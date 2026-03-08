@@ -15,7 +15,6 @@ import {
 import ApiHelpers from './api-helpers';
 import { generateDerivApiInstance, V2GetActiveClientId, V2GetActiveToken } from './appId';
 import chart_api from './chart-api';
-import { subscriptionManager } from '@/lib/subscription-manager';
 
 type CurrentSubscription = {
     id: string;
@@ -60,10 +59,6 @@ class APIBase {
     active_symbols_promise: Promise<void> | null = null;
     common_store: CommonStore | undefined;
     landing_company: string | null = null;
-    reconnect_attempts = 0;
-    max_reconnect_attempts = 5;
-    reconnect_timeout: ReturnType<typeof setTimeout> | null = null;
-    ping_interval: ReturnType<typeof setInterval> | null = null;
 
     unsubscribeAllSubscriptions = () => {
         this.current_auth_subscriptions?.forEach(subscription_promise => {
@@ -80,17 +75,10 @@ class APIBase {
 
     onsocketopen() {
         setConnectionStatus(CONNECTION_STATUS.OPENED);
-        this.common_store?.setSocketOpened(true);
-        this.reconnect_attempts = 0; // Reset on success
-        if (this.reconnect_timeout) {
-            clearTimeout(this.reconnect_timeout);
-            this.reconnect_timeout = null;
-        }
     }
 
     onsocketclose() {
         setConnectionStatus(CONNECTION_STATUS.CLOSED);
-        this.common_store?.setSocketOpened(false);
         this.reconnectIfNotConnected();
     }
 
@@ -113,29 +101,6 @@ class APIBase {
             this.api = generateDerivApiInstance();
             this.api?.connection.addEventListener('open', this.onsocketopen.bind(this));
             this.api?.connection.addEventListener('close', this.onsocketclose.bind(this));
-
-            // Initialize subscription manager with API instance
-            if (this.api) {
-                // Clear any stale subscriptions from previous connection
-                subscriptionManager.reset();
-                subscriptionManager.setApi(this.api);
-
-                // Add message listener to suppress AlreadySubscribed errors
-                // These are expected when switching tabs and are handled automatically
-                this.api.onMessage().subscribe((message: any) => {
-                    if (message.error && message.error.code === 'AlreadySubscribed') {
-                        // Suppress console error - this is handled by the application
-                        console.log(
-                            `[API] AlreadySubscribed to ${message.echo_req?.ticks_history} - using existing subscription`
-                        );
-                    }
-                });
-            }
-
-            // DEBUG: Add direct event listeners to debug connection stability
-            if (this.api?.connection) {
-                // connection listeners removed for performance
-            }
         }
 
         if (!this.has_active_symbols && !V2GetActiveToken()) {
@@ -152,7 +117,6 @@ class APIBase {
             await this.authorizeAndSubscribe();
         }
 
-        this.startPingLoop();
         chart_api.init(force_create_connection);
     }
 
@@ -166,10 +130,7 @@ class APIBase {
 
     terminate() {
         // eslint-disable-next-line no-console
-        if (this.api) {
-            subscriptionManager.unsubscribeAll(); // Clean up all subscriptions
-            this.api.disconnect();
-        }
+        if (this.api) this.api.disconnect();
     }
 
     initEventListeners() {
@@ -186,73 +147,40 @@ class APIBase {
     }
 
     reconnectIfNotConnected = () => {
-        if (this.reconnect_timeout) return;
-
-        const readyState = this.api?.connection?.readyState;
-
-        if (readyState !== undefined && readyState > 1) {
-            if (this.reconnect_attempts >= this.max_reconnect_attempts) {
-                console.error('[API] Max reconnect attempts reached. Stopping reconnection.');
-                return;
-            }
-
-            const delay = Math.min(1000 * Math.pow(2, this.reconnect_attempts), 10000);
-            this.reconnect_attempts++;
-
-            this.reconnect_timeout = setTimeout(() => {
-                this.reconnect_timeout = null;
-                this.init(true);
-            }, delay);
+        // eslint-disable-next-line no-console
+        console.log('connection state: ', this.api?.connection?.readyState);
+        if (this.api?.connection?.readyState && this.api?.connection?.readyState > 1) {
+            // eslint-disable-next-line no-console
+            console.log('Info: Connection to the server was closed, trying to reconnect.');
+            this.init(true);
         }
     };
 
     async authorizeAndSubscribe() {
         const token = V2GetActiveToken();
-        if (!this.api) return;
-
-        if (!token) {
-            console.log('[API] No token found, proceeding anonymously');
-            if (!this.has_active_symbols) {
-                this.active_symbols_promise = this.getActiveSymbols();
-            }
-            this.subscribe();
-            return;
-        }
-
+        if (!token || !this.api) return;
         this.token = token;
         this.account_id = V2GetActiveClientId() ?? '';
-
         setIsAuthorizing(true);
         setIsAuthorized(false);
 
         try {
-            console.log('[API] Starting authorization process...');
-            const authPromise = this.api.authorize(this.token);
-            const timeoutPromise = new Promise((_, reject) =>
-                setTimeout(() => reject(new Error('Auth Timeout')), 15000)
-            );
-
-            const { authorize, error } = (await Promise.race([authPromise, timeoutPromise])) as {
-                authorize: TAuthData;
-                error: any;
-            };
-
+            const { authorize, error } = await this.api.authorize(this.token);
             if (error) {
-                console.error('[API] Authorization Error Response:', error);
                 if (error.code === 'InvalidToken') {
                     const is_tmb_enabled = window.is_tmb_enabled === true;
                     if (Cookies.get('logged_state') === 'true' && !is_tmb_enabled) {
                         globalObserver.emit('InvalidToken', { error });
                     } else {
-                        console.warn('[API] Clearing auth data due to InvalidToken');
                         clearAuthData();
                     }
                 } else {
-                    console.error('[API] Authorization error (generic):', error);
+                    console.error('Authorization error:', error);
                 }
                 setIsAuthorizing(false);
                 return error;
             }
+
             this.account_info = authorize;
             setAccountList(authorize?.account_list || []);
             setAuthData(authorize);
@@ -260,41 +188,28 @@ class APIBase {
             this.is_authorized = true;
             localStorage.setItem('client_account_details', JSON.stringify(authorize?.account_list));
             localStorage.setItem('client.country', authorize?.country);
-
-            // Cache balance immediately for faster subsequent loads
-            if (authorize.balance !== undefined) {
-                try {
-                    const clientAccounts = JSON.parse(localStorage.getItem('clientAccounts') || '{}');
-                    if (clientAccounts[this.account_id]) {
-                        clientAccounts[this.account_id].balance = authorize.balance;
-                        clientAccounts[this.account_id].currency = authorize.currency;
-                        localStorage.setItem('clientAccounts', JSON.stringify(clientAccounts));
-                    }
-                } catch (e) {
-                    console.error('[API] Failed to cache balance:', e);
+            this.toggleRunButton(false);
+            this.has_active_symbols = false;
+            this.active_symbols_promise = this.getActiveSymbols().then(() => {
+                // After getting active symbols, refresh them in the ApiHelpers instance too
+                // Use type casting to fix TypeScript errors
+                const apiHelpers = ApiHelpers.instance as any;
+                if (apiHelpers?.active_symbols) {
+                    apiHelpers.active_symbols.retrieveActiveSymbols(true).catch((error: Error) => {
+                        console.error('[API] Failed to retrieve active symbols:', error);
+                    });
                 }
-            }
-
-            if (this.has_active_symbols) {
-                this.toggleRunButton(false);
-            } else {
-                this.active_symbols_promise = this.getActiveSymbols();
-            }
+            });
             this.subscribe();
             // this.getSelfExclusion(); commented this so we dont call it from two places
-        } catch (e: any) {
-            console.error('[API] Authorization Exception:', e);
+        } catch (e) {
+            console.error('Authorization failed:', e);
             this.is_authorized = false;
-            // Only clear auth data if it's a real failure, not just a timeout during initialization
-            // but for now, we follow the existing logic of clearing if fails.
-            if (e?.message !== 'Auth Timeout') {
-                clearAuthData();
-            }
+            clearAuthData();
             setIsAuthorized(false);
             globalObserver.emit('Error', e);
         } finally {
             setIsAuthorizing(false);
-            this.toggleRunButton(false);
         }
     }
 
@@ -362,36 +277,12 @@ class APIBase {
         this.subscriptions.forEach(s => s.unsubscribe());
         this.subscriptions = [];
 
-        if (this.ping_interval) {
-            clearInterval(this.ping_interval);
-            this.ping_interval = null;
-        }
-
         // Resetting timeout resolvers
         const global_timeouts = globalObserver.getState('global_timeouts') ?? [];
 
         global_timeouts.forEach((_: unknown, i: number) => {
             clearTimeout(i);
         });
-    }
-
-    startPingLoop() {
-        if (this.ping_interval) clearInterval(this.ping_interval);
-        this.ping_interval = setInterval(() => this.measureLatency(), 5000); // Every 5 seconds
-    }
-
-    async measureLatency() {
-        if (!this.api || this.api.connection.readyState !== 1) return;
-        const start = Date.now();
-        try {
-            await this.api.send({ ping: 1 });
-            const latency = Date.now() - start;
-            if (this.common_store) {
-                this.common_store.setLatency(latency);
-            }
-        } catch (e) {
-            console.error('Ping error:', e);
-        }
     }
 }
 

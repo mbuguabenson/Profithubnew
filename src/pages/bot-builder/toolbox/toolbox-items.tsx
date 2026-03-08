@@ -384,51 +384,14 @@ export const ToolboxItems = () => {
                     </Block>
                 </Category>
 
-                <Category name={localize('Digits')} id='digits'>
-                    <Block type='last_digit' />
-                    <Block type='lastDigitList' />
-                    <Block type='digitFrequencyAnalysis'>
-                        <Value name='DIGIT'>
-                            <Shadow type='math_number'><Field name='NUM'>0</Field></Shadow>
-                        </Value>
-                        <Value name='TICK_COUNT'>
-                            <Shadow type='math_number'><Field name='NUM'>50</Field></Shadow>
-                        </Value>
-                    </Block>
-                    <Block type='digitRangeCounter'>
-                        <Value name='MIN_DIGIT'>
-                            <Shadow type='math_number'><Field name='NUM'>0</Field></Shadow>
-                        </Value>
-                        <Value name='MAX_DIGIT'>
-                            <Shadow type='math_number'><Field name='NUM'>2</Field></Shadow>
-                        </Value>
-                        <Value name='TICK_COUNT'>
-                            <Shadow type='math_number'><Field name='NUM'>50</Field></Shadow>
-                        </Value>
-                    </Block>
-                    <Block type='digitByRank'>
-                        <Value name='RANK'>
-                            <Shadow type='math_number'><Field name='NUM'>3</Field></Shadow>
-                        </Value>
-                        <Value name='TICK_COUNT'>
-                            <Shadow type='math_number'><Field name='NUM'>100</Field></Shadow>
-                        </Value>
-                    </Block>
-                </Category>
-
                 <Category name={localize('Tick and candle analysis')} id='tick_analysis'>
                     <Block type='tick_analysis' />
                     <Block type='tick' />
+                    <Block type='last_digit' />
                     <Block type='stat' />
                     <Block type='stat_list' />
                     <Block type='ticks' />
-                    <Block type='trendDirection'>
-                        <Value name='TICK_COUNT'>
-                            <Shadow type='math_number'>
-                                <Field name='NUM'>20</Field>
-                            </Shadow>
-                        </Value>
-                    </Block>
+                    <Block type='lastDigitList' />
                     <Block type='check_direction' />
                     <Block type='is_candle_black' />
                     <Block type='read_ohlc'>
@@ -454,39 +417,6 @@ export const ToolboxItems = () => {
                     <Block type='ohlc' />
                 </Category>
 
-                <Category name={localize('New Logics Analysis')} id='new_logics_analysis'>
-                    <Block type='streakDetection'>
-                        <Value name='TICK_COUNT'>
-                            <Shadow type='math_number'><Field name='NUM'>10</Field></Shadow>
-                        </Value>
-                    </Block>
-                    <Block type='volatilityScore'>
-                        <Value name='TICK_COUNT'>
-                            <Shadow type='math_number'><Field name='NUM'>50</Field></Shadow>
-                        </Value>
-                    </Block>
-                    <Block type='trendDirection'>
-                        <Value name='TICK_COUNT'>
-                            <Shadow type='math_number'><Field name='NUM'>20</Field></Shadow>
-                        </Value>
-                    </Block>
-                    <Block type='identifyCandlePattern'>
-                        <Value name='TICK_COUNT'>
-                            <Shadow type='math_number'><Field name='NUM'>3</Field></Shadow>
-                        </Value>
-                    </Block>
-                    <Block type='analyzeMomentum'>
-                        <Value name='TICK_COUNT'>
-                            <Shadow type='math_number'><Field name='NUM'>10</Field></Shadow>
-                        </Value>
-                    </Block>
-                    <Block type='checkVolumeHealth'>
-                        <Value name='TICK_COUNT'>
-                            <Shadow type='math_number'><Field name='NUM'>20</Field></Shadow>
-                        </Value>
-                    </Block>
-                </Category>
-
                 <Category name={localize('Contract')} id='contract_details'>
                     <Block type='contract_check_result' />
                     <Block type='read_details' />
@@ -494,11 +424,6 @@ export const ToolboxItems = () => {
                     <Block type='check_sell' />
                     <Block type='payout' />
                     <Block type='ask_price' />
-                </Category>
-
-                <Category name={localize('Analysis Logics')} id='analysis_logics'>
-                    <Block type='analysis_get_power' />
-                    <Block type='analysis_is_increasing' />
                 </Category>
 
                 <Category name={localize('Stats')} id='stats'>
@@ -678,20 +603,6 @@ export const ToolboxItems = () => {
                         </Value>
                     </Block>
                     <Block type='math_random_float' />
-                </Category>
-
-                <Category name={localize('Money Management')} id='money_management'>
-                    <Block type='martingaleWithCompounding'>
-                        <Value name='BASE_STAKE'>
-                            <Shadow type='math_number'><Field name='NUM'>0.35</Field></Shadow>
-                        </Value>
-                        <Value name='MULTIPLIER'>
-                            <Shadow type='math_number'><Field name='NUM'>2.1</Field></Shadow>
-                        </Value>
-                        <Value name='PROFIT'>
-                            <Block type='total_profit' />
-                        </Value>
-                    </Block>
                 </Category>
 
                 <Category name={localize('Text')} id='text'>

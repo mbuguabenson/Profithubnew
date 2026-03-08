@@ -61,6 +61,8 @@ export interface IDashboardStore {
     is_chart_modal_visible: boolean;
     is_trading_view_modal_visible: boolean;
     setPreviewOnPopup: (is_preview_on_popup: boolean) => void;
+    is_profithub_tool_visible: boolean;
+    setIsProfithubToolVisible: (is_profithub_tool_visible: boolean) => void;
 }
 
 export default class DashboardStore implements IDashboardStore {
@@ -118,7 +120,9 @@ export default class DashboardStore implements IDashboardStore {
             video_tab_content: observable,
             setStrategySaveType: action.bound,
             setShowMobileTourDialog: action.bound,
+            setIsProfithubToolVisible: action.bound,
             is_trading_view_modal_visible: observable,
+            is_profithub_tool_visible: observable,
             bot_builder_symbol: observable,
         });
         this.root_store = root_store;
@@ -204,6 +208,7 @@ export default class DashboardStore implements IDashboardStore {
     filtered_tab_list = [];
     is_chart_modal_visible = false;
     is_trading_view_modal_visible = false;
+    is_profithub_tool_visible = false;
     faq_title = '';
 
     setFaqTitle = (faq_title: string) => {
@@ -321,6 +326,10 @@ export default class DashboardStore implements IDashboardStore {
 
     setPreviewOnPopup = (is_preview_on_popup: boolean): void => {
         this.is_preview_on_popup = is_preview_on_popup;
+    };
+
+    setIsProfithubToolVisible = (is_profithub_tool_visible: boolean): void => {
+        this.is_profithub_tool_visible = is_profithub_tool_visible;
     };
 
     setTourDialogVisibility = (is_tour_dialog_visible: boolean): void => {

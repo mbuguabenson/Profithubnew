@@ -3,14 +3,7 @@ import classNames from 'classnames';
 import { observer } from 'mobx-react-lite';
 import Text from '@/components/shared_ui/text';
 import { useStore } from '@/hooks/useStore';
-import { 
-    LabelPairedChevronDownMdFillIcon,
-    LabelPairedNineMdBoldIcon,
-    LabelPairedCircleInfoMdBoldIcon,
-    LabelPairedChartLineMdBoldIcon,
-    LabelPairedGearMdBoldIcon,
-    LabelPairedObjectsAlignLeftMdBoldIcon
-} from '@deriv/quill-icons/LabelPaired';
+import { LabelPairedChevronDownMdFillIcon } from '@deriv/quill-icons/LabelPaired';
 import { localize } from '@deriv-com/translations';
 import { useDevice } from '@deriv-com/ui';
 import { rudderStackSendOpenEvent } from '../../../analytics/rudderstack-common-events';
@@ -123,15 +116,8 @@ const Toolbox = observer(() => {
                                                     }}
                                                 >
                                                     <div className='db-toolbox__category-text'>
-                                                        <div className='db-toolbox__label-group' style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                                                            {category.getAttribute('id') === 'digits' && <LabelPairedNineMdBoldIcon fill='var(--brand-red-coral)' />}
-                                                            {category.getAttribute('id') === 'tick_analysis' && <LabelPairedChartLineMdBoldIcon fill='var(--text-general)' />}
-                                                            {category.getAttribute('id') === 'contract_details' && <LabelPairedCircleInfoMdBoldIcon fill='var(--text-general)' />}
-                                                            {category.getAttribute('id') === 'variables' && <LabelPairedGearMdBoldIcon fill='var(--text-general)' />}
-                                                            {category.getAttribute('id') === 'functions' && <LabelPairedObjectsAlignLeftMdBoldIcon fill='var(--text-general)' />}
-                                                            <div className='db-toolbox__label'>
-                                                                {localize(category.getAttribute('name') as string)}
-                                                            </div>
+                                                        <div className='db-toolbox__label'>
+                                                            {localize(category.getAttribute('name') as string)}
                                                         </div>
                                                         {has_sub_category && (
                                                             <div

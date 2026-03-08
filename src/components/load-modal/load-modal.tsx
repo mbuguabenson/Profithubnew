@@ -1,5 +1,4 @@
 import React from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
 import { observer } from 'mobx-react-lite';
 import { tabs_title } from '@/constants/load-modal';
 import { useStore } from '@/hooks/useStore';
@@ -31,26 +30,16 @@ const LoadModal: React.FC = observer(() => {
     } = load_modal;
     const { setPreviewOnPopup } = dashboard;
     const { isDesktop } = useDevice();
-    const location = useLocation();
-    const navigate = useNavigate();
     const header_text = localize('Load strategy');
 
-    const historyShim = {
-        replace: (path: string) => navigate(path, { replace: true }),
-        location,
-    };
-
-    const handleTabItemClick = (idx: number) => {
-        setActiveTabIndex(idx);
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const handleTabItemClick = (active_index: number) => {
+        setActiveTabIndex(active_index);
         rudderStackSendSwitchLoadStrategyTabEvent({
-            load_strategy_tab: LOAD_MODAL_TABS[idx + (!isDesktop ? 1 : 0)],
-        } as any);
+            load_strategy_tab: LOAD_MODAL_TABS[active_index + (!isDesktop ? 1 : 0)],
+        });
     };
 
     if (!isDesktop) {
-        const is_file_loaded_mobile = !!loaded_local_file && tab_name === tabs_title.TAB_LOCAL;
-
         return (
             <MobileFullPageModal
                 is_modal_open={is_load_modal_open}
@@ -59,22 +48,15 @@ const LoadModal: React.FC = observer(() => {
                 onClickClose={() => {
                     setPreviewOnPopup(false);
                     toggleLoadModal();
-                    // eslint-disable-next-line @typescript-eslint/no-explicit-any
                     rudderStackSendCloseEvent({
                         subform_name: 'load_strategy',
                         load_strategy_tab: LOAD_MODAL_TABS[active_index + 1],
-                    } as any);
+                    });
                 }}
                 height_offset='80px'
-                renderPageFooterChildren={is_file_loaded_mobile ? () => <LocalFooter /> : undefined}
+                page_overlay
             >
-                <Tabs
-                    active_index={active_index}
-                    onTabItemClick={handleTabItemClick}
-                    top
-                    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                    history={historyShim as any}
-                >
+                <Tabs active_index={active_index} onTabItemClick={handleTabItemClick} top>
                     <div label={localize('Local')}>
                         <Local />
                     </div>
@@ -98,25 +80,16 @@ const LoadModal: React.FC = observer(() => {
             is_open={is_load_modal_open}
             toggleModal={() => {
                 toggleLoadModal();
-                if (LOAD_MODAL_TABS[active_index]) {
-                    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                    rudderStackSendCloseEvent({
-                        subform_name: 'load_strategy',
-                        load_strategy_tab: LOAD_MODAL_TABS[active_index],
-                    } as any);
-                }
+                rudderStackSendCloseEvent({
+                    subform_name: 'load_strategy',
+                    load_strategy_tab: LOAD_MODAL_TABS[active_index + (!isDesktop ? 1 : 0)],
+                });
             }}
             onEntered={onEntered}
-            elements_to_ignore={[document.activeElement].filter(Boolean) as HTMLElement[]}
+            elements_to_ignore={[document.querySelector('.injectionDiv')]}
         >
             <Modal.Body>
-                <Tabs
-                    active_index={active_index}
-                    onTabItemClick={handleTabItemClick}
-                    top
-                    header_fit_content
-                    history={historyShim as any}
-                >
+                <Tabs active_index={active_index} onTabItemClick={handleTabItemClick} top header_fit_content>
                     <div label={localize('Recent')}>
                         <Recent />
                     </div>

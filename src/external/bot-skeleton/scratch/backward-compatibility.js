@@ -343,10 +343,6 @@ export default class BlockConversion {
             TRADETYPE_LIST: {
                 risefall: 'callput',
                 risefallequals: 'callputequal',
-                differs: 'matchesdiffers',
-                matches: 'matchesdiffers',
-                over: 'overunder',
-                under: 'overunder',
             },
         };
 

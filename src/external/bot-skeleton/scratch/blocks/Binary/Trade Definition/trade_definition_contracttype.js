@@ -34,49 +34,30 @@ window.Blockly.Blocks.trade_definition_contracttype = {
         this.enforceLimitations();
 
         const is_load_event = /^dbot-load/.test(event.group);
-        const is_create_event = event.type === window.Blockly.Events.BLOCK_CREATE && event.ids?.includes(this.id);
-        const is_drag_event = event.type === window.Blockly.Events.BLOCK_DRAG && !event.isStart;
-        const is_trade_type_change =
-            event.type === window.Blockly.Events.BLOCK_CHANGE && event.name === 'TRADETYPE_LIST';
 
-        const shouldRefreshContractTypes = is_create_event || is_drag_event || is_trade_type_change;
+        if (event.type === window.Blockly.Events.BLOCK_CHANGE) {
+            if (event.name === 'TRADETYPE_LIST') {
+                const trade_type = event.newValue;
+                const contract_type_list = this.getField('TYPE_LIST');
+                const contract_type_options = [];
 
-        if (shouldRefreshContractTypes) {
-            // Get the current trade type from the sibling tradetype block
-            const trade_definition_block = this.workspace
-                .getAllBlocks(true)
-                .find(block => block.type === 'trade_definition');
+                const trade_types = getContractTypeOptions('both', trade_type);
 
-            let trade_type = event.name === 'TRADETYPE_LIST' ? event.newValue : null;
-
-            if (!trade_type && trade_definition_block) {
-                const trade_type_block = trade_definition_block.getChildByType('trade_definition_tradetype');
-                if (trade_type_block) {
-                    trade_type = trade_type_block.getFieldValue('TRADETYPE_LIST');
+                if (trade_types.length > 1) {
+                    contract_type_options.push([localize('Both'), 'both']);
                 }
+
+                contract_type_options.push(...trade_types);
+
+                if (contract_type_options.length === 0) {
+                    contract_type_options.push(...config().NOT_AVAILABLE_DROPDOWN_OPTIONS);
+                }
+
+                contract_type_list.updateOptions(contract_type_options, {
+                    event_group: event.group,
+                    default_value: is_load_event ? contract_type_list.getValue() : undefined,
+                });
             }
-
-            if (!trade_type) return;
-
-            const contract_type_list = this.getField('TYPE_LIST');
-            const contract_type_options = [];
-
-            const trade_types = getContractTypeOptions('both', trade_type);
-
-            if (trade_types.length > 1) {
-                contract_type_options.push([localize('Both'), 'both']);
-            }
-
-            contract_type_options.push(...trade_types);
-
-            if (contract_type_options.length === 0) {
-                contract_type_options.push(...config().NOT_AVAILABLE_DROPDOWN_OPTIONS);
-            }
-
-            contract_type_list.updateOptions(contract_type_options, {
-                event_group: event.group,
-                default_value: is_load_event ? contract_type_list.getValue() : undefined,
-            });
         }
     },
     customContextMenu(menu) {

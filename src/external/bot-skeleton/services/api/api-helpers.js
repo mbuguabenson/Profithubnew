@@ -1,7 +1,6 @@
 import AccountLimits from './account-limits';
 import ActiveSymbols from './active-symbols';
 import ContractsFor from './contracts-for';
-import TicksService from './ticks_service';
 import TradingTimes from './trading-times';
 
 class ApiHelpers {
@@ -10,7 +9,6 @@ class ApiHelpers {
     constructor(api_helpers_store) {
         this.trading_times = new TradingTimes(api_helpers_store);
         this.contracts_for = new ContractsFor(api_helpers_store);
-        this.ticks_service = new TicksService();
         this.active_symbols = new ActiveSymbols(this.trading_times);
         this.account_limits = new AccountLimits(api_helpers_store);
     }
