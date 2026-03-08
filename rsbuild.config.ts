@@ -10,8 +10,8 @@ export default defineConfig({
             sassLoaderOptions: {
                 sourceMap: true,
                 additionalData: (content, loaderContext) => {
-                    const reqPath = loaderContext.resourcePath || '';
-                    if (reqPath.includes('trades.profithub2026')) {
+                    const reqPath = (loaderContext.resourcePath || '').replace(/\\/g, '/');
+                    if (reqPath.includes('/packages/components/') || reqPath.includes('/packages/api')) {
                         return `@use "@/styles/global-deriv-mixins.scss" as *;\n` + content.toString();
                     }
                     return content.toString();
@@ -71,7 +71,8 @@ export default defineConfig({
             Analytics: path.resolve(__dirname, './src/pages/dtrader/Analytics'),
             Assets: path.resolve(__dirname, './src/pages/dtrader/Assets'),
             Documents: path.resolve(__dirname, './src/pages/dtrader/Documents'),
-            '@deriv/stores': path.resolve(__dirname, '../trades.profithub2026/packages/stores/src'),
+            '@': path.resolve(__dirname, './src'),
+            '@root': path.resolve(__dirname, '.'),
         },
     },
     output: {

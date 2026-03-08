@@ -27,13 +27,13 @@
                 "./*"
             ],
             "@deriv/stores/*": [
-                "../trades.profithub2026/packages/stores/src/*"
+                "./packages/stores/src/*"
             ],
             "@deriv/components": [
-                "../trades.profithub2026/packages/components/src"
+                "./packages/components/src"
             ],
             "@deriv/components/*": [
-                "../trades.profithub2026/packages/components/src/*"
+                "./packages/components/src/*"
             ]
         },
         "esModuleInterop": true

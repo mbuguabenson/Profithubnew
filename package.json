@@ -3,6 +3,9 @@
     "private": true,
     "version": "0.0.1",
     "type": "module",
+    "workspaces": [
+        "packages/*"
+    ],
     "engines": {
         "node": ">=20.0.0"
     },
@@ -29,11 +32,12 @@
         "@deriv-com/translations": "^1.3.9",
         "@deriv-com/ui": "^1.37.1",
         "@deriv-com/utils": "latest",
-        "@deriv/api-v2": "file:../trades.profithub2026/packages/api-v2",
-        "@deriv/components": "file:../trades.profithub2026/packages/components",
-        "@deriv/shared": "file:../trades.profithub2026/packages/shared",
-        "@deriv/stores": "file:../trades.profithub2026/packages/stores",
-        "@deriv/utils": "file:../trades.profithub2026/packages/utils",
+        "@deriv/api": "*",
+        "@deriv/api-v2": "*",
+        "@deriv/components": "*",
+        "@deriv/shared": "*",
+        "@deriv/stores": "*",
+        "@deriv/utils": "*",
         "@deriv/deriv-api": "^1.0.15",
         "@deriv/deriv-charts": "^2.9.1",
         "@deriv/js-interpreter": "^3.0.0",
@@ -198,6 +202,10 @@
         "cross-spawn": "^7.0.6",
         "braces": "^3.0.3",
         "brace-expansion@2.0.1": "2.0.2",
-        "@semantic-release/npm": "^12.0.0"
+        "react-dom": "^18.2.0",
+        "react": "^18.2.0",
+        "nth-check": "2.0.1",
+        "node-forge": "1.3.2",
+        "@semantic-release/npm": "^13.1.4"
     }
 }
