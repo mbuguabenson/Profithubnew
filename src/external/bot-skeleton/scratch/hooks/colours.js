@@ -1,9 +1,9 @@
 const lightMode = () => {
     const workspace = Blockly;
     workspace.Colours.RootBlock = {
-        colour: '#a291ff', // Restored specific purple color from image
-        colourSecondary: '#a291ff',
-        colourTertiary: '#b1a4ff',
+        colour: '#9144D5', // Exact purple color requested by user
+        colourSecondary: '#9144D5',
+        colourTertiary: '#a266e3',
     };
 
     workspace.Colours.Base = {
