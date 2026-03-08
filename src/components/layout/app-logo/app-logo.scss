@@ -1,0 +1,33 @@
+.app-header {
+    &__logo-container {
+        padding-inline-start: 1.2rem;
+        padding-inline-end: 2rem;
+        border-inline-end: 1px solid var(--general-section-1);
+        height: 32px;
+        display: flex;
+        align-items: center;
+    }
+}
+
+.profithub-logo {
+    display: flex;
+    align-items: center;
+    font-family: 'Inter', sans-serif;
+    font-weight: 800;
+    font-size: 1.8rem;
+    letter-spacing: -0.5px;
+    cursor: pointer;
+
+    &__text-profit {
+        color: #7c3aed;
+    }
+
+    &__text-hub {
+        color: var(--text-general);
+        margin-left: 2px;
+    }
+
+    &:hover {
+        opacity: 0.8;
+    }
+}

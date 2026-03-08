@@ -1,0 +1,164 @@
+.client-tokens-minimal {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 1rem;
+    padding: 1.6rem;
+    margin-bottom: 1.6rem;
+
+    .minimal-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 2rem;
+        flex-wrap: wrap;
+        margin-bottom: 1.6rem;
+
+        h3 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin: 0;
+            color: var(--text-prominent);
+        }
+
+        .input-group-minimal {
+            display: flex;
+            gap: 0.8rem;
+            flex: 1;
+            max-width: 400px;
+
+            input {
+                flex: 1;
+                padding: 0.6rem 1rem;
+                font-size: 1.3rem;
+                background: rgba(0, 0, 0, 0.3);
+                border: 1px solid rgba(255, 255, 255, 0.1);
+                border-radius: 0.6rem;
+                color: var(--text-prominent);
+
+                &:focus {
+                    outline: none;
+                    border-color: rgba(139, 92, 246, 0.5);
+                }
+            }
+
+            .add-btn-minimal {
+                padding: 0.6rem 1.6rem;
+                font-size: 1.3rem;
+                font-weight: 700;
+                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                color: white;
+                border: none;
+                border-radius: 0.6rem;
+                cursor: pointer;
+            }
+        }
+    }
+
+    .empty-minimal {
+        padding: 2rem;
+        text-align: center;
+        font-size: 1.3rem;
+        color: var(--text-less-prominent);
+        opacity: 0.6;
+    }
+
+    .clients-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 1.2rem;
+    }
+
+    .client-card {
+        background: rgba(0, 0, 0, 0.2);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 0.8rem;
+        padding: 1.2rem;
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+
+            .client-id {
+                font-size: 1.1rem;
+                font-weight: 700;
+                color: var(--text-less-prominent);
+            }
+
+            .header-actions {
+                display: flex;
+                align-items: center;
+                gap: 0.8rem;
+
+                .status-dot {
+                    width: 8px;
+                    height: 8px;
+                    border-radius: 50%;
+                    &.connected { background: #10b981; }
+                    &.connecting { background: #f59e0b; }
+                    &.idle { background: #94a3b8; }
+                }
+
+                .remove-btn {
+                    background: none;
+                    border: none;
+                    color: #ef4444;
+                    cursor: pointer;
+                    font-size: 1.4rem;
+                }
+            }
+        }
+
+        .card-body {
+            .account-info {
+                display: flex;
+                justify-content: space-between;
+                font-size: 1.2rem;
+                margin-bottom: 1rem;
+
+                .info-item {
+                    display: flex;
+                    gap: 0.5rem;
+                    .label { color: var(--text-less-prominent); }
+                    .value { font-weight: 700; }
+                }
+            }
+
+            .connect-btn {
+                width: 100%;
+                padding: 0.6rem;
+                font-size: 1.2rem;
+                font-weight: 700;
+                background: rgba(255, 255, 255, 0.05);
+                border: 1px solid rgba(255, 255, 255, 0.1);
+                border-radius: 0.4rem;
+                color: var(--text-prominent);
+                cursor: pointer;
+
+                &:hover {
+                    background: rgba(255, 255, 255, 0.1);
+                }
+            }
+            
+            .trading-stats {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 0.5rem;
+                font-size: 1rem;
+                
+                .stat {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    background: rgba(255, 255, 255, 0.03);
+                    padding: 0.4rem;
+                    border-radius: 0.4rem;
+                    
+                    .stat-label { color: var(--text-less-prominent); margin-bottom: 0.2rem; }
+                    .stat-value { font-weight: 700; }
+                }
+            }
+        }
+    }
+}
