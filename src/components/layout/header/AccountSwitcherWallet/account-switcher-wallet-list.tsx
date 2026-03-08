@@ -1,10 +1,8 @@
-import React from 'react';
-import { TStores } from '@deriv/stores/types';
 import { AccountSwitcherWalletItem } from './account-switcher-wallet-item';
 import './account-switcher-wallet-list.scss';
 
 type TAccountSwitcherWalletListProps = {
-    wallets: TStores['client']['wallet_list'];
+    wallets: any[];
     closeAccountsDialog: () => void;
 };
 

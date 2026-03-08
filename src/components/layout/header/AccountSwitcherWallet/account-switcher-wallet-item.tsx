@@ -1,4 +1,3 @@
-import React from 'react';
 import classNames from 'classnames';
 import { observer } from 'mobx-react-lite';
 import { formatMoney, getCurrencyDisplayCode } from '@/components/shared';
@@ -40,7 +39,7 @@ export const AccountSwitcherWalletItem = observer(
         const app_icon = is_dark_mode_on ? 'IcWalletOptionsDark' : 'IcWalletOptionsLight';
         const is_active = loginid === active_loginid;
 
-        const switchAccount = async (loginId: number) => {
+        const switchAccount = async (loginId: string) => {
             const account_list = JSON.parse(localStorage.getItem('accountsList') ?? '{}');
             const token = account_list[loginId];
 
@@ -77,7 +76,7 @@ export const AccountSwitcherWalletItem = observer(
                 (acc: any) => acc.loginid === loginId.toString()
             );
             if (!selected_account) return;
-            const account_param = is_virtual ? 'demo' : selected_account.currency;
+            const account_param = is_virtual ? 'demo' : (selected_account as any)?.currency;
             search_params.set('account', account_param);
             window.history.pushState({}, '', `${window.location.pathname}?${search_params.toString()}`);
         };
@@ -119,7 +118,7 @@ export const AccountSwitcherWalletItem = observer(
                         )}
                     </Text>
                     <Text size='xs' weight='bold'>
-                        {`${formatMoney(currency ?? '', dtrade_balance || 0, true)} ${getCurrencyDisplayCode(
+                        {`${formatMoney(currency ?? '', balance || 0, true)} ${getCurrencyDisplayCode(
                             currency
                         )}`}
                     </Text>

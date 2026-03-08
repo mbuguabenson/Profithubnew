@@ -118,7 +118,7 @@ export default defineConfig({
             // Apply Tailwind but ensure it doesn't choke on node_modules
             // We'll use the default config but explicitly set postcssOptions
             config.postcssOptions = {
-                config: path.resolve(__dirname, 'postcss.config.js'),
+                config: true,
             };
         },
         rspack: {
