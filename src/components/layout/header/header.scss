@@ -10,15 +10,16 @@
     &__account-settings,
     .notifications__wrapper,
     &__menu {
-        svg > path,
-        svg > g > path {
+
+        svg>path,
+        svg>g>path {
             fill: #ffffff !important; // Enforce white visibility
         }
     }
 
     position: sticky;
     top: 0;
-    z-index: 999;
+    z-index: 10000;
     background: rgba(2, 6, 23, 0.95) !important; // Darker and more opaque for better contrast
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
@@ -217,7 +218,7 @@
             box-shadow: 0 0 2px 0 var(--du-shadow-box, #00000014);
         }
 
-        .deriv-account-switcher__balance + svg > path {
+        .deriv-account-switcher__balance+svg>path {
             fill: var(--text-general);
         }
 
@@ -473,6 +474,7 @@
         transform: scale(0.95);
         opacity: 0.4;
     }
+
     to {
         transform: scale(1.1);
         opacity: 0.7;

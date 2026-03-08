@@ -17,7 +17,7 @@
             top: 0;
             left: 0;
             width: 100vw;
-            z-index: 9995; // Increased to be above main tabs (z-index 990)
+            z-index: 999; // Above main tabs (990) but below header (10000)
             height: calc(100% - env(safe-area-inset-bottom, 0));
             padding-bottom: env(safe-area-inset-bottom, 0);
 
@@ -211,10 +211,12 @@
         transform: scale(1) rotate(0deg);
         filter: drop-shadow(0 0 0px rgba(124, 58, 237, 0.6));
     }
+
     50% {
         transform: scale(1.2) rotate(-5deg);
         filter: drop-shadow(0 0 5px #ffa500);
     }
+
     100% {
         transform: scale(1) rotate(0deg);
         filter: drop-shadow(0 0 0px #ffa500);
