@@ -15,6 +15,7 @@
         transition: width 0.5s cubic-bezier(0.62, 0.01, 0.51, 0.95);
         background-color: var(--brand-primary);
     }
+
     &__countdown {
         position: absolute;
         left: 1rem;

@@ -4,7 +4,7 @@ import Popover from '@/components/shared_ui/popover';
 type TAccountInfoWrapper = {
     is_disabled?: boolean;
     is_mobile?: boolean;
-    is_dtrader_v2?: boolean;
+
     disabled_message?: string;
 };
 

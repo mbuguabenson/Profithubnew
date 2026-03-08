@@ -81,7 +81,7 @@ export const standalone_routes = {
     root: getDerivDomain('derivApp'),
     smarttrader: getDerivDomain('smartTrader'),
     statement: `${getDerivDomain('derivApp')}/reports/statement`,
-    trade: `/dtrader`,
+    trade: `${getDerivDomain('derivApp')}/dtrader`,
     traders_hub: getDerivDomain('derivApp'),
     traders_hub_lowcode: getDerivDomain('derivHub'),
     recent_transactions: `${getDerivDomain('derivHub')}/tradershub/redirect?action=redirect_to&redirect_to=wallet`,

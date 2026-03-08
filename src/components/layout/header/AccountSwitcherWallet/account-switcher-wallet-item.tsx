@@ -21,9 +21,9 @@ type TAccountSwitcherWalletItemProps = {
 export const AccountSwitcherWalletItem = observer(
     ({ closeAccountsDialog, account, show_badge = false }: TAccountSwitcherWalletItemProps) => {
         const {
+            loginid,
+            balance,
             currency,
-            dtrade_loginid,
-            dtrade_balance,
             gradients,
             icons,
             is_virtual,
@@ -38,7 +38,7 @@ export const AccountSwitcherWalletItem = observer(
 
         const theme = is_dark_mode_on ? 'dark' : 'light';
         const app_icon = is_dark_mode_on ? 'IcWalletOptionsDark' : 'IcWalletOptionsLight';
-        const is_dtrade_active = dtrade_loginid === active_loginid;
+        const is_active = loginid === active_loginid;
 
         const switchAccount = async (loginId: number) => {
             const account_list = JSON.parse(localStorage.getItem('accountsList') ?? '{}');
@@ -85,10 +85,10 @@ export const AccountSwitcherWalletItem = observer(
         return (
             <div
                 className={classNames('acc-switcher-wallet-item__container', {
-                    'acc-switcher-wallet-item__container--active': is_dtrade_active,
+                    'acc-switcher-wallet-item__container--active': is_active,
                 })}
                 data-testid='account-switcher-wallet-item'
-                onClick={() => switchAccount(dtrade_loginid)}
+                onClick={() => switchAccount(loginid)}
                 role='button'
             >
                 <div>

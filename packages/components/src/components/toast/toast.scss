@@ -12,7 +12,9 @@
     &__message {
         max-width: calc(100vw - 3.2rem);
         padding: 0.4rem 0.8rem;
+
         @include typeface(--paragraph-center-normal-black);
+
         color: var(--color-surface-primary);
         border-radius: $BORDER_RADIUS;
         min-height: 34px;
@@ -20,41 +22,49 @@
         align-items: center;
         pointer-events: all;
     }
+
     &__error {
         .dc-toast__message {
             background-color: var(--color-status-danger);
         }
     }
+
     &__info {
         .dc-toast__message {
             background: var(--color-status-info);
             font-size: 1.2rem;
+
             /* iPhone SE screen height fixes due to UI space restrictions */
-            @media only screen and (max-height: 580px) {
+            @media only screen and (height <= 580px) {
                 font-size: 1rem;
             }
         }
     }
+
     &__notification {
         .dc-toast__message {
             background: var(--color-interactive-active);
             padding: 0.9rem 1.2rem;
         }
     }
+
     &--enter,
     &--exit {
         transform: scale(1, 0);
         opacity: 0;
     }
+
     &--enter-done {
         transform: scale(1, 1);
         opacity: 1;
     }
+
     &--blinker {
         .dc-toast__message {
             animation: toast_blinking 0.4s alternate infinite;
         }
     }
+
     &:not(:first-child) {
         margin-top: 1rem;
     }
@@ -64,6 +74,7 @@
     40% {
         opacity: 1;
     }
+
     100% {
         opacity: 0;
     }

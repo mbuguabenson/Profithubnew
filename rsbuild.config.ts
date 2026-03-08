@@ -61,16 +61,7 @@ export default defineConfig({
             '@/utils': path.resolve(__dirname, './src/utils'),
             '@/constants': path.resolve(__dirname, './src/constants'),
             '@/stores': path.resolve(__dirname, './src/stores'),
-            // DTrader Aliases
-            App: path.resolve(__dirname, './src/pages/dtrader/App'),
-            Modules: path.resolve(__dirname, './src/pages/dtrader/Modules'),
-            Sass: path.resolve(__dirname, './src/pages/dtrader/sass'),
-            Stores: path.resolve(__dirname, './src/pages/dtrader/Stores'),
-            Types: path.resolve(__dirname, './src/pages/dtrader/Types'),
-            _common: path.resolve(__dirname, './src/pages/dtrader/_common'),
-            Analytics: path.resolve(__dirname, './src/pages/dtrader/Analytics'),
-            Assets: path.resolve(__dirname, './src/pages/dtrader/Assets'),
-            Documents: path.resolve(__dirname, './src/pages/dtrader/Documents'),
+
             '@': path.resolve(__dirname, './src'),
             '@root': path.resolve(__dirname, '.'),
         },

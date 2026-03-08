@@ -10,6 +10,7 @@
     div {
         display: flex;
     }
+
     &__calculation {
         margin-bottom: 28px;
         justify-content: space-evenly;
@@ -22,6 +23,7 @@
             text-align: center;
             margin: 0 1.4rem;
         }
+
         .operator {
             background-color: var(--color-surface-primary);
             width: 48px;
@@ -32,6 +34,7 @@
             }
         }
     }
+
     &__submit-wrapper {
         margin-bottom: 1.6rem;
         justify-content: center;
@@ -46,6 +49,7 @@
                 font-size: 1.6rem;
             }
         }
+
         &--is-disabled {
             pointer-events: none;
 

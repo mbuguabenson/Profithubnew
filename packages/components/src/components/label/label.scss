@@ -18,6 +18,7 @@
         position: absolute;
         border-radius: $BORDER_RADIUS * 3;
     }
+
     /* TODO: change all :after to normal background color once styleguide ready */
     &--general {
         &--default {
@@ -27,6 +28,7 @@
                 background-color: var(--color-status-neutral);
             }
         }
+
         &--adjustment {
             color: var(--color-status-neutral);
 
@@ -34,6 +36,7 @@
                 background-color: var(--color-status-neutral);
             }
         }
+
         &--danger {
             color: var(--color-status-danger);
 
@@ -41,6 +44,7 @@
                 background-color: var(--color-status-danger);
             }
         }
+
         &--warn {
             color: var(--color-status-warning);
 
@@ -48,6 +52,7 @@
                 background-color: var(--color-status-warning);
             }
         }
+
         &--success {
             color: var(--color-status-success);
 
@@ -55,6 +60,7 @@
                 background-color: var(--color-status-success);
             }
         }
+
         &--transfer {
             color: var(--status-transfer);
 
@@ -62,6 +68,7 @@
                 background-color: var(--status-transfer);
             }
         }
+
         &--default-invert {
             color: var(--color-text-secondary);
 
@@ -69,14 +76,17 @@
                 background-color: var(--color-text-secondary);
             }
         }
+
         &--success-invert {
             color: var(--color-surface-primary);
             background-color: var(--color-status-success);
         }
+
         &--warn-invert {
             color: var(--color-surface-primary);
             background-color: var(--color-status-warning);
         }
+
         &--info {
             color: var(--color-status-info);
 
@@ -85,6 +95,7 @@
             }
         }
     }
+
     &--large {
         height: 28px;
         border-radius: $BORDER_RADIUS * 5;

@@ -7,6 +7,7 @@
         flex-direction: column;
         gap: 0.4rem;
     }
+
     &__caption {
         text-transform: capitalize;
         font-size: 1.4em;
@@ -20,9 +21,11 @@
         &--won {
             color: var(--color-text-success);
         }
+
         &--lost {
             color: var(--color-text-danger);
         }
+
         &-wrapper {
             cursor: pointer;
             width: 100%;
@@ -35,14 +38,17 @@
             justify-content: center;
             align-items: center;
         }
+
         @include mobile {
             pointer-events: none;
         }
     }
+
     &__close-btn {
         position: absolute;
         top: 2px;
-        /*rtl:ignore*/
+
+        /* rtl:ignore */
         right: 8px;
         cursor: pointer;
         visibility: visible;
@@ -54,6 +60,7 @@
             color: var(--color-text-secondary);
         }
     }
+
     &__positions-overlay {
         max-width: 282px;
     }

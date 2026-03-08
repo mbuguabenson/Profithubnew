@@ -12,13 +12,16 @@
         &--warning {
             stroke: var(--color-status-warning);
         }
+
         &--danger {
             stroke: var(--color-status-danger);
         }
     }
+
     &--clockwise {
         transform: rotate(-90deg);
     }
+
     &__icon {
         position: absolute;
         width: 1.6rem;

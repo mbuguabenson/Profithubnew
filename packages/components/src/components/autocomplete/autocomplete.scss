@@ -18,13 +18,16 @@
         &--opened {
             transform: rotate(-180deg);
         }
+
         &--disabled {
             --fill-color1: var(--color-text-secondary) !important;
         }
+
         .color1-fill {
             fill: var(--color-text-secondary);
         }
     }
+
     .dc-input {
         margin-bottom: 0;
 
@@ -36,14 +39,17 @@
             }
         }
     }
+
     .dc-input__field {
         white-space: nowrap;
         text-overflow: ellipsis;
     }
+
     .dc-dropdown-list {
         box-shadow: 0 8px 16px 0 var(--color-shadow-medium);
         background: var(--color-surface-primary);
     }
+
     &:focus,
     &:focus-within,
     &:active {

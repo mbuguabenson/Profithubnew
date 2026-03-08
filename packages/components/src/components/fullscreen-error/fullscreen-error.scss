@@ -5,10 +5,11 @@
     position: fixed;
     top: 0;
     width: 100vw;
+
     // Note: colors copied from figma design
     background:
         linear-gradient(0deg, #181c25, #3d2832),
-        radial-gradient(108.21% 50% at 52.05% 0%, rgba(255, 68, 79, 0.24) 0%, rgba(255, 68, 79, 0) 100%);
+        radial-gradient(108.21% 50% at 52.05% 0%, rgb(255 68 79 / 24%) 0%, rgb(255 68 79 / 0%) 100%);
     z-index: 9999;
 
     &__content {

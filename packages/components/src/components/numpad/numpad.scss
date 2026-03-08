@@ -1,5 +1,6 @@
 // Used for buttons
 $SQUARE_SIZE: 48px;
+
 @mixin append-button($position) {
     border-top-#{$position}-radius: 0;
     border-bottom-#{$position}-radius: 0;
@@ -27,6 +28,7 @@ $SQUARE_SIZE: 48px;
         grid-template-columns: min-content min-content min-content minmax($SQUARE_SIZE, 1fr);
         max-width: min-content;
     }
+
     &--is-currency {
         grid-template-areas: /* numpad--with-currency layout */
             'np np np np'
@@ -37,31 +39,39 @@ $SQUARE_SIZE: 48px;
         grid-template-columns: min-content min-content min-content minmax($SQUARE_SIZE, 1fr);
         max-width: min-content;
     }
+
     &__input-area {
         display: grid;
         grid-area: np;
         grid-template-areas: 'dc inp inp nc';
         grid-template-columns: min-content 1fr 1fr min-content;
     }
+
     &__decrement {
         grid-area: dc;
+
         @include append-button(right);
     }
+
     &__increment {
         grid-area: nc;
+
         @include append-button(left);
     }
+
     &__increment,
     &__decrement {
         width: $SQUARE_SIZE;
         height: $SQUARE_SIZE;
     }
+
     &__input-field,
     &__increment,
     &__decrement {
         background-color: var(--color-surface-primary);
         color: var(--color-text-primary);
     }
+
     &__input-field {
         grid-area: inp;
         padding: 0;
@@ -71,24 +81,30 @@ $SQUARE_SIZE: 48px;
         display: flex;
         align-items: center;
         justify-content: center;
+
         @include typeface(--title-center-bold-black);
+
         color: var(--color-text-primary);
 
         input {
             padding: 0;
             max-height: $SQUARE_SIZE;
         }
+
         &--has-error {
             color: var(--color-status-danger);
             font-weight: bold;
         }
     }
+
     &__number {
         border-radius: 2.4rem;
         background-color: var(--color-surface-primary);
         width: $SQUARE_SIZE;
         height: $SQUARE_SIZE;
+
         @include typeface(--title-left-bold-black);
+
         color: var(--color-text-primary);
         text-align: left !important;
 
@@ -98,28 +114,35 @@ $SQUARE_SIZE: 48px;
             pointer-events: none;
             touch-action: none;
         }
+
         &--r3 {
             grid-row: 2 / 2;
         }
+
         &--r2 {
             grid-row: 3 / 3;
         }
+
         &--r1 {
             grid-row: 4 / 4;
         }
+
         &--zero {
             grid-area: z;
             width: 100% !important;
         }
+
         &--is-left-aligned {
             text-align: left;
             width: 100%;
             padding: 0 0 0 4px;
         }
     }
+
     &__dot {
         grid-area: p;
     }
+
     &__bkspace {
         grid-area: b;
 
@@ -127,6 +150,7 @@ $SQUARE_SIZE: 48px;
             height: 100%;
         }
     }
+
     &__ok {
         grid-area: o;
 

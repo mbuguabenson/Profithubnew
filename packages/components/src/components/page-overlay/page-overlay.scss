@@ -21,12 +21,14 @@
         opacity: 0;
         pointer-events: none;
     }
+
     &--enter-done {
         transform: translateY(0);
         opacity: 1;
         pointer-events: auto;
         z-index: 9;
     }
+
     &__header {
         position: sticky;
         top: 0;
@@ -47,6 +49,7 @@
                 font-size: 1.6rem;
             }
         }
+
         &-close {
             cursor: pointer;
             height: 16px;
@@ -56,10 +59,12 @@
             @include mobile-screen {
                 right: 1.6rem;
             }
+
             @include tablet-screen {
                 right: 2.4rem;
             }
         }
+
         &-wrapper {
             width: 100%;
             display: flex;
@@ -70,16 +75,19 @@
                 padding: 0;
             }
         }
+
         @include mobile-or-tablet-screen {
             height: 4rem;
             z-index: 3;
             padding: 0;
             margin: 0;
         }
+
         &-tradershub {
             padding: 0.8rem;
         }
     }
+
     &__content {
         padding: 2.4rem 2.4rem 0;
         display: flex;
@@ -90,11 +98,13 @@
             min-width: 256px;
             margin-left: 2.4rem;
         }
+
         @include mobile-screen {
             flex: 1;
             padding: 0;
         }
     }
+
     &__header-wrapper,
     &__content {
         position: relative;
@@ -105,6 +115,7 @@
             justify-content: center;
         }
     }
+
     @include mobile-or-tablet-screen {
         display: flex;
         flex-direction: column;

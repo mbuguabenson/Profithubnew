@@ -10,6 +10,7 @@
     &__input {
         display: none;
     }
+
     &__box {
         display: flex;
         width: 16px;
@@ -28,14 +29,17 @@
             background-color: var(--brand-primary);
         }
     }
+
     &--active {
         border: none;
         background-color: var(--brand-primary);
     }
+
     &--disabled {
         opacity: 0.5;
         cursor: not-allowed !important;
     }
+
     &--grey-disabled {
         background-color: var(--checkbox-disabled-grey);
     }

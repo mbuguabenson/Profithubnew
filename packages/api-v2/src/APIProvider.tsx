@@ -101,9 +101,9 @@ const APIProvider = ({ children }: PropsWithChildren) => {
                 },
             },
             logger: {
-                log: () => { },
-                warn: () => { },
-                error: () => { },
+                log: () => {},
+                warn: () => {},
+                error: () => {},
             },
         });
     }

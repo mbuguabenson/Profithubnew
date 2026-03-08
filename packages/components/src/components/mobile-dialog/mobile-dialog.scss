@@ -12,6 +12,7 @@
     opacity: 0;
     pointer-events: none;
     background: var(--color-surface-primary);
+
     // transform here would break fixed header
 
     &--enter,
@@ -22,10 +23,12 @@
         & .dc-mobile-dialog__content {
             transform: scale(0);
         }
+
         & .dc-mobile-dialog__header {
             transform: translateY(-100%);
         }
     }
+
     &--enter-done {
         opacity: 1;
         pointer-events: auto;
@@ -33,10 +36,12 @@
         & .dc-mobile-dialog__content {
             transform: scale(1);
         }
+
         & .dc-mobile-dialog__header {
             transform: translateY(0);
         }
     }
+
     &__content {
         margin-top: 4.8rem;
         box-sizing: border-box;
@@ -48,10 +53,12 @@
         &--is-full-height {
             height: 100%;
         }
+
         > div {
             height: 100%;
         }
     }
+
     &__header {
         box-sizing: border-box;
         display: flex;
@@ -69,11 +76,13 @@
         transition-delay: 0.2s;
         border-bottom: 1px solid var(--color-interactive-disabled);
     }
+
     &__container {
         &--has-scroll {
             overflow-x: hidden;
             overflow-y: auto;
         }
+
         &--has-info-banner {
             .dc-mobile-dialog {
                 &__header {
@@ -88,6 +97,7 @@
                         z-index: 4;
                         background: var(--color-surface-primary);
                         width: 100%;
+
                         // transparent border ensures children's margins contribute to height:
                         border-bottom: 0.01rem solid transparent;
 
@@ -110,6 +120,7 @@
                         }
                     }
                 }
+
                 &__content {
                     margin-top: unset;
                     padding-top: unset;
@@ -117,20 +128,24 @@
             }
         }
     }
+
     &__footer {
         position: fixed;
         width: 100%;
-        bottom: 0px;
+        bottom: 0;
         z-index: 4;
     }
+
     &__title {
         padding: 1.2rem 1.2rem 1.2rem 0.4rem;
         margin: 0;
     }
+
     &__close-btn-icon {
         margin: 1.2rem 0.4rem;
         width: 1.6rem;
         height: 1.6rem;
+
         /* postcss-bem-linter: ignore */
         --fill-color1: var(--color-text-primary) !important;
     }

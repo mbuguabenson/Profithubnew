@@ -51,52 +51,7 @@
         }
     }
 
-    &__preloader__dtrader {
-        position: absolute;
-        top: 0;
-        right: 0;
-        width: 37rem;
-        height: 4rem;
-        z-index: 2;
-        background: var(--general-main-1);
 
-        &:before {
-            content: '';
-            position: absolute;
-            left: -8rem;
-            width: 8rem;
-            height: 3.5rem;
-            top: 0;
-            background: var(--general-main-1);
-        }
-
-        &--no-currency:before {
-            left: -9rem;
-            width: 9rem;
-        }
-
-        @include mobile-screen {
-            width: 14rem;
-            height: 4rem;
-            top: -0.3rem;
-
-            &:before {
-                display: none;
-            }
-
-            &--is-crypto {
-                width: 100%;
-            }
-        }
-
-        &--wallets {
-            width: 47rem;
-
-            @include mobile-screen {
-                width: auto;
-            }
-        }
-    }
 
     &__container {
         align-items: center;

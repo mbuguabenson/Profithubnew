@@ -14,6 +14,7 @@
         border-radius: 4.9rem;
         transition: background-color 0.25s;
     }
+
     &__button {
         width: 1.9rem;
         height: 1.9rem;
@@ -21,9 +22,11 @@
         transition: transform 0.25s;
         background: var(--color-surface-primary);
     }
+
     &:checked + &__label {
         background: var(--color-text-success);
     }
+
     &:checked + &__label &__button {
         transform: translateX(2.25rem);
     }

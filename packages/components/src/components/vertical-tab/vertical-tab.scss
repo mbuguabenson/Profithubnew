@@ -8,17 +8,20 @@
     &--floating {
         justify-content: center;
     }
+
     &--grid {
         display: grid;
         height: calc(100vh - #{$HEADER_HEIGHT});
         grid-template-areas: 'form-sidebar form-title' 'form-sidebar form-content';
         grid-template-rows: 5.2rem auto;
     }
+
     &__title {
         grid-area: form-title;
         height: 5rem;
         border-top: 1px solid var(--color-surface-border);
     }
+
     &__content-container {
         position: relative;
         z-index: 0;
@@ -32,6 +35,7 @@
             flex-flow: unset;
         }
     }
+
     &--full-screen {
         min-height: calc(100svh - 5.4rem - 2.4rem); // 5.4rem for header + page overlay padding
         width: 100%;
@@ -40,6 +44,7 @@
             min-height: calc(100svh - 4rem - 2.4rem); // 4rem for mobile header + page overlay padding
         }
     }
+
     &--full-screen.dc-vertical-tab--floating {
         min-height: calc(100svh - 5.4rem - 2.4rem); // 5.4rem for header + page overlay padding
 
@@ -47,13 +52,15 @@
             min-height: calc(100svh - 4rem - 2.4rem); // 4rem for mobile header + page overlay padding
         }
     }
-    &:not(.dc-vertical-tab--full-screen):not(.dc-vertical-tab--floating) {
+
+    &:not(.dc-vertical-tab--full-screen, .dc-vertical-tab--floating) {
         // height: 600px;
 
         .dc-vertical-tab__content {
             padding: 2.4rem;
         }
     }
+
     &__action-bar {
         width: 100%;
         display: flex;
@@ -74,6 +81,7 @@
             }
         }
     }
+
     &__tab {
         display: flex;
         min-width: 28%;
@@ -93,19 +101,23 @@
                 border-radius: $BORDER_RADIUS;
             }
         }
+
         &-meta-wrapper {
             // a class used to wrap `.dc-vertical-tab__tab-bottom-note` and `.dc-vertical-tab__tab`
             grid-area: form-sidebar;
+
             &--floating {
                 position: sticky;
                 top: calc(2.4rem + 41px); // 41px for the header of PageOverlay
             }
         }
+
         &-bottom-note {
             position: sticky;
             margin-top: 1.6rem;
         }
     }
+
     &__header-title {
         padding: 1.6rem;
         display: flex;
@@ -113,6 +125,7 @@
         transition: background-color 0.1s ease-in;
         text-decoration: none;
     }
+
     &--grouped {
         .dc-vertical-tab__header {
             padding-left: 4.4rem;
@@ -120,16 +133,19 @@
             &--highlight {
                 z-index: -1;
             }
+
             &--active {
                 padding-left: 4.8rem;
             }
         }
     }
+
     &__header {
         &__icon.dc-vertical-tab__header__icon--active {
             margin-right: 2rem;
         }
     }
+
     &__header-group {
         &-chevron {
             position: absolute;
@@ -141,9 +157,11 @@
             }
         }
     }
+
     &__header,
     &__header-group {
         @include typeface(--paragraph-left-bold-black, none);
+
         line-height: 1.5;
         color: var(--color-text-primary);
         padding: 1rem 1.2rem 1rem 1.6rem;
@@ -155,13 +173,15 @@
         z-index: 1;
         user-select: none;
 
-        &:hover:not(.dc-vertical-tab__header--active):not(.dc-vertical-tab__header-group--active) {
+        &:hover:not(.dc-vertical-tab__header--active, .dc-vertical-tab__header-group--active) {
             background-color: var(--color-interactive-hover);
         }
+
         &__link {
             font-weight: normal;
             margin-right: 0.4rem;
         }
+
         &__icon {
             margin-right: 1.6rem;
 
@@ -169,14 +189,17 @@
                 --fill-color1: var(--color-text-primary);
             }
         }
+
         &__counter {
             position: absolute;
             right: 2rem;
         }
+
         &--active &__link {
             color: var(--color-text-primary);
             font-weight: bold;
         }
+
         &--highlight {
             // This selector has a `transition` property that's set inline
             position: absolute;
@@ -190,6 +213,7 @@
             transform: translate3d(0, 0, 0);
             z-index: 0;
         }
+
         &--new {
             font-size: 1rem;
             font-weight: bold;
@@ -199,10 +223,12 @@
             color: var(--color-surface-primary);
             border-radius: 8px;
         }
+
         &--floating {
             border-radius: $BORDER_RADIUS;
         }
     }
+
     &__content {
         width: 100%;
         height: 100%;
@@ -230,15 +256,18 @@
                 width: 25.6rem;
             }
         }
+
         &.dc-vertical-tab:not(.dc-vertical-tab--full-screen) {
             padding: 2.4rem;
             height: 100%;
         }
+
         &--floating {
             max-width: 106.2rem;
             min-width: calc(
                 106.2rem - 25.6rem - 2.4rem
             ); // 25.6rem is the width of the vertical tab. 2.4rem is the gap between tab and content
+
             margin-left: 2.4rem;
 
             @include tablet-screen {

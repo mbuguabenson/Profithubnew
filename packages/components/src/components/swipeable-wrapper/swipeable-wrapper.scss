@@ -10,6 +10,7 @@
         height: inherit;
         position: relative;
     }
+
     &__item {
         position: relative;
         display: inline-flex;
@@ -22,6 +23,7 @@
             }
         }
     }
+
     &__nav {
         position: absolute;
         bottom: 0;

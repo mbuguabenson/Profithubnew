@@ -62,9 +62,9 @@ const getSharedQueryClientContext = (): QueryClient => {
                 },
             },
             logger: {
-                log: () => { },
-                warn: () => { },
-                error: () => { },
+                log: () => {},
+                warn: () => {},
+                error: () => {},
             },
         });
     }

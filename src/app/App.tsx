@@ -33,7 +33,7 @@ const SuspenseWrapper = ({ children }: { children: React.ReactNode }) => {
     return <Suspense fallback={<InitialLoader />}>{children}</Suspense>;
 };
 
-const DTraderApp = lazy(() => import('../pages/dtrader/index'));
+
 
 const router = createBrowserRouter(
     createRoutesFromElements(
@@ -56,7 +56,7 @@ const router = createBrowserRouter(
             <Route index element={<AppRoot />} />
             <Route path='endpoint' element={<Endpoint />} />
             <Route path='callback' element={<CallbackPage />} />
-            <Route path='dtrader' element={<DTraderApp passthrough={{ root_store: null, WS: null }} />} />
+
         </Route>
     ),
     {

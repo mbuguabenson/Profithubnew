@@ -37,6 +37,7 @@
                 opacity: 0;
             }
         }
+
         &--enter-done {
             opacity: 1;
 
@@ -45,10 +46,12 @@
                 opacity: 1;
             }
         }
+
         &--has-portal {
             background-color: transparent;
         }
     }
+
     &__dialog {
         max-width: 560px;
         max-height: 338px;
@@ -69,6 +72,7 @@
             transform 0.25s cubic-bezier(0.25, 0.1, 0.1, 0.25),
             opacity 0.25s cubic-bezier(0.25, 0.1, 0.1, 0.25);
     }
+
     &__header {
         &-wrapper {
             width: 100%;
@@ -76,17 +80,21 @@
             justify-content: space-between;
             align-items: center;
             margin-bottom: 1rem;
+
             &--end {
                 justify-content: flex-end;
             }
         }
+
         &--title {
             align-self: flex-start;
         }
+
         &--close {
             cursor: pointer;
         }
     }
+
     &__content {
         align-self: flex-start;
         margin-bottom: 2.4rem;
@@ -97,22 +105,27 @@
         .dc-input__label {
             background-color: var(--color-surface-primary);
         }
+
         &--centered {
             align-self: center;
         }
     }
+
     &__footer {
         display: flex;
         justify-content: flex-end;
         align-items: center;
         width: 100%;
+
         @include mobile {
             flex-wrap: wrap;
             align-items: flex-start;
         }
     }
+
     &__button {
         margin-left: 0.8rem;
+
         @include mobile {
             &:not(:last-child) {
                 margin-bottom: 1rem;
@@ -121,7 +134,7 @@
     }
 }
 
-@media screen and (max-width: 560px) {
+@media screen and (width <= 560px) {
     .dc-dialog {
         &__dialog {
             min-width: auto;
