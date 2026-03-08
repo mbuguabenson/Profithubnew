@@ -44,11 +44,6 @@ const AnalysisTool = observer(() => {
 
     return (
         <div className='analysis-tool'>
-            <div className='analysis-tool__header'>
-                <h2>Analysis Tool</h2>
-                <p>Advanced market analysis strategies for digit trading</p>
-            </div>
-
             <div className='analysis-tool__tabs'>
                 <button
                     className={active_subtab === 'easy_tool' ? 'active' : ''}
