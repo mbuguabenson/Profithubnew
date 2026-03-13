@@ -12,10 +12,9 @@ import MobileWrapper from '@/components/shared_ui/mobile-wrapper';
 import Tabs from '@/components/shared_ui/tabs/tabs';
 import TradingViewModal from '@/components/trading-view-chart/trading-view-modal';
 import { DBOT_TABS, TAB_IDS } from '@/constants/bot-contents';
-const { DASHBOARD, BOT_BUILDER, DTRADER, DTOOLTRADES } = DBOT_TABS;
+import { isDbotRTL } from '@/external/bot-skeleton/utils/workspace';
 import { api_base, updateWorkspaceName } from '@/external/bot-skeleton';
 import { CONNECTION_STATUS } from '@/external/bot-skeleton/services/api/observables/connection-status-stream';
-import { isDbotRTL } from '@/external/bot-skeleton/utils/workspace';
 import { useApiBase } from '@/hooks/useApiBase';
 import { useStore } from '@/hooks/useStore';
 import useTMB from '@/hooks/useTMB';
@@ -376,11 +375,11 @@ const AppWrapper = observer(() => {
                             className='main__tabs'
                             onTabItemClick={handleTabChange}
                             top
-                            history={historyShim as React.ComponentProps<typeof Tabs>['history']}
+                            history={historyShim as any}
                             is_scrollable
                         >
                             {/* Tab 0: Dashboard */}
-                            {admin.visible_tabs.dashboard && (
+                            {admin.visible_tabs.dashboard ? (
                                 <div
                                     label={
                                         <div className='main__tabs-label'>
@@ -396,10 +395,10 @@ const AppWrapper = observer(() => {
                                 >
                                     <Dashboard handleTabChange={handleTabChange} />
                                 </div>
-                            )}
+                            ) : null}
 
                             {/* Tab 1: Bot Builder */}
-                            {admin.visible_tabs.bot_builder && (
+                            {admin.visible_tabs.bot_builder ? (
                                 <div
                                     label={
                                         <div className='main__tabs-label'>
@@ -413,10 +412,10 @@ const AppWrapper = observer(() => {
                                     }
                                     id='id-bot-builder'
                                 />
-                            )}
+                            ) : null}
 
                             {/* Tab 2: Charts */}
-                            {admin.visible_tabs.charts && (
+                            {admin.visible_tabs.charts ? (
                                 <div
                                     label={
                                         <div className='main__tabs-label'>
@@ -440,10 +439,10 @@ const AppWrapper = observer(() => {
                                         <ChartWrapper show_digits_stats={false} />
                                     </Suspense>
                                 </div>
-                            )}
+                            ) : null}
 
                             {/* Tab 3: Analysis Tool */}
-                            {admin.visible_tabs.analysis_tool && (
+                            {admin.visible_tabs.analysis_tool ? (
                                 <div
                                     label={
                                         <div className='main__tabs-label'>
@@ -463,10 +462,10 @@ const AppWrapper = observer(() => {
                                         </Suspense>
                                     </PageContentWrapper>
                                 </div>
-                            )}
+                            ) : null}
 
                             {/* Tab 4: Trading Tools */}
-                            {admin.visible_tabs.trading_tools && (
+                            {admin.visible_tabs.trading_tools ? (
                                 <div
                                     label={
                                         <div className='main__tabs-label'>
@@ -484,10 +483,10 @@ const AppWrapper = observer(() => {
                                         <TradingTools />
                                     </PageContentWrapper>
                                 </div>
-                            )}
+                            ) : null}
 
                             {/* Tab 5: Copy Trading */}
-                            {admin.visible_tabs.copy_trading && (
+                            {admin.visible_tabs.copy_trading ? (
                                 <div
                                     label={
                                         <div className='main__tabs-label'>
@@ -507,10 +506,10 @@ const AppWrapper = observer(() => {
                                         </Suspense>
                                     </PageContentWrapper>
                                 </div>
-                            )}
+                            ) : null}
 
                             {/* Tab 6: Strategies */}
-                            {admin.visible_tabs.strategies && (
+                            {admin.visible_tabs.strategies ? (
                                 <div
                                     label={
                                         <div className='main__tabs-label'>
@@ -530,10 +529,10 @@ const AppWrapper = observer(() => {
                                         </Suspense>
                                     </PageContentWrapper>
                                 </div>
-                            )}
+                            ) : null}
 
                             {/* Tab 7: Settings */}
-                            {admin.visible_tabs.settings && (
+                            {admin.visible_tabs.settings ? (
                                 <div
                                     label={
                                         <div className='main__tabs-label'>
@@ -553,10 +552,10 @@ const AppWrapper = observer(() => {
                                         </Suspense>
                                     </PageContentWrapper>
                                 </div>
-                            )}
+                            ) : null}
 
                             {/* Tab 8: Tutorials */}
-                            {admin.visible_tabs.tutorials && (
+                            {admin.visible_tabs.tutorials ? (
                                 <div
                                     label={
                                         <div className='main__tabs-label'>
@@ -572,14 +571,14 @@ const AppWrapper = observer(() => {
                                 >
                                     <PageContentWrapper>
                                         <Suspense fallback={<ChunkLoader message={localize('Loading...')} />}>
-                                            <Tutorials />
+                                            <Tutorials handleTabChange={handleTabChange} />
                                         </Suspense>
                                     </PageContentWrapper>
                                 </div>
-                            )}
+                            ) : null}
 
                             {/* Tab 9: Free Bots */}
-                            {admin.visible_tabs.free_bots && (
+                            {admin.visible_tabs.free_bots ? (
                                 <div
                                     label={
                                         <div className='main__tabs-label'>
@@ -595,9 +594,9 @@ const AppWrapper = observer(() => {
                                         </Suspense>
                                     </PageContentWrapper>
                                 </div>
-                            )}
+                            ) : null}
                             {/* Tab 10: DTrader */}
-                            {admin.visible_tabs.dtrader && (
+                            {admin.visible_tabs.dtrader ? (
                                 <div
                                     label={
                                         <div className='main__tabs-label'>
@@ -609,10 +608,10 @@ const AppWrapper = observer(() => {
                                 >
                                     <Portal type='dtrader' />
                                 </div>
-                            )}
+                            ) : null}
 
                             {/* Tab 11: DTool */}
-                            {admin.visible_tabs.dtooltrades && (
+                            {admin.visible_tabs.dtooltrades ? (
                                 <div
                                     label={
                                         <div className='main__tabs-label'>
@@ -624,7 +623,7 @@ const AppWrapper = observer(() => {
                                 >
                                     <Portal type='dtooltrades' />
                                 </div>
-                            )}
+                            ) : null}
                         </Tabs>
                         {!isDesktop && right_tab_shadow && <span className='tabs-shadow tabs-shadow--right' />}
                     </>
