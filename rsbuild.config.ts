@@ -111,7 +111,7 @@ export default defineConfig({
         },
     },
     dev: {
-        hmr: true,
+        hmr: false,
     },
     tools: {
         postcss: config => {

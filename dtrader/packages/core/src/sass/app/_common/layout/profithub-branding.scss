@@ -1,0 +1,62 @@
+:root {
+    --profithub-gradient: linear-gradient(90deg, #00ff88, #00c6ff, #0072ff);
+    --profithub-glow: 0 0 10px rgba(0, 255, 136, 0.6), 0 0 20px rgba(0, 198, 255, 0.4);
+}
+
+.profithub-logo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 800;
+    font-size: 20px;
+    text-transform: uppercase;
+    letter-spacing: -0.5px;
+    cursor: pointer;
+    user-select: none;
+    margin: 0 16px;
+
+    &__text {
+        background: var(--profithub-gradient);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        filter: drop-shadow(0 0 5px rgba(0, 255, 136, 0.3));
+        animation: glow-pulse 3s infinite alternate;
+    }
+
+    &__icon {
+        font-size: 24px;
+        filter: drop-shadow(0 0 5px rgba(0, 198, 255, 0.5));
+    }
+}
+
+@keyframes glow-pulse {
+    from {
+        filter: drop-shadow(0 0 2px rgba(0, 255, 136, 0.2));
+    }
+    to {
+        filter: drop-shadow(0 0 8px rgba(0, 255, 136, 0.5));
+    }
+}
+
+// Button Retheme
+:root {
+    --button-primary-default: #00c6ff; // Sky blue base
+    --button-primary-hover: #00ff88; // Green hover
+}
+
+.theme--light,
+.theme--dark {
+    --brand-red-coral: #00c6ff;
+    --button-primary-default: #00c6ff;
+    --button-primary-hover: #00ff88;
+}
+
+// Glowing effect for primary buttons
+.dc-btn--primary {
+    transition: all 0.3s ease;
+    &:hover {
+        box-shadow: 0 0 15px rgba(0, 255, 136, 0.4);
+        transform: translateY(-1px);
+    }
+}

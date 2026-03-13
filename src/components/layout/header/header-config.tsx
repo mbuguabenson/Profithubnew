@@ -45,25 +45,25 @@ export const platformsConfig: PlatformsConfig[] = [
         active: false,
         buttonIcon: <DerivTraderLogo height={25} width={114.97} />,
         description: localize('A whole new trading experience on a powerful yet easy to use platform.'),
-        href: standalone_routes.trade,
-        icon: <DerivTraderLogo height={32} width={148} />,
-        showInEU: true,
-    },
-    {
-        active: true,
-        buttonIcon: <DerivBotLogo height={25} width={94} />,
-        description: localize('Automated trading at your fingertips. No coding needed.'),
-        href: standalone_routes.bot,
-        icon: <DerivBotLogo height={32} width={121} />,
+        href: standalone_routes.smarttrader,
+        icon: <SmarttraderLogo height={32} width={153} />,
         showInEU: false,
     },
     {
         active: false,
-        buttonIcon: <SmarttraderLogo height={24} width={115} />,
-        description: localize('Trade the world’s markets with our popular user-friendly platform.'),
-        href: standalone_routes.smarttrader,
-        icon: <SmarttraderLogo height={32} width={153} />,
-        showInEU: false,
+        buttonIcon: <DerivTraderLogo height={25} width={114.97} />,
+        description: localize('Manual trading on local Dtrader.'),
+        href: standalone_routes.dtrader,
+        icon: <DerivTraderLogo height={32} width={148} />,
+        showInEU: true,
+    },
+    {
+        active: false,
+        buttonIcon: <DerivBotLogo height={25} width={94} />,
+        description: localize('Automated trading on local Dtooltrades.'),
+        href: standalone_routes.dtooltrades,
+        icon: <DerivBotLogo height={32} width={121} />,
+        showInEU: true,
     },
 ];
 
@@ -75,6 +75,18 @@ export const TRADERS_HUB_LINK_CONFIG = {
 };
 
 export const MenuItems: MenuItemsConfig[] = [
+    {
+        as: 'a',
+        href: standalone_routes.dtrader,
+        icon: <DerivTraderLogo iconSize='xs' />,
+        label: localize('Dtrader'),
+    },
+    {
+        as: 'a',
+        href: standalone_routes.dtooltrades,
+        icon: <DerivBotLogo iconSize='xs' />,
+        label: localize('Dtooltrades'),
+    },
     {
         as: 'a',
         href: standalone_routes.cashier,

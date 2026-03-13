@@ -30,7 +30,7 @@ export const MenuItems = observer(() => {
 
     // Use handleTraderHubRedirect for all links
     const getModifiedHref = (originalHref: string) => {
-        const redirect_url = new URL(originalHref);
+        let redirect_url = new URL(originalHref);
 
         if (is_virtual) {
             // For demo accounts, set the account parameter to 'demo'
@@ -40,7 +40,15 @@ export const MenuItems = observer(() => {
             redirect_url.searchParams.set('account', currency);
         }
 
-        return redirect_url.toString();
+        let finalHref = redirect_url.toString();
+
+        // If it's a cross-app link (Dtrader or Dtooltrades), append SSO tokens
+        if (originalHref.includes('localhost:8443') || originalHref.includes('localhost:3000')) {
+            const { getSsoUrl } = require('@/utils/sso-utils');
+            finalHref = getSsoUrl(finalHref, client.accounts);
+        }
+
+        return finalHref;
     };
 
     // Filter out the Cashier link when the account is a wallet account

@@ -30,6 +30,7 @@ export default class AdminStore {
         strategies: true,
         settings: true,
         tutorials: true,
+        free_bots: true,
     };
 
     // Mock Data for Table & Radial Chart

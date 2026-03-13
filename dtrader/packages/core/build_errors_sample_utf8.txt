@@ -1,0 +1,300 @@
+﻿<i> [1m[32m | 208 ms (parallelism 94.9) resolve to new modules > ../../../node_modules/react-dropzone/dist/es/index.js[39m[22m
+<i> [1m[32m | 204 ms (parallelism 85.1) resolve to new modules > ./Modules/Page404/index.js[39m[22m
+<i> [1m[32m | 233 ms (parallelism 86.3) resolve to new modules > ../node_modules/@deriv-com/auth-client/dist/index.js[39m[22m
+<i> [1m[32m | 210 ms (parallelism 73.5) resolve to new modules > ../../../node_modules/@babel/runtime/helpers/esm/toPrimitive.js[39m[22m
+<i> [1m[32m | 210 ms (parallelism 73.5) resolve to new modules > ../../../node_modules/@babel/runtime/helpers/esm/arrayLikeToArray.js[39m[22m
+<i> [1m[32m | 323 ms (parallelism 70) resolve to new modules > ./App/Components/Elements/Modals/deriv-real-account-required-modal.scss[39m[22m
+<w> [1m[33m | 594 ms (parallelism 76.1) resolve to new modules > ../../../node_modules/@tanstack/query-core/build/lib/index.mjs[39m[22m
+<i> [1m[32m | 368 ms (parallelism 67.8) resolve to new modules > ./Components/markers/marker-line.jsx[39m[22m
+<i> [1m[32m | 368 ms (parallelism 67.8) resolve to new modules > ./Components/markers/marker-spot-label.jsx[39m[22m
+<i> [1m[32m | 368 ms (parallelism 67.8) resolve to new modules > ./Components/markers/marker-spot.jsx[39m[22m
+<w> [1m[33m | 582 ms (parallelism 75.9) resolve to new modules > ../../../node_modules/uuid/dist/commonjs-browser/index.js[39m[22m
+<i> [1m[32m | 368 ms (parallelism 67.7) resolve to new modules > ../../stores/src/stores/FeatureFlagsStore.ts[39m[22m
+<w> [1m[33m | 582 ms (parallelism 75.9) resolve to new modules > ../../../node_modules/@growthbook/growthbook/dist/cjs/index.js[39m[22m
+<i> [1m[32m | 220 ms (parallelism 91.2) resolve to new modules > ../../cfd/src/index.tsx[39m[22m
+<i> [1m[32m | 220 ms (parallelism 91.2) resolve to new modules > ../../cashier/src/index.tsx[39m[22m
+<i> [1m[32m | 220 ms (parallelism 91.2) resolve to new modules > ../../reports/src/index.tsx[39m[22m
+<i> [1m[32m | 220 ms (parallelism 91.2) resolve to new modules > ../../trader/src/index.tsx[39m[22m
+<e> [1m[31m72328 ms resolve to new modules[39m[22m
+<i> [1m[32m | 218 ms (parallelism 86.4) resolve to existing modules > ../../../node_modules/@deriv-com/quill-ui/dist/components/Badge/index.js[39m[22m
+<w> [1m[33m6593 ms resolve to existing modules[39m[22m
+<e> [1m[31m |  | 2112 ms build modules > ./index.tsx[39m[22m
+<i> [1m[32m |  | 224 ms (parallelism 87.3) build modules > ../../components/src/components/date-picker/date-picker.tsx[39m[22m
+<i> [1m[32m |  | 252 ms (parallelism 87) build modules > ../../components/src/components/data-list/data-list.tsx[39m[22m
+<i> [1m[32m |  | 252 ms (parallelism 87) build modules > ../../components/src/components/data-table/data-table.tsx[39m[22m
+<i> [1m[32m |  | 223 ms (parallelism 87.3) build modules > ../../components/src/components/data-table/table-cell.tsx[39m[22m
+<i> [1m[32m |  | 223 ms (parallelism 87.3) build modules > ../../components/src/components/data-table/table-row-info.tsx[39m[22m
+<i> [1m[32m |  | 223 ms (parallelism 87.3) build modules > ../../components/src/components/data-table/table-row.tsx[39m[22m
+<i> [1m[32m |  | 224 ms (parallelism 87.3) build modules > ../../components/src/components/div100vh-container/div100vh-container.tsx[39m[22m
+<i> [1m[32m |  | 251 ms (parallelism 87) build modules > ../../components/src/components/drawer/drawer.tsx[39m[22m
+<i> [1m[32m |  | 278 ms (parallelism 86.4) build modules > ../../components/src/components/dropdown/dropdown.tsx[39m[22m
+<i> [1m[32m |  | 269 ms (parallelism 86.7) build modules > ../../components/src/components/empty-state/empty-state.tsx[39m[22m
+<i> [1m[32m |  | 269 ms (parallelism 86.7) build modules > ../../components/src/components/expansion-panel/expansion-panel.tsx[39m[22m
+<i> [1m[32m |  | 267 ms (parallelism 86.7) build modules > ../../components/src/components/error-modal/error-modal.tsx[39m[22m
+<i> [1m[32m |  | 275 ms (parallelism 86.3) build modules > ../../components/src/components/fade-wrapper/fade-wrapper.tsx[39m[22m
+<i> [1m[32m |  | 275 ms (parallelism 86.3) build modules > ../../components/src/components/field/field.tsx[39m[22m
+<i> [1m[32m |  | 215 ms (parallelism 87.4) build modules > ../../components/src/components/inline-message/inline-message.tsx[39m[22m
+<i> [1m[32m |  | 216 ms (parallelism 87.4) build modules > ../../components/src/components/input/input.tsx[39m[22m
+<i> [1m[32m |  | 246 ms (parallelism 88.9) build modules > ../../components/src/components/input-field/input-field.tsx[39m[22m
+<i> [1m[32m |  | 216 ms (parallelism 87.4) build modules > ../../components/src/components/input-wth-checkbox/input-with-checkbox.tsx[39m[22m
+<i> [1m[32m |  | 215 ms (parallelism 87.4) build modules > ../../components/src/components/linear-progress/linear-progress-container.tsx[39m[22m
+<i> [1m[32m |  | 215 ms (parallelism 87.4) build modules > ../../components/src/components/loading/loading.tsx[39m[22m
+<i> [1m[32m |  | 271 ms (parallelism 89.8) build modules > ../../components/src/components/mobile-dialog/mobile-dialog.tsx[39m[22m
+<i> [1m[32m |  | 246 ms (parallelism 88.8) build modules > ../../components/src/components/mobile-drawer/mobile-drawer.tsx[39m[22m
+<i> [1m[32m |  | 265 ms (parallelism 89.7) build modules > ../../components/src/components/mobile-full-page-modal/mobile-full-page-modal.tsx[39m[22m
+<i> [1m[32m |  | 265 ms (parallelism 89.7) build modules > ../../components/src/components/mobile-wrapper/mobile-wrapper.tsx[39m[22m
+<i> [1m[32m |  | 266 ms (parallelism 89.7) build modules > ../../components/src/components/modal/modal.tsx[39m[22m
+<i> [1m[32m |  | 263 ms (parallelism 89.6) build modules > ../../components/src/components/money/money.tsx[39m[22m
+<i> [1m[32m |  | 263 ms (parallelism 89.6) build modules > ../../components/src/components/multi-step/multi-step.tsx[39m[22m
+<i> [1m[32m |  | 295 ms (parallelism 71.6) build modules > ./App/Containers/Modals/complete-user-profile-modal/complete-user-profile-modal.tsx[39m[22m
+<i> [1m[32m |  | 295 ms (parallelism 71.6) build modules > ./App/Containers/Layout/header/header-wallets.tsx[39m[22m
+<i> [1m[32m |  | 295 ms (parallelism 71.6) build modules > ./App/Containers/Layout/header/header-legacy.tsx[39m[22m
+<e> [1m[31m | 38410 ms build modules > 1237 x javascript/auto with ../../shared/src/loaders/deriv-account-loader.js!../../shared/src/loaders/deriv-cashier-loader.js!../../shared/src/loaders/deriv-cfd-loader.js!../../../node_modules/babel-loader/lib/index.js??ruleSet[1].rules[1].use[3][39m[22m
+<e> [1m[31m | 11553 ms build modules > 8511 x javascript/auto[39m[22m
+<i> [1m[32m |  | 210 ms (parallelism 73.5) build modules > ../../../node_modules/moment/locale/ ../../../../node_modules/moment/locale/ lazy ^\.\/.*$ namespace object[39m[22m
+<i> [1m[32m | 286 ms build modules > 61 x javascript/dynamic[39m[22m
+<i> [1m[32m |  | 399 ms (parallelism 86.7) build modules > ../../components/src/components/carousel/carousel.scss[39m[22m
+<i> [1m[32m |  | 399 ms (parallelism 86.7) build modules > ../../components/src/components/cfd-compare-accounts-carousel/cfd-compare-accounts-carousel.scss[39m[22m
+<i> [1m[32m |  | 398 ms (parallelism 86.7) build modules > ../../components/src/components/composite-checkbox/composite-checkbox.scss[39m[22m
+<i> [1m[32m |  | 398 ms (parallelism 86.7) build modules > ../../components/src/components/checkbox/checkbox.scss[39m[22m
+<i> [1m[32m |  | 398 ms (parallelism 86.7) build modules > ../../components/src/components/checklist/checklist.scss[39m[22m
+<i> [1m[32m |  | 398 ms (parallelism 86.7) build modules > ../../components/src/components/circular-progress/circular-progress.scss[39m[22m
+<i> [1m[32m |  | 399 ms (parallelism 86.7) build modules > ../../components/src/components/contract-card/contract-card.scss[39m[22m
+<i> [1m[32m |  | 398 ms (parallelism 86.7) build modules > ../../components/src/components/collapsible/collapsible.scss[39m[22m
+<i> [1m[32m |  | 398 ms (parallelism 86.7) build modules > ../../components/src/components/content-expander/content-expander.scss[39m[22m
+<i> [1m[32m |  | 398 ms (parallelism 86.7) build modules > ../../components/src/components/counter/counter.scss[39m[22m
+<i> [1m[32m |  | 399 ms (parallelism 86.7) build modules > ../../components/src/components/dialog/dialog.scss[39m[22m
+<i> [1m[32m |  | 399 ms (parallelism 86.7) build modules > ../../components/src/components/date-picker/date-picker.scss[39m[22m
+<i> [1m[32m |  | 398 ms (parallelism 86.7) build modules > ../../components/src/components/currency-badge/currency-badge.scss[39m[22m
+<i> [1m[32m |  | 397 ms (parallelism 86.7) build modules > ../../components/src/components/date-of-birth-picker/date-of-birth-picker.scss[39m[22m
+<i> [1m[32m |  | 397 ms (parallelism 86.7) build modules > ../../components/src/components/desktop-wrapper/desktop-wrapper.scss[39m[22m
+<i> [1m[32m |  | 462 ms (parallelism 85.5) build modules > ../../components/src/components/data-list/data-list.scss[39m[22m
+<i> [1m[32m |  | 462 ms (parallelism 85.5) build modules > ../../components/src/components/data-table/data-table.scss[39m[22m
+<i> [1m[32m |  | 462 ms (parallelism 85.5) build modules > ../../components/src/components/div100vh-container/div100vh-container.scss[39m[22m
+<i> [1m[32m |  | 462 ms (parallelism 85.5) build modules > ../../components/src/components/drawer/drawer.scss[39m[22m
+<i> [1m[32m |  | 462 ms (parallelism 85.5) build modules > ../../components/src/components/dropdown/dropdown.scss[39m[22m
+<i> [1m[32m |  | 462 ms (parallelism 85.5) build modules > ../../components/src/components/dropdown/list.scss[39m[22m
+<i> [1m[32m |  | 485 ms (parallelism 85.9) build modules > ../../components/src/components/expansion-panel/expansion-panel.scss[39m[22m
+<i> [1m[32m |  | 485 ms (parallelism 85.9) build modules > ../../components/src/components/error-modal/error-modal.scss[39m[22m
+<i> [1m[32m |  | 484 ms (parallelism 85.8) build modules > ../../components/src/components/fade-wrapper/fade-wrapper.scss[39m[22m
+<i> [1m[32m |  | 485 ms (parallelism 85.9) build modules > ../../components/src/components/field/field.scss[39m[22m
+<i> [1m[32m |  | 485 ms (parallelism 85.9) build modules > ../../components/src/components/file-dropzone/file-dropzone.scss[39m[22m
+<w> [1m[33m |  | 526 ms (parallelism 86.5) build modules > ../../components/src/components/form-progress/form-progress.scss[39m[22m
+<w> [1m[33m |  | 525 ms (parallelism 86.5) build modules > ../../components/src/components/filter-dropdown/filter-dropdown.scss[39m[22m
+<w> [1m[33m |  | 525 ms (parallelism 86.5) build modules > ../../components/src/components/form-submit-button/form-submit-button.scss[39m[22m
+<w> [1m[33m |  | 602 ms (parallelism 88.1) build modules > ../../components/src/components/form-submit-error-message/form-submit-error-message.scss[39m[22m
+<w> [1m[33m |  | 601 ms (parallelism 88.1) build modules > ../../components/src/components/form-cancel-button/form-cancel-button.scss[39m[22m
+<w> [1m[33m |  | 599 ms (parallelism 88.1) build modules > ../../components/src/components/label/label.scss[39m[22m
+<w> [1m[33m |  | 599 ms (parallelism 88.1) build modules > ../../components/src/components/hint-box/hint-box.scss[39m[22m
+<w> [1m[33m |  | 599 ms (parallelism 88.1) build modules > ../../components/src/components/horizontal-swipe/horizontal-swipe.scss[39m[22m
+<w> [1m[33m |  | 599 ms (parallelism 88.1) build modules > ../../components/src/components/icon/icon.scss[39m[22m
+<w> [1m[33m |  | 599 ms (parallelism 88.1) build modules > ../../components/src/components/icon-trade-types/icon-trade-types.scss[39m[22m
+<i> [1m[32m |  | 296 ms (parallelism 90.5) build modules > ../../components/src/components/infinite-data-list/infinite-data-list.scss[39m[22m
+<i> [1m[32m |  | 296 ms (parallelism 90.5) build modules > ../../components/src/components/input/input.scss[39m[22m
+<i> [1m[32m |  | 297 ms (parallelism 90.5) build modules > ../../components/src/components/input-field/input-field.scss[39m[22m
+<i> [1m[32m |  | 296 ms (parallelism 90.5) build modules > ../../components/src/components/input-wth-checkbox/input-with-checkbox.scss[39m[22m
+<i> [1m[32m |  | 296 ms (parallelism 90.5) build modules > ../../components/src/components/linear-progress/linear-progress.scss[39m[22m
+<i> [1m[32m |  | 296 ms (parallelism 90.5) build modules > ../../components/src/components/loading/loading.scss[39m[22m
+<i> [1m[32m |  | 296 ms (parallelism 90.5) build modules > ../../components/src/components/mobile-dialog/mobile-dialog.scss[39m[22m
+<i> [1m[32m |  | 297 ms (parallelism 90.5) build modules > ../../components/src/components/mobile-drawer/mobile-drawer.scss[39m[22m
+<i> [1m[32m |  | 296 ms (parallelism 90.5) build modules > ../../components/src/components/mobile-full-page-modal/mobile-full-page-modal.scss[39m[22m
+<i> [1m[32m |  | 297 ms (parallelism 90.5) build modules > ../../components/src/components/mobile-wrapper/mobile-wrapper.scss[39m[22m
+<i> [1m[32m |  | 297 ms (parallelism 90.5) build modules > ../../components/src/components/modal/modal.scss[39m[22m
+<i> [1m[32m |  | 297 ms (parallelism 90.5) build modules > ../../components/src/components/money/money.scss[39m[22m
+<i> [1m[32m |  | 297 ms (parallelism 90.5) build modules > ../../components/src/components/multi-step/multi-step.scss[39m[22m
+<i> [1m[32m |  | 297 ms (parallelism 90.5) build modules > ../../components/src/components/news-ticker/news-ticker.scss[39m[22m
+<i> [1m[32m |  | 297 ms (parallelism 90.5) build modules > ../../components/src/components/numpad/numpad.scss[39m[22m
+<i> [1m[32m |  | 297 ms (parallelism 90.5) build modules > ../../components/src/components/page-error/page-error.scss[39m[22m
+<i> [1m[32m |  | 301 ms (parallelism 90.4) build modules > ../../components/src/components/page-overlay/page-overlay.scss[39m[22m
+<i> [1m[32m |  | 301 ms (parallelism 90.4) build modules > ../../components/src/components/password-input/password-input.scss[39m[22m
+<i> [1m[32m |  | 301 ms (parallelism 90.4) build modules > ../../components/src/components/password-meter/password-meter.scss[39m[22m
+<i> [1m[32m |  | 330 ms (parallelism 90.9) build modules > ../../components/src/components/popup/popup.scss[39m[22m
+<i> [1m[32m |  | 329 ms (parallelism 90.9) build modules > ../../components/src/components/popover/popover.scss[39m[22m
+<i> [1m[32m |  | 329 ms (parallelism 90.9) build modules > ../../components/src/components/progress-bar/progress-bar.scss[39m[22m
+<i> [1m[32m |  | 329 ms (parallelism 90.9) build modules > ../../components/src/components/progress-bar-tracker/progress-bar-tracker.scss[39m[22m
+<i> [1m[32m |  | 333 ms (parallelism 90.9) build modules > ../../components/src/components/progress-indicator/progress-indicator.scss[39m[22m
+<i> [1m[32m |  | 333 ms (parallelism 90.9) build modules > ../../components/src/components/progress-slider/progress-slider.scss[39m[22m
+<i> [1m[32m |  | 333 ms (parallelism 90.9) build modules > ../../components/src/components/progress-slider-mobile/progress-slider-mobile.scss[39m[22m
+<i> [1m[32m |  | 333 ms (parallelism 90.9) build modules > ../../components/src/components/radio-group/radio-group.scss[39m[22m
+<i> [1m[32m |  | 332 ms (parallelism 90.9) build modules > ../../components/src/components/read-more/read-more.scss[39m[22m
+<i> [1m[32m |  | 333 ms (parallelism 90.9) build modules > ../../components/src/components/skeleton/skeleton.scss[39m[22m
+<i> [1m[32m |  | 333 ms (parallelism 90.9) build modules > ../../components/src/components/route-with-subroutes/route-with-subroutes.scss[39m[22m
+<i> [1m[32m |  | 333 ms (parallelism 90.9) build modules > ../../components/src/components/select-native/select-native.scss[39m[22m
+<i> [1m[32m |  | 333 ms (parallelism 90.9) build modules > ../../components/src/components/send-email-template/send-email-template.scss[39m[22m
+<i> [1m[32m |  | 326 ms (parallelism 90.8) build modules > ../../components/src/components/status-badge/status-badge.scss[39m[22m
+<i> [1m[32m |  | 317 ms (parallelism 91.3) build modules > ../../components/src/components/search-box/search-box.scss[39m[22m
+<i> [1m[32m |  | 317 ms (parallelism 91.3) build modules > ../../components/src/components/swipeable-notification/swipeable-notification.scss[39m[22m
+<i> [1m[32m |  | 317 ms (parallelism 91.3) build modules > ../../components/src/components/swipeable-wrapper/swipeable-wrapper.scss[39m[22m
+<i> [1m[32m |  | 207 ms (parallelism 88.3) build modules > ../../components/src/components/relative-datepicker/relative-datepicker.scss[39m[22m
+<i> [1m[32m |  | 209 ms (parallelism 88.1) build modules > ../../components/src/components/tabs/tabs.scss[39m[22m
+<i> [1m[32m |  | 208 ms (parallelism 88.1) build modules > ../../components/src/components/table/table.scss[39m[22m
+<i> [1m[32m |  | 205 ms (parallelism 88.2) build modules > ../../components/src/components/text/text.scss[39m[22m
+<i> [1m[32m |  | 209 ms (parallelism 88.1) build modules > ../../components/src/components/toast/toast.scss[39m[22m
+<i> [1m[32m |  | 206 ms (parallelism 88.2) build modules > ../../components/src/components/themed-scrollbars/themed-scrollbars.scss[39m[22m
+<i> [1m[32m |  | 207 ms (parallelism 88.2) build modules > ../../components/src/components/toggle-switch/toggle-switch.scss[39m[22m
+<i> [1m[32m |  | 208 ms (parallelism 88.1) build modules > ../../components/src/components/tick-picker/tick-picker.scss[39m[22m
+<i> [1m[32m |  | 207 ms (parallelism 88.2) build modules > ../../components/src/components/tick-progress/tick-progress.scss[39m[22m
+<i> [1m[32m |  | 208 ms (parallelism 88.1) build modules > ../../components/src/components/timeline/timeline.scss[39m[22m
+<i> [1m[32m |  | 205 ms (parallelism 88.2) build modules > ../../components/src/components/tooltip/tooltip.scss[39m[22m
+<i> [1m[32m |  | 208 ms (parallelism 88.1) build modules > ../../components/src/components/u-i-loader/ui-loader.scss[39m[22m
+<i> [1m[32m |  | 207 ms (parallelism 88.2) build modules > ../../components/src/components/unhandled-error-modal/unhandled-error-modal.scss[39m[22m
+<i> [1m[32m |  | 204 ms (parallelism 88.1) build modules > ../../components/src/components/vertical-tab/vertical-tab.scss[39m[22m
+<i> [1m[32m |  | 204 ms (parallelism 88.1) build modules > ../../components/src/components/wizard/wizard.scss[39m[22m
+<i> [1m[32m |  | 204 ms (parallelism 88.1) build modules > ../../components/src/components/video-player/video-player.scss[39m[22m
+<i> [1m[32m |  | 205 ms (parallelism 88.1) build modules > ../../components/src/components/information-banner/information-banner.scss[39m[22m
+<w> [1m[33m |  | 543 ms (parallelism 78.6) build modules > ../../../node_modules/@deriv-com/quill-ui/dist/assets/stepper.css[39m[22m
+<w> [1m[33m |  | 543 ms (parallelism 78.5) build modules > ../../../node_modules/@deriv-com/quill-ui/dist/assets/toggle-switch.css[39m[22m
+<w> [1m[33m |  | 543 ms (parallelism 78.5) build modules > ../../../node_modules/@deriv-com/quill-ui/dist/assets/segmented-control.css[39m[22m
+<w> [1m[33m |  | 541 ms (parallelism 78.6) build modules > ../../../node_modules/@deriv-com/quill-ui/dist/assets/section-message.css[39m[22m
+<w> [1m[33m |  | 542 ms (parallelism 78.5) build modules > ../../../node_modules/@deriv-com/quill-ui/dist/assets/pagination-base.css[39m[22m
+<w> [1m[33m |  | 540 ms (parallelism 78.6) build modules > ../../../node_modules/@deriv-com/quill-ui/dist/assets/spinner.css[39m[22m
+<w> [1m[33m |  | 541 ms (parallelism 78.6) build modules > ../../../node_modules/@deriv-com/quill-ui/dist/assets/breadcrumbs.css[39m[22m
+<w> [1m[33m |  | 543 ms (parallelism 78.5) build modules > ../../../node_modules/@deriv-com/quill-ui/dist/assets/date-picker.css[39m[22m
+<w> [1m[33m |  | 542 ms (parallelism 78.5) build modules > ../../../node_modules/@deriv-com/quill-ui/dist/assets/wheel-picker-base.css[39m[22m
+<w> [1m[33m |  | 540 ms (parallelism 78.6) build modules > ../../../node_modules/@deriv-com/quill-ui/dist/assets/password-validation.css[39m[22m
+<w> [1m[33m |  | 540 ms (parallelism 78.6) build modules > ../../../node_modules/@deriv-com/quill-ui/dist/assets/divider.css[39m[22m
+<w> [1m[33m |  | 543 ms (parallelism 78.5) build modules > ../../../node_modules/@deriv-com/quill-ui/dist/assets/snackbar-controller.css[39m[22m
+<w> [1m[33m |  | 542 ms (parallelism 78.5) build modules > ../../../node_modules/@deriv-com/quill-ui/dist/assets/index16.css[39m[22m
+<w> [1m[33m |  | 541 ms (parallelism 78.6) build modules > ../../../node_modules/@deriv-com/quill-ui/dist/assets/index20.css[39m[22m
+<w> [1m[33m |  | 541 ms (parallelism 78.5) build modules > ../../../node_modules/@deriv-com/quill-ui/dist/assets/index5.css[39m[22m
+<w> [1m[33m |  | 541 ms (parallelism 78.6) build modules > ../../../node_modules/@deriv-com/quill-ui/dist/assets/index.css[39m[22m
+<w> [1m[33m |  | 540 ms (parallelism 78.6) build modules > ../../../node_modules/@deriv-com/quill-ui/dist/assets/index2.css[39m[22m
+<w> [1m[33m |  | 543 ms (parallelism 78.5) build modules > ../../../node_modules/@deriv-com/quill-ui/dist/assets/index22.css[39m[22m
+<w> [1m[33m |  | 541 ms (parallelism 78.5) build modules > ../../../node_modules/@deriv-com/quill-ui/dist/assets/index21.css[39m[22m
+<w> [1m[33m |  | 595 ms (parallelism 76) build modules > ../../../node_modules/@deriv-com/quill-ui/dist/assets/index17.css[39m[22m
+<w> [1m[33m |  | 593 ms (parallelism 75.9) build modules > ../../../node_modules/@deriv-com/quill-ui/dist/assets/index3.css[39m[22m
+<w> [1m[33m |  | 594 ms (parallelism 75.9) build modules > ../../../node_modules/@deriv-com/quill-ui/dist/assets/index4.css[39m[22m
+<w> [1m[33m |  | 593 ms (parallelism 75.9) build modules > ../../../node_modules/@deriv-com/quill-ui/dist/assets/index6.css[39m[22m
+<i> [1m[32m |  | 497 ms (parallelism 67.7) build modules > ../../../node_modules/@deriv-com/ui/dist/assets/index23.css[39m[22m
+<i> [1m[32m |  | 495 ms (parallelism 67.6) build modules > ../../../node_modules/@deriv-com/ui/dist/assets/ActionScreen.css[39m[22m
+<i> [1m[32m |  | 497 ms (parallelism 67.7) build modules > ../../../node_modules/@deriv-com/ui/dist/assets/index.css[39m[22m
+<i> [1m[32m |  | 498 ms (parallelism 67.8) build modules > ../../../node_modules/@deriv-com/ui/dist/assets/index2.css[39m[22m
+<i> [1m[32m |  | 495 ms (parallelism 67.6) build modules > ../../../node_modules/@deriv-com/ui/dist/assets/Breadcrumbs.css[39m[22m
+<i> [1m[32m |  | 496 ms (parallelism 67.7) build modules > ../../../node_modules/@deriv-com/ui/dist/assets/index3.css[39m[22m
+<i> [1m[32m |  | 496 ms (parallelism 67.7) build modules > ../../../node_modules/@deriv-com/ui/dist/assets/CircularProgressBar.css[39m[22m
+<i> [1m[32m |  | 494 ms (parallelism 67.6) build modules > ../../../node_modules/@deriv-com/ui/dist/assets/index4.css[39m[22m
+<i> [1m[32m |  | 497 ms (parallelism 67.7) build modules > ../../../node_modules/@deriv-com/ui/dist/assets/Dropdown.css[39m[22m
+<i> [1m[32m |  | 496 ms (parallelism 67.7) build modules > ../../../node_modules/@deriv-com/ui/dist/assets/InlineMessage.css[39m[22m
+<i> [1m[32m |  | 496 ms (parallelism 67.7) build modules > ../../../node_modules/@deriv-com/ui/dist/assets/index5.css[39m[22m
+<i> [1m[32m |  | 478 ms (parallelism 66.6) build modules > ./App/Components/Elements/LandscapeBlocker/landscape-blocker.scss[39m[22m
+<i> [1m[32m |  | 481 ms (parallelism 66.8) build modules > ../../../node_modules/@deriv-com/ui/dist/assets/LinearProgressBar.css[39m[22m
+<i> [1m[32m |  | 480 ms (parallelism 66.8) build modules > ../../../node_modules/@deriv-com/ui/dist/assets/index6.css[39m[22m
+<i> [1m[32m |  | 480 ms (parallelism 66.8) build modules > ../../../node_modules/@deriv-com/ui/dist/assets/index27.css[39m[22m
+<i> [1m[32m |  | 479 ms (parallelism 66.7) build modules > ../../../node_modules/@deriv-com/ui/dist/assets/PageLayout.css[39m[22m
+<i> [1m[32m |  | 458 ms (parallelism 64.5) build modules > ../../../node_modules/@deriv-com/ui/dist/assets/SectionMessage.css[39m[22m
+<i> [1m[32m |  | 457 ms (parallelism 64.4) build modules > ../../../node_modules/@deriv-com/ui/dist/assets/SideNote.css[39m[22m
+<i> [1m[32m |  | 460 ms (parallelism 64.6) build modules > ../../../node_modules/@deriv-com/ui/dist/assets/Tabs.css[39m[22m
+<i> [1m[32m |  | 460 ms (parallelism 64.5) build modules > ../../../node_modules/@deriv-com/ui/dist/assets/Text.css[39m[22m
+<i> [1m[32m |  | 459 ms (parallelism 64.5) build modules > ../../../node_modules/@deriv-com/ui/dist/assets/Table.css[39m[22m
+<i> [1m[32m |  | 459 ms (parallelism 64.5) build modules > ../../../node_modules/@deriv-com/ui/dist/assets/index7.css[39m[22m
+<i> [1m[32m |  | 459 ms (parallelism 64.5) build modules > ../../../node_modules/@deriv-com/ui/dist/assets/index8.css[39m[22m
+<i> [1m[32m |  | 459 ms (parallelism 64.4) build modules > ../../../node_modules/@deriv-com/ui/dist/assets/index28.css[39m[22m
+<i> [1m[32m |  | 459 ms (parallelism 64.4) build modules > ../../../node_modules/@deriv-com/ui/dist/assets/VerticalTab.css[39m[22m
+<i> [1m[32m |  | 459 ms (parallelism 64.4) build modules > ../../../node_modules/@deriv-com/ui/dist/assets/index15.css[39m[22m
+<i> [1m[32m |  | 459 ms (parallelism 64.3) build modules > ../../../node_modules/@deriv-com/ui/dist/assets/index24.css[39m[22m
+<i> [1m[32m |  | 459 ms (parallelism 64.3) build modules > ../../../node_modules/@deriv-com/ui/dist/assets/index9.css[39m[22m
+<i> [1m[32m |  | 459 ms (parallelism 64.3) build modules > ../../../node_modules/@deriv-com/ui/dist/assets/index10.css[39m[22m
+<i> [1m[32m |  | 206 ms (parallelism 89.7) build modules > ../../components/src/components/side-note/side-note.scss[39m[22m
+<i> [1m[32m |  | 206 ms (parallelism 89.7) build modules > ../../components/src/components/message-list/message-list.scss[39m[22m
+<i> [1m[32m |  | 206 ms (parallelism 89.6) build modules > ../../components/src/components/wallet-card/wallet-card.scss[39m[22m
+<i> [1m[32m |  | 206 ms (parallelism 89.6) build modules > ../../components/src/components/wallet-icon/wallet-icon.scss[39m[22m
+<i> [1m[32m |  | 206 ms (parallelism 89.6) build modules > ../../components/src/components/app-linked-with-wallet-icon/app-linked-with-wallet-icon.scss[39m[22m
+<i> [1m[32m |  | 364 ms (parallelism 92.1) build modules > ../../../node_modules/@deriv-com/quill-ui/dist/assets/base2.css[39m[22m
+<i> [1m[32m |  | 361 ms (parallelism 92.3) build modules > ../../../node_modules/@deriv-com/quill-ui/dist/assets/index19.css[39m[22m
+<i> [1m[32m |  | 360 ms (parallelism 92.3) build modules > ../../../node_modules/@deriv-com/quill-ui/dist/assets/base.css[39m[22m
+<i> [1m[32m |  | 359 ms (parallelism 92.3) build modules > ../../../node_modules/@deriv-com/quill-ui/dist/assets/index7.css[39m[22m
+<i> [1m[32m |  | 359 ms (parallelism 92.3) build modules > ../../../node_modules/@deriv-com/quill-ui/dist/assets/index8.css[39m[22m
+<i> [1m[32m |  | 360 ms (parallelism 92.3) build modules > ../../../node_modules/@deriv-com/quill-ui/dist/assets/index24.css[39m[22m
+<i> [1m[32m |  | 359 ms (parallelism 92.3) build modules > ../../../node_modules/@deriv-com/quill-ui/dist/assets/index9.css[39m[22m
+<i> [1m[32m |  | 360 ms (parallelism 92.3) build modules > ../../../node_modules/@deriv-com/quill-ui/dist/assets/index18.css[39m[22m
+<i> [1m[32m |  | 360 ms (parallelism 92.3) build modules > ../../../node_modules/@deriv-com/quill-ui/dist/assets/index11.css[39m[22m
+<i> [1m[32m |  | 360 ms (parallelism 92.2) build modules > ../../../node_modules/@deriv-com/quill-ui/dist/assets/index12.css[39m[22m
+<i> [1m[32m |  | 360 ms (parallelism 92.2) build modules > ../../../node_modules/@deriv-com/quill-ui/dist/assets/index13.css[39m[22m
+<i> [1m[32m |  | 360 ms (parallelism 92.2) build modules > ../../../node_modules/@deriv-com/quill-ui/dist/assets/index15.css[39m[22m
+<i> [1m[32m |  | 244 ms (parallelism 87.4) build modules > ../../../node_modules/@deriv-com/quill-ui/dist/assets/index10.css[39m[22m
+<i> [1m[32m |  | 243 ms (parallelism 87.6) build modules > ../../../node_modules/@deriv-com/quill-ui/dist/assets/index23.css[39m[22m
+<i> [1m[32m |  | 244 ms (parallelism 87.5) build modules > ../../../node_modules/@deriv-com/ui/dist/assets/PasswordInput.css[39m[22m
+<i> [1m[32m |  | 224 ms (parallelism 87.7) build modules > ../../../node_modules/@deriv-com/ui/dist/assets/HelperMessage.css[39m[22m
+<i> [1m[32m |  | 230 ms (parallelism 87.1) build modules > ./App/Components/Elements/Modals/deriv-real-account-required-modal.scss[39m[22m
+<e> [1m[31m | 76209 ms build modules > 265 x javascript/auto with ../../../node_modules/mini-css-extract-plugin/dist/loader.js!../../../node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].use[1]!../../../node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].use[2]!../../../node_modules/resolve-url-loader/index.js??ruleSet[1].rules[6].use[3]!../../../node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[6].use[4]!../../../node_modules/sass-resources-loader/lib/loader.js??ruleSet[1].rules[6].use[5][39m[22m
+<i> [1m[32m | 4347 ms build modules > 744 x javascript/esm[39m[22m
+<e> [1m[31m132539 ms build modules[39m[22m
++ 2212 hidden lines
+
+[1mLOG from GenerateSW[39m[22m
+<i> [1m[32mThe service worker at service-worker.js will precache[39m[22m
+<i> [1m[32m        0 URLs, totaling 0 B.[39m[22m
+
+[1m[33mWARNING[39m[22m in [1m../../account/src/Constants/routes-config.tsx[39m[22m [1m[32m35:13-30[39m[22m
+[1mexport 'DeactivateAccount' (imported as 'DeactivateAccount') was [1m[31mnot found[39m[22m[1m in '../Sections' (possible exports: [1m[32mEmploymentTaxInfo[39m[22m[1m)[39m[22m
+ @ ../../account/src/Components/Routes/binary-link.tsx 11:0-60 22:38-53
+ @ ../../account/src/Components/Routes/index.ts 1:0-54 1:0-54
+ @ ../../account/src/Containers/routes.tsx 8:0-52 34:32-44
+ @ ../../account/src/App.tsx 1:0-41 26:94-100
+ @ ../../account/src/index.tsx 5:52-126
+ @ ./App/Constants/routes-config.js 32:9-66
+ @ ./App/Components/Routes/binary-routes.jsx 9:0-58 53:16-31
+ @ ./App/Components/Routes/index.js 4:0-47 7:15-27
+ @ ./App/Containers/Routes/routes.jsx 13:0-49 84:27-39
+ @ ./App/AppContent.tsx 19:0-52 148:36-42
+ @ ./App/app.jsx 24:0-38 150:48-58
+ @ ./index.tsx 10:0-30 33:36-39
+
+[1m[33mWARNING[39m[22m in [1m../../account/src/Constants/routes-config.tsx[39m[22m [1m[32m38:13-20[39m[22m
+[1mexport 'Account' (imported as 'Account') was [1m[31mnot found[39m[22m[1m in '../Sections' (possible exports: [1m[32mEmploymentTaxInfo[39m[22m[1m)[39m[22m
+ @ ../../account/src/Components/Routes/binary-link.tsx 11:0-60 22:38-53
+ @ ../../account/src/Components/Routes/index.ts 1:0-54 1:0-54
+ @ ../../account/src/Containers/routes.tsx 8:0-52 34:32-44
+ @ ../../account/src/App.tsx 1:0-41 26:94-100
+ @ ../../account/src/index.tsx 5:52-126
+ @ ./App/Constants/routes-config.js 32:9-66
+ @ ./App/Components/Routes/binary-routes.jsx 9:0-58 53:16-31
+ @ ./App/Components/Routes/index.js 4:0-47 7:15-27
+ @ ./App/Containers/Routes/routes.jsx 13:0-49 84:27-39
+ @ ./App/AppContent.tsx 19:0-52 148:36-42
+ @ ./App/app.jsx 24:0-38 150:48-58
+ @ ./index.tsx 10:0-30 33:36-39
+
+[1m[33mWARNING[39m[22m in [1m../../account/src/Constants/routes-config.tsx[39m[22m [1m[32m52:17-32[39m[22m
+[1mexport 'PersonalDetails' (imported as 'PersonalDetails') was [1m[31mnot found[39m[22m[1m in '../Sections' (possible exports: [1m[32mEmploymentTaxInfo[39m[22m[1m)[39m[22m
+ @ ../../account/src/Components/Routes/binary-link.tsx 11:0-60 22:38-53
+ @ ../../account/src/Components/Routes/index.ts 1:0-54 1:0-54
+ @ ../../account/src/Containers/routes.tsx 8:0-52 34:32-44
+ @ ../../account/src/App.tsx 1:0-41 26:94-100
+ @ ../../account/src/index.tsx 5:52-126
+ @ ./App/Constants/routes-config.js 32:9-66
+ @ ./App/Components/Routes/binary-routes.jsx 9:0-58 53:16-31
+ @ ./App/Components/Routes/index.js 4:0-47 7:15-27
+ @ ./App/Containers/Routes/routes.jsx 13:0-49 84:27-39
+ @ ./App/AppContent.tsx 19:0-52 148:36-42
+ @ ./App/app.jsx 24:0-38 150:48-58
+ @ ./index.tsx 10:0-30 33:36-39
+
+[1m[33mWARNING[39m[22m in [1m../../account/src/Constants/routes-config.tsx[39m[22m [1m[32m77:17-36[39m[22m
+[1mexport 'ProofOfIdentityFlow' (imported as 'ProofOfIdentityFlow') was [1m[31mnot found[39m[22m[1m in '../Sections' (possible exports: [1m[32mEmploymentTaxInfo[39m[22m[1m)[39m[22m
+ @ ../../account/src/Components/Routes/binary-link.tsx 11:0-60 22:38-53
+ @ ../../account/src/Components/Routes/index.ts 1:0-54 1:0-54
+ @ ../../account/src/Containers/routes.tsx 8:0-52 34:32-44
+ @ ../../account/src/App.tsx 1:0-41 26:94-100
+ @ ../../account/src/index.tsx 5:52-126
+ @ ./App/Constants/routes-config.js 32:9-66
+ @ ./App/Components/Routes/binary-routes.jsx 9:0-58 53:16-31
+ @ ./App/Components/Routes/index.js 4:0-47 7:15-27
+ @ ./App/Containers/Routes/routes.jsx 13:0-49 84:27-39
+ @ ./App/AppContent.tsx 19:0-52 148:36-42
+ @ ./App/app.jsx 24:0-38 150:48-58
+ @ ./index.tsx 10:0-30 33:36-39
+
+[1m[33mWARNING[39m[22m in [1m../../account/src/Constants/routes-config.tsx[39m[22m [1m[32m81:17-35[39m[22m
+[1mexport 'ProofOfAddressFlow' (imported as 'ProofOfAddressFlow') was [1m[31mnot found[39m[22m[1m in '../Sections' (possible exports: [1m[32mEmploymentTaxInfo[39m[22m[1m)[39m[22m
+ @ ../../account/src/Components/Routes/binary-link.tsx 11:0-60 22:38-53
+ @ ../../account/src/Components/Routes/index.ts 1:0-54 1:0-54
+ @ ../../account/src/Containers/routes.tsx 8:0-52 34:32-44
+ @ ../../account/src/App.tsx 1:0-41 26:94-100
+ @ ../../account/src/index.tsx 5:52-126
+ @ ./App/Constants/routes-config.js 32:9-66
+ @ ./App/Components/Routes/binary-routes.jsx 9:0-58 53:16-31
+ @ ./App/Components/Routes/index.js 4:0-47 7:15-27
+ @ ./App/Containers/Routes/routes.jsx 13:0-49 84:27-39
+ @ ./App/AppContent.tsx 19:0-52 148:36-42
+ @ ./App/app.jsx 24:0-38 150:48-58

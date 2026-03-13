@@ -35,15 +35,16 @@ import Dashboard from '../dashboard';
 import RunStrategy from '../dashboard/run-strategy';
 import './main.scss';
 
-const ChartWrapper = lazy(() => import('../chart/chart-wrapper'));
+const ChartWrapper = lazy(() => import('@/pages/chart/chart-wrapper'));
 
-const CopyTrading = lazy(() => import('../copy-trader'));
-const AnalysisTool = lazy(() => import('../analysis-tool/index'));
-const Tutorials = lazy(() => import('../tutorials/tutorials'));
-const SmartAuto24 = lazy(() => import('../circles-analysis/index'));
-const DigitCracker = lazy(() => import('../digit-cracker/index'));
-const Settings = lazy(() => import('../settings/index'));
-const Strategies = lazy(() => import('../strategies/index'));
+const CopyTrading = lazy(() => import('@/pages/copy-trader'));
+const AnalysisTool = lazy(() => import('@/pages/analysis-tool/index'));
+const Tutorials = lazy(() => import('@/pages/tutorials/tutorials'));
+const SmartAuto24 = lazy(() => import('@/pages/circles-analysis/index'));
+const DigitCracker = lazy(() => import('@/pages/digit-cracker/index'));
+const Settings = lazy(() => import('@/pages/settings/index'));
+const Strategies = lazy(() => import('@/pages/strategies/index'));
+const FreeBotsTab = lazy(() => import('@/pages/free-bots/free-bots-tab'));
 
 /** Combined Trading Tools tab: SmartAuto24 + DigitCracker side-by-side sub-tabs */
 const TradingTools = () => {
@@ -131,6 +132,7 @@ const AppWrapper = observer(() => {
         'strategies',
         'settings',
         'tutorials',
+        'free_bots',
     ];
     const { isDesktop } = useDevice();
     const location = useLocation();
@@ -539,6 +541,25 @@ const AppWrapper = observer(() => {
                                     <PageContentWrapper>
                                         <Suspense fallback={<ChunkLoader message={localize('Loading...')} />}>
                                             <Tutorials />
+                                        </Suspense>
+                                    </PageContentWrapper>
+                                </div>
+                            )}
+
+                            {/* Tab 9: Free Bots */}
+                            {admin.visible_tabs.free_bots && (
+                                <div
+                                    label={
+                                        <div className='main__tabs-label'>
+                                            <span style={{ fontSize: '20px', marginRight: '8px' }}>🤖</span>
+                                            <Localize i18n_default_text='Free Bots' />
+                                        </div>
+                                    }
+                                    id='id-free-bots'
+                                >
+                                    <PageContentWrapper>
+                                        <Suspense fallback={<ChunkLoader message={localize('Loading Free Bots...')} />}>
+                                            <FreeBotsTab />
                                         </Suspense>
                                     </PageContentWrapper>
                                 </div>

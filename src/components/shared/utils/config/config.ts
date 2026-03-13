@@ -1,15 +1,15 @@
 import { isStaging } from '../url/helpers';
 
 export const APP_IDS = {
-    LOCALHOST: 121856,
+    LOCALHOST: 113875,
     TMP_STAGING: 113831,
     STAGING: 113831,
     STAGING_BE: 113831,
     STAGING_ME: 113831,
-    PRODUCTION: 121856,
+    PRODUCTION: 113875,
     PRODUCTION_BE: 114784,
     PRODUCTION_ME: 114784,
-    VERCEL: 121856,
+    VERCEL: 113875,
 };
 
 export const livechat_license_id = 12049137;
@@ -24,7 +24,7 @@ export const domain_app_ids = {
     'dbot.deriv.be': APP_IDS.PRODUCTION_BE,
     'dbot.deriv.me': APP_IDS.PRODUCTION_ME,
     '22-dec.vercel.app': APP_IDS.VERCEL,
-    'profithubtool.vercel.app': '121856',
+    'profithubtool.vercel.app': '113875',
 };
 
 export const getCurrentProductionDomain = () =>
@@ -147,9 +147,10 @@ export const getDebugServiceWorker = () => {
 export const generateOAuthURL = () => {
     const hostname = window.location.hostname;
     // Special strict fix for Vercel Production
-    if (hostname === 'profithubtool.vercel.app') {
+    if (hostname === 'profithubtool.vercel.app' || hostname === 'localhost') {
         const lang = window.localStorage.getItem('lang') || 'EN';
-        return `https://oauth.deriv.com/oauth2/authorize?app_id=121856&l=${lang}&brand=deriv`;
+        const app_id = getAppId();
+        return `https://oauth.deriv.com/oauth2/authorize?app_id=${app_id}&l=${lang}&brand=deriv`;
     }
 
     const lang = window.localStorage.getItem('lang') || 'EN';

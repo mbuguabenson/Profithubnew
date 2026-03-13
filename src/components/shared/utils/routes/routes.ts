@@ -82,6 +82,8 @@ export const standalone_routes = {
     smarttrader: getDerivDomain('smartTrader'),
     statement: `${getDerivDomain('derivApp')}/reports/statement`,
     trade: `${getDerivDomain('derivApp')}/dtrader`,
+    dtrader: window.location.hostname === 'localhost' ? 'https://localhost:8443' : `https://dtrader.profithubtool.vercel.app`, // Proposing a subdomain pattern
+    dtooltrades: window.location.hostname === 'localhost' ? 'http://localhost:3000' : `https://dtool.profithubtool.vercel.app`, // Proposing a subdomain pattern
     traders_hub: getDerivDomain('derivApp'),
     traders_hub_lowcode: getDerivDomain('derivHub'),
     recent_transactions: `${getDerivDomain('derivHub')}/tradershub/redirect?action=redirect_to&redirect_to=wallet`,
