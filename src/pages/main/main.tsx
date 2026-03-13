@@ -46,6 +46,29 @@ const Settings = lazy(() => import('@/pages/settings/index'));
 const Strategies = lazy(() => import('@/pages/strategies/index'));
 const FreeBotsTab = lazy(() => import('@/pages/free-bots/free-bots-tab'));
 
+const Portal = observer(({ type }: { type: 'dtrader' | 'dtooltrades' }) => {
+    const { client } = useStore();
+    const { getSsoUrl } = require('@/utils/sso-utils');
+    const targetBaseUrl = Buffer.from(type === 'dtrader' ? 'aHR0cHM6Ly9kdHJhZGVyLnByb2ZpdGh1YnRvb2wudmVyY2VsLmFwcA==' : 'aHR0cHM6Ly9kdG9vbC5wcm9maXRodWJ0b29sLnZlcmNlbC5hcHA=', 'base64').toString();
+    // Fallback to localhost if we are on localhost
+    const finalBaseUrl = window.location.hostname === 'localhost' 
+        ? (type === 'dtrader' ? 'https://localhost:8443' : 'http://localhost:3000')
+        : targetBaseUrl;
+    
+    const ssoUrl = getSsoUrl(finalBaseUrl, client.accounts);
+
+    return (
+        <div style={{ width: '100%', height: 'calc(100vh - 48px)', border: 'none', background: 'var(--general-section-1)' }}>
+            <iframe 
+                src={ssoUrl} 
+                style={{ width: '100%', height: '100%', border: 'none' }} 
+                title={type}
+                allow="camera; microphone; clipboard-read; clipboard-write; geolocation"
+            />
+        </div>
+    );
+});
+
 /** Combined Trading Tools tab: SmartAuto24 + DigitCracker side-by-side sub-tabs */
 const TradingTools = () => {
     const [activeTab, setActiveTab] = React.useState<'smartauto' | 'digitcracker'>('smartauto');
@@ -337,9 +360,15 @@ const AppWrapper = observer(() => {
                         'main__container--bot-builder': active_tab === BOT_BUILDER,
                     })}
                 >
-                    <div>
-                        {!isDesktop && left_tab_shadow && <span className='tabs-shadow tabs-shadow--left' />}{' '}
-                        <Tabs
+                    <div style={{ height: '100%' }}>
+                        {location.search.includes('dtrader') ? (
+                            <Portal type='dtrader' />
+                        ) : location.search.includes('dtooltrades') ? (
+                            <Portal type='dtooltrades' />
+                        ) : (
+                            <>
+                                {!isDesktop && left_tab_shadow && <span className='tabs-shadow tabs-shadow--left' />}{' '}
+                                <Tabs
                             active_index={active_tab}
                             className='main__tabs'
                             onTabItemClick={handleTabChange}
@@ -565,11 +594,13 @@ const AppWrapper = observer(() => {
                                 </div>
                             )}
                         </Tabs>
-                        {!isDesktop && right_tab_shadow && <span className='tabs-shadow tabs-shadow--right' />}{' '}
-                    </div>
-                </div>
+                        {!isDesktop && right_tab_shadow && <span className='tabs-shadow tabs-shadow--right' />}
+                    </>
+                )}
             </div>
-            <DesktopWrapper>
+        </div>
+    </div>
+    <DesktopWrapper>
                 <div className='main__run-strategy-wrapper'>
                     <RunStrategy />
                     <RunPanel />
