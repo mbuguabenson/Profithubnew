@@ -31,6 +31,8 @@ export default class AdminStore {
         settings: true,
         tutorials: true,
         free_bots: true,
+        dtrader: true,
+        dtooltrades: true,
     };
 
     // Mock Data for Table & Radial Chart

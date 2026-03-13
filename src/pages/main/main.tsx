@@ -5,12 +5,14 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import ChunkLoader from '@/components/loader/chunk-loader';
 import PageContentWrapper from '@/components/page-content-wrapper';
 import { generateOAuthURL } from '@/components/shared';
+import { getSsoUrl } from '@/utils/sso-utils';
 import DesktopWrapper from '@/components/shared_ui/desktop-wrapper';
 import Dialog from '@/components/shared_ui/dialog';
 import MobileWrapper from '@/components/shared_ui/mobile-wrapper';
 import Tabs from '@/components/shared_ui/tabs/tabs';
 import TradingViewModal from '@/components/trading-view-chart/trading-view-modal';
 import { DBOT_TABS, TAB_IDS } from '@/constants/bot-contents';
+const { DASHBOARD, BOT_BUILDER, DTRADER, DTOOLTRADES } = DBOT_TABS;
 import { api_base, updateWorkspaceName } from '@/external/bot-skeleton';
 import { CONNECTION_STATUS } from '@/external/bot-skeleton/services/api/observables/connection-status-stream';
 import { isDbotRTL } from '@/external/bot-skeleton/utils/workspace';
@@ -48,7 +50,6 @@ const FreeBotsTab = lazy(() => import('@/pages/free-bots/free-bots-tab'));
 
 const Portal = observer(({ type }: { type: 'dtrader' | 'dtooltrades' }) => {
     const { client } = useStore();
-    const { getSsoUrl } = require('@/utils/sso-utils');
     const targetBaseUrl = Buffer.from(type === 'dtrader' ? 'aHR0cHM6Ly9kdHJhZGVyLnByb2ZpdGh1YnRvb2wudmVyY2VsLmFwcA==' : 'aHR0cHM6Ly9kdG9vbC5wcm9maXRodWJ0b29sLnZlcmNlbC5hcHA=', 'base64').toString();
     // Fallback to localhost if we are on localhost
     const finalBaseUrl = window.location.hostname === 'localhost' 
@@ -58,7 +59,7 @@ const Portal = observer(({ type }: { type: 'dtrader' | 'dtooltrades' }) => {
     const ssoUrl = getSsoUrl(finalBaseUrl, client.accounts);
 
     return (
-        <div style={{ width: '100%', height: 'calc(100vh - 48px)', border: 'none', background: 'var(--general-section-1)' }}>
+        <div style={{ width: '100%', height: 'calc(100vh - 84px)', border: 'none', background: 'var(--general-section-1)', overflow: 'hidden' }}>
             <iframe 
                 src={ssoUrl} 
                 style={{ width: '100%', height: '100%', border: 'none' }} 
@@ -156,6 +157,8 @@ const AppWrapper = observer(() => {
         'settings',
         'tutorials',
         'free_bots',
+        'dtrader',
+        'dtooltrades',
     ];
     const { isDesktop } = useDevice();
     const location = useLocation();
@@ -591,6 +594,35 @@ const AppWrapper = observer(() => {
                                             <FreeBotsTab />
                                         </Suspense>
                                     </PageContentWrapper>
+                                </div>
+                            )}
+                            {/* Tab 10: DTrader */}
+                            {admin.visible_tabs.dtrader && (
+                                <div
+                                    label={
+                                        <div className='main__tabs-label'>
+                                            <span style={{ fontSize: '20px', marginRight: '8px' }}>💹</span>
+                                            <Localize i18n_default_text='DTrader' />
+                                        </div>
+                                    }
+                                    id='id-dtrader'
+                                >
+                                    <Portal type='dtrader' />
+                                </div>
+                            )}
+
+                            {/* Tab 11: DTool */}
+                            {admin.visible_tabs.dtooltrades && (
+                                <div
+                                    label={
+                                        <div className='main__tabs-label'>
+                                            <span style={{ fontSize: '20px', marginRight: '8px' }}>🛠️</span>
+                                            <Localize i18n_default_text='DTool' />
+                                        </div>
+                                    }
+                                    id='id-dtooltrades'
+                                >
+                                    <Portal type='dtooltrades' />
                                 </div>
                             )}
                         </Tabs>

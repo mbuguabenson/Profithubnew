@@ -1,5 +1,8 @@
+import React, { useEffect } from 'react';
+import { observer } from 'mobx-react-lite';
 import { useFreeBots } from '@/hooks/use-free-bots';
 import { useStore } from '@/hooks/useStore';
+import { TDigitStat } from '@/stores/analysis-store';
 import './free-bots-tab.scss';
 
 
