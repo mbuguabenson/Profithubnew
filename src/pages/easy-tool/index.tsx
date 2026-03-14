@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { observer } from 'mobx-react-lite';
 import { useStore } from '@/hooks/useStore';
-import DigitDistributionCircles from '@/pages/chart/digit-distribution-circles';
+import DigitDistributionCircles from './digit-distribution-circles';
 import MarketSelector from '@/pages/smart-trading/components/market-selector';
 import { Localize } from '@deriv-com/translations';
 import AdvancedOUAnalyzer from './advanced-ou-analyzer';
