@@ -785,9 +785,9 @@ export default class SmartTradingStore {
                     // Ideally, we should fetch history first, but for now let's push the new tick.
 
                     // Extract digit
-                    const price_str = String(quote);
-                    const last_char = price_str[price_str.length - 1];
-                    const digit = parseInt(last_char);
+                    const symbol_info = this.active_symbols_data[this.symbol];
+                    const pip = symbol_info?.pip || 2;
+                    const digit = getSafeLastDigit(quote, pip);
 
                     // Append to current ticks if valid
                     if (!isNaN(digit)) {
@@ -796,10 +796,10 @@ export default class SmartTradingStore {
                         this.updateDigitStats(new_ticks, quote);
                     }
                 } else if (data.msg_type === 'history') {
-                    const prices = data.history.prices;
+                    const symbol_info = this.active_symbols_data[this.symbol];
+                    const pip = symbol_info?.pip || 2;
                     const digits = prices.map((p: any) => {
-                        const s = String(p);
-                        return parseInt(s[s.length - 1]);
+                        return getSafeLastDigit(p, pip);
                     });
                     this.updateDigitStats(digits, prices);
                 }

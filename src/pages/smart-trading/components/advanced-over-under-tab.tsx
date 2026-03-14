@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from 'react';
 import classNames from 'classnames';
 import { observer } from 'mobx-react-lite';
 import { useStore } from '@/hooks/useStore';
+import { getSafeLastDigit } from '@/utils/digit-utils';
 import './advanced-over-under-tab.scss';
 
 // Threshold Configurations
@@ -259,11 +260,7 @@ const AdvancedOverUnderTab = observer(() => {
                         const decimals = symbol_info?.pip ? String(symbol_info.pip).split('.')[1]?.length || 2 : 2;
 
                         const last_digits = ticks_data.slice(-200).map(t => {
-                            let quote_str = String(t.quote || '0');
-                            if (typeof t.quote === 'number') {
-                                quote_str = t.quote.toFixed(decimals);
-                            }
-                            const digit = parseInt(quote_str[quote_str.length - 1]);
+                            const digit = getSafeLastDigit(t.quote as string | number, symbol_info?.pip || 2);
                             return isNaN(digit) ? 0 : digit;
                         });
                         updateDigitStats(last_digits, latest.quote);

@@ -2,6 +2,7 @@ import { useEffect, useMemo } from 'react';
 import classNames from 'classnames';
 import { observer } from 'mobx-react-lite';
 import { useStore } from '@/hooks/useStore';
+import { getSafeLastDigit } from '@/utils/digit-utils';
 import { Localize } from '@deriv-com/translations';
 
 const DigitStats = observer(() => {
@@ -30,14 +31,7 @@ const DigitStats = observer(() => {
                                 : 2;
 
                         const digits = ticks.map(t => {
-                            let quote_val = t.quote;
-                            let quote_str: string;
-                            if (typeof quote_val === 'number') {
-                                quote_str = quote_val.toFixed(decimals);
-                            } else {
-                                quote_str = String(quote_val);
-                            }
-                            const digit = parseInt(quote_str[quote_str.length - 1]);
+                            const digit = getSafeLastDigit(t.quote as string | number, active_symbols && active_symbols[symbol]?.pip ? active_symbols[symbol].pip : 2);
                             return isNaN(digit) ? 0 : digit;
                         });
 

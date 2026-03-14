@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from 'react';
 import classNames from 'classnames';
 import { observer } from 'mobx-react-lite';
 import { useStore } from '@/hooks/useStore';
+import { getSafeLastDigit } from '@/utils/digit-utils';
 import { AnomalyDetector, BacktestingEngine, MultiStepPredictor, NeuralPatternRecognizer } from '@/lib/ai/predictors';
 import './smart-analysis-tab.scss';
 
@@ -25,12 +26,7 @@ const AIAnalysisTab = observer(() => {
                     const symbol_info = active_symbols_data[symbol];
 
                     const last_digits = ticks_data.slice(-100).map(t => {
-                        let quote_str = String(t.quote || '0');
-                        if (symbol_info && typeof t.quote === 'number') {
-                            const decimals = Math.abs(Math.log10(symbol_info.pip));
-                            quote_str = t.quote.toFixed(decimals);
-                        }
-                        const digit = parseInt(quote_str[quote_str.length - 1]);
+                        const digit = getSafeLastDigit(t.quote as string | number, symbol_info?.pip || 2);
                         return isNaN(digit) ? 0 : digit;
                     });
                     updateDigitStats(last_digits, latest.quote);

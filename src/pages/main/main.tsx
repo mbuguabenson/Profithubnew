@@ -68,7 +68,7 @@ const Portal = observer(({ type }: { type: 'dtrader' | 'dtooltrades' }) => {
         <div
             style={{
                 width: '100%',
-                height: 'calc(100vh - 84px)',
+                height: '100%',
                 border: 'none',
                 background: 'var(--general-section-1)',
                 overflow: 'hidden',

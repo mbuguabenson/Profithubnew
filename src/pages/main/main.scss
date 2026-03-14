@@ -29,15 +29,19 @@
 }
 
 // Global Drawer/Portal z-index overrides
-.deriv-drawer__container,
-.dc-drawer,
 .dc-modal,
+.dc-dialog,
 .dc-mobile-drawer {
-    z-index: 99999 !important;
+    z-index: 10005 !important; // Above everything else
+}
+
+.deriv-drawer__container,
+.dc-drawer {
+    z-index: 995 !important; // Above tabs (990) but below modals
 }
 
 .controls__section {
-    z-index: 100001 !important; // Must be higher than my global drawer override (99999)
+    z-index: 998 !important; // High, but below drawers and modals
 }
 
 .main {
@@ -72,15 +76,13 @@
             overflow: hidden;
         }
 
-        &--bot-builder {
-            .dc-tabs__list {
-                @include desktop-screen {
-                    padding-inline-end: 45rem; // Maximum space to ensure all tabs are fully visible
-                }
+        .dc-tabs__list {
+            @include desktop-screen {
+                padding-inline-end: 45rem; // Ensure space for Run Panel on all tabs
+            }
 
-                @include mobile-or-tablet-screen {
-                    padding-inline-end: 10rem; // Reduced from 28rem to allow more space for tabs
-                }
+            @include mobile-or-tablet-screen {
+                padding-inline-end: 10rem;
             }
         }
 
@@ -287,7 +289,7 @@
 .main__run-strategy-wrapper {
     inset-inline-end: 1.6rem;
     top: 5.6rem;
-    z-index: 9999;
+    z-index: 997; // Above main content but below drawers/modals
 
     @include desktop-screen {
         position: absolute;

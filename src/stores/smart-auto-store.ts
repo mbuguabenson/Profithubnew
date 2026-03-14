@@ -1,4 +1,5 @@
 import { action, makeObservable, observable, reaction, runInAction } from 'mobx';
+import { getSafeLastDigit } from '@/utils/digit-utils';
 import { TDigitStat } from './analysis-store';
 import RootStore from './root-store';
 
