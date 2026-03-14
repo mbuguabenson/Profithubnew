@@ -108,6 +108,18 @@ const useMobileMenuConfig = (client?: RootStore['client']) => {
                 },
                 {
                     as: 'a',
+                    href: standalone_routes.dtrader,
+                    label: localize('DTrader'),
+                    LeftComponent: LegacyChartsIcon, // Using Charts icon as placeholder or appropriate icon
+                },
+                {
+                    as: 'a',
+                    href: standalone_routes.dtooltrades,
+                    label: localize('DTool'),
+                    LeftComponent: LegacyChartsIcon, // Using Charts icon as placeholder or appropriate icon
+                },
+                {
+                    as: 'a',
                     href: getRedirectUrl(),
                     label: localize('Account Settings'),
                     LeftComponent: LegacyProfileSmIcon,

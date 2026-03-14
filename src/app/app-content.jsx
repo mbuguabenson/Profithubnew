@@ -38,7 +38,7 @@ const AppContent = observer(() => {
     const [is_eu_error_loading, setIsEuErrorLoading] = React.useState(true);
     const [offline_timeout, setOfflineTimeout] = React.useState(null);
     const store = useStore();
-    const { app, transactions, common, client } = store;
+    const { app, transactions, common, client, dashboard } = store;
     const { showDigitalOptionsMaltainvestError } = app;
     const { is_dark_mode_on } = useThemeSwitcher();
     const { isOnline } = useOfflineDetection();
@@ -72,6 +72,7 @@ const AppContent = observer(() => {
         if (connectionStatus === CONNECTION_STATUS.OPENED) {
             setIsApiInitialized(true);
             common.setSocketOpened(true);
+            dashboard.setWebSocketState(true);
             
             // Clear offline timeout if connection is restored
             if (offline_timeout) {
@@ -80,6 +81,7 @@ const AppContent = observer(() => {
             }
         } else if (connectionStatus === CONNECTION_STATUS.CLOSED) {
             common.setSocketOpened(false);
+            dashboard.setWebSocketState(false);
         }
     }, [connectionStatus, offline_timeout, common]);
 

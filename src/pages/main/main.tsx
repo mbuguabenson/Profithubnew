@@ -248,7 +248,23 @@ const AppWrapper = observer(() => {
     React.useEffect(() => {
         // Run on mount and when active tab changes
         updateTabShadowsHeight();
+    }, [active_tab]);
 
+    React.useEffect(() => {
+        if (active_tab !== undefined) {
+            if (init_render.current) {
+                init_render.current = false;
+                // Check both hash and search for initial tab
+                const tab_value = location.hash?.split('#')[1] || location.search?.split('?')[1];
+                const tab_index = hash.indexOf(String(tab_value));
+                if (tab_index !== -1 && tab_index !== active_tab) {
+                    setActiveTab(tab_index);
+                }
+            }
+        }
+    }, [active_tab, location.hash, location.search, setActiveTab]);
+
+    React.useEffect(() => {
         if (is_open) {
             setTourDialogVisibility(false);
         }
@@ -363,14 +379,8 @@ const AppWrapper = observer(() => {
                     })}
                 >
                     <div style={{ height: '100%' }}>
-                        {location.search.includes('dtrader') ? (
-                            <Portal type='dtrader' />
-                        ) : location.search.includes('dtooltrades') ? (
-                            <Portal type='dtooltrades' />
-                        ) : (
-                            <>
-                                {!isDesktop && left_tab_shadow && <span className='tabs-shadow tabs-shadow--left' />}{' '}
-                                <Tabs
+                        {!isDesktop && left_tab_shadow && <span className='tabs-shadow tabs-shadow--left' />}{' '}
+                        <Tabs
                             active_index={active_tab}
                             className='main__tabs'
                             onTabItemClick={handleTabChange}
@@ -626,12 +636,10 @@ const AppWrapper = observer(() => {
                             ) : null}
                         </Tabs>
                         {!isDesktop && right_tab_shadow && <span className='tabs-shadow tabs-shadow--right' />}
-                    </>
-                )}
+                    </div>
+                </div>
             </div>
-        </div>
-    </div>
-    <DesktopWrapper>
+            <DesktopWrapper>
                 <div className='main__run-strategy-wrapper'>
                     <RunStrategy />
                     <RunPanel />

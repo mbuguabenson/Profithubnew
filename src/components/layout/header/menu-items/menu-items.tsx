@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { observer } from 'mobx-react-lite';
 import { useFirebaseCountriesConfig } from '@/hooks/firebase/useFirebaseCountriesConfig';
 import { useStore } from '@/hooks/useStore';
@@ -52,9 +52,8 @@ export const MenuItems = observer(() => {
     };
 
     // Filter out the Cashier link when the account is a wallet account
-    const filtered_items = items.filter((item, index) => {
-        // Index 0 is the Cashier link
-        if (index === 0 && has_wallet) {
+    const filtered_items = items.filter(item => {
+        if (item.label === localize('Cashier') && has_wallet) {
             return false;
         }
         return true;
