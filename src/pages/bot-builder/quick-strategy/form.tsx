@@ -63,27 +63,27 @@ const QuickStrategyForm = observer(() => {
 
         // Cross-validate stake and max_stake when either value changes
         if (key === 'stake' || key === 'max_stake') {
-            // Always re-validate both fields when either changes
-            // This ensures error messages are cleared when values are corrected
+            // Re-validate both fields when either changes
             setFieldTouched('stake', true, true);
             setFieldTouched('max_stake', true, true);
 
-            // Force immediate validation
-            if (key === 'stake') {
-                // When stake changes, we need to validate max_stake as well
-                const input_elements = document.querySelectorAll('input[name="max_stake"]');
-                if (input_elements.length > 0) {
-                    const event = new Event('keyup', { bubbles: true });
-                    input_elements[0].dispatchEvent(event);
+            // Ported from upstream: ensure values are not negative and stake <= max_stake if enabled
+            const stake = Number(values.stake);
+            const maxStake = Number(values.max_stake);
+            
+            if (stake < 0) setFieldValue('stake', 0);
+            if (maxStake < 0) setFieldValue('max_stake', 0);
+
+            // Force immediate validation trigger for the other field
+            setTimeout(() => {
+                if (key === 'stake') {
+                    const input = document.querySelector('input[name="max_stake"]');
+                    if (input) input.dispatchEvent(new Event('blur'));
+                } else {
+                    const input = document.querySelector('input[name="stake"]');
+                    if (input) input.dispatchEvent(new Event('blur'));
                 }
-            } else if (key === 'max_stake') {
-                // When max_stake changes, we need to validate stake as well
-                const input_elements = document.querySelectorAll('input[name="stake"]');
-                if (input_elements.length > 0) {
-                    const event = new Event('keyup', { bubbles: true });
-                    input_elements[0].dispatchEvent(event);
-                }
-            }
+            }, 0);
         }
     };
 
