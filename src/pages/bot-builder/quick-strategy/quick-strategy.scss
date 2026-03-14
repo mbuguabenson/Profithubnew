@@ -29,7 +29,7 @@
 
     &__head {
         background-color: var(--general-main-1);
-        z-index: 1001; // Ported fix: reduced from 10000 to avoid overlapping with global tooltips
+        z-index: 10000;
         position: relative;
 
         @include flex-center(space-between);
