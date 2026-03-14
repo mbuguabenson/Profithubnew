@@ -173,14 +173,13 @@ const AppWrapper = observer(() => {
         'dashboard',
         'bot_builder',
         'chart',
+        'free_bots',
         'analysis_tool',
         'trading_tools',
         'copy_trading',
         'strategies',
         'settings',
         'tutorials',
-        'free_bots',
-        'dtrader',
         'dtooltrades',
     ];
     const { isDesktop } = useDevice();
@@ -475,7 +474,26 @@ const AppWrapper = observer(() => {
                                 </div>
                             ) : null}
 
-                            {/* Tab 3: Analysis Tool */}
+                            {/* Tab 3: Free Bots */}
+                            {admin.visible_tabs.free_bots ? (
+                                <div
+                                    label={
+                                        <div className='main__tabs-label'>
+                                            <span style={{ fontSize: '20px', marginRight: '8px' }}>🤖</span>
+                                            <Localize i18n_default_text='Free Bots' />
+                                        </div>
+                                    }
+                                    id='id-free-bots'
+                                >
+                                    <PageContentWrapper>
+                                        <Suspense fallback={<ChunkLoader message={localize('Loading Free Bots...')} />}>
+                                            <FreeBotsTab />
+                                        </Suspense>
+                                    </PageContentWrapper>
+                                </div>
+                            ) : null}
+
+                            {/* Tab 4: Analysis Tool */}
                             {admin.visible_tabs.analysis_tool ? (
                                 <div
                                     label={
@@ -498,7 +516,7 @@ const AppWrapper = observer(() => {
                                 </div>
                             ) : null}
 
-                            {/* Tab 4: Trading Tools */}
+                            {/* Tab 5: Trading Tools */}
                             {admin.visible_tabs.trading_tools ? (
                                 <div
                                     label={
@@ -519,7 +537,7 @@ const AppWrapper = observer(() => {
                                 </div>
                             ) : null}
 
-                            {/* Tab 5: Copy Trading */}
+                            {/* Tab 6: Copy Trading */}
                             {admin.visible_tabs.copy_trading ? (
                                 <div
                                     label={
@@ -542,7 +560,7 @@ const AppWrapper = observer(() => {
                                 </div>
                             ) : null}
 
-                            {/* Tab 6: Strategies */}
+                            {/* Tab 7: Strategies */}
                             {admin.visible_tabs.strategies ? (
                                 <div
                                     label={
@@ -567,7 +585,7 @@ const AppWrapper = observer(() => {
                                 </div>
                             ) : null}
 
-                            {/* Tab 7: Settings */}
+                            {/* Tab 8: Settings */}
                             {admin.visible_tabs.settings ? (
                                 <div
                                     label={
@@ -590,7 +608,7 @@ const AppWrapper = observer(() => {
                                 </div>
                             ) : null}
 
-                            {/* Tab 8: Tutorials */}
+                            {/* Tab 9: Tutorials */}
                             {admin.visible_tabs.tutorials ? (
                                 <div
                                     label={
@@ -613,40 +631,7 @@ const AppWrapper = observer(() => {
                                 </div>
                             ) : null}
 
-                            {/* Tab 9: Free Bots */}
-                            {admin.visible_tabs.free_bots ? (
-                                <div
-                                    label={
-                                        <div className='main__tabs-label'>
-                                            <span style={{ fontSize: '20px', marginRight: '8px' }}>🤖</span>
-                                            <Localize i18n_default_text='Free Bots' />
-                                        </div>
-                                    }
-                                    id='id-free-bots'
-                                >
-                                    <PageContentWrapper>
-                                        <Suspense fallback={<ChunkLoader message={localize('Loading Free Bots...')} />}>
-                                            <FreeBotsTab />
-                                        </Suspense>
-                                    </PageContentWrapper>
-                                </div>
-                            ) : null}
-                            {/* Tab 10: DTrader */}
-                            {admin.visible_tabs.dtrader ? (
-                                <div
-                                    label={
-                                        <div className='main__tabs-label'>
-                                            <span style={{ fontSize: '20px', marginRight: '8px' }}>💹</span>
-                                            <Localize i18n_default_text='DTrader' />
-                                        </div>
-                                    }
-                                    id='id-dtrader'
-                                >
-                                    <Portal type='dtrader' />
-                                </div>
-                            ) : null}
-
-                            {/* Tab 11: DTool */}
+                            {/* Tab 10: DTool */}
                             {admin.visible_tabs.dtooltrades ? (
                                 <div
                                     label={
