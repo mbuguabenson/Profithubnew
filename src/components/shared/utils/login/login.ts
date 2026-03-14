@@ -37,8 +37,11 @@ export const loginUrl = ({ language }: TLoginUrl) => {
         const lang = language || window.localStorage.getItem('lang') || 'EN';
         const app_id = getAppId();
         
-        // Exact requested URL format
-        const url = `https://oauth.deriv.com/oauth2/authorize?app_id=${app_id}&l=${lang}&brand=deriv`;
+        // Must include redirect_uri for OAuth to work correctly
+        const pathname = window.location.pathname === '/' ? '' : window.location.pathname;
+        const redirect_uri = `${window.location.protocol}//${window.location.host}${pathname}`;
+        
+        const url = `https://oauth.deriv.com/oauth2/authorize?app_id=${app_id}&l=${lang}&brand=deriv&redirect_uri=${redirect_uri}`;
 
         console.log('[Login] Redirecting to:', url);
         return url;

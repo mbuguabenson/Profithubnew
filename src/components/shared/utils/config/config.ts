@@ -146,14 +146,13 @@ export const getDebugServiceWorker = () => {
 
 export const generateOAuthURL = () => {
     const hostname = window.location.hostname;
-    // Special strict fix for Vercel Production
-    if (hostname === 'profithubtool.vercel.app' || hostname === 'localhost') {
-        const lang = window.localStorage.getItem('lang') || 'EN';
-        const app_id = getAppId();
-        return `https://oauth.deriv.com/oauth2/authorize?app_id=${app_id}&l=${lang}&brand=deriv`;
-    }
-
     const lang = window.localStorage.getItem('lang') || 'EN';
+    const app_id = getAppId();
+    
+    // Construct redirect URI
+    const pathname = window.location.pathname === '/' ? '' : window.location.pathname;
+    const redirect_uri = `${window.location.protocol}//${window.location.host}${pathname}`;
+
     let oauth_url = 'https://oauth.deriv.com/oauth2/authorize';
 
     if (hostname.includes('.deriv.me')) {
@@ -162,9 +161,7 @@ export const generateOAuthURL = () => {
         oauth_url = 'https://oauth.deriv.be/oauth2/authorize';
     }
 
-    const app_id = getAppId();
-
-    const login_url = `${oauth_url}?app_id=${app_id}&l=${lang}&brand=deriv`;
+    const login_url = `${oauth_url}?app_id=${app_id}&l=${lang}&brand=deriv&redirect_uri=${redirect_uri}`;
 
     console.log('[Config] Generated OAuth URL:', login_url);
     return login_url;
