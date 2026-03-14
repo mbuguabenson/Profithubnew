@@ -11,12 +11,13 @@ const DigitCircles = observer(() => {
     const renderDigitGroup = (digits: typeof digit_stats) => {
         return digits.map(stat => {
             const isCurrent = stat.digit === last_digit;
-            
+
             // Colors based on rank and current status
             let color = '#3b82f6'; // Default Blue
-            if (stat.rank === 1) color = '#00ff41'; // Green for top
+            if (stat.rank === 1)
+                color = '#00ff41'; // Green for top
             else if (stat.rank === 10) color = '#ff073a'; // Red for least
-            
+
             if (isCurrent) color = '#ff9f00'; // Orange for NOW
 
             return (
@@ -28,11 +29,13 @@ const DigitCircles = observer(() => {
                     )}
                     <div className='digit-main-circle'>
                         <svg width='70' height='70' viewBox='0 0 70 70'>
-                            <circle 
-                                className='circle-track' 
-                                cx='35' cy='35' r='30' 
-                                fill='none' 
-                                stroke='rgba(255, 255, 255, 0.05)' 
+                            <circle
+                                className='circle-track'
+                                cx='35'
+                                cy='35'
+                                r='30'
+                                fill='none'
+                                stroke='rgba(255, 255, 255, 0.05)'
                                 strokeWidth='6'
                             />
                             <circle
@@ -50,13 +53,15 @@ const DigitCircles = observer(() => {
                             />
                         </svg>
                         <div className='digit-center-text'>
-                            <span className='digit-num' style={{ color: isCurrent ? color : '#fff' }}>{stat.digit}</span>
-                            <span className='digit-pct' style={{ color: isCurrent ? color : '#60a5fa' }}>{stat.percentage.toFixed(1)}%</span>
+                            <span className='digit-num' style={{ color: isCurrent ? color : '#fff' }}>
+                                {stat.digit}
+                            </span>
+                            <span className='digit-pct' style={{ color: isCurrent ? color : '#60a5fa' }}>
+                                {stat.percentage.toFixed(1)}%
+                            </span>
                         </div>
                     </div>
-                    <div className='digit-sample-size'>
-                        n={stat.count}
-                    </div>
+                    <div className='digit-sample-size'>n={stat.count}</div>
                 </div>
             );
         });
@@ -64,12 +69,8 @@ const DigitCircles = observer(() => {
 
     return (
         <div className='digit-circles-wrapper'>
-            <div className='digit-circles-row'>
-                {renderDigitGroup(group1)}
-            </div>
-            <div className='digit-circles-row'>
-                {renderDigitGroup(group2)}
-            </div>
+            <div className='digit-circles-row'>{renderDigitGroup(group1)}</div>
+            <div className='digit-circles-row'>{renderDigitGroup(group2)}</div>
         </div>
     );
 });

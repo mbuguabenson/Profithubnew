@@ -48,7 +48,6 @@ const App = () => (
 
 1. Add an `.svg` icon file under one of the svg folders (or add a new folder) in `components/icon` folder.
 2. Make sure the icon file name is in `kebab-case` and is prefix with `ic-`. The icon file name will be converted to a `PascalCase` as the icon name.
-
     - Example:
 
     ```sh
@@ -70,7 +69,6 @@ const App = () => (
     Note: If there are multiple svg files you are adding in the component, please make sure that the id's are not duplicated due to minification.
 
 4. Run `npm run build` to rebuild the Icon component.
-
     - Note: Running `npm run build` command will run the `npm run build:icons`. This command will then rewrite `icons.js` file and `stories/icon/icons.js` files with the newly added icon imports.
     - Tips: Run `npm run storybook` to check whether the newly added icon is added.
 
@@ -84,7 +82,6 @@ const App = () => (
 
 1. Theming has to be done manually for now. You need add CSS variables to each path that needs to be themed.
 2. Rules:
-
     - replace primary `<path />` fill or stroke color with `var(--fill-color1)`
     - replace secondary `<path />` fill or stroke color with `var(--fill-color2)`
     - replace background `<rect />` or `<circle />` fill color with `var(--fill-color3)`

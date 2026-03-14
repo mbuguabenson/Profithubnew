@@ -1,5 +1,6 @@
 import { action, makeObservable, observable, reaction, runInAction } from 'mobx';
 import { ApiHelpers } from '@/external/bot-skeleton';
+import { getSafeLastDigit } from '@/utils/digit-utils';
 import RootStore from './root-store';
 
 export type TDigitStat = {
@@ -224,20 +225,16 @@ export default class AutoTraderStore {
         if (price !== undefined && price !== null) {
             this.current_price = price;
             // Robustly get the last digit regardless of format
-            const price_str = String(price);
-            const match = price_str.match(/\d$/);
-            if (match) {
-                const current_digit = parseInt(match[0]);
-                this.last_digit = current_digit;
+            const pip = this.root_store.app?.active_symbols_data?.[this.symbol]?.pip || 2;
+            this.last_digit = getSafeLastDigit(price, pip);
 
-                // Track streaks
-                if (current_digit % 2 === 0) {
-                    this.consecutive_even++;
-                    this.consecutive_odd = 0;
-                } else {
-                    this.consecutive_odd++;
-                    this.consecutive_even = 0;
-                }
+            // Track streaks
+            if (this.last_digit % 2 === 0) {
+                this.consecutive_even++;
+                this.consecutive_odd = 0;
+            } else {
+                this.consecutive_odd++;
+                this.consecutive_even = 0;
             }
         } else {
             this.last_digit = last_digits[last_digits.length - 1];

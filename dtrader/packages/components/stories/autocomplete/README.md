@@ -2,13 +2,11 @@
 
 A searchable `Dropdown` input component that accepts text input and provides a suggested list based on keyword entered.
 
-
 #### Supported Events:
 
--   onChange
--   Arrow keypresses for movement
--   Enter keypresses for selection
-
+- onChange
+- Arrow keypresses for movement
+- Enter keypresses for selection
 
 ## Usage
 
@@ -21,7 +19,7 @@ const DummyComponent = props => (
         label={'Place of birth'}
         list_items={data}
         onItemSelection={({ value, text }) => {
-            setFieldValue('citizen', value ? text : '',)
+            setFieldValue('citizen', value ? text : '');
         }}
         required
     />
@@ -30,14 +28,13 @@ const DummyComponent = props => (
 
 ## Props
 
-| Name               | Type                             | Default             | Description                               |
-| ------------------ | -------------------------------- | ------------------- | ----------------------------------------- |
-| list_items         | [string] \| [object<text,value>] | []                  | Suggestion list                           |
-| list_height        | {string}                         | null                | Height of the suggestion list element.    |
-| not\_found\_text   | {string}                         | 'No results found'  | Text to show if no item found             |
-| onHideDropdownList | {function}                       | undefined           | Function triggers when the dropdown hides.|
-| onItemSelection    | {function}                       | undefined           | Function returns the selected element.    |
-
+| Name               | Type                             | Default            | Description                                |
+| ------------------ | -------------------------------- | ------------------ | ------------------------------------------ |
+| list_items         | [string] \| [object<text,value>] | []                 | Suggestion list                            |
+| list_height        | {string}                         | null               | Height of the suggestion list element.     |
+| not_found_text     | {string}                         | 'No results found' | Text to show if no item found              |
+| onHideDropdownList | {function}                       | undefined          | Function triggers when the dropdown hides. |
+| onItemSelection    | {function}                       | undefined          | Function returns the selected element.     |
 
 # Full example:
 
@@ -58,14 +55,14 @@ const DummyComponent = props => (
                                 label={'Place of birth'}
                                 list_items={[
                                     { text: 'Malaysia', value: 'ML' },
-                                            { text: 'China', value: 'CH' },
-                                            { text: 'USA', value: 'US' },
-                                            { text: 'Canada', value: 'CA' },
-                                            { text: 'Sweden', value: 'SE' },
-                                            { text: 'Norway', value: 'NO' },
+                                    { text: 'China', value: 'CH' },
+                                    { text: 'USA', value: 'US' },
+                                    { text: 'Canada', value: 'CA' },
+                                    { text: 'Sweden', value: 'SE' },
+                                    { text: 'Norway', value: 'NO' },
                                 ]}
                                 onItemSelection={({ value, text }) => {
-                                    setFieldValue('citizen', value ? text : '',)
+                                    setFieldValue('citizen', value ? text : '');
                                 }}
                                 required
                             />

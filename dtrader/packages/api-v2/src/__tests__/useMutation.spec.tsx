@@ -6,7 +6,7 @@ import AuthProvider from '../AuthProvider';
 import useMutation from '../useMutation';
 
 jest.mock('../useAPI', () => () => ({
-    send: async () => ({ verify_email: 1 } as TSocketResponse<'verify_email'>),
+    send: async () => ({ verify_email: 1 }) as TSocketResponse<'verify_email'>,
 }));
 
 describe('useMutation', () => {

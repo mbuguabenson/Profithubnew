@@ -1,4 +1,5 @@
 import { TDigitStat, TAnalysisHistory } from '../stores/analysis-store';
+import { getSafeLastDigit } from '../utils/digit-utils';
 
 export class DigitStatsEngine {
     ticks: number[] = [];
@@ -48,14 +49,7 @@ export class DigitStatsEngine {
 
     // Robust digit extraction helper
     extractLastDigit(price: number | string): number {
-        const p = Number(price);
-        if (isNaN(p)) return 0;
-
-        // Use fixed precision based on pip to ensure trailing zeros are kept
-        const fixed_price = p.toFixed(this.pip);
-        const last_char = fixed_price[fixed_price.length - 1];
-        const digit = parseInt(last_char);
-        return isNaN(digit) ? 0 : digit;
+        return getSafeLastDigit(price, this.pip);
     }
 
     update(new_ticks: number[], new_prices: number[]) {

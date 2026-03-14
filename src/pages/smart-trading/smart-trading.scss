@@ -255,7 +255,7 @@
 
     &.distribution-card.circular-style {
         grid-column: span 2;
-        
+
         @media (max-width: 1024px) {
             grid-column: span 1;
         }
@@ -265,7 +265,7 @@
             flex-direction: column;
             gap: 1.5rem;
             margin-top: 1rem;
-            
+
             .digit-row {
                 display: grid;
                 grid-template-columns: repeat(5, 1fr);
@@ -305,13 +305,13 @@
                 svg {
                     position: absolute;
                     transform: rotate(-90deg);
-                    
+
                     .bg-circle {
                         fill: none;
                         stroke: rgba(255, 255, 255, 0.05);
                         stroke-width: 3;
                     }
-                    
+
                     .progress-circle {
                         fill: none;
                         stroke-width: 3;
@@ -331,7 +331,7 @@
                 display: flex;
                 flex-direction: column;
                 align-items: center;
-                
+
                 .percentage {
                     font-size: 0.8rem;
                     font-weight: 700;

@@ -114,7 +114,9 @@
             &-enter-done,
             &-exit {
                 /*rtl:ignore*/
-                transition: transform 0.25s ease, opacity 0.25s linear;
+                transition:
+                    transform 0.25s ease,
+                    opacity 0.25s linear;
             }
         }
         &--top {
@@ -129,7 +131,9 @@
             }
             &-enter-done,
             &-exit {
-                transition: transform 0.25s ease, opacity 0.25s linear;
+                transition:
+                    transform 0.25s ease,
+                    opacity 0.25s linear;
             }
         }
         &--bottom {
@@ -144,7 +148,9 @@
             }
             &-enter-done,
             &-exit {
-                transition: transform 0.25s ease, opacity 0.25s linear;
+                transition:
+                    transform 0.25s ease,
+                    opacity 0.25s linear;
             }
         }
     }

@@ -2,14 +2,13 @@
 
 A desktop date picker component to get the user's birthdate based on `age` value. Allowed `age` range is from 18 to 100 (excluding).
 
-
 #### Supported Gestures:
 
--   Click
+- Click
 
 #### Supported Events:
 
--   onChange
+- onChange
 
 ## Usage
 
@@ -27,14 +26,12 @@ const DummyComponent = props => (
 
 ## Props
 
-
-| Name               | Type         | Default     | Description                                                 |
-| ------------------ | ------------ | ----------- | ----------------------------------------------------------- |
-| name               | {string}     | null        | Name of the DateOfBirthPicker                               |
-| lable              | {string}     | null        | Lable of the DateOfBirthPicker                              |
-| value              | {string}     | null        | Default value of the DateOfBirthPicker                      |
-| onChange           | {function}   | undefined   | Function returns current value of DateOfBirthPicker         |
-
+| Name     | Type       | Default   | Description                                         |
+| -------- | ---------- | --------- | --------------------------------------------------- |
+| name     | {string}   | null      | Name of the DateOfBirthPicker                       |
+| lable    | {string}   | null      | Lable of the DateOfBirthPicker                      |
+| value    | {string}   | null      | Default value of the DateOfBirthPicker              |
+| onChange | {function} | undefined | Function returns current value of DateOfBirthPicker |
 
 # Full example:
 
@@ -42,7 +39,7 @@ const DummyComponent = props => (
 import React from 'react';
 import DateOfBirthPicker from 'deriv-components';
 
-const DummyComponent = props => {    
+const DummyComponent = props => {
     return (
         <React.Fragment>
             <div className={'date-of-birth-picker__wrapper'}>
@@ -53,6 +50,6 @@ const DummyComponent = props => {
                 />
             </div>
         </React.Fragment>
-    )
-}
+    );
+};
 ```

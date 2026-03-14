@@ -4,7 +4,7 @@ Use this component to create a custom wizard
 
 #### Supported Events:
 
--   onStepChange
+- onStepChange
 
 ## Usage
 

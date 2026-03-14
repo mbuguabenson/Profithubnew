@@ -126,7 +126,7 @@ describe('PaymentAgentStore', () => {
                     location: {
                         pathname: routes.cashier_pa,
                     },
-                } as Window & typeof globalThis)
+                }) as Window & typeof globalThis
         );
     });
 

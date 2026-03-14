@@ -11,7 +11,9 @@
         }
     }
     &__info {
-        box-shadow: 0 0.8rem 0.8rem 0 var(--shadow-drop), 0 0 0.8rem 0 var(--shadow-drop);
+        box-shadow:
+            0 0.8rem 0.8rem 0 var(--shadow-drop),
+            0 0 0.8rem 0 var(--shadow-drop);
         padding: 1.6rem 1.6rem 0.8rem;
         border-radius: 0.8rem;
         margin-top: 1.6rem;
@@ -27,7 +29,9 @@
         margin-bottom: 0.8rem;
     }
     &__provider {
-        box-shadow: 0 0.8rem 0.8rem 0 var(--shadow-drop), 0 0 0.8rem 0 var(--shadow-drop);
+        box-shadow:
+            0 0.8rem 0.8rem 0 var(--shadow-drop),
+            0 0 0.8rem 0 var(--shadow-drop);
         padding: 1.6rem 1.6rem 0.8rem;
         border-radius: 0.8rem;
         display: grid;

@@ -1,27 +1,21 @@
 # MultiStep component
+
 Use this component to render separate steps.
 
 ## Usage
- 
+
 ```jsx
 import { MultiStep } from 'deriv-components';
 
-const DummyComponent = (props) => (
-     <MultiStep
-        ref={this.multi_step_ref}
-        lbl_previous='Back'
-        steps={props.steps}
-    />
-);
+const DummyComponent = props => <MultiStep ref={this.multi_step_ref} lbl_previous='Back' steps={props.steps} />;
 ```
 
 ## Props
 
-| Name                     | Type                   | Default            | Description                                                                                                              |
-|--------------------------|------------------------|--------------------|--------------------------------------------------------------------------------------------------------------------------|
-| lbl_previous             | {string}               | null               | Prev step button's text                                                                                                  |
-| steps                    | {array}                | null               | Pass steps's contents as an array                                                                                        |
-
+| Name         | Type     | Default | Description                       |
+| ------------ | -------- | ------- | --------------------------------- |
+| lbl_previous | {string} | null    | Prev step button's text           |
+| steps        | {array}  | null    | Pass steps's contents as an array |
 
 ## Full example:
 

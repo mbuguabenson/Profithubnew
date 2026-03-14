@@ -11,8 +11,5 @@
             "react-drag-drawer": ["./@types/react-drag-drawer/index.d.ts"]
         }
     },
-    "include": [
-        "src",
-        "./@types/**/*.d.ts"
-    ]
+    "include": ["src", "./@types/**/*.d.ts"]
 }

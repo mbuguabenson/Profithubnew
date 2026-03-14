@@ -57,7 +57,10 @@ const HOISTED_PACKAGES = {
     '@deriv/cfd/dist/cfd/js/CFDStore': path.resolve(__dirname, '../../cfd/src/Stores/Modules/CFD/cfd-store'),
     // Deep component mappings for account
     '@deriv/account/dist/account/js/Sections': path.resolve(__dirname, '../../account/src/Sections'),
-    '@deriv/account/dist/account/js/Containers/Account/account': path.resolve(__dirname, '../../account/src/Containers/Account/account'),
+    '@deriv/account/dist/account/js/Containers/Account/account': path.resolve(
+        __dirname,
+        '../../account/src/Containers/Account/account'
+    ),
     '@deriv/account-src': path.resolve(__dirname, '../../account/src'),
     '@deriv/cashier-src': path.resolve(__dirname, '../../cashier/src'),
     '@deriv/cfd-src': path.resolve(__dirname, '../../cfd/src'),
@@ -67,23 +70,66 @@ const HOISTED_PACKAGES = {
     '@deriv/wallets-src': path.resolve(__dirname, '../../wallets/src'),
     '@deriv/bot-web-ui-src': path.resolve(__dirname, '../../bot-web-ui/src'),
     '@deriv/bot-skeleton-src': path.resolve(__dirname, '../../bot-skeleton/src'),
-    '@deriv/account/dist/account/js/test-warning-modal': path.resolve(__dirname, '../../account/src/Components/trading-assessment/test-warning-modal'),
-    '@deriv/account/dist/account/js/currency-radio-button': path.resolve(__dirname, '../../account/src/Components/currency-selector/currency-radio-button'),
-    '@deriv/account/dist/account/js/currency-radio-button-group': path.resolve(__dirname, '../../account/src/Components/currency-selector/currency-radio-button-group'),
-    '@deriv/account/dist/account/js/currency-selector-config': path.resolve(__dirname, '../../account/src/Configs/currency-selector-config'),
-    '@deriv/account/dist/account/js/address-details-config': path.resolve(__dirname, '../../account/src/Configs/address-details-config'),
-    '@deriv/account/dist/account/js/personal-details-config': path.resolve(__dirname, '../../account/src/Configs/personal-details-config'),
-    '@deriv/account/dist/account/js/financial-details-config': path.resolve(__dirname, '../../account/src/Configs/financial-details-config'),
-    '@deriv/account/dist/account/js/terms-of-use-config': path.resolve(__dirname, '../../account/src/Configs/terms-of-use-config'),
-    '@deriv/account/dist/account/js/trading-assessment-config': path.resolve(__dirname, '../../account/src/Configs/trading-assessment-config'),
-    '@deriv/account/dist/account/js/employment-tax-info-config': path.resolve(__dirname, '../../account/src/Configs/employment-tax-info-config'),
-    '@deriv/account/dist/account/js/risk-tolerance-warning-modal': path.resolve(__dirname, '../../account/src/Components/trading-assessment/risk-tolerance-warning-modal'),
+    '@deriv/account/dist/account/js/test-warning-modal': path.resolve(
+        __dirname,
+        '../../account/src/Components/trading-assessment/test-warning-modal'
+    ),
+    '@deriv/account/dist/account/js/currency-radio-button': path.resolve(
+        __dirname,
+        '../../account/src/Components/currency-selector/currency-radio-button'
+    ),
+    '@deriv/account/dist/account/js/currency-radio-button-group': path.resolve(
+        __dirname,
+        '../../account/src/Components/currency-selector/currency-radio-button-group'
+    ),
+    '@deriv/account/dist/account/js/currency-selector-config': path.resolve(
+        __dirname,
+        '../../account/src/Configs/currency-selector-config'
+    ),
+    '@deriv/account/dist/account/js/address-details-config': path.resolve(
+        __dirname,
+        '../../account/src/Configs/address-details-config'
+    ),
+    '@deriv/account/dist/account/js/personal-details-config': path.resolve(
+        __dirname,
+        '../../account/src/Configs/personal-details-config'
+    ),
+    '@deriv/account/dist/account/js/financial-details-config': path.resolve(
+        __dirname,
+        '../../account/src/Configs/financial-details-config'
+    ),
+    '@deriv/account/dist/account/js/terms-of-use-config': path.resolve(
+        __dirname,
+        '../../account/src/Configs/terms-of-use-config'
+    ),
+    '@deriv/account/dist/account/js/trading-assessment-config': path.resolve(
+        __dirname,
+        '../../account/src/Configs/trading-assessment-config'
+    ),
+    '@deriv/account/dist/account/js/employment-tax-info-config': path.resolve(
+        __dirname,
+        '../../account/src/Configs/employment-tax-info-config'
+    ),
+    '@deriv/account/dist/account/js/risk-tolerance-warning-modal': path.resolve(
+        __dirname,
+        '../../account/src/Components/trading-assessment/risk-tolerance-warning-modal'
+    ),
 };
 
 const ALIASES = {
     _common: path.resolve(__dirname, '../src/_common'),
-    App: [path.resolve(__dirname, '../src/App'), path.resolve(__dirname, '../../account/src/App'), path.resolve(__dirname, '../../cashier/src/App'), path.resolve(__dirname, '../../cfd/src/App')],
-    Assets: [path.resolve(__dirname, '../src/Assets'), path.resolve(__dirname, '../../account/src/Assets'), path.resolve(__dirname, '../../cashier/src/Assets'), path.resolve(__dirname, '../../cfd/src/Assets')],
+    App: [
+        path.resolve(__dirname, '../src/App'),
+        path.resolve(__dirname, '../../account/src/App'),
+        path.resolve(__dirname, '../../cashier/src/App'),
+        path.resolve(__dirname, '../../cfd/src/App'),
+    ],
+    Assets: [
+        path.resolve(__dirname, '../src/Assets'),
+        path.resolve(__dirname, '../../account/src/Assets'),
+        path.resolve(__dirname, '../../cashier/src/Assets'),
+        path.resolve(__dirname, '../../cfd/src/Assets'),
+    ],
     Components: [
         path.resolve(__dirname, '../src/Components'),
         path.resolve(__dirname, '../../account/src/Components'),
@@ -110,17 +156,50 @@ const ALIASES = {
         path.resolve(__dirname, '../../trader/src/Containers'),
     ],
     Fonts: path.resolve(__dirname, '../src/public/fonts'),
-    Helpers: [path.resolve(__dirname, '../../account/src/Helpers'), path.resolve(__dirname, '../../cashier/src/Helpers'), path.resolve(__dirname, '../../cfd/src/Helpers')],
-    Hooks: [path.resolve(__dirname, '../../account/src/hooks'), path.resolve(__dirname, '../../cashier/src/hooks'), path.resolve(__dirname, '../../cfd/src/hooks')],
+    Helpers: [
+        path.resolve(__dirname, '../../account/src/Helpers'),
+        path.resolve(__dirname, '../../cashier/src/Helpers'),
+        path.resolve(__dirname, '../../cfd/src/Helpers'),
+    ],
+    Hooks: [
+        path.resolve(__dirname, '../../account/src/hooks'),
+        path.resolve(__dirname, '../../cashier/src/hooks'),
+        path.resolve(__dirname, '../../cfd/src/hooks'),
+    ],
     Images: path.resolve(__dirname, '../src/public/images'),
-    Modules: [path.resolve(__dirname, '../src/Modules'), path.resolve(__dirname, '../../account/src/Modules'), path.resolve(__dirname, '../../cashier/src/Modules'), path.resolve(__dirname, '../../cfd/src/Modules'), path.resolve(__dirname, '../../trader/src/Modules')],
+    Modules: [
+        path.resolve(__dirname, '../src/Modules'),
+        path.resolve(__dirname, '../../account/src/Modules'),
+        path.resolve(__dirname, '../../cashier/src/Modules'),
+        path.resolve(__dirname, '../../cfd/src/Modules'),
+        path.resolve(__dirname, '../../trader/src/Modules'),
+    ],
     Sass: path.resolve(__dirname, '../src/sass'),
-    Sections: [path.resolve(__dirname, '../../account/src/Sections'), path.resolve(__dirname, '../../cashier/src/Sections'), path.resolve(__dirname, '../../cfd/src/Sections')],
+    Sections: [
+        path.resolve(__dirname, '../../account/src/Sections'),
+        path.resolve(__dirname, '../../cashier/src/Sections'),
+        path.resolve(__dirname, '../../cfd/src/Sections'),
+    ],
     Services: path.resolve(__dirname, '../src/Services'),
-    Stores: [path.resolve(__dirname, '../src/Stores'), path.resolve(__dirname, '../../account/src/Stores'), path.resolve(__dirname, '../../cashier/src/Stores'), path.resolve(__dirname, '../../cfd/src/Stores'), path.resolve(__dirname, '../../trader/src/Stores')],
+    Stores: [
+        path.resolve(__dirname, '../src/Stores'),
+        path.resolve(__dirname, '../../account/src/Stores'),
+        path.resolve(__dirname, '../../cashier/src/Stores'),
+        path.resolve(__dirname, '../../cfd/src/Stores'),
+        path.resolve(__dirname, '../../trader/src/Stores'),
+    ],
     Translations: path.resolve(__dirname, '../src/public/translations'),
-    Types: [path.resolve(__dirname, '../../account/src/Types'), path.resolve(__dirname, '../../cashier/src/Types'), path.resolve(__dirname, '../../cfd/src/Types')],
-    Utils: [path.resolve(__dirname, '../src/Utils'), path.resolve(__dirname, '../../account/src/Utils'), path.resolve(__dirname, '../../cashier/src/Utils'), path.resolve(__dirname, '../../cfd/src/Utils')],
+    Types: [
+        path.resolve(__dirname, '../../account/src/Types'),
+        path.resolve(__dirname, '../../cashier/src/Types'),
+        path.resolve(__dirname, '../../cfd/src/Types'),
+    ],
+    Utils: [
+        path.resolve(__dirname, '../src/Utils'),
+        path.resolve(__dirname, '../../account/src/Utils'),
+        path.resolve(__dirname, '../../cashier/src/Utils'),
+        path.resolve(__dirname, '../../cfd/src/Utils'),
+    ],
     ...HOISTED_PACKAGES,
 };
 

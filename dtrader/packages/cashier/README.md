@@ -5,9 +5,9 @@
 This repository is a workspace of [deriv-app](../../README.md) monorepo and covers the [cashier](https://app.deriv.com/cashier/) page in app.deriv.com. (You need to be logged in to see the page.)
 This workspace covers:
 
--   Deposit, Withdraw and Transfer (for both `Fiat` and `Crypto`)
--   Deposit and withdraw with `Payment agents`
--   Deposit with `p2p` and `onRamp`
+- Deposit, Withdraw and Transfer (for both `Fiat` and `Crypto`)
+- Deposit and withdraw with `Payment agents`
+- Deposit with `p2p` and `onRamp`
 
 ## How to Install the Project
 
@@ -65,7 +65,7 @@ The features developed in this folder also have been exported through the webpac
 
 ## Troubleshooting
 
--   **Icon missing:** If the icons are missing, you only need to build this workspace. You can do this by running the build command from the root directory (`/deriv-app`):
+- **Icon missing:** If the icons are missing, you only need to build this workspace. You can do this by running the build command from the root directory (`/deriv-app`):
 
 ```
 npm run build

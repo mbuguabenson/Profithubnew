@@ -309,68 +309,154 @@ const EvenOddTab = observer(() => {
                 className={classNames('big-action-button', power.dominant.toLowerCase(), {
                     executing: smart_trading.is_executing,
                 })}
-                onClick={() => smart_trading.manualTrade && smart_trading.manualTrade(power.dominant === 'EVEN' ? 'DIGITEVEN' : 'DIGITODD')}
+                onClick={() =>
+                    smart_trading.manualTrade &&
+                    smart_trading.manualTrade(power.dominant === 'EVEN' ? 'DIGITEVEN' : 'DIGITODD')
+                }
             >
                 {smart_trading.is_executing
                     ? 'EXECUTING...'
                     : `TRADE ${power.dominant} NOW - ${power.dominantPercent.toFixed(1)}%`}
             </div>
 
-            <div className='auto-trading-section' style={{ marginTop: '20px', padding: '15px', background: 'rgba(255,255,255,0.02)', borderRadius: '12px', border: '1px solid rgba(255,255,255,0.05)' }}>
-                <h3 style={{ marginBottom: '15px', color: '#fff', fontSize: '1.2rem', textAlign: 'center' }}>Auto Trading Configuration</h3>
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(130px, 1fr))', gap: '10px', marginBottom: '20px' }}>
+            <div
+                className='auto-trading-section'
+                style={{
+                    marginTop: '20px',
+                    padding: '15px',
+                    background: 'rgba(255,255,255,0.02)',
+                    borderRadius: '12px',
+                    border: '1px solid rgba(255,255,255,0.05)',
+                }}
+            >
+                <h3 style={{ marginBottom: '15px', color: '#fff', fontSize: '1.2rem', textAlign: 'center' }}>
+                    Auto Trading Configuration
+                </h3>
+                <div
+                    style={{
+                        display: 'grid',
+                        gridTemplateColumns: 'repeat(auto-fit, minmax(130px, 1fr))',
+                        gap: '10px',
+                        marginBottom: '20px',
+                    }}
+                >
                     <div style={{ display: 'flex', flexDirection: 'column', gap: '5px' }}>
                         <label style={{ fontSize: '0.8rem', color: '#aaa' }}>Trigger Condition</label>
-                        <select 
-                            style={{ padding: '0.8rem', borderRadius: '6px', background: 'rgba(0,0,0,0.3)', color: '#fff', border: '1px solid rgba(255,255,255,0.1)', cursor: 'pointer' }}
+                        <select
+                            style={{
+                                padding: '0.8rem',
+                                borderRadius: '6px',
+                                background: 'rgba(0,0,0,0.3)',
+                                color: '#fff',
+                                border: '1px solid rgba(255,255,255,0.1)',
+                                cursor: 'pointer',
+                            }}
                             value={smart_trading.strategies.EVENODD.trigger_condition || 'EITHER'}
-                            onChange={(e) => smart_trading.updateStrategySetting('EVENODD', 'trigger_condition', e.target.value)}
+                            onChange={e =>
+                                smart_trading.updateStrategySetting('EVENODD', 'trigger_condition', e.target.value)
+                            }
                         >
-                            <option value="EITHER" style={{ background: '#1f2937' }}>Either (Even/Odd)</option>
-                            <option value="EVEN" style={{ background: '#1f2937' }}>Even Only</option>
-                            <option value="ODD" style={{ background: '#1f2937' }}>Odd Only</option>
+                            <option value='EITHER' style={{ background: '#1f2937' }}>
+                                Either (Even/Odd)
+                            </option>
+                            <option value='EVEN' style={{ background: '#1f2937' }}>
+                                Even Only
+                            </option>
+                            <option value='ODD' style={{ background: '#1f2937' }}>
+                                Odd Only
+                            </option>
                         </select>
                     </div>
                     <div style={{ display: 'flex', flexDirection: 'column', gap: '5px' }}>
                         <label style={{ fontSize: '0.8rem', color: '#aaa' }}>Target Prediction</label>
-                        <select 
-                            style={{ padding: '0.8rem', borderRadius: '6px', background: 'rgba(0,0,0,0.3)', color: '#fff', border: '1px solid rgba(255,255,255,0.1)', cursor: 'pointer' }}
+                        <select
+                            style={{
+                                padding: '0.8rem',
+                                borderRadius: '6px',
+                                background: 'rgba(0,0,0,0.3)',
+                                color: '#fff',
+                                border: '1px solid rgba(255,255,255,0.1)',
+                                cursor: 'pointer',
+                            }}
                             value={smart_trading.strategies.EVENODD.target_prediction || 'EVEN'}
-                            onChange={(e) => smart_trading.updateStrategySetting('EVENODD', 'target_prediction', e.target.value)}
+                            onChange={e =>
+                                smart_trading.updateStrategySetting('EVENODD', 'target_prediction', e.target.value)
+                            }
                         >
-                            <option value="EVEN" style={{ background: '#1f2937' }}>Trade Even</option>
-                            <option value="ODD" style={{ background: '#1f2937' }}>Trade Odd</option>
+                            <option value='EVEN' style={{ background: '#1f2937' }}>
+                                Trade Even
+                            </option>
+                            <option value='ODD' style={{ background: '#1f2937' }}>
+                                Trade Odd
+                            </option>
                         </select>
                     </div>
                     <div style={{ display: 'flex', flexDirection: 'column', gap: '5px' }}>
                         <label style={{ fontSize: '0.8rem', color: '#aaa' }}>Entry Pattern</label>
-                        <select 
-                            style={{ padding: '0.8rem', borderRadius: '6px', background: 'rgba(0,0,0,0.3)', color: '#fff', border: '1px solid rgba(255,255,255,0.1)', cursor: 'pointer' }}
+                        <select
+                            style={{
+                                padding: '0.8rem',
+                                borderRadius: '6px',
+                                background: 'rgba(0,0,0,0.3)',
+                                color: '#fff',
+                                border: '1px solid rgba(255,255,255,0.1)',
+                                cursor: 'pointer',
+                            }}
                             value={smart_trading.strategies.EVENODD.entry_pattern || 'PATTERN_1'}
-                            onChange={(e) => smart_trading.updateStrategySetting('EVENODD', 'entry_pattern', e.target.value)}
+                            onChange={e =>
+                                smart_trading.updateStrategySetting('EVENODD', 'entry_pattern', e.target.value)
+                            }
                         >
-                            <option value="PATTERN_1" style={{ background: '#1f2937' }}>Threshold + Consec.</option>
-                            <option value="PATTERN_2" style={{ background: '#1f2937' }}>High/2nd/Least Ranks</option>
+                            <option value='PATTERN_1' style={{ background: '#1f2937' }}>
+                                Threshold + Consec.
+                            </option>
+                            <option value='PATTERN_2' style={{ background: '#1f2937' }}>
+                                High/2nd/Least Ranks
+                            </option>
                         </select>
                     </div>
                     {smart_trading.strategies.EVENODD.entry_pattern !== 'PATTERN_2' && (
                         <>
                             <div style={{ display: 'flex', flexDirection: 'column', gap: '5px' }}>
                                 <label style={{ fontSize: '0.8rem', color: '#aaa' }}>Trigger %</label>
-                                <input 
-                                    type='number' 
-                                    style={{ padding: '0.8rem', borderRadius: '6px', background: 'rgba(0,0,0,0.3)', color: '#fff', border: '1px solid rgba(255,255,255,0.1)' }}
-                                    value={smart_trading.strategies.EVENODD.trigger_percentage || 55} 
-                                    onChange={(e) => smart_trading.updateStrategySetting('EVENODD', 'trigger_percentage', parseFloat(e.target.value))} 
+                                <input
+                                    type='number'
+                                    style={{
+                                        padding: '0.8rem',
+                                        borderRadius: '6px',
+                                        background: 'rgba(0,0,0,0.3)',
+                                        color: '#fff',
+                                        border: '1px solid rgba(255,255,255,0.1)',
+                                    }}
+                                    value={smart_trading.strategies.EVENODD.trigger_percentage || 55}
+                                    onChange={e =>
+                                        smart_trading.updateStrategySetting(
+                                            'EVENODD',
+                                            'trigger_percentage',
+                                            parseFloat(e.target.value)
+                                        )
+                                    }
                                 />
                             </div>
                             <div style={{ display: 'flex', flexDirection: 'column', gap: '5px' }}>
                                 <label style={{ fontSize: '0.8rem', color: '#aaa' }}>Consecutive Ticks</label>
-                                <input 
-                                    type='number' 
-                                    style={{ padding: '0.8rem', borderRadius: '6px', background: 'rgba(0,0,0,0.3)', color: '#fff', border: '1px solid rgba(255,255,255,0.1)' }}
-                                    value={smart_trading.strategies.EVENODD.consecutive_ticks || 2} 
-                                    onChange={(e) => smart_trading.updateStrategySetting('EVENODD', 'consecutive_ticks', parseInt(e.target.value))} 
+                                <input
+                                    type='number'
+                                    style={{
+                                        padding: '0.8rem',
+                                        borderRadius: '6px',
+                                        background: 'rgba(0,0,0,0.3)',
+                                        color: '#fff',
+                                        border: '1px solid rgba(255,255,255,0.1)',
+                                    }}
+                                    value={smart_trading.strategies.EVENODD.consecutive_ticks || 2}
+                                    onChange={e =>
+                                        smart_trading.updateStrategySetting(
+                                            'EVENODD',
+                                            'consecutive_ticks',
+                                            parseInt(e.target.value)
+                                        )
+                                    }
                                 />
                             </div>
                         </>
@@ -378,12 +464,21 @@ const EvenOddTab = observer(() => {
                 </div>
                 <div
                     className={classNames('big-action-button')}
-                    style={{ background: smart_trading.strategies.EVENODD.is_running ? 'linear-gradient(135deg, #ef4444, #b91c1c)' : 'linear-gradient(135deg, #10b981, #047857)', boxShadow: '0 4px 15px rgba(0,0,0,0.3)', width: '100%', margin: '0 auto' }}
+                    style={{
+                        background: smart_trading.strategies.EVENODD.is_running
+                            ? 'linear-gradient(135deg, #ef4444, #b91c1c)'
+                            : 'linear-gradient(135deg, #10b981, #047857)',
+                        boxShadow: '0 4px 15px rgba(0,0,0,0.3)',
+                        width: '100%',
+                        margin: '0 auto',
+                    }}
                     onClick={() => {
                         smart_trading.toggleBot('EVENODD');
                     }}
                 >
-                    {smart_trading.strategies.EVENODD.is_running ? 'STOP AUTO TRADING' : 'START AUTO TRADING (EVEN/ODD)'}
+                    {smart_trading.strategies.EVENODD.is_running
+                        ? 'STOP AUTO TRADING'
+                        : 'START AUTO TRADING (EVEN/ODD)'}
                 </div>
                 {smart_trading.strategies.EVENODD.is_running && (
                     <div style={{ marginTop: '15px', textAlign: 'center', color: '#10b981', fontWeight: 'bold' }}>

@@ -12,6 +12,7 @@ import {
 } from '@/lib/analysis/smart-predictions';
 import { VSenseEngine, VSenseSignal } from '@/lib/analysis/v-sense-engine';
 import subscriptionManager from '@/lib/subscription-manager';
+import { getSafeLastDigit } from '@/utils/digit-utils';
 import RootStore from './root-store';
 
 type TDerivResponse = {
@@ -557,22 +558,16 @@ export default class SmartTradingStore {
         if (price !== undefined && price !== null) {
             runInAction(() => {
                 this.current_price = price;
-                const price_str = String(price);
-                const last_char = price_str[price_str.length - 1];
-                const current_digit = parseInt(last_char);
-                if (!isNaN(current_digit)) {
-                    // Use the last digit from the input array which comes from the source of truth
-                    // avoiding string parsing issues (e.g. "1.50" -> "1.5" -> 5 instead of 0)
-                    const safe_last_digit = last_digits[last_digits.length - 1];
-                    this.last_digit = safe_last_digit !== undefined ? safe_last_digit : current_digit;
+                const symbol_info = this.active_symbols_data[this.symbol];
+                const pip = symbol_info?.pip || 2;
+                this.last_digit = getSafeLastDigit(price, pip);
 
-                    if (this.last_digit % 2 === 0) {
-                        this.consecutive_even++;
-                        this.consecutive_odd = 0;
-                    } else {
-                        this.consecutive_odd++;
-                        this.consecutive_even = 0;
-                    }
+                if (this.last_digit % 2 === 0) {
+                    this.consecutive_even++;
+                    this.consecutive_odd = 0;
+                } else {
+                    this.consecutive_odd++;
+                    this.consecutive_even = 0;
                 }
             });
         }

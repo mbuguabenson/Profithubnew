@@ -7,7 +7,7 @@ import useQuery from '../useQuery';
 
 // mock the useAPI hook
 jest.mock('../useAPI', () => () => ({
-    send: async () => ({ ping: 'pong' } as TSocketResponse<'ping'>),
+    send: async () => ({ ping: 'pong' }) as TSocketResponse<'ping'>,
 }));
 
 describe('useQuery', () => {

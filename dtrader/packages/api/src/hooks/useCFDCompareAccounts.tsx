@@ -107,11 +107,14 @@ const useCFDCompareAccounts = () => {
 
         if (!modifiedMt5Data) return;
 
-        const sortedData = marketTypeOrder.reduce((acc, marketType) => {
-            const accounts = modifiedMt5Data.filter(account => account.market_type === marketType);
-            if (!accounts.length) return acc;
-            return [...acc, ...accounts];
-        }, [] as typeof modifiedMt5Data);
+        const sortedData = marketTypeOrder.reduce(
+            (acc, marketType) => {
+                const accounts = modifiedMt5Data.filter(account => account.market_type === marketType);
+                if (!accounts.length) return acc;
+                return [...acc, ...accounts];
+            },
+            [] as typeof modifiedMt5Data
+        );
 
         return sortedData;
     }, [modifiedMt5Data]);

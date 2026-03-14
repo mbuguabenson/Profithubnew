@@ -8,6 +8,7 @@ import AdvancedOUAnalyzer from './advanced-ou-analyzer';
 import EvenOddPattern from './even-odd-pattern';
 import MatchesDiffersAnalyzer from './matches-differs-analyzer';
 import OverUnderPattern from './over-under-pattern';
+import { getSafeLastDigit } from '@/utils/digit-utils';
 import './easy-tool.scss';
 
 const DIGIT_COLORS: Record<number, string> = {
@@ -58,12 +59,7 @@ const EasyTool = observer(() => {
                         const decimals = symbol_info?.pip ? String(symbol_info.pip).split('.')[1]?.length || 2 : 2;
 
                         const last_digits = ticks_data.slice(-1000).map(t => {
-                            let quote_str = String(t.quote || '0');
-                            if (typeof t.quote === 'number') {
-                                quote_str = t.quote.toFixed(decimals);
-                            }
-                            const digit = parseInt(quote_str[quote_str.length - 1]);
-                            return isNaN(digit) ? 0 : digit;
+                            return getSafeLastDigit(t.quote, decimals);
                         });
 
                         updateDigitStats(last_digits, latest.quote);
@@ -84,7 +80,7 @@ const EasyTool = observer(() => {
         monitorTicks();
         return () => {
             is_mounted = false;
-            if (listenerKey) ticks_service.stopMonitor({ symbol, key: listenerKey });
+            if (listenerKey && ticks_service) ticks_service.stopMonitor({ symbol, key: listenerKey });
         };
     }, [symbol, ticks_service, updateDigitStats, active_symbols_data, is_socket_opened]);
 

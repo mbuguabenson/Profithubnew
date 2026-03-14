@@ -4,8 +4,8 @@ A component to show data in a list on mobile.
 
 #### Supported events:
 
--   onScroll
--   onRowsRendered
+- onScroll
+- onRowsRendered
 
 ## Usage
 

@@ -57,14 +57,6 @@ export const platformsConfig: PlatformsConfig[] = [
         icon: <DerivBotLogo height={32} width={121} />,
         showInEU: false,
     },
-    {
-        active: false,
-        buttonIcon: <SmarttraderLogo height={24} width={115} />,
-        description: localize('Trade the world’s markets with our popular user-friendly platform.'),
-        href: standalone_routes.smarttrader,
-        icon: <SmarttraderLogo height={32} width={153} />,
-        showInEU: false,
-    },
 ];
 
 export const TRADERS_HUB_LINK_CONFIG = {

@@ -33,8 +33,6 @@ const SuspenseWrapper = ({ children }: { children: React.ReactNode }) => {
     return <Suspense fallback={<InitialLoader />}>{children}</Suspense>;
 };
 
-
-
 const router = createBrowserRouter(
     createRoutesFromElements(
         <Route

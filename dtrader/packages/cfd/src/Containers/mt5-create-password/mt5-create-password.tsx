@@ -13,7 +13,7 @@ import CfdPasswordModalTnc from '../cfd-password-modal-tnc';
 export type TCFDPasswordFormValues = { password: string };
 
 type TCFDPasswordFormReusedProps = {
-    platform: typeof CFD_PLATFORMS[keyof typeof CFD_PLATFORMS];
+    platform: (typeof CFD_PLATFORMS)[keyof typeof CFD_PLATFORMS];
     error_message: string;
     validatePassword?: (values: TCFDPasswordFormValues) => FormikErrors<TCFDPasswordFormValues>;
 };

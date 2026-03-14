@@ -7,17 +7,17 @@ Visual automation for binary.com [bot.binary.com](https://bot.binary.com)
 
 **In this document**
 
--   [Other documents](#other-documents)
--   [Development](#development)
-    -   [Deploying to local gh-pages](#deploying-to-local-gh-pages)
--   [Release](#release)
--   [To update to latest version](#to-update-to-latest-version)
--   [Running the CLI command](#running-the-cli-command)
+- [Other documents](#other-documents)
+- [Development](#development)
+    - [Deploying to local gh-pages](#deploying-to-local-gh-pages)
+- [Release](#release)
+- [To update to latest version](#to-update-to-latest-version)
+- [Running the CLI command](#running-the-cli-command)
 
 ## Other documents
 
--   [General](docs/README.md) - Contains general philosophy and overview of this package
--   [Modules docs](docs/Modules/README.md) - Contains implementation guides (i.e., scaffolding, code usage)
+- [General](docs/README.md) - Contains general philosophy and overview of this package
+- [Modules docs](docs/Modules/README.md) - Contains implementation guides (i.e., scaffolding, code usage)
 
 Visit [wiki](https://github.com/binary-com/binary-bot/wiki) for more info.
 

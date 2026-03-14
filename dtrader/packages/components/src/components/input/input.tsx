@@ -44,8 +44,8 @@ export type TInputProps = {
         React.ComponentType extends 'textarea'
             ? HTMLTextAreaElement
             : React.ComponentType extends 'input'
-            ? HTMLInputElement
-            : never
+              ? HTMLInputElement
+              : never
     >;
     required?: boolean;
     trailing_icon?: React.ReactElement | null;

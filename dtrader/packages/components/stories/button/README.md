@@ -4,7 +4,7 @@ Use this component to show buttons
 
 #### Supported Events
 
--   onClick
+- onClick
 
 ## Usage
 
@@ -27,8 +27,8 @@ const DummyComponent = props => <Button onClick={() => console.log('clicked')} t
 | id                | {string}   | `''`     | custom id for button component                                     |
 | is_disabled       | {boolean}  | `false`  | disable the button                                                 |
 | is_loading        | {boolean}  | `false`  | show loading in the button                                         |
-| is\_submit\_success | {boolean}  | `false`  | callback flag to for successful submission                         |
-| is\_button\_toggle  | {boolean}  | `false`  | convert to a toggle button                                         |
+| is_submit_success | {boolean}  | `false`  | callback flag to for successful submission                         |
+| is_button_toggle  | {boolean}  | `false`  | convert to a toggle button                                         |
 | is_circle         | {boolean}  | `false`  | button shape is circular                                           |
 | is_plus           | {boolean}  | `false ` | show a plus icon in the button                                     |
 | large             | {boolean}  | `false`  | large sized button                                                 |

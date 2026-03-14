@@ -315,7 +315,7 @@ export class AutoTradeStore {
     evaluateEvenOddStrategy(): void {
         const even_stats = this.digit_stats.filter(d => d.digit % 2 === 0);
         const odd_stats = this.digit_stats.filter(d => d.digit % 2 !== 0);
-        
+
         const even_percentage = even_stats.reduce((a, b) => a + b.percentage, 0);
         const odd_percentage = 100 - even_percentage;
 

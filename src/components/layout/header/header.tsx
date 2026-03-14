@@ -21,6 +21,7 @@ import AccountsInfoLoader from './account-info-loader';
 import AccountSwitcher from './account-switcher';
 import MenuItems from './menu-items';
 import MobileMenu from './mobile-menu';
+import WhatsApp from '../footer/WhatsApp';
 
 import './header.scss';
 
@@ -213,14 +214,15 @@ const AppHeader = observer(({ isAuthenticating }: TAppHeaderProps) => {
             })}
         >
             <Wrapper variant='left'>
-                <AppLogo />
                 <MobileMenu />
+                <AppLogo />
                 {isDesktop && <MenuItems.TradershubLink />}
                 {isDesktop && <MenuItems />}
 
             </Wrapper>
             <Wrapper variant='right'>
                 {!isDesktop && <PWAInstallButton variant='primary' size='medium' />}
+                <WhatsApp />
                 {renderAccountSection()}
             </Wrapper>
             {/* <PWAInstallModalTest /> */}

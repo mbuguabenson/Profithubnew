@@ -2,23 +2,20 @@
 
 Renders a `Counter` component containing a number
 
-
 ## Usage
 
 ```jsx
 import Counter from 'deriv-components';
 
-const DummyComponent = props => (
-    <Counter count={5} className='counter' />
-);
+const DummyComponent = props => <Counter count={5} className='counter' />;
 ```
 
 ## Props
 
-| Name               | Type         | Default     | Description                             |
-| ------------------ | ------------ | ----------- | --------------------------------------- |
-| className          | {string}     | null        | The classname of the main component     |
-| count              | {string}     | null        | Number to show                          |
+| Name      | Type     | Default | Description                         |
+| --------- | -------- | ------- | ----------------------------------- |
+| className | {string} | null    | The classname of the main component |
+| count     | {string} | null    | Number to show                      |
 
 # Full example:
 
@@ -26,13 +23,13 @@ const DummyComponent = props => (
 import React from 'react';
 import Counter from 'deriv-components';
 
-const DummyComponent = props => {    
+const DummyComponent = props => {
     return (
         <React.Fragment>
             <div className={'counter__wrapper'}>
-                 <Counter count={5} className='counter' />
+                <Counter count={5} className='counter' />
             </div>
         </React.Fragment>
-    )
-}
+    );
+};
 ```

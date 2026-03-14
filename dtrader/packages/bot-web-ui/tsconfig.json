@@ -10,8 +10,8 @@
             "Stores/*": ["src/stores/*"],
             "Utils/*": ["src/utils/*"],
             "@deriv/*": ["../*/src"],
-            "Types": ["src/types"],
+            "Types": ["src/types"]
         }
     },
-    "include": ["src", "../../utils.d.ts", "src/types/global.d.ts"],
+    "include": ["src", "../../utils.d.ts", "src/types/global.d.ts"]
 }

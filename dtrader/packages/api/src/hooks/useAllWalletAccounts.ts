@@ -34,7 +34,7 @@ const useAllWalletAccounts = () => {
 
     /** Function to sort wallet based on currency */
     const sortWalletsByCurrency = useCallback(
-        (a: typeof modifiedWallets[number], b: typeof modifiedWallets[number]) => {
+        (a: (typeof modifiedWallets)[number], b: (typeof modifiedWallets)[number]) => {
             if (a.is_crypto !== b.is_crypto) return a.is_crypto ? 1 : -1;
 
             return (a.currency || 'USD').localeCompare(b.currency || 'USD');

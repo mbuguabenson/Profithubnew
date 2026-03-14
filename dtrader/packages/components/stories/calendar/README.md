@@ -4,7 +4,7 @@ renders a controllable calendar display
 
 #### Supported Events
 
--   onChangeCalendarMonth
+- onChangeCalendarMonth
 
 ## Usage
 
@@ -23,7 +23,7 @@ const DummyComponent = props => <Calendar />;
 | disabled_days         | [object]        | null                    | Disabled days in the calendar                    |
 | events                | {object}        | null                    | Selected holiday dates                           |
 | footer                | {string}        | `''`                    | Additional text for footer                       |
-| has\_today\_btn       | {boolean}       | `false`                 | Displays today button when `true`                |
+| has_today_btn         | {boolean}       | `false`                 | Displays today button when `true`                |
 | max_date              | {object,string} | `120 years after today` | Maximum date to show in the calender             |
 | min_date              | {object,string} | `1970-01-01`            | Minimum date to show in the calendar             |
 | onChangeCalendarMonth | {function}      | null                    | Callback function when month is changed          |

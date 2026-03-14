@@ -1,12 +1,27 @@
 @keyframes pulse-signal {
-    0% { transform: scale(0.95); opacity: 0.7; }
-    50% { transform: scale(1); opacity: 1; }
-    100% { transform: scale(0.95); opacity: 0.7; }
+    0% {
+        transform: scale(0.95);
+        opacity: 0.7;
+    }
+    50% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(0.95);
+        opacity: 0.7;
+    }
 }
 
 @keyframes slide-in {
-    from { transform: translateY(10px); opacity: 0; }
-    to { transform: translateY(0); opacity: 1; }
+    from {
+        transform: translateY(10px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
 }
 
 .autotrade-button {
@@ -74,7 +89,7 @@
         &--trade {
             border-left-color: #4bb4b3;
             background: rgba(75, 180, 179, 0.1);
-            
+
             .autotrade-modal__status-text {
                 animation: pulse-signal 2s infinite;
                 color: #4bb4b3;
@@ -85,7 +100,7 @@
         &--wait {
             border-left-color: #ffad3a;
             background: rgba(255, 173, 58, 0.1);
-            
+
             .autotrade-modal__status-text {
                 color: #ffad3a;
             }
@@ -94,7 +109,7 @@
         &--unstable {
             border-left-color: #f43f5e;
             background: rgba(244, 63, 94, 0.1);
-            
+
             .autotrade-modal__status-text {
                 color: #f43f5e;
             }
@@ -126,7 +141,7 @@
         background: rgba(0, 0, 0, 0.2) !important;
         border-radius: 8px !important;
         border: 1px solid rgba(255, 255, 255, 0.1) !important;
-        
+
         input {
             color: var(--text-general) !important;
         }
@@ -146,4 +161,3 @@
         opacity: 0.8;
     }
 }
-

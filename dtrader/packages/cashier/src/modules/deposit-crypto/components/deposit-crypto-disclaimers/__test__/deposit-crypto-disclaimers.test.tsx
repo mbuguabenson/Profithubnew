@@ -26,12 +26,11 @@ describe('DepositCryptoDisclaimers', () => {
     const createWrapper =
         (mock: ReturnType<typeof mockStore>) =>
         // eslint-disable-next-line react/display-name
-        ({ children }: { children: JSX.Element }) =>
-            (
-                <StoreProvider store={mock}>
-                    <APIProvider>{children}</APIProvider>
-                </StoreProvider>
-            );
+        ({ children }: { children: JSX.Element }) => (
+            <StoreProvider store={mock}>
+                <APIProvider>{children}</APIProvider>
+            </StoreProvider>
+        );
 
     test('should show correct message for BTC', () => {
         const mock = mockStore({ client: { currency: 'BTC' } });

@@ -194,7 +194,9 @@
             &-active {
                 height: auto;
                 transform: translateX(0%);
-                transition: height 500ms, transform 500ms;
+                transition:
+                    height 500ms,
+                    transform 500ms;
             }
         }
         &-exit {

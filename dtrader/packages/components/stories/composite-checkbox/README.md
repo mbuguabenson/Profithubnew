@@ -2,14 +2,13 @@
 
 A checkbox with label and description.
 
-
 ## Usage
 
 ```jsx
 import CompositeCheckbox from 'deriv-components';
 
 const DummyComponent = props => (
-  <CompositeCheckbox
+    <CompositeCheckbox
         name='field-name'
         label='Label'
         description='Description'
@@ -21,16 +20,15 @@ const DummyComponent = props => (
 
 ## Props
 
-| Name                     | Type        | Default  | Description                                         |
-| ------------------------ | ----------- | -------- | --------------------------------------------------- |
-| name `*required`         | {string}    | null     | The name of the field                               |
-| value `*required`        | {boolean}   | null     | Value of the checkbox                               |
-| onChange `*required`     | {function}  | null     | A callback function that is called on value change  |
-| className                | {string}    | null     | A classname for checkbox's container                |
-| label `*required`        | {string}    | null     | Label of the checkbox                               |
-| id                       | {string}    | null     | An id for checkobox field                           |
-| description `*required`  | {string}    | null     | A description about checkbox field                  |
-
+| Name                    | Type       | Default | Description                                        |
+| ----------------------- | ---------- | ------- | -------------------------------------------------- |
+| name `*required`        | {string}   | null    | The name of the field                              |
+| value `*required`       | {boolean}  | null    | Value of the checkbox                              |
+| onChange `*required`    | {function} | null    | A callback function that is called on value change |
+| className               | {string}   | null    | A classname for checkbox's container               |
+| label `*required`       | {string}   | null    | Label of the checkbox                              |
+| id                      | {string}   | null    | An id for checkobox field                          |
+| description `*required` | {string}   | null    | A description about checkbox field                 |
 
 # Full example:
 
@@ -38,7 +36,7 @@ const DummyComponent = props => (
 import CompositeCheckbox from 'deriv-components';
 
 const DummyComponent = props => (
-  <CompositeCheckbox
+    <CompositeCheckbox
         name='field-name'
         label='Label'
         description='Description'

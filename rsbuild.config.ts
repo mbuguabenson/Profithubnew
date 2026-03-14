@@ -7,7 +7,7 @@ import { pluginSass } from '@rsbuild/plugin-sass';
 export default defineConfig({
     plugins: [
         pluginSass({
-            sassLoaderOptions: (config) => {
+            sassLoaderOptions: config => {
                 config.sassOptions = {
                     ...config.sassOptions,
                     includePaths: [path.resolve(__dirname, 'node_modules')],

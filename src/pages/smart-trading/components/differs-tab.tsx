@@ -262,50 +262,129 @@ const DiffersTab = observer(() => {
                         {smart_trading.is_executing ? 'EXECUTING...' : 'MANUAL TRADE NOW'}
                     </button>
                 </div>
-                
-                <div className='auto-trading-section' style={{ marginTop: '20px', padding: '15px', background: 'rgba(255,255,255,0.02)', borderRadius: '12px', border: '1px solid rgba(255,255,255,0.05)' }}>
-                    <h3 style={{ marginBottom: '15px', color: '#fff', fontSize: '1.2rem', textAlign: 'center' }}>Auto Trading Configuration (Differs)</h3>
-                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(130px, 1fr))', gap: '10px', marginBottom: '20px' }}>
+
+                <div
+                    className='auto-trading-section'
+                    style={{
+                        marginTop: '20px',
+                        padding: '15px',
+                        background: 'rgba(255,255,255,0.02)',
+                        borderRadius: '12px',
+                        border: '1px solid rgba(255,255,255,0.05)',
+                    }}
+                >
+                    <h3 style={{ marginBottom: '15px', color: '#fff', fontSize: '1.2rem', textAlign: 'center' }}>
+                        Auto Trading Configuration (Differs)
+                    </h3>
+                    <div
+                        style={{
+                            display: 'grid',
+                            gridTemplateColumns: 'repeat(auto-fit, minmax(130px, 1fr))',
+                            gap: '10px',
+                            marginBottom: '20px',
+                        }}
+                    >
                         <div style={{ display: 'flex', flexDirection: 'column', gap: '5px' }}>
                             <label style={{ fontSize: '0.8rem', color: '#aaa' }}>Max Allowed %</label>
-                            <input 
-                                type='number' 
-                                style={{ padding: '0.8rem', borderRadius: '6px', background: 'rgba(0,0,0,0.3)', color: '#fff', border: '1px solid rgba(255,255,255,0.1)' }}
-                                value={smart_trading.strategies.DIFFERS.differs_max_percentage ?? 9} 
-                                onChange={(e) => smart_trading.updateStrategySetting('DIFFERS', 'differs_max_percentage', parseFloat(e.target.value))} 
+                            <input
+                                type='number'
+                                style={{
+                                    padding: '0.8rem',
+                                    borderRadius: '6px',
+                                    background: 'rgba(0,0,0,0.3)',
+                                    color: '#fff',
+                                    border: '1px solid rgba(255,255,255,0.1)',
+                                }}
+                                value={smart_trading.strategies.DIFFERS.differs_max_percentage ?? 9}
+                                onChange={e =>
+                                    smart_trading.updateStrategySetting(
+                                        'DIFFERS',
+                                        'differs_max_percentage',
+                                        parseFloat(e.target.value)
+                                    )
+                                }
                             />
                         </div>
                         <div style={{ display: 'flex', flexDirection: 'column', gap: '5px' }}>
-                            <label style={{ fontSize: '0.8rem', color: '#aaa', cursor: 'help' }} title="How many times the digit must appear before entering">Target Appearances</label>
-                            <input 
-                                type='number' 
-                                min="1"
-                                style={{ padding: '0.8rem', borderRadius: '6px', background: 'rgba(0,0,0,0.3)', color: '#fff', border: '1px solid rgba(255,255,255,0.1)' }}
-                                value={smart_trading.strategies.DIFFERS.differs_target_ticks ?? 2} 
-                                onChange={(e) => smart_trading.updateStrategySetting('DIFFERS', 'differs_target_ticks', parseInt(e.target.value))} 
+                            <label
+                                style={{ fontSize: '0.8rem', color: '#aaa', cursor: 'help' }}
+                                title='How many times the digit must appear before entering'
+                            >
+                                Target Appearances
+                            </label>
+                            <input
+                                type='number'
+                                min='1'
+                                style={{
+                                    padding: '0.8rem',
+                                    borderRadius: '6px',
+                                    background: 'rgba(0,0,0,0.3)',
+                                    color: '#fff',
+                                    border: '1px solid rgba(255,255,255,0.1)',
+                                }}
+                                value={smart_trading.strategies.DIFFERS.differs_target_ticks ?? 2}
+                                onChange={e =>
+                                    smart_trading.updateStrategySetting(
+                                        'DIFFERS',
+                                        'differs_target_ticks',
+                                        parseInt(e.target.value)
+                                    )
+                                }
                             />
                         </div>
                         <div style={{ display: 'flex', flexDirection: 'column', gap: '5px' }}>
-                            <label style={{ fontSize: '0.8rem', color: '#aaa', cursor: 'help' }} title="Number of contracts to place simultaneously">Bulk Trades</label>
-                            <input 
-                                type='number' 
-                                min="1"
-                                max="10"
-                                style={{ padding: '0.8rem', borderRadius: '6px', background: 'rgba(0,0,0,0.3)', color: '#fff', border: '1px solid rgba(255,255,255,0.1)' }}
-                                value={smart_trading.strategies.DIFFERS.bulk_trades_count ?? 1} 
-                                onChange={(e) => smart_trading.updateStrategySetting('DIFFERS', 'bulk_trades_count', parseInt(e.target.value))} 
+                            <label
+                                style={{ fontSize: '0.8rem', color: '#aaa', cursor: 'help' }}
+                                title='Number of contracts to place simultaneously'
+                            >
+                                Bulk Trades
+                            </label>
+                            <input
+                                type='number'
+                                min='1'
+                                max='10'
+                                style={{
+                                    padding: '0.8rem',
+                                    borderRadius: '6px',
+                                    background: 'rgba(0,0,0,0.3)',
+                                    color: '#fff',
+                                    border: '1px solid rgba(255,255,255,0.1)',
+                                }}
+                                value={smart_trading.strategies.DIFFERS.bulk_trades_count ?? 1}
+                                onChange={e =>
+                                    smart_trading.updateStrategySetting(
+                                        'DIFFERS',
+                                        'bulk_trades_count',
+                                        parseInt(e.target.value)
+                                    )
+                                }
                             />
                         </div>
                     </div>
-                    
+
                     <div
                         className={classNames('big-action-button')}
-                        style={{ cursor: 'pointer', padding: '15px', color: 'white', textAlign: 'center', fontWeight: 'bold', borderRadius: '8px', background: smart_trading.strategies.DIFFERS.is_running ? 'linear-gradient(135deg, #ef4444, #b91c1c)' : 'linear-gradient(135deg, #10b981, #047857)', boxShadow: '0 4px 15px rgba(0,0,0,0.3)', width: '100%', margin: '0 auto' }}
+                        style={{
+                            cursor: 'pointer',
+                            padding: '15px',
+                            color: 'white',
+                            textAlign: 'center',
+                            fontWeight: 'bold',
+                            borderRadius: '8px',
+                            background: smart_trading.strategies.DIFFERS.is_running
+                                ? 'linear-gradient(135deg, #ef4444, #b91c1c)'
+                                : 'linear-gradient(135deg, #10b981, #047857)',
+                            boxShadow: '0 4px 15px rgba(0,0,0,0.3)',
+                            width: '100%',
+                            margin: '0 auto',
+                        }}
                         onClick={() => {
                             smart_trading.toggleBot('DIFFERS');
                         }}
                     >
-                        {smart_trading.strategies.DIFFERS.is_running ? 'STOP AUTO TRADING' : 'START AUTO TRADING (DIFFERS)'}
+                        {smart_trading.strategies.DIFFERS.is_running
+                            ? 'STOP AUTO TRADING'
+                            : 'START AUTO TRADING (DIFFERS)'}
                     </div>
                     {smart_trading.strategies.DIFFERS.is_running && (
                         <div style={{ marginTop: '15px', textAlign: 'center', color: '#10b981', fontWeight: 'bold' }}>
@@ -314,7 +393,9 @@ const DiffersTab = observer(() => {
                     )}
                 </div>
 
-                <div className='signal-text' style={{ marginTop: '15px' }}>{signalText}</div>
+                <div className='signal-text' style={{ marginTop: '15px' }}>
+                    {signalText}
+                </div>
                 {topDiffers[0] && frequencies.find(f => f.digit === topDiffers[0].digit)?.gap === 0 && (
                     <div className='signal-subtext'>
                         Digit {topDiffers[0].digit} has not appeared in 3+ ticks - TRADE DIFFERS NOW

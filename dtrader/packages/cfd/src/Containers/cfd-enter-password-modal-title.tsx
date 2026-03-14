@@ -5,7 +5,7 @@ import { observer, useStore } from '@deriv/stores';
 import { Localize } from '@deriv/translations';
 import { CATEGORY, CFD_PLATFORMS } from '../Helpers/cfd-config';
 
-type TCFDEnterPasswordModalTitleProps = { platform: typeof CFD_PLATFORMS[keyof typeof CFD_PLATFORMS] };
+type TCFDEnterPasswordModalTitleProps = { platform: (typeof CFD_PLATFORMS)[keyof typeof CFD_PLATFORMS] };
 
 const CFDEnterPasswordModalTitle = observer(({ platform }: TCFDEnterPasswordModalTitleProps) => {
     const {

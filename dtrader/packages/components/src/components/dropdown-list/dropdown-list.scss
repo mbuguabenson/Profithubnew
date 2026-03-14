@@ -5,7 +5,9 @@
     z-index: 1;
     box-shadow: 0 4px 6px 0 rgba(0, 0, 0, 0.24);
     transform-origin: top;
-    transition: transform 0.25s ease, opacity 0.25s linear;
+    transition:
+        transform 0.25s ease,
+        opacity 0.25s linear;
     transform: scale(1, 0);
     cursor: pointer;
     background-color: var(--state-normal);

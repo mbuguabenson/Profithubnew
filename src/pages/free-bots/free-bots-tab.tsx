@@ -5,17 +5,9 @@ import { useStore } from '@/hooks/useStore';
 import { TDigitStat } from '@/stores/analysis-store';
 import './free-bots-tab.scss';
 
-
 const LiveMarketAnalysis = observer(() => {
     const { analysis } = useStore();
-    const { 
-        digit_stats, 
-        last_digit, 
-        current_price, 
-        symbol, 
-        markets, 
-        is_subscribing,
-    } = analysis;
+    const { digit_stats, last_digit, current_price, symbol, markets, is_subscribing } = analysis;
 
     useEffect(() => {
         analysis.fetchMarkets();
@@ -42,14 +34,16 @@ const LiveMarketAnalysis = observer(() => {
                     </div>
                 </div>
                 <div className='market-selector-wrapper'>
-                    <select 
-                        value={symbol} 
-                        onChange={(e) => handleMarketChange(e.target.value)}
+                    <select
+                        value={symbol}
+                        onChange={e => handleMarketChange(e.target.value)}
                         className='nexus-select'
                         disabled={is_subscribing}
                     >
                         {availableMarkets.map(m => (
-                            <option key={m.value} value={m.value}>{m.label}</option>
+                            <option key={m.value} value={m.value}>
+                                {m.label}
+                            </option>
                         ))}
                     </select>
                 </div>
@@ -72,18 +66,28 @@ const LiveMarketAnalysis = observer(() => {
                 <span className='dist-label'>Digit Frequency (Last 1000 Ticks)</span>
                 <div className='dist-grid'>
                     {digit_stats.map((stat: TDigitStat) => (
-                        <div key={stat.digit} className={`dist-bar-wrapper ${stat.digit === last_digit ? 'active' : ''}`}>
+                        <div
+                            key={stat.digit}
+                            className={`dist-bar-wrapper ${stat.digit === last_digit ? 'active' : ''}`}
+                        >
                             <div className='dist-bar-meta'>
                                 <span className='digit-num'>{stat.digit}</span>
                                 <span className='digit-pct'>{stat.percentage.toFixed(1)}%</span>
                             </div>
                             <div className='dist-bar-outer'>
-                                <div 
-                                    className='dist-bar-inner' 
-                                    style={{ 
-                                        '--bar-height': `${Math.min(stat.percentage * 5, 100)}%`,
-                                        background: stat.digit === last_digit ? '#fff' : stat.digit % 2 === 0 ? '#3b82f6' : '#ec4899'
-                                    } as React.CSSProperties} 
+                                <div
+                                    className='dist-bar-inner'
+                                    style={
+                                        {
+                                            '--bar-height': `${Math.min(stat.percentage * 5, 100)}%`,
+                                            background:
+                                                stat.digit === last_digit
+                                                    ? '#fff'
+                                                    : stat.digit % 2 === 0
+                                                      ? '#3b82f6'
+                                                      : '#ec4899',
+                                        } as React.CSSProperties
+                                    }
                                 />
                             </div>
                         </div>
@@ -98,20 +102,22 @@ const BotCard = ({ bot, onLoad }: { bot: any; onLoad: (bot: any) => void }) => {
     // Convert hex to rgb for CSS variable
     const hexToRgb = (hex: string) => {
         const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
-        return result ? 
-            `${parseInt(result[1], 16)}, ${parseInt(result[2], 16)}, ${parseInt(result[3], 16)}` : 
-            '124, 58, 237';
+        return result
+            ? `${parseInt(result[1], 16)}, ${parseInt(result[2], 16)}, ${parseInt(result[3], 16)}`
+            : '124, 58, 237';
     };
 
     const rgbColor = hexToRgb(bot.color);
 
     return (
-        <div 
-            className='bot-card' 
-            style={{ 
-                '--bot-color': bot.color,
-                '--bot-color-rgb': rgbColor
-            } as React.CSSProperties}
+        <div
+            className='bot-card'
+            style={
+                {
+                    '--bot-color': bot.color,
+                    '--bot-color-rgb': rgbColor,
+                } as React.CSSProperties
+            }
         >
             <div className='bot-card__top'>
                 <div className='bot-card__icon'>
@@ -124,7 +130,7 @@ const BotCard = ({ bot, onLoad }: { bot: any; onLoad: (bot: any) => void }) => {
                 <h3 className='bot-card__title'>{bot.name}</h3>
                 <p className='bot-card__tagline'>{bot.category} Algotrade • High Accuracy</p>
                 <p className='bot-card__description'>{bot.description}</p>
-                
+
                 <div className='bot-card__stats'>
                     <div className='stat'>
                         <span className='stat__label'>Win Rate</span>
@@ -155,7 +161,6 @@ const FreeBotsTab = observer(() => {
 
     return (
         <div className={`free-bots-tab ${is_dark_mode_on ? 'free-bots-tab--dark' : 'free-bots-tab--light'}`}>
-
             <LiveMarketAnalysis />
 
             <div className='free-bots-tab__categories'>

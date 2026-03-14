@@ -3,7 +3,7 @@ import classNames from 'classnames';
 import Icon from '../icon';
 import './wallet-icon.scss';
 
-type TWalletIconSizes = keyof typeof sizes['square' | 'box'];
+type TWalletIconSizes = keyof (typeof sizes)['square' | 'box'];
 
 type TWalletIconProps = {
     gradient_class?: string;

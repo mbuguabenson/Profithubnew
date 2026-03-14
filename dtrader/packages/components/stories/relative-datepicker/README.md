@@ -4,13 +4,11 @@ Renders a native date picker for mobile that returns value in days relative to c
 
 #### Supported Gestures:
 
--   Click
-
+- Click
 
 #### Supported events:
 
 - onChange
-
 
 ## Usage
 
@@ -18,8 +16,10 @@ Renders a native date picker for mobile that returns value in days relative to c
 import RelativeDatepicker from 'Components/relative-datepicker';
 
 const DummyComponent = props => (
-   <RelativeDatepicker
-        onChange={(date) => { console.log(date) }}
+    <RelativeDatepicker
+        onChange={date => {
+            console.log(date);
+        }}
         min={0}
         max={5}
         title={'Pick a date'}
@@ -29,13 +29,12 @@ const DummyComponent = props => (
 
 ## Props
 
-| Name                          | Type               | Default   | Description                                                                            |
-| ----------------------------- | ------------------ | --------- | -------------------------------------------------------------------------------------- |
-| onChange                      | {function}         | undefined | Function returns value in amount of days, relative to date selected and current date.  |
-| title                         | {string}           | null      | Title of the date picker                                                               |
-| min                           | {string \| number} | 0         | Minimum selectable date offset                                                         |
-| max                           | {string \| number} | 0         | Maximum selectable date offset                                                         |
-
+| Name     | Type               | Default   | Description                                                                           |
+| -------- | ------------------ | --------- | ------------------------------------------------------------------------------------- |
+| onChange | {function}         | undefined | Function returns value in amount of days, relative to date selected and current date. |
+| title    | {string}           | null      | Title of the date picker                                                              |
+| min      | {string \| number} | 0         | Minimum selectable date offset                                                        |
+| max      | {string \| number} | 0         | Maximum selectable date offset                                                        |
 
 # Full example:
 
@@ -43,8 +42,10 @@ const DummyComponent = props => (
 import RelativeDatepicker from 'Components/relative-datepicker';
 
 const DummyComponent = props => (
-   <RelativeDatepicker
-        onChange={(date) => { console.log(date) }}
+    <RelativeDatepicker
+        onChange={date => {
+            console.log(date);
+        }}
         min={0}
         max={5}
         title={'Pick a date'}

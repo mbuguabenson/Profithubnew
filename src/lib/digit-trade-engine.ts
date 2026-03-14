@@ -436,7 +436,7 @@ export class DigitTradeEngine {
                     currency: currency || 'USD',
                     duration: config.ticks,
                     duration_unit: 't',
-                    symbol: symbol,
+                    underlying_symbol: symbol,
                     ...(contract_type.includes('DIGIT') && !['DIGITEVEN', 'DIGITODD'].includes(contract_type)
                         ? { barrier: String(prediction) }
                         : {}),

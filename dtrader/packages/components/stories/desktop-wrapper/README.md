@@ -8,7 +8,7 @@ A wrapper which shows its children only if the client's device is desktop (in te
 import React from 'react';
 import DesktopWrapper from 'deriv-components';
 
-const DummyComponent = props => {    
+const DummyComponent = props => {
     return (
         <React.Fragment>
             <DesktopWrapper>
@@ -16,6 +16,6 @@ const DummyComponent = props => {
             </DesktopWrapper>
             <p style={{ margin: 20, fontSize: 24 }}>This text is always visible!</p>
         </React.Fragment>
-    )
-}
+    );
+};
 ```

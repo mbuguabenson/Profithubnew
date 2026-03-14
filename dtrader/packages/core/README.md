@@ -4,22 +4,22 @@
 
 **In this document**
 
--   [Other documents](#other-documents)
--   [Description](#description)
--   [How to work with this workspace](#how-to-work-with-this-workspace)
-    -   [Adding domain to your machine hosts config](#adding-domain-to-your-machine-hosts-config)
-    -   [Run this workspace](#run-this-workspace)
-    -   [Deploy to your gh-pages for the first time](#deploy-to-your-gh-pages-for-the-first-time)
-    -   [Deploy to the root of gh-pages](#deploy-to-the-root-of-gh-pages)
-    -   [Clean root and deploy to it](#clean-root-and-deploy-to-it)
-    -   [Deploy to test folder](#deploy-to-test-folder)
--   [Folder Structure](#folder-structure)
--   [Troubleshooting](#troubleshooting)
--   [Miscellaneous](#miscellaneous)
+- [Other documents](#other-documents)
+- [Description](#description)
+- [How to work with this workspace](#how-to-work-with-this-workspace)
+    - [Adding domain to your machine hosts config](#adding-domain-to-your-machine-hosts-config)
+    - [Run this workspace](#run-this-workspace)
+    - [Deploy to your gh-pages for the first time](#deploy-to-your-gh-pages-for-the-first-time)
+    - [Deploy to the root of gh-pages](#deploy-to-the-root-of-gh-pages)
+    - [Clean root and deploy to it](#clean-root-and-deploy-to-it)
+    - [Deploy to test folder](#deploy-to-test-folder)
+- [Folder Structure](#folder-structure)
+- [Troubleshooting](#troubleshooting)
+- [Miscellaneous](#miscellaneous)
 
 ## Other documents
 
--   [Modules docs](docs/Modules/README.md) - Contains implementation guides (i.e., scaffolding help, etc.)
+- [Modules docs](docs/Modules/README.md) - Contains implementation guides (i.e., scaffolding help, etc.)
 
 ## Description
 
@@ -27,11 +27,11 @@ This workspace is the "app instance". It contains singleton services (such as th
 
 ## How to work with this workspace
 
--   To preview your changes locally for the first time, run `npm start`:
-    -   It will run all tests, compile all CSS, and JS/JSX as well as watch for further `js/jsx/css` changes and rebuild on every change you make.
--   To preview your changes locally without any tests, run `npm run serve`
-    -   It will watch for js/jsx/css changes and rebuild on every change you make.
--   To run all tests, run `npm run test`
+- To preview your changes locally for the first time, run `npm start`:
+    - It will run all tests, compile all CSS, and JS/JSX as well as watch for further `js/jsx/css` changes and rebuild on every change you make.
+- To preview your changes locally without any tests, run `npm run serve`
+    - It will watch for js/jsx/css changes and rebuild on every change you make.
+- To run all tests, run `npm run test`
 
 ### Run this workspace
 
@@ -42,8 +42,7 @@ To run and work on this workspace you need to use `npm run serve core` command.
 1.  Register your application [here](https://developers.binary.com/applications/). This will give you the ability to redirect back to your Github pages after login. Use `https://YOUR_GITHUB_USERNAME.github.io/deriv-app/` for the Redirect URL and `https://YOUR_GITHUB_USERNAME.github.io/deriv-app/en/redirect` for the Verification URL. If you're using a custom domain, replace the Github URLs above with your domain and remove the `deriv-app` base path.
 
 2.  In `src/config.js`: Insert the `Application ID` of your registered application in `user_app_id`.
-
-    -   **NOTE:** To avoid accidentally committing personal changes to this file, use `git update-index --assume-unchanged src/javascript/config.js`
+    - **NOTE:** To avoid accidentally committing personal changes to this file, use `git update-index --assume-unchanged src/javascript/config.js`
 
 3.  Set `NODE_ENV` to `development` with `export NODE_ENV=development`
 
@@ -108,7 +107,7 @@ src
 
 ## Troubleshooting
 
--   **Icon missing:** If the icons are missing, you only need to build this workspace. You can do this by running the build command from the root directory (`/deriv-app`):
+- **Icon missing:** If the icons are missing, you only need to build this workspace. You can do this by running the build command from the root directory (`/deriv-app`):
 
 ```
 npm run build
@@ -116,4 +115,4 @@ npm run build
 
 ## Miscellaneous
 
--   In Webstorm, right-click on `src`, hover over `Mark directory as`, and click `Resource root` to enable import alias resolution.
+- In Webstorm, right-click on `src`, hover over `Mark directory as`, and click `Resource root` to enable import alias resolution.

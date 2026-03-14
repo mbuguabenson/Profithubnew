@@ -77,7 +77,7 @@ const useCurrencyConfig = () => {
 
     // Transform the currency config array into a record object.
     const transformed_currencies_config = useMemo(() => {
-        return modified_crypto_config?.reduce<Record<string, typeof modified_crypto_config[number]>>(
+        return modified_crypto_config?.reduce<Record<string, (typeof modified_crypto_config)[number]>>(
             (previous, current) => ({ ...previous, [current.code]: current }),
             {}
         );

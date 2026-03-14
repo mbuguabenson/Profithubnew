@@ -4,7 +4,6 @@ Renders a timeline container
 
 ## Usage
 
-
 ```jsx
 import RelativeDatepicker from 'Components/relative-datepicker';
 

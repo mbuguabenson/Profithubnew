@@ -5,7 +5,7 @@ import { TPage404 } from '../Constants/routes-config';
 
 export type TTradingPlatformAvailableAccount = TCoreStores['client']['trading_platform_available_accounts'][number];
 
-export type TJurisdiction = typeof Jurisdiction[keyof typeof Jurisdiction];
+export type TJurisdiction = (typeof Jurisdiction)[keyof typeof Jurisdiction];
 
 export type TRoute = {
     exact?: boolean;

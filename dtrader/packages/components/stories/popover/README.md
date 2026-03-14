@@ -4,8 +4,8 @@ Used this component to have a popover message on hover an element.
 
 #### Supported events:
 
--   onBubbleOpen
--   onBubbleClose
+- onBubbleOpen
+- onBubbleClose
 
 ## Usage
 

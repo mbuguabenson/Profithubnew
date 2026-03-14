@@ -38,7 +38,7 @@ const App = ({ passthrough }: Apptypes) => {
     }, [root_store]);
 
     return (
-        <BrowserRouter basename="/dtrader">
+        <BrowserRouter basename='/dtrader'>
             <TraderProviders store={root_store}>
                 <ModulesProvider store={root_store}>
                     <Routes />

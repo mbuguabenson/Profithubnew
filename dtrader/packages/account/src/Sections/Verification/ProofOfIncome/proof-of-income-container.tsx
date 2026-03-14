@@ -60,7 +60,7 @@ const ProofOfIncomeContainer = ({ is_switching, refreshNotifications }: TProofOf
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [is_switching]);
 
-    const handleSubmit = (status: typeof income_status_codes[keyof typeof income_status_codes]) => {
+    const handleSubmit = (status: (typeof income_status_codes)[keyof typeof income_status_codes]) => {
         setAuthenticationStatus({ ...authentication_status, ...{ income_status: status } });
     };
 

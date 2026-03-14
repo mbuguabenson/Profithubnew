@@ -1,7 +1,9 @@
 /** @define dc-toast; */
 .dc-toast {
     width: 100vw;
-    transition: transform 0.25s ease, opacity 0.25s linear;
+    transition:
+        transform 0.25s ease,
+        opacity 0.25s linear;
     display: flex;
     justify-content: center;
     align-items: center;

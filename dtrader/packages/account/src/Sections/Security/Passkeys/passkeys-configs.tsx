@@ -17,7 +17,7 @@ export const PASSKEY_STATUS_CODES = {
     VERIFYING: 'verifying',
 } as const;
 
-export type TPasskeysStatus = typeof PASSKEY_STATUS_CODES[keyof typeof PASSKEY_STATUS_CODES];
+export type TPasskeysStatus = (typeof PASSKEY_STATUS_CODES)[keyof typeof PASSKEY_STATUS_CODES];
 
 // TODO: fix types for TServerError and TSocketError
 export type TPasskeyError =

@@ -29,25 +29,26 @@ const CirclesAnalysis = observer(() => {
         match_diff_digit,
     } = analysis;
 
-    const availableMarkets = markets.length > 0 
-        ? markets 
-        : [
-            {
-                group: 'Synthetic Indices',
-                items: [
-                    { value: '1HZ10V', label: 'Volatility 10 (1s) Index' },
-                    { value: '1HZ25V', label: 'Volatility 25 (1s) Index' },
-                    { value: '1HZ50V', label: 'Volatility 50 (1s) Index' },
-                    { value: '1HZ75V', label: 'Volatility 75 (1s) Index' },
-                    { value: '1HZ100V', label: 'Volatility 100 (1s) Index' },
-                    { value: 'R_10', label: 'Volatility 10 Index' },
-                    { value: 'R_25', label: 'Volatility 25 Index' },
-                    { value: 'R_50', label: 'Volatility 50 Index' },
-                    { value: 'R_75', label: 'Volatility 75 Index' },
-                    { value: 'R_100', label: 'Volatility 100 Index' },
-                ]
-            }
-        ];
+    const availableMarkets =
+        markets.length > 0
+            ? markets
+            : [
+                  {
+                      group: 'Synthetic Indices',
+                      items: [
+                          { value: '1HZ10V', label: 'Volatility 10 (1s) Index' },
+                          { value: '1HZ25V', label: 'Volatility 25 (1s) Index' },
+                          { value: '1HZ50V', label: 'Volatility 50 (1s) Index' },
+                          { value: '1HZ75V', label: 'Volatility 75 (1s) Index' },
+                          { value: '1HZ100V', label: 'Volatility 100 (1s) Index' },
+                          { value: 'R_10', label: 'Volatility 10 Index' },
+                          { value: 'R_25', label: 'Volatility 25 Index' },
+                          { value: 'R_50', label: 'Volatility 50 Index' },
+                          { value: 'R_75', label: 'Volatility 75 Index' },
+                          { value: 'R_100', label: 'Volatility 100 Index' },
+                      ],
+                  },
+              ];
 
     useEffect(() => {
         // Initialization if needed
@@ -87,7 +88,9 @@ const CirclesAnalysis = observer(() => {
                         <span className='label'>LIVE PRICE</span>
                         <span className='price-value'>{current_price}</span>
                     </div>
-                    <div className={`digit-display-card ${last_digit !== null ? (last_digit % 2 === 0 ? 'digit--even' : 'digit--odd') : ''}`}>
+                    <div
+                        className={`digit-display-card ${last_digit !== null ? (last_digit % 2 === 0 ? 'digit--even' : 'digit--odd') : ''}`}
+                    >
                         <span className='label'>LAST DIGIT</span>
                         <span className='digit-value'>{last_digit ?? '-'}</span>
                     </div>
@@ -98,7 +101,7 @@ const CirclesAnalysis = observer(() => {
 
             <div className='circles-analysis__content'>
                 <TradingEngine />
-                
+
                 <div className='analysis-sections-grid'>
                     <AnalysisSection
                         title='Matches/Differs'

@@ -181,7 +181,9 @@
         height: 0;
         width: 100%;
         position: absolute;
-        transition: transform 0.25s ease, opacity 0.25s linear;
+        transition:
+            transform 0.25s ease,
+            opacity 0.25s linear;
         user-select: none;
         opacity: 0;
         transform: scale(1, 0);
@@ -274,7 +276,8 @@
         width: 100%;
 
         &:not(.cfd-personal-details-modal__form *):not(.trade-container__multiplier-dropdown):not(
-                .dc-dropdown--left):not(.contract-type-info__dropdown) {
+                .dc-dropdown--left
+            ):not(.contract-type-info__dropdown) {
             margin-top: unset;
         }
 

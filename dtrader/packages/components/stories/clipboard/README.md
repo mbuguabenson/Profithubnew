@@ -4,7 +4,7 @@ Renders clipboard icon with capabilities to copy text to client clipboard
 
 #### Supported Gestures:
 
--   Click
+- Click
 
 ## Usage
 

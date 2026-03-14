@@ -6,7 +6,9 @@
     height: calc(100% - 6.5rem);
 
     .notification-messages {
-        transition: transform 0.3s ease, opacity 0.25s linear;
+        transition:
+            transform 0.3s ease,
+            opacity 0.25s linear;
     }
     &__dashboard {
         .notification-messages {

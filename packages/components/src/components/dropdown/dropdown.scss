@@ -317,7 +317,12 @@
         min-width: 15rem;
         width: 100%;
 
-        &:not(.cfd-personal-details-modal__form *, .trade-container__multiplier-dropdown, .dc-dropdown--left, .contract-type-info__dropdown) {
+        &:not(
+            .cfd-personal-details-modal__form *,
+            .trade-container__multiplier-dropdown,
+            .dc-dropdown--left,
+            .contract-type-info__dropdown
+        ) {
             margin-top: unset;
         }
 

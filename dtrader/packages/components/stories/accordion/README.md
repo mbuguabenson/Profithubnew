@@ -4,28 +4,22 @@ An accordion with a list of node objects. Objects must have `header` and `conten
 
 #### Supported Gestures:
 
--   Click
+- Click
 
 ## Usage
 
 ```jsx
 import Accordion from 'deriv-components';
 
-const DummyComponent = props => (
-   <Accordion
-        className='accordion__wrapper'
-        list={data}
-    />
-);
+const DummyComponent = props => <Accordion className='accordion__wrapper' list={data} />;
 ```
 
 ## Props
 
-| Name          | Type                | Default   | Description                           |
-| ------------- | ------------------- | --------- | ------------------------------------- |
-| list          | [{header, content}] | []        | Array containing the list of objects. |
-| className     | {string}            | null      | Accordion wrapper class.              |
-
+| Name      | Type                | Default | Description                           |
+| --------- | ------------------- | ------- | ------------------------------------- |
+| list      | [{header, content}] | []      | Array containing the list of objects. |
+| className | {string}            | null    | Accordion wrapper class.              |
 
 # Full example:
 
@@ -35,7 +29,7 @@ import Accordion from 'deriv-components';
 const DummyComponent = props => (
     <Accordion
         className='accordion__wrapper'
-        list={ Array.from(new Array(3)).map((_, i) => ({ header: `header ${i + 1}`, content: `content ${i + 1}`})) }
+        list={Array.from(new Array(3)).map((_, i) => ({ header: `header ${i + 1}`, content: `content ${i + 1}` }))}
     />
 );
 ```

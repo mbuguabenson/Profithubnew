@@ -28,7 +28,7 @@ const useCountryConfig = () => {
 
     // Transform the country config array into a record object.
     const transformed_residence_list = useMemo(() => {
-        return modified_residence_list?.reduce<Record<string, typeof modified_residence_list[number]>>(
+        return modified_residence_list?.reduce<Record<string, (typeof modified_residence_list)[number]>>(
             (previous, current) => ({ ...previous, [current.code]: current }),
             {}
         );

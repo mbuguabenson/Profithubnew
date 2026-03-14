@@ -17,7 +17,7 @@ import { income_status_codes, getPoincDocumentsList } from 'Sections/Verificatio
 import { useDevice } from '@deriv-com/ui';
 
 type TProofOfIncomeForm = {
-    onSubmit: (status: typeof income_status_codes[keyof typeof income_status_codes]) => void;
+    onSubmit: (status: (typeof income_status_codes)[keyof typeof income_status_codes]) => void;
 };
 
 type TInitialValues = {
@@ -135,7 +135,7 @@ const ProofOfIncomeForm = observer(({ onSubmit }: TProofOfIncomeForm) => {
                                                 onItemSelection={({
                                                     value,
                                                     text,
-                                                }: typeof poinc_documents_list[number]) => {
+                                                }: (typeof poinc_documents_list)[number]) => {
                                                     setFieldValue('document_type', value ? text : '', true);
                                                     setStatus({ msg: '' });
                                                 }}

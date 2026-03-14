@@ -7,7 +7,7 @@ import { useCfdStore } from '../Stores/Modules/CFD/Helpers/useCfdStores';
 import classNames from 'classnames';
 
 type CfdPasswordModalTncProps = {
-    platform: typeof CFD_PLATFORMS[keyof typeof CFD_PLATFORMS];
+    platform: (typeof CFD_PLATFORMS)[keyof typeof CFD_PLATFORMS];
     checked: boolean;
     need_tnc: boolean;
     onCheck: () => void;

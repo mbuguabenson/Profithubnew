@@ -94,7 +94,7 @@
     transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
     display: flex;
     flex-direction: column;
-    box-shadow: 
+    box-shadow:
         0 30px 60px -12px rgba(0, 0, 0, 0.45),
         inset 0 0 0 1px rgba(255, 255, 255, 0.05);
     overflow: hidden;
@@ -112,7 +112,7 @@
         transform: translateY(-20px);
         border-color: rgba(var(--bot-color-rgb), 0.4);
         background: linear-gradient(135deg, rgba(30, 41, 59, 0.7) 0%, rgba(15, 23, 42, 0.9) 100%);
-        box-shadow: 
+        box-shadow:
             0 50px 100px -20px rgba(0, 0, 0, 0.6),
             0 0 120px rgba(var(--bot-color-rgb), 0.15),
             inset 0 0 0 1px rgba(255, 255, 255, 0.1);
@@ -283,19 +283,41 @@
 }
 
 @keyframes scanline {
-    0% { transform: translateY(-300px); opacity: 0; }
-    5% { opacity: 0.5; }
-    95% { opacity: 0.5; }
-    100% { transform: translateY(500px); opacity: 0; }
+    0% {
+        transform: translateY(-300px);
+        opacity: 0;
+    }
+    5% {
+        opacity: 0.5;
+    }
+    95% {
+        opacity: 0.5;
+    }
+    100% {
+        transform: translateY(500px);
+        opacity: 0;
+    }
 }
 
 // Category Specific Colors
 .free-bots-tab--dark {
-    .category-btn--Automatic.category-btn--active { background: linear-gradient(135deg, #f59e0b, #ea580c); }
-    .category-btn--Hybrid.category-btn--active { background: linear-gradient(135deg, #06b6d4, #0891b2); }
-    .category-btn--Normal.category-btn--active { background: linear-gradient(135deg, #3b82f6, #1d4ed8); }
-    .category-btn--Popular.category-btn--active { background: linear-gradient(135deg, #a855f7, #7c3aed); }
-    .category-btn--Official.category-btn--active { background: linear-gradient(135deg, #fbbf24, #d97706); border-color: #fbbf24; color: #000 !important; }
+    .category-btn--Automatic.category-btn--active {
+        background: linear-gradient(135deg, #f59e0b, #ea580c);
+    }
+    .category-btn--Hybrid.category-btn--active {
+        background: linear-gradient(135deg, #06b6d4, #0891b2);
+    }
+    .category-btn--Normal.category-btn--active {
+        background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+    }
+    .category-btn--Popular.category-btn--active {
+        background: linear-gradient(135deg, #a855f7, #7c3aed);
+    }
+    .category-btn--Official.category-btn--active {
+        background: linear-gradient(135deg, #fbbf24, #d97706);
+        border-color: #fbbf24;
+        color: #000 !important;
+    }
 }
 
 // Loading Overlay Redesign
@@ -359,19 +381,42 @@
     }
 }
 
-@keyframes spin { to { transform: rotate(360deg); } }
-@keyframes spin-rev { to { transform: rotate(-360deg); } }
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+@keyframes spin-rev {
+    to {
+        transform: rotate(-360deg);
+    }
+}
 @keyframes pulse-mini {
-    0%, 100% { opacity: 0.5; transform: scale(0.9); }
-    50% { opacity: 1; transform: scale(1.1); }
+    0%,
+    100% {
+        opacity: 0.5;
+        transform: scale(0.9);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.1);
+    }
 }
 
 // Glitch animation for text
 @keyframes glitch {
-    0% { transform: skewX(0deg); }
-    20% { transform: skewX(1deg); }
-    40% { transform: skewX(-1deg); }
-    60% { transform: skewX(0.5deg); }
+    0% {
+        transform: skewX(0deg);
+    }
+    20% {
+        transform: skewX(1deg);
+    }
+    40% {
+        transform: skewX(-1deg);
+    }
+    60% {
+        transform: skewX(0.5deg);
+    }
 }
 
 // Nexus Live Analysis Card
@@ -449,7 +494,7 @@
                     border-color: rgba(255, 255, 255, 0.3);
                     background: rgba(30, 41, 59, 0.7);
                 }
-                
+
                 option {
                     background: #0f172a;
                     color: #fff;
@@ -492,8 +537,14 @@
                 .digit-val {
                     font-size: 3rem;
                     line-height: 1;
-                    &.even { color: #3b82f6; text-shadow: 0 0 20px rgba(59, 130, 246, 0.4); }
-                    &.odd { color: #ec4899; text-shadow: 0 0 20px rgba(236, 72, 153, 0.4); }
+                    &.even {
+                        color: #3b82f6;
+                        text-shadow: 0 0 20px rgba(59, 130, 246, 0.4);
+                    }
+                    &.odd {
+                        color: #ec4899;
+                        text-shadow: 0 0 20px rgba(236, 72, 153, 0.4);
+                    }
                 }
             }
         }
@@ -520,10 +571,14 @@
                 flex-direction: column;
                 gap: 12px;
                 transition: all 0.3s ease;
-                
+
                 &.active {
                     transform: translateY(-5px);
-                    .digit-num { color: #fff; font-weight: 900; transform: scale(1.2); }
+                    .digit-num {
+                        color: #fff;
+                        font-weight: 900;
+                        transform: scale(1.2);
+                    }
                 }
 
                 .dist-bar-meta {
@@ -559,7 +614,9 @@
                     .dist-bar-inner {
                         width: 100%;
                         border-radius: 100px;
-                        transition: height 1s cubic-bezier(0.16, 1, 0.3, 1), background 0.5s ease;
+                        transition:
+                            height 1s cubic-bezier(0.16, 1, 0.3, 1),
+                            background 0.5s ease;
                         // We use height for vertical bars
                         height: var(--bar-height, 0%);
                     }
@@ -573,9 +630,18 @@
 // I'll update the component to use height instead of width for vertical bars
 
 @keyframes pulse-red {
-    0% { transform: scale(1); opacity: 1; }
-    50% { transform: scale(1.5); opacity: 0.5; }
-    100% { transform: scale(1); opacity: 1; }
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.5);
+        opacity: 0.5;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
 }
 
 // Responsive Design Updates
@@ -589,14 +655,24 @@
 @media (max-width: 768px) {
     .free-bots-tab {
         padding: 40px 20px;
-        &__header h2 { font-size: 2.5rem; }
-        &__grid { grid-template-columns: 1fr; }
+        &__header h2 {
+            font-size: 2.5rem;
+        }
+        &__grid {
+            grid-template-columns: 1fr;
+        }
     }
-    
+
     .live-analysis-card {
         padding: 20px;
-        .analysis-header .title-area h3 { font-size: 1.25rem; }
-        .analysis-stats .stat-item .value { font-size: 1.25rem; }
-        .analysis-stats .stat-item.digit .digit-val { font-size: 2rem; }
+        .analysis-header .title-area h3 {
+            font-size: 1.25rem;
+        }
+        .analysis-stats .stat-item .value {
+            font-size: 1.25rem;
+        }
+        .analysis-stats .stat-item.digit .digit-val {
+            font-size: 2rem;
+        }
     }
 }

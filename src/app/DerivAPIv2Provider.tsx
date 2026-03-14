@@ -21,9 +21,7 @@ type TDerivAPIv2ProviderProps = {
 const DerivAPIv2Provider: React.FC<TDerivAPIv2ProviderProps> = ({ children }) => {
     return (
         <APIProvider>
-            <AuthProvider>
-                {children}
-            </AuthProvider>
+            <AuthProvider>{children}</AuthProvider>
         </APIProvider>
     );
 };

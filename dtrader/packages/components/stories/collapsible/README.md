@@ -5,10 +5,10 @@ Can also be used dynamically in situations where there might be no collapsible i
 
 #### Supported Gestures:
 
--   DragUp
--   DragDown
--   SwipeUp
--   SwipeDown
+- DragUp
+- DragDown
+- SwipeUp
+- SwipeDown
 
 ## Usage
 

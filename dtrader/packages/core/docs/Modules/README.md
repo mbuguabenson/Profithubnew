@@ -2,12 +2,12 @@
 
 **In this document**
 
--   [Socket Base](#socket-base)
-    -   [One time requests](#one-time-requests)
-    -   [Subscriptions](#subscriptions)
-    -   [Cache](#cache)
-    -   [Storage](#storage)
-    -   [Authorized](#authorized)
+- [Socket Base](#socket-base)
+    - [One time requests](#one-time-requests)
+    - [Subscriptions](#subscriptions)
+    - [Cache](#cache)
+    - [Storage](#storage)
+    - [Authorized](#authorized)
 
 ## Socket Base
 

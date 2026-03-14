@@ -4,33 +4,33 @@
 
 **In this docuemnt**
 
--   [Other documents](#other-documents)
--   [Pre-installation](#Pre-installation)
--   [Editor helpers](#editor-helpers)
--   [Quick start](#Quick-start)
--   [Differences](#Differences)
-    -   [JavaScript](#JavaScript)
-    -   [TypeScript](#TypeScript)
--   [Types](#Types)
--   [Types vs Interfaces](#types-vs-interfaces)
--   [Type and Interface prefix](#type-and-interface-prefix)
--   [Gotchas](#gotchas)
+- [Other documents](#other-documents)
+- [Pre-installation](#Pre-installation)
+- [Editor helpers](#editor-helpers)
+- [Quick start](#Quick-start)
+- [Differences](#Differences)
+    - [JavaScript](#JavaScript)
+    - [TypeScript](#TypeScript)
+- [Types](#Types)
+- [Types vs Interfaces](#types-vs-interfaces)
+- [Type and Interface prefix](#type-and-interface-prefix)
+- [Gotchas](#gotchas)
 
 ## Other documents
 
--   [General](docs/README.md) - Contains general philosophy and overview of this package
--   [Modules docs](docs/Modules/README.md) - Contains implementation guides (i.e., adding types, use observer, etc.)
+- [General](docs/README.md) - Contains general philosophy and overview of this package
+- [Modules docs](docs/Modules/README.md) - Contains implementation guides (i.e., adding types, use observer, etc.)
 
 ## Pre-installation
 
--   node
--   npm
+- node
+- npm
 
 ## Editor helpers
 
--   Prettier setup in your editor https://prettier.io/
--   Stylelint setup in your editor https://stylelint.io/
--   Eslint setup in your editor https://eslint.org/
+- Prettier setup in your editor https://prettier.io/
+- Stylelint setup in your editor https://stylelint.io/
+- Eslint setup in your editor https://eslint.org/
 
 ## Quick start
 
@@ -125,9 +125,9 @@ As you can see, TypeScript is a lot more explicit and we have to state the type 
 
 In most cases types will be defined within the same component, however, when a type should be shared across multiple files, you may put it in the `src/types` folder. In this folder we have 3 named folders:
 
--   `params.types.ts`: Contains shared types for function parameters
--   `props.types.ts`: Contains shared types for component props
--   `stores.types.ts`: Contains types for the app's stores
+- `params.types.ts`: Contains shared types for function parameters
+- `props.types.ts`: Contains shared types for component props
+- `stores.types.ts`: Contains types for the app's stores
 
 In general, try to append any new types to these files before creating a new `*.types.ts` file here.
 

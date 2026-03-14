@@ -4,7 +4,7 @@ Shows detailed information of a contract. Two types of contracts are available t
 
 ##### Supported Gestures:
 
--   Click
+- Click
 
 ##### Usage
 

@@ -120,7 +120,9 @@
             overflow-y: auto;
             scrollbar-width: none;
             height: calc(100% - 5rem);
-            box-shadow: 0 1.2rem 1.6rem rgba(14, 14, 14, 0.08), 0 0.4rem 0.6rem rgba(14, 14, 14, 0.03);
+            box-shadow:
+                0 1.2rem 1.6rem rgba(14, 14, 14, 0.08),
+                0 0.4rem 0.6rem rgba(14, 14, 14, 0.03);
         }
     }
 }

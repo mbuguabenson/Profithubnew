@@ -4,7 +4,7 @@ Use this component to show vertical tabs
 
 #### Supported Events
 
--   onClickClose
+- onClickClose
 
 ## Usage
 
@@ -31,25 +31,25 @@ const DummyComponent = props => (
 | Name                 | Type       | Default | Description                                                                    |
 | -------------------- | ---------- | ------- | ------------------------------------------------------------------------------ |
 | action_bar           | {array}    | `null`  | tab contents and action handler                                                |
-| action\_bar\_classname | {string}   | `''`    | additional custom class name for action bar                                    |
+| action_bar_classname | {string}   | `''`    | additional custom class name for action bar                                    |
 | className            | {string}   | `''`    | additional custom class name for the vertical tab                              |
 | current_path         | {string}   | `''`    | the default selected path as per the `list` props                              |
 | extra_content        | {string}   | `''`    | additional content below the sidebar menu                                      |
-| extra\_offset         | {number}   | `null`  | offset value for sidebar menu when `is_floating` is enabled                    |
+| extra_offset         | {number}   | `null`  | offset value for sidebar menu when `is_floating` is enabled                    |
 | header_classname     | {boolean}  | `false` | addtional custom class for the header                                          |
 | header_title         | {string}   | `''`    | text for the header                                                            |
 | is_collapsible       | {boolean}  | `false` | allow collapse on sidebar menu                                                 |
 | is_floating          | {boolean}  | `false` | floating sidebar menu                                                          |
 | is_grid              | {boolean}  | `false` | customized full width vertical tab                                             |
-| is\_full\_width        | {boolean}  | `false` | use full width of parent container                                             |
+| is_full_width        | {boolean}  | `false` | use full width of parent container                                             |
 | is_routed            | {boolean}  | `false` | is routing enabled                                                             |
-| is\_sidebar\_enabled   | {array}    | `true ` | show or hide sidebar                                                           |
+| is_sidebar_enabled   | {array}    | `true ` | show or hide sidebar                                                           |
 | list                 | {array}    | `[]`    | array of menu for sidebar                                                      |
 | list_groups          | {array}    | `[]`    | array of sub menu of sidebar menus                                             |
 | onClickClose         | {function} | `null`  | if assigned, it will show a close icon that will trigger the callback function |
 | setVerticalTabIndex  | {function} | `null`  | a react hook setter for setting the current tab index                          |
 | title                | {string}   | `''`    | vertical tab title                                                             |
-| vertical\_tab\_index   | {number}   | `null`  | current selected tab index                                                     |
+| vertical_tab_index   | {number}   | `null`  | current selected tab index                                                     |
 
 ## Full example:
 

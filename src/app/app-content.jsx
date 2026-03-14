@@ -73,7 +73,7 @@ const AppContent = observer(() => {
             setIsApiInitialized(true);
             common.setSocketOpened(true);
             dashboard.setWebSocketState(true);
-            
+
             // Clear offline timeout if connection is restored
             if (offline_timeout) {
                 clearTimeout(offline_timeout);

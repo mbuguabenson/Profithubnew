@@ -5,7 +5,7 @@ type TSkeletonProps = {
     animated?: boolean;
     className?: string;
     rows?: number;
-    variant?: typeof VARIANT[keyof typeof VARIANT];
+    variant?: (typeof VARIANT)[keyof typeof VARIANT];
 } & React.CSSProperties;
 
 export const VARIANT = {

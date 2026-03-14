@@ -1,8 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-    content: [
-        "./src/**/*.{js,jsx,ts,tsx}",
-    ],
+    content: ['./src/**/*.{js,jsx,ts,tsx}'],
     theme: {
         extend: {
             colors: {
@@ -19,9 +17,9 @@ export default {
                 'glow-blue': '0 0 15px rgba(59, 130, 246, 0.5)',
                 'glow-purple': '0 0 15px rgba(168, 85, 247, 0.5)',
                 'glow-cyan': '0 0 15px rgba(6, 182, 212, 0.5)',
-            }
+            },
         },
     },
     plugins: [],
     darkMode: 'class',
-}
+};

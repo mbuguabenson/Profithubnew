@@ -9,7 +9,9 @@ const CopyTrading = observer(() => {
         <div className='copy-trader'>
             <header className='copy-trader__hero'>
                 <div className='hero-content'>
-                    <h1>Copy Trading <span>Premium</span></h1>
+                    <h1>
+                        Copy Trading <span>Premium</span>
+                    </h1>
                     <p>Automate your success by mirroring expert trades in real-time.</p>
                 </div>
             </header>

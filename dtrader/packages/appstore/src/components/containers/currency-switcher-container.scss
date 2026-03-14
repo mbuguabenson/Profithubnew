@@ -26,7 +26,9 @@
 
         &--has-interaction {
             &:hover {
-                box-shadow: 0 12px 16px -4px var(--shadow-menu), 0 4px 6px -2px var(--shadow-menu);
+                box-shadow:
+                    0 12px 16px -4px var(--shadow-menu),
+                    0 4px 6px -2px var(--shadow-menu);
             }
         }
 
