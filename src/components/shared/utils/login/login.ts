@@ -34,37 +34,13 @@ export const loginUrl = ({ language }: TLoginUrl) => {
         date_first_contact ? `&date_first_contact=${date_first_contact}` : ''
     }`;
     const getOAuthUrl = () => {
-        // Special strict fix for Vercel Production to avoid any dynamic parameter issues
-        if (window.location.hostname === 'profithubtool.vercel.app') {
-            return `https://oauth.deriv.com/oauth2/authorize?app_id=121856&l=${language}&brand=deriv`;
-        }
+        const lang = language || window.localStorage.getItem('lang') || 'EN';
+        const app_id = getAppId();
+        
+        // Use the standard OAuth URL as requested
+        const url = `https://oauth.deriv.com/oauth2/authorize?app_id=${app_id}&l=${lang}&brand=deriv`;
 
-        const current_domain = getCurrentProductionDomain();
-        let oauth_domain = deriv_urls.DERIV_HOST_NAME;
-
-        if (current_domain) {
-            // Extract domain suffix (e.g., 'deriv.me' from 'dbot.deriv.me')
-            const domain_suffix = current_domain.replace(/^[^.]+\./, '');
-
-            // Only use custom oauth domain for known derivations, otherwise default to deriv.com
-            // This prevents issues on vercel.app or other custom domains
-            if (['deriv.me', 'deriv.be', 'deriv.com'].includes(domain_suffix)) {
-                oauth_domain = domain_suffix;
-            }
-        }
-
-        // Force redirect to current origin to avoid localhost default
-        // Normalize: remove trailing slash from pathname if it's just '/'
-        // Example: 'https://site.com/' -> 'https://site.com'
-        const pathname = window.location.pathname === '/' ? '' : window.location.pathname;
-        const redirect_uri = `${window.location.protocol}//${window.location.host}${pathname}`;
-        const redirect_param = `&redirect_uri=${redirect_uri}`;
-
-        const url = `https://oauth.${oauth_domain}/oauth2/authorize?app_id=${getAppId()}&l=${language}${marketing_queries}&brand=${website_name.toLowerCase()}`;
-
-        console.log('[Login] Redirect URI:', redirect_uri);
-        console.log('[Login] App ID:', getAppId());
-
+        console.log('[Login] Redirecting with App ID:', app_id);
         return url;
     };
 
