@@ -33,6 +33,11 @@ module.exports = {
         '@typescript-eslint/no-explicit-any': 'warn',
         '@typescript-eslint/no-var-requires': 'off',
     },
+    settings: {
+        react: {
+            version: 'detect',
+        },
+    },
     overrides: [
         {
             files: ['**/*.js', '**/*.ts', '**/*.tsx', '**/*.jsx'],
