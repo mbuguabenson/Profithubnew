@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { observer } from 'mobx-react-lite';
 import { useFirebaseCountriesConfig } from '@/hooks/firebase/useFirebaseCountriesConfig';
 import { useStore } from '@/hooks/useStore';
@@ -30,7 +30,7 @@ export const MenuItems = observer(() => {
 
     // Use handleTraderHubRedirect for all links
     const getModifiedHref = (originalHref: string) => {
-        let redirect_url = new URL(originalHref);
+        const redirect_url = new URL(originalHref);
 
         if (is_virtual) {
             // For demo accounts, set the account parameter to 'demo'
@@ -40,20 +40,13 @@ export const MenuItems = observer(() => {
             redirect_url.searchParams.set('account', currency);
         }
 
-        let finalHref = redirect_url.toString();
-
-        // If it's a cross-app link (Dtrader or Dtooltrades), append SSO tokens
-        if (originalHref.includes('localhost:8443') || originalHref.includes('localhost:3000')) {
-            const { getSsoUrl } = require('@/utils/sso-utils');
-            finalHref = getSsoUrl(finalHref, client.accounts);
-        }
-
-        return finalHref;
+        return redirect_url.toString();
     };
 
     // Filter out the Cashier link when the account is a wallet account
-    const filtered_items = items.filter(item => {
-        if (item.label === localize('Cashier') && has_wallet) {
+    const filtered_items = items.filter((item, index) => {
+        // Index 0 is the Cashier link
+        if (index === 0 && has_wallet) {
             return false;
         }
         return true;

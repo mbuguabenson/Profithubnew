@@ -1,3 +1,4 @@
+import React from 'react';
 import classNames from 'classnames';
 import { observer } from 'mobx-react-lite';
 import { formatMoney, getCurrencyDisplayCode } from '@/components/shared';
@@ -20,9 +21,9 @@ type TAccountSwitcherWalletItemProps = {
 export const AccountSwitcherWalletItem = observer(
     ({ closeAccountsDialog, account, show_badge = false }: TAccountSwitcherWalletItemProps) => {
         const {
-            loginid,
-            balance,
             currency,
+            dtrade_loginid,
+            dtrade_balance,
             gradients,
             icons,
             is_virtual,
@@ -37,9 +38,9 @@ export const AccountSwitcherWalletItem = observer(
 
         const theme = is_dark_mode_on ? 'dark' : 'light';
         const app_icon = is_dark_mode_on ? 'IcWalletOptionsDark' : 'IcWalletOptionsLight';
-        const is_active = loginid === active_loginid;
+        const is_dtrade_active = dtrade_loginid === active_loginid;
 
-        const switchAccount = async (loginId: string) => {
+        const switchAccount = async (loginId: number) => {
             const account_list = JSON.parse(localStorage.getItem('accountsList') ?? '{}');
             const token = account_list[loginId];
 
@@ -76,7 +77,7 @@ export const AccountSwitcherWalletItem = observer(
                 (acc: any) => acc.loginid === loginId.toString()
             );
             if (!selected_account) return;
-            const account_param = is_virtual ? 'demo' : (selected_account as any)?.currency;
+            const account_param = is_virtual ? 'demo' : selected_account.currency;
             search_params.set('account', account_param);
             window.history.pushState({}, '', `${window.location.pathname}?${search_params.toString()}`);
         };
@@ -84,10 +85,10 @@ export const AccountSwitcherWalletItem = observer(
         return (
             <div
                 className={classNames('acc-switcher-wallet-item__container', {
-                    'acc-switcher-wallet-item__container--active': is_active,
+                    'acc-switcher-wallet-item__container--active': is_dtrade_active,
                 })}
                 data-testid='account-switcher-wallet-item'
-                onClick={() => switchAccount(loginid)}
+                onClick={() => switchAccount(dtrade_loginid)}
                 role='button'
             >
                 <div>
@@ -118,7 +119,7 @@ export const AccountSwitcherWalletItem = observer(
                         )}
                     </Text>
                     <Text size='xs' weight='bold'>
-                        {`${formatMoney(currency ?? '', balance || 0, true)} ${getCurrencyDisplayCode(
+                        {`${formatMoney(currency ?? '', dtrade_balance || 0, true)} ${getCurrencyDisplayCode(
                             currency
                         )}`}
                     </Text>

@@ -10,100 +10,9 @@
     &__account-settings,
     .notifications__wrapper,
     &__menu {
-
-        svg>path,
-        svg>g>path {
-            fill: #ffffff !important; // Enforce white visibility
-        }
-    }
-
-    position: sticky;
-    top: 0;
-    z-index: 10000;
-    background: rgba(2, 6, 23, 0.95) !important; // Darker and more opaque for better contrast
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border-bottom: 1px solid rgb(255 255 255 / 5%);
-    height: 6rem;
-    padding: 0 1.6rem;
-    max-width: 100vw;
-
-    @include mobile-or-tablet-screen {
-        height: 5.5rem;
-        padding: 0 0.8rem;
-    }
-
-    &__whatsapp {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin-right: 1.2rem;
-        padding: 0.4rem;
-        border-radius: 50%;
-        transition: all 0.2s ease;
-
-        @include mobile-or-tablet-screen {
-            margin-right: 0.4rem;
-        }
-
-        &:hover {
-            background-color: var(--general-section-1);
-            transform: scale(1.1);
-        }
-
-        &-icon {
-            fill: #25d366;
-            width: 2rem;
-            height: 2rem;
-            filter: drop-shadow(0 0 2px rgb(37 211 102 / 30%));
-
-            @include mobile-or-tablet-screen {
-                width: 1.6rem;
-                height: 1.6rem;
-            }
-        }
-    }
-
-    .header-branding {
-        display: flex;
-        align-items: center;
-        gap: 1.2rem;
-        margin-right: 2.4rem;
-        cursor: pointer;
-        transition: transform 0.2s ease;
-
-        @include mobile-or-tablet-screen {
-            margin-right: 0.8rem;
-        }
-
-        &:hover {
-            transform: translateY(-1px);
-
-            .brand-logo {
-                box-shadow: 0 6px 20px rgba(255, 68, 79, 0.4);
-
-                .logo-glow {
-                    opacity: 1;
-                }
-            }
-        }
-
-        .brand-logo-img {
-            width: 48px;
-            height: 48px;
-            object-fit: contain;
-            filter: drop-shadow(0 0 15px rgba(124, 58, 237, 0.5));
-            transition: all 0.3s ease;
-
-            @include mobile-or-tablet-screen {
-                width: 36px;
-                height: 36px;
-            }
-
-            &:hover {
-                transform: scale(1.05);
-                filter: drop-shadow(0 0 20px rgba(124, 58, 237, 0.7));
-            }
+        svg > path,
+        svg > g > path {
+            fill: var(--text-prominent);
         }
     }
 }
@@ -183,7 +92,7 @@
     width: 100%;
     position: sticky;
     top: 0;
-    z-index: 998;
+    z-index: 1;
     background: var(--general-main-1);
 
     .derivs-text__size--md {
@@ -218,7 +127,7 @@
             box-shadow: 0 0 2px 0 var(--du-shadow-box, #00000014);
         }
 
-        .deriv-account-switcher__balance+svg>path {
+        .deriv-account-switcher__balance + svg > path {
             fill: var(--text-general);
         }
 
@@ -367,26 +276,10 @@
 .auth-actions {
     display: flex;
     padding-block: 8px;
-    gap: 0.4rem;
 
     button {
         font-weight: 400;
         margin-inline-end: 1.6rem;
-    }
-
-    @include mobile-or-tablet-screen {
-        gap: 0.8rem;
-        padding-block: 4px;
-        align-items: center;
-
-        button {
-            margin-inline-end: 0;
-            padding: 0.6rem 1.2rem;
-            font-size: 1.2rem;
-            min-height: 3.6rem;
-            height: auto;
-            white-space: nowrap;
-        }
     }
 }
 
@@ -397,100 +290,4 @@
 
 .deriv-accordion--underline {
     border-bottom: none;
-}
-
-/* Header Balance Style */
-.header-balance {
-    position: relative;
-    display: flex;
-    align-items: center;
-    padding: 0.6rem 2rem;
-    margin-right: 1.6rem;
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 12px;
-    font-family: 'Outfit', sans-serif;
-    transition: all 0.3s ease;
-    overflow: hidden;
-
-    &:hover {
-        background: rgba(255, 255, 255, 0.05);
-        border-color: rgba(255, 255, 255, 0.15);
-        transform: translateY(-1px);
-
-        .header-balance__glow {
-            opacity: 0.6;
-        }
-    }
-
-    &__info {
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        line-height: 1.1;
-        z-index: 1;
-    }
-
-    &__amount {
-        font-size: 1.8rem;
-        font-weight: 800;
-        color: var(--text-prominent);
-        letter-spacing: -0.01em;
-    }
-
-    &__currency {
-        font-size: 0.9rem;
-        font-weight: 600;
-        color: var(--brand-red-coral);
-        text-transform: uppercase;
-        letter-spacing: 0.05em;
-        opacity: 0.8;
-    }
-
-    &__glow {
-        position: absolute;
-        top: -50%;
-        left: -50%;
-        width: 200%;
-        height: 200%;
-        background: radial-gradient(circle at center, rgba(255, 68, 79, 0.1) 0%, transparent 70%);
-        opacity: 0.3;
-        pointer-events: none;
-        transition: opacity 0.5s ease;
-    }
-
-    @include mobile-or-tablet-screen {
-        padding: 0.4rem 1.2rem;
-        margin-right: 0.8rem;
-
-        &__amount {
-            font-size: 1.4rem;
-        }
-    }
-}
-
-@keyframes logo-glow-pulse {
-    from {
-        transform: scale(0.95);
-        opacity: 0.4;
-    }
-
-    to {
-        transform: scale(1.1);
-        opacity: 0.7;
-    }
-}
-
-// Ensure mobile drawer and its overlay are always on top of all header content
-.deriv-drawer {
-    outline: none;
-    z-index: 10001 !important;
-
-    &__overlay {
-        z-index: 10000 !important;
-    }
-
-    &__container {
-        z-index: 10001 !important;
-    }
 }

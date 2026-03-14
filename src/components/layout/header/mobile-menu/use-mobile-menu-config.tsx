@@ -13,12 +13,14 @@ import {
     LegacyCashierIcon,
     LegacyChartsIcon,
     LegacyHelpCentreIcon,
+    LegacyHomeOldIcon,
     LegacyProfileSmIcon,
     LegacyReportsIcon,
     LegacyResponsibleTradingIcon,
     LegacyTheme1pxIcon,
     LegacyWhatsappIcon,
 } from '@deriv/quill-icons/Legacy';
+import { BrandDerivLogoCoralIcon } from '@deriv/quill-icons/Logo';
 import { useTranslations } from '@deriv-com/translations';
 import { ToggleSwitch } from '@deriv-com/ui';
 import { URLConstants } from '@deriv-com/utils';
@@ -101,22 +103,22 @@ const useMobileMenuConfig = (client?: RootStore['client']) => {
             [
                 {
                     as: 'a',
+                    href: standalone_routes.deriv_com,
+                    label: localize('Deriv.com'),
+                    LeftComponent: BrandDerivLogoCoralIcon,
+                },
+                {
+                    as: 'a',
+                    href: standalone_routes.deriv_app,
+                    label: localize("Trader's Hub"),
+                    LeftComponent: LegacyHomeOldIcon,
+                },
+                {
+                    as: 'a',
                     href: standalone_routes.bot,
-                    label: localize('Bot Builder'),
+                    label: localize('Trade'),
                     LeftComponent: LegacyChartsIcon,
-                    isActive: true,
-                },
-                {
-                    as: 'a',
-                    href: standalone_routes.dtrader,
-                    label: localize('DTrader'),
-                    LeftComponent: LegacyChartsIcon, // Using Charts icon as placeholder or appropriate icon
-                },
-                {
-                    as: 'a',
-                    href: standalone_routes.dtooltrades,
-                    label: localize('DTool'),
-                    LeftComponent: LegacyChartsIcon, // Using Charts icon as placeholder or appropriate icon
+                    isActive: true, // Always highlight Trade as active
                 },
                 {
                     as: 'a',
@@ -168,7 +170,7 @@ const useMobileMenuConfig = (client?: RootStore['client']) => {
                     ? {
                           as: 'a',
                           href: URLConstants.whatsApp,
-                          label: localize('WhatsApp Support'),
+                          label: localize('WhatsApp'),
                           LeftComponent: LegacyWhatsappIcon,
                           target: '_blank',
                       }
@@ -187,23 +189,7 @@ const useMobileMenuConfig = (client?: RootStore['client']) => {
             // Logout button removed from mobile interface as per acceptance criteria
             [],
         ],
-        [
-            is_virtual,
-            currency,
-            is_logged_in,
-            client?.is_logged_in,
-            client_residence,
-            is_tmb_enabled,
-            icAvailable,
-            is_dark_mode_on,
-            toggleTheme,
-            is_livechat_available,
-            cs_chat_whatsapp,
-            localize,
-            getRedirectUrl,
-            has_wallet,
-            is_hub_enabled_country,
-        ]
+        [is_virtual, currency, is_logged_in, client_residence, is_tmb_enabled]
     );
 
     return {

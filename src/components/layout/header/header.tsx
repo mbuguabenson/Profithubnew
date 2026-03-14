@@ -10,15 +10,18 @@ import { useFirebaseCountriesConfig } from '@/hooks/firebase/useFirebaseCountrie
 import { useApiBase } from '@/hooks/useApiBase';
 import { useStore } from '@/hooks/useStore';
 import useTMB from '@/hooks/useTMB';
-import { clearAuthData } from '@/utils/auth-utils';
-import { LegacyWhatsappIcon } from '@deriv/quill-icons/Legacy';
+import { clearAuthData, handleOidcAuthFailure } from '@/utils/auth-utils';
+import { StandaloneCircleUserRegularIcon } from '@deriv/quill-icons/Standalone';
+import { requestOidcAuthentication } from '@deriv-com/auth-client';
 import { Localize, useTranslations } from '@deriv-com/translations';
 import { Header, useDevice, Wrapper } from '@deriv-com/ui';
+import { Tooltip } from '@deriv-com/ui';
 import { AppLogo } from '../app-logo';
 import AccountsInfoLoader from './account-info-loader';
 import AccountSwitcher from './account-switcher';
 import MenuItems from './menu-items';
 import MobileMenu from './mobile-menu';
+
 import './header.scss';
 
 type TAppHeaderProps = {
@@ -93,6 +96,40 @@ const AppHeader = observer(({ isAuthenticating }: TAppHeaderProps) => {
                         ))}
 
                     <AccountSwitcher activeAccount={activeAccount} />
+
+                    {isDesktop &&
+                        (() => {
+                            let redirect_url = new URL(standalone_routes.personal_details);
+                            const is_hub_enabled_country = hubEnabledCountryList.includes(client?.residence || '');
+
+                            if (has_wallet && is_hub_enabled_country) {
+                                redirect_url = new URL(standalone_routes.account_settings);
+                            }
+                            // Check if the account is a demo account
+                            // Use the URL parameter to determine if it's a demo account, as this will update when the account changes
+                            const urlParams = new URLSearchParams(window.location.search);
+                            const account_param = urlParams.get('account');
+                            const is_virtual = client?.is_virtual || account_param === 'demo';
+
+                            if (is_virtual) {
+                                // For demo accounts, set the account parameter to 'demo'
+                                redirect_url.searchParams.set('account', 'demo');
+                            } else if (currency) {
+                                // For real accounts, set the account parameter to the currency
+                                redirect_url.searchParams.set('account', currency);
+                            }
+                            return (
+                                <Tooltip
+                                    as='a'
+                                    href={redirect_url.toString()}
+                                    tooltipContent={localize('Manage account settings')}
+                                    tooltipPosition='bottom'
+                                    className='app-header__account-settings'
+                                >
+                                    <StandaloneCircleUserRegularIcon className='app-header__profile_icon' />
+                                </Tooltip>
+                            );
+                        })()}
                 </>
             );
         } else {
@@ -102,6 +139,10 @@ const AppHeader = observer(({ isAuthenticating }: TAppHeaderProps) => {
                         tertiary
                         onClick={async () => {
                             clearAuthData(false);
+                            const getQueryParams = new URLSearchParams(window.location.search);
+                            const currency = getQueryParams.get('account') ?? '';
+                            const query_param_currency =
+                                currency || sessionStorage.getItem('query_param_currency') || 'USD';
 
                             try {
                                 // First, explicitly wait for TMB status to be determined
@@ -110,8 +151,22 @@ const AppHeader = observer(({ isAuthenticating }: TAppHeaderProps) => {
                                 if (tmbEnabled) {
                                     await onRenderTMBCheck(true); // Pass true to indicate it's from login button
                                 } else {
-                                    // Use legacy OAuth flow (generateOAuthURL) instead of OIDC to avoid redirect_uri issues on Vercel
-                                    window.location.assign(generateOAuthURL());
+                                    // Always use OIDC if TMB is not enabled
+                                    try {
+                                        await requestOidcAuthentication({
+                                            redirectCallbackUri: `${window.location.origin}/callback`,
+                                            ...(query_param_currency
+                                                ? {
+                                                      state: {
+                                                          account: query_param_currency,
+                                                      },
+                                                  }
+                                                : {}),
+                                        });
+                                    } catch (err) {
+                                        handleOidcAuthFailure(err);
+                                        window.location.replace(generateOAuthURL());
+                                    }
                                 }
                             } catch (error) {
                                 // eslint-disable-next-line no-console
@@ -138,6 +193,7 @@ const AppHeader = observer(({ isAuthenticating }: TAppHeaderProps) => {
         isSingleLoggingIn,
         isDesktop,
         activeLoginid,
+        standalone_routes,
         client,
         has_wallet,
         currency,
@@ -146,8 +202,6 @@ const AppHeader = observer(({ isAuthenticating }: TAppHeaderProps) => {
         is_virtual,
         onRenderTMBCheck,
         is_tmb_enabled,
-        hubEnabledCountryList,
-        isTmbEnabled,
     ]);
 
     if (client?.should_hide_header) return null;
@@ -159,19 +213,13 @@ const AppHeader = observer(({ isAuthenticating }: TAppHeaderProps) => {
             })}
         >
             <Wrapper variant='left'>
-                {!isDesktop && <MobileMenu />}
                 <AppLogo />
+                <MobileMenu />
+                {isDesktop && <MenuItems.TradershubLink />}
                 {isDesktop && <MenuItems />}
+
             </Wrapper>
             <Wrapper variant='right'>
-                <a
-                    href='https://wa.me/254757722344'
-                    target='_blank'
-                    rel='noopener noreferrer'
-                    className='app-header__whatsapp'
-                >
-                    <LegacyWhatsappIcon className='app-header__whatsapp-icon' />
-                </a>
                 {!isDesktop && <PWAInstallButton variant='primary' size='medium' />}
                 {renderAccountSection()}
             </Wrapper>

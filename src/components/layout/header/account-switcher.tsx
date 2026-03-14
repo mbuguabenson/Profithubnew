@@ -141,10 +141,9 @@ const AccountSwitcher = observer(({ activeAccount }: TAccountSwitcher) => {
         const token = account_list[loginId];
         if (!token) return;
         localStorage.setItem('authToken', token);
-        localStorage.setItem('active_loginid', loginId.toString());
+        localStorage.setItem('active_loginid', loginId);
         const account_type =
             loginId
-                .toString()
                 .match(/[a-zA-Z]+/g)
                 ?.join('') || '';
 
@@ -153,7 +152,7 @@ const AccountSwitcher = observer(({ activeAccount }: TAccountSwitcher) => {
         });
         await api_base?.init(true);
         const search_params = new URLSearchParams(window.location.search);
-        const selected_account = modifiedAccountList.find(acc => acc.loginid === loginId.toString());
+        const selected_account = modifiedAccountList.find(acc => acc.loginid === loginId);
         if (!selected_account) return;
         const account_param = selected_account.is_virtual ? 'demo' : selected_account.currency;
         search_params.set('account', account_param);
