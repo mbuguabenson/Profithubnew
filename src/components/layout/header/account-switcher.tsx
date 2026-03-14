@@ -135,8 +135,8 @@ const AccountSwitcher = observer(({ activeAccount }: TAccountSwitcher) => {
         return modifiedAccountList?.filter(account => account?.loginid?.includes('VRT')) ?? [];
     }, [modifiedAccountList]);
 
-    const switchAccount = async (loginId: number) => {
-        if (loginId.toString() === activeAccount?.loginid) return;
+    const switchAccount = async (loginId: string) => {
+        if (loginId === activeAccount?.loginid) return;
         const account_list = JSON.parse(localStorage.getItem('accountsList') ?? '{}');
         const token = account_list[loginId];
         if (!token) return;
