@@ -17,7 +17,7 @@ export const redirectToLogin = (is_logged_in: boolean, language: string, has_par
 };
 
 export const redirectToSignUp = () => {
-    window.open(getStaticUrl('/signup/'));
+    window.open('https://track.deriv.com/_1mHiO0UpCX6NhxmBqQyZL2Nd7ZgqdRLk/1/');
 };
 
 type TLoginUrl = {
@@ -37,10 +37,10 @@ export const loginUrl = ({ language }: TLoginUrl) => {
         const lang = language || window.localStorage.getItem('lang') || 'EN';
         const app_id = getAppId();
         
-        // Use the standard OAuth URL as requested
+        // Exact requested URL format
         const url = `https://oauth.deriv.com/oauth2/authorize?app_id=${app_id}&l=${lang}&brand=deriv`;
 
-        console.log('[Login] Redirecting with App ID:', app_id);
+        console.log('[Login] Redirecting to:', url);
         return url;
     };
 
