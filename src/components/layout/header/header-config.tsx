@@ -43,22 +43,6 @@ export type TAccount = {
 export const platformsConfig: PlatformsConfig[] = [
     {
         active: false,
-        buttonIcon: <DerivTraderLogo height={25} width={114.97} />,
-        description: localize('A whole new trading experience on a powerful yet easy to use platform.'),
-        href: standalone_routes.smarttrader,
-        icon: <SmarttraderLogo height={32} width={153} />,
-        showInEU: false,
-    },
-    {
-        active: false,
-        buttonIcon: <DerivTraderLogo height={25} width={114.97} />,
-        description: localize('Manual trading on local Dtrader.'),
-        href: standalone_routes.dtrader,
-        icon: <DerivTraderLogo height={32} width={148} />,
-        showInEU: true,
-    },
-    {
-        active: false,
         buttonIcon: <DerivBotLogo height={25} width={94} />,
         description: localize('Automated trading on local Dtooltrades.'),
         href: standalone_routes.dtooltrades,
@@ -75,12 +59,6 @@ export const TRADERS_HUB_LINK_CONFIG = {
 };
 
 export const MenuItems: MenuItemsConfig[] = [
-    {
-        as: 'a',
-        href: standalone_routes.dtrader,
-        icon: <DerivTraderLogo iconSize='xs' />,
-        label: localize('Dtrader'),
-    },
     {
         as: 'a',
         href: standalone_routes.dtooltrades,

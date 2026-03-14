@@ -50,21 +50,35 @@ const FreeBotsTab = lazy(() => import('@/pages/free-bots/free-bots-tab'));
 
 const Portal = observer(({ type }: { type: 'dtrader' | 'dtooltrades' }) => {
     const { client } = useStore();
-    const targetBaseUrl = Buffer.from(type === 'dtrader' ? 'aHR0cHM6Ly9kdHJhZGVyLnByb2ZpdGh1YnRvb2wudmVyY2VsLmFwcA==' : 'aHR0cHM6Ly9kdG9vbC5wcm9maXRodWJ0b29sLnZlcmNlbC5hcHA=', 'base64').toString();
+    const targetBaseUrl =
+        type === 'dtrader'
+            ? atob('aHR0cHM6Ly9kdHJhZGVyLnByb2ZpdGh1YnRvb2wudmVyY2VsLmFwcA==')
+            : atob('aHR0cHM6Ly9kdG9vbC5wcm9maXRodWJ0b29sLnZlcmNlbC5hcHA=');
     // Fallback to localhost if we are on localhost
-    const finalBaseUrl = window.location.hostname === 'localhost' 
-        ? (type === 'dtrader' ? 'https://localhost:8443' : 'http://localhost:3000')
-        : targetBaseUrl;
-    
+    const finalBaseUrl =
+        window.location.hostname === 'localhost'
+            ? type === 'dtrader'
+                ? 'https://localhost:8443'
+                : 'http://localhost:3000'
+            : targetBaseUrl;
+
     const ssoUrl = getSsoUrl(finalBaseUrl, client.accounts);
 
     return (
-        <div style={{ width: '100%', height: 'calc(100vh - 84px)', border: 'none', background: 'var(--general-section-1)', overflow: 'hidden' }}>
-            <iframe 
-                src={ssoUrl} 
-                style={{ width: '100%', height: '100%', border: 'none' }} 
+        <div
+            style={{
+                width: '100%',
+                height: 'calc(100vh - 84px)',
+                border: 'none',
+                background: 'var(--general-section-1)',
+                overflow: 'hidden',
+            }}
+        >
+            <iframe
+                src={ssoUrl}
+                style={{ width: '100%', height: '100%', border: 'none' }}
                 title={type}
-                allow="camera; microphone; clipboard-read; clipboard-write; geolocation"
+                allow='camera; microphone; clipboard-read; clipboard-write; geolocation'
             />
         </div>
     );
@@ -75,7 +89,15 @@ const TradingTools = () => {
     const [activeTab, setActiveTab] = React.useState<'smartauto' | 'digitcracker'>('smartauto');
     return (
         <div style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
-            <div style={{ display: 'flex', gap: '8px', padding: '12px 16px', background: 'var(--general-section-1)', borderBottom: '1px solid var(--general-section-2)' }}>
+            <div
+                style={{
+                    display: 'flex',
+                    gap: '8px',
+                    padding: '12px 16px',
+                    background: 'var(--general-section-1)',
+                    borderBottom: '1px solid var(--general-section-2)',
+                }}
+            >
                 <button
                     onClick={() => setActiveTab('smartauto')}
                     style={{
@@ -99,7 +121,8 @@ const TradingTools = () => {
                         border: 'none',
                         cursor: 'pointer',
                         fontWeight: 600,
-                        background: activeTab === 'digitcracker' ? 'var(--brand-red-coral)' : 'var(--general-section-2)',
+                        background:
+                            activeTab === 'digitcracker' ? 'var(--brand-red-coral)' : 'var(--general-section-2)',
                         color: activeTab === 'digitcracker' ? '#fff' : 'var(--text-general)',
                         transition: 'all 0.2s',
                     }}
@@ -535,7 +558,9 @@ const AppWrapper = observer(() => {
                                     id='id-strategies'
                                 >
                                     <PageContentWrapper>
-                                        <Suspense fallback={<ChunkLoader message={localize('Loading Strategies...')} />}>
+                                        <Suspense
+                                            fallback={<ChunkLoader message={localize('Loading Strategies...')} />}
+                                        >
                                             <Strategies />
                                         </Suspense>
                                     </PageContentWrapper>
