@@ -12,7 +12,7 @@ import { useStore } from '@/hooks/useStore';
 import useTMB from '@/hooks/useTMB';
 import { clearAuthData, handleOidcAuthFailure } from '@/utils/auth-utils';
 import { Localize, useTranslations } from '@deriv-com/translations';
-import { loginUrl, redirectToSignUp } from '../../shared/utils/login';
+import { loginUrl, redirectToLogin, redirectToSignUp } from '../../shared/utils/login';
 import { Header, useDevice, Wrapper } from '@deriv-com/ui';
 import { Tooltip } from '@deriv-com/ui';
 import { AppLogo } from '../app-logo';
@@ -21,6 +21,7 @@ import AccountSwitcher from './account-switcher';
 import MenuItems from './menu-items';
 import MobileMenu from './mobile-menu';
 import WhatsApp from '../footer/WhatsApp';
+import { StandaloneCircleUserRegularIcon } from '@deriv/quill-icons';
 
 import './header.scss';
 
@@ -31,7 +32,8 @@ type TAppHeaderProps = {
 const AppHeader = observer(({ isAuthenticating }: TAppHeaderProps) => {
     const { isDesktop } = useDevice();
     const { isAuthorizing, activeLoginid } = useApiBase();
-    const { client } = useStore() ?? {};
+    const { client, common } = useStore() ?? {};
+    const language = common?.current_language || 'EN';
 
     const { data: activeAccount } = useActiveAccount({ allBalanceData: client?.all_accounts_balance });
     const { accounts, getCurrency, is_virtual } = client ?? {};
@@ -139,7 +141,7 @@ const AppHeader = observer(({ isAuthenticating }: TAppHeaderProps) => {
                         tertiary
                         onClick={() => {
                             clearAuthData(false);
-                            window.location.href = loginUrl({ language: language || 'EN' });
+                            redirectToLogin(false, language);
                         }}
                     >
                         <Localize i18n_default_text='Log in' />
