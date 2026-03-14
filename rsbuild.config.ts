@@ -7,15 +7,11 @@ import { pluginSass } from '@rsbuild/plugin-sass';
 export default defineConfig({
     plugins: [
         pluginSass({
-            sassLoaderOptions: {
-                sourceMap: true,
-                additionalData: (content, loaderContext) => {
-                    const reqPath = (loaderContext.resourcePath || '').replace(/\\/g, '/');
-                    if (reqPath.includes('/packages/components/') || reqPath.includes('/packages/api')) {
-                        return `@use "@/styles/global-deriv-mixins.scss" as *;\n` + content.toString();
-                    }
-                    return content.toString();
-                },
+            sassLoaderOptions: (config) => {
+                config.sassOptions = {
+                    ...config.sassOptions,
+                    includePaths: [path.resolve(__dirname, 'node_modules')],
+                };
             },
             exclude: /node_modules/,
         }),
@@ -61,7 +57,6 @@ export default defineConfig({
             '@/utils': path.resolve(__dirname, './src/utils'),
             '@/constants': path.resolve(__dirname, './src/constants'),
             '@/stores': path.resolve(__dirname, './src/stores'),
-
             '@': path.resolve(__dirname, './src'),
             '@root': path.resolve(__dirname, '.'),
         },

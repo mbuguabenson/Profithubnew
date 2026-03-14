@@ -4,7 +4,7 @@ import { observer } from 'mobx-react-lite';
 import { botNotification } from '@/components/bot-notification/bot-notification';
 import { notification_message } from '@/components/bot-notification/bot-notification-utils';
 import { useStore } from '@/hooks/useStore';
-import { Localize, localize } from '@deriv-com/translations';
+import { localize } from '@deriv-com/translations';
 import { useDevice } from '@deriv-com/ui';
 import { TBlocklyEvents } from 'Types';
 import LoadModal from '../../components/load-modal';
@@ -12,12 +12,10 @@ import SaveModal from '../dashboard/bot-list/save-modal';
 import BotBuilderTourHandler from '../tutorials/dbot-tours/bot-builder-tour';
 import QuickStrategy1 from './quick-strategy';
 import WorkspaceWrapper from './workspace-wrapper';
-import './bot-builder.scss';
 
 const BotBuilder = observer(() => {
     const { dashboard, app, run_panel, toolbar, quick_strategy, blockly_store } = useStore();
-    const { active_tab, active_tour, is_preview_on_popup, is_profithub_tool_visible, setIsProfithubToolVisible } =
-        dashboard;
+    const { active_tab, active_tour, is_preview_on_popup } = dashboard;
     const { is_open } = quick_strategy;
     const { is_running } = run_panel;
     const { is_loading } = blockly_store;
@@ -26,9 +24,6 @@ const BotBuilder = observer(() => {
     const { isDesktop } = useDevice();
     const { onMount, onUnmount } = app;
     const el_ref = React.useRef<HTMLInputElement | null>(null);
-
-    const [isMinimized, setIsMinimized] = React.useState(false);
-    const [isScaled, setIsScaled] = React.useState(false);
 
     // TODO: fix
     // const isMounted = useIsMounted();
@@ -132,53 +127,6 @@ const BotBuilder = observer(() => {
             <LoadModal />
             <SaveModal />
             {is_open && <QuickStrategy1 />}
-            {is_profithub_tool_visible && (
-                <>
-                    {isMinimized ? (
-                        <div
-                            className='profithub-minimized-icon'
-                            onClick={() => setIsMinimized(false)}
-                            title='Restore Profithub Tool'
-                        >
-                            <span className='tool-icon'>P</span>
-                        </div>
-                    ) : (
-                        <div className={classNames('profithub-tool-overlay glass-card', { 'scaled-down': isScaled })}>
-                            <div className='profithub-tool-header'>
-                                <span className='tool-title'>
-                                    <Localize i18n_default_text='Profithub Tool' />
-                                </span>
-                                <div className='tool-controls'>
-                                    <button
-                                        className='control-btn'
-                                        onClick={() => setIsScaled(!isScaled)}
-                                        title={isScaled ? 'Maximize' : 'Scale Down'}
-                                    >
-                                        {isScaled ? '□' : '❐'}
-                                    </button>
-                                    <button
-                                        className='control-btn'
-                                        onClick={() => setIsMinimized(true)}
-                                        title='Minimize'
-                                    >
-                                        _
-                                    </button>
-                                    <button className='close-btn' onClick={() => setIsProfithubToolVisible(false)}>
-                                        ✕
-                                    </button>
-                                </div>
-                            </div>
-                            <iframe
-                                src='https://v0-profithubtool2026.vercel.app/'
-                                title='Profithub Tool'
-                                className='profithub-tool-iframe'
-                                allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture'
-                                allowFullScreen
-                            />
-                        </div>
-                    )}
-                </>
-            )}
         </>
     );
 });

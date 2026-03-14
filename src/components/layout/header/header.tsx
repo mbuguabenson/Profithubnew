@@ -19,6 +19,7 @@ import AccountsInfoLoader from './account-info-loader';
 import AccountSwitcher from './account-switcher';
 import MenuItems from './menu-items';
 import MobileMenu from './mobile-menu';
+import PlatformSwitcher from './platform-switcher';
 import './header.scss';
 
 type TAppHeaderProps = {
@@ -161,6 +162,7 @@ const AppHeader = observer(({ isAuthenticating }: TAppHeaderProps) => {
         >
             <Wrapper variant='left'>
                 {!isDesktop && <MobileMenu />}
+                <PlatformSwitcher />
                 <AppLogo />
                 {isDesktop && <MenuItems />}
             </Wrapper>

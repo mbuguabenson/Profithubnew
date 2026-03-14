@@ -3,7 +3,6 @@ import { observer } from 'mobx-react-lite';
 import { v4 as uuidv4 } from 'uuid';
 import { useStore } from '@/hooks/useStore';
 import Chart from './chart';
-import DigitDistributionCircles from './digit-distribution-circles';
 import './chart.scss';
 
 interface ChartWrapperProps {
@@ -17,12 +16,7 @@ const ChartWrapper = observer(({ prefix = 'chart', show_digits_stats }: ChartWra
 
     const uniqueKey = client.loginid ? `${prefix}-${client.loginid}` : `${prefix}-${uuid}`;
 
-    return (
-        <div className='chart-wrapper-container'>
-            {show_digits_stats && <DigitDistributionCircles />}
-            <Chart key={uniqueKey} show_digits_stats={show_digits_stats} />
-        </div>
-    );
+    return <Chart key={uniqueKey} show_digits_stats={show_digits_stats} />;
 });
 
 export default ChartWrapper;

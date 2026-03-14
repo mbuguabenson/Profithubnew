@@ -159,6 +159,7 @@ const AccountSwitcher = observer(({ activeAccount }: TAccountSwitcher) => {
         search_params.set('account', account_param);
         sessionStorage.setItem('query_param_currency', account_param);
         window.history.pushState({}, '', `${window.location.pathname}?${search_params.toString()}`);
+        window.location.reload();
     };
 
     return (

@@ -38,16 +38,15 @@ const PlatformSwitcher = observer(() => {
     try {
         const redirect_url = new URL(redirect_url_str);
         if (is_virtual) {
-            // For demo accounts, set the account parameter to 'demo'
             redirect_url.searchParams.set('account', 'demo');
         } else if (client.currency) {
-            // For real accounts, set the account parameter to the currency
             redirect_url.searchParams.set('account', client.currency);
         }
         final_url = redirect_url.toString();
     } catch (error) {
         console.error('Error parsing redirect URL:', error);
     }
+
     return (
         <UIPlatformSwitcher
             bottomLinkLabel={localize("Looking for CFDs? Go to Trader's Hub")}

@@ -6,16 +6,6 @@
         "staging": "staging-home.deriv.com/dashboard",
         "production": "home.deriv.com/dashboard"
     },
-    "platform": {
-        "name": "Derivatives Trader",
-        "logo": "IcRebrandingDerivTrader",
-        "hostname": {
-            "staging": "staging-dtrader.deriv.com",
-            "beta": "beta-dtrader.deriv.com",
-            "production": "dtrader.deriv.com"
-        },
-        "help_centre_url": "https://trade.deriv.com/help-centre"
-    },
     "auth": {
         "staging": "https://staging-auth.deriv.com",
         "production": "https://auth.deriv.com"

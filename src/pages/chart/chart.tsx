@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import classNames from 'classnames';
 import { observer } from 'mobx-react-lite';
 import chart_api from '@/external/bot-skeleton/services/api/chart-api';
+import { useApiBase } from '@/hooks/useApiBase';
 import { useStore } from '@/hooks/useStore';
 import {
     ActiveSymbolsRequest,
@@ -35,6 +36,9 @@ const Chart = observer(({ show_digits_stats }: { show_digits_stats: boolean }) =
     const { common, ui } = useStore();
     const { chart_store, run_panel, dashboard } = useStore();
     const [isSafari, setIsSafari] = useState(false);
+    // Boolean state to control whether to refresh active symbols
+    const [activeSymbols, setActiveSymbols] = useState<any[]>([]);
+    const { activeLoginid } = useApiBase();
 
     const {
         chart_type,
@@ -54,9 +58,9 @@ const Chart = observer(({ show_digits_stats }: { show_digits_stats: boolean }) =
     const { is_drawer_open } = run_panel;
     const { is_chart_modal_visible } = dashboard;
     const settings = {
-        assetInformation: true, // ui.is_chart_asset_info_visible,
+        assetInformation: false, // ui.is_chart_asset_info_visible,
         countdown: true,
-        isHighestLowestMarkerEnabled: true, // TODO: Pending UI,
+        isHighestLowestMarkerEnabled: false, // TODO: Pending UI,
         language: common.current_language.toLowerCase(),
         position: ui.is_chart_layout_default ? 'bottom' : 'left',
         theme: ui.is_dark_mode_on ? 'dark' : 'light',
@@ -72,9 +76,7 @@ const Chart = observer(({ show_digits_stats }: { show_digits_stats: boolean }) =
         setIsSafari(isSafariBrowser());
 
         return () => {
-            if (chartSubscriptionIdRef.current) {
-                chart_api.api.forget(chartSubscriptionIdRef.current).catch(() => {});
-            }
+            chart_api.api.forgetAll('ticks');
         };
     }, []);
 
@@ -85,6 +87,27 @@ const Chart = observer(({ show_digits_stats }: { show_digits_stats: boolean }) =
     useEffect(() => {
         if (!symbol) updateSymbol();
     }, [symbol, updateSymbol]);
+
+    // Function to fetch active symbols using chart_api
+    const fetchActiveSymbols = async () => {
+        try {
+            // Then fetch active symbols
+            const response = await chart_api.api.send({ active_symbols: 'brief' });
+            if (response && response.active_symbols) {
+                setActiveSymbols(response.active_symbols);
+            }
+        } catch (error) {
+            console.error('Failed to fetch active symbols:', error);
+        }
+    };
+
+    // Initialize previousLoginIdRef when component mounts and detect account changes
+    useEffect(() => {
+        // First time initialization
+        if (activeLoginid && chart_api.is_authorized) {
+            fetchActiveSymbols();
+        }
+    }, [activeLoginid, chart_api.is_authorized]);
 
     const requestAPI = (req: ServerTimeRequest | ActiveSymbolsRequest | TradingTimesRequest) => {
         return chart_api.api.send(req);
@@ -131,7 +154,7 @@ const Chart = observer(({ show_digits_stats }: { show_digits_stats: boolean }) =
                 chartControlsWidgets={null}
                 enabledChartFooter={false}
                 chartStatusListener={(v: boolean) => setChartStatus(!v)}
-                toolbarWidget={() => (
+                toolbarWidgets={() => (
                     <ToolbarWidgets
                         updateChartType={updateChartType}
                         updateGranularity={updateGranularity}
@@ -152,6 +175,9 @@ const Chart = observer(({ show_digits_stats }: { show_digits_stats: boolean }) =
                 topWidgets={() => <ChartTitle onChange={onSymbolChange} />}
                 isConnectionOpened={is_connection_opened}
                 getMarketsOrder={getMarketsOrder}
+                chartData={{
+                    activeSymbols: JSON.parse(JSON.stringify(activeSymbols)),
+                }}
                 isLive
                 leftMargin={80}
             />

@@ -33,6 +33,7 @@ import { useDevice } from '@deriv-com/ui';
 import RunPanel from '../../components/run-panel';
 import ChartModal from '../chart/chart-modal';
 import Dashboard from '../dashboard';
+// Rebuild triggered - verifying chart-modal resolution
 import RunStrategy from '../dashboard/run-strategy';
 import './main.scss';
 
@@ -385,7 +386,7 @@ const AppWrapper = observer(() => {
                             className='main__tabs'
                             onTabItemClick={handleTabChange}
                             top
-                            history={historyShim as any}
+                            history={historyShim as unknown as React.ComponentProps<typeof Tabs>['history']}
                             is_scrollable
                         >
                             {/* Tab 0: Dashboard */}

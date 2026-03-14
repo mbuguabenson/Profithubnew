@@ -11,10 +11,6 @@
         "v": "Deriv (V) Ltd"
     },
     "platforms": {
-        "trader": {
-            "name": "Deriv Trader",
-            "icon": "IcRebrandingDerivTrader"
-        },
         "dbot": {
             "name": "Deriv Bot",
             "icon": "IcRebrandingDerivBot"
@@ -31,10 +27,6 @@
             "name": "Deriv X",
             "icon": "IcRebrandingDxtrade"
         },
-        "smarttrader": {
-            "name": "SmartTrader",
-            "icon": "IcRebrandingSmarttrader"
-        },
         "bbot": {
             "name": "Binary Bot",
             "icon": "IcRebrandingBinaryBot"
@@ -45,19 +37,9 @@
         }
     },
     "platforms_appstore": {
-        "trader": {
-            "name": "Deriv Trader",
-            "icon": "DTrader",
-            "availability": "All"
-        },
         "dbot": {
             "name": "Deriv Bot",
             "icon": "DBot",
-            "availability": "Non-EU"
-        },
-        "smarttrader": {
-            "name": "SmartTrader",
-            "icon": "SmartTrader",
             "availability": "Non-EU"
         },
         "bbot": {
