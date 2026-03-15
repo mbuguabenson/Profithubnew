@@ -1,0 +1,150 @@
+.market-selector-v2 {
+    background: var(--general-section-1);
+    padding: 12px 24px;
+    border-bottom: 1px solid var(--general-section-2);
+    width: 100%;
+
+    &__main {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 32px;
+        max-width: 1200px;
+        margin: 0 auto;
+
+        @media (max-width: 768px) {
+            flex-direction: column;
+            gap: 16px;
+            align-items: stretch;
+        }
+    }
+
+    .selector-group {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        flex: 1;
+
+        .selector-label {
+            font-size: 10px;
+            font-weight: 700;
+            color: var(--text-less-prominent);
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+
+        .select-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+
+            .market-select-v2 {
+                width: 100%;
+                appearance: none;
+                background: rgba(255, 255, 255, 0.03);
+                border: 1px solid var(--general-section-2);
+                border-radius: 8px;
+                padding: 10px 16px;
+                color: var(--text-prominent);
+                font-size: 14px;
+                font-weight: 600;
+                cursor: pointer;
+                transition: all 0.2s ease;
+                font-family: 'Inter', sans-serif;
+
+                &:hover {
+                    background: rgba(255, 255, 255, 0.05);
+                    border-color: var(--brand-red-coral);
+                }
+
+                &:focus {
+                    outline: none;
+                    border-color: var(--brand-red-coral);
+                    box-shadow: 0 0 0 2px rgba(255, 68, 79, 0.1);
+                }
+
+                optgroup {
+                    background: var(--general-section-1);
+                    color: var(--text-less-prominent);
+                    font-size: 12px;
+                    padding: 8px;
+                }
+
+                option {
+                    background: var(--general-section-1);
+                    color: var(--text-prominent);
+                    font-size: 14px;
+                    padding: 8px;
+                }
+            }
+
+            .select-arrow {
+                position: absolute;
+                right: 16px;
+                pointer-events: none;
+                color: var(--text-less-prominent);
+                font-size: 12px;
+            }
+        }
+    }
+
+    .stats-group {
+        display: flex;
+        gap: 24px;
+        align-items: center;
+
+        @media (max-width: 480px) {
+            justify-content: space-between;
+        }
+    }
+
+    .stat-item {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        min-width: 100px;
+
+        .stat-label {
+            font-size: 10px;
+            font-weight: 700;
+            color: var(--text-less-prominent);
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+
+        .stat-value {
+            font-size: 18px;
+            font-weight: 700;
+            font-family: 'Roboto Mono', monospace;
+            color: var(--text-prominent);
+        }
+
+        &.digit {
+            .stat-value {
+                width: 32px;
+                height: 32px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border-radius: 6px;
+                background: rgba(255, 255, 255, 0.05);
+            }
+
+            &.even .stat-value {
+                background: rgba(16, 185, 129, 0.1);
+                color: #10b981;
+                border: 1px solid rgba(16, 185, 129, 0.2);
+            }
+
+            &.odd .stat-value {
+                background: rgba(239, 68, 68, 0.1);
+                color: #ef4444;
+                border: 1px solid rgba(239, 68, 68, 0.2);
+            }
+        }
+
+        &.price .stat-value {
+            color: #3b82f6;
+        }
+    }
+}

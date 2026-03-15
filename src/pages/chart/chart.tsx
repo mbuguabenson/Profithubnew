@@ -14,6 +14,7 @@ import {
 import { ChartTitle, SmartChart } from '@deriv/deriv-charts';
 import { useDevice } from '@deriv-com/ui';
 import ToolbarWidgets from './toolbar-widgets';
+import MarketSelector from '@/components/market-selector/market-selector';
 import '@deriv/deriv-charts/dist/smartcharts.css';
 
 type TSubscription = {
@@ -85,7 +86,14 @@ const Chart = observer(({ show_digits_stats }: { show_digits_stats: boolean }) =
     }, [chart_subscription_id]);
 
     useEffect(() => {
-        if (!symbol) updateSymbol();
+        if (!symbol) {
+            // Retry symbol resolution until active_symbols are available
+            const retryInterval = setInterval(() => {
+                updateSymbol();
+                if (symbol) clearInterval(retryInterval);
+            }, 500);
+            return () => clearInterval(retryInterval);
+        }
     }, [symbol, updateSymbol]);
 
     // Function to fetch active symbols using chart_api
@@ -136,7 +144,37 @@ const Chart = observer(({ show_digits_stats }: { show_digits_stats: boolean }) =
         }
     };
 
-    if (!symbol) return null;
+    if (!symbol) {
+        return (
+            <div
+                style={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    height: '100%',
+                    gap: '1rem',
+                    color: 'rgba(255,255,255,0.5)',
+                    fontFamily: 'Inter, sans-serif',
+                    fontSize: '0.85rem',
+                    letterSpacing: '0.05rem',
+                }}
+            >
+                <div
+                    style={{
+                        width: 32,
+                        height: 32,
+                        borderRadius: '50%',
+                        border: '2px solid rgba(6,182,212,0.3)',
+                        borderTopColor: '#06b6d4',
+                        animation: 'spin 0.8s linear infinite',
+                    }}
+                />
+                <style>{`@keyframes spin { to { transform: rotate(360deg); } }`}</style>
+                <span>Loading market data...</span>
+            </div>
+        );
+    }
     const is_connection_opened = !!chart_api?.api;
     return (
         <div
@@ -147,6 +185,7 @@ const Chart = observer(({ show_digits_stats }: { show_digits_stats: boolean }) =
             })}
             dir='ltr'
         >
+            <MarketSelector />
             <SmartChart
                 id='dbot'
                 barriers={barriers}

@@ -51,8 +51,10 @@ export default class ChartStore {
 
     get is_contract_ended() {
         const { transactions } = this.root_store;
-
-        return transactions.contracts.length > 0 && transactions.contracts[0].is_ended;
+        const txns = transactions.transactions;
+        if (!txns || txns.length === 0) return false;
+        const first = txns[0]?.data;
+        return typeof first === 'object' && first !== null && 'is_ended' in first ? (first as any).is_ended : false;
     }
 
     onStartBot = () => {
@@ -66,13 +68,28 @@ export default class ChartStore {
     };
 
     updateSymbol = () => {
-        const workspace = window.Blockly.derivWorkspace;
-        const market_block = workspace?.getAllBlocks().find((block: window.Blockly.Block) => {
-            return block.type === 'trade_definition_market';
-        });
+        // First try: get symbol from Blockly workspace
+        try {
+            const workspace = window.Blockly?.derivWorkspace;
+            const market_block = workspace?.getAllBlocks().find((block: any) => block.type === 'trade_definition_market');
+            const blockly_symbol = market_block?.getFieldValue('SYMBOL_LIST');
+            if (blockly_symbol) {
+                this.symbol = blockly_symbol;
+                return;
+            }
+        } catch {
+            // Blockly not ready yet — fall through
+        }
 
-        const symbol = market_block?.getFieldValue('SYMBOL_LIST') ?? api_base?.active_symbols[0]?.symbol;
-        this.symbol = symbol;
+        // Second try: get from active_symbols list
+        const first_symbol = (api_base?.active_symbols as any[])?.[0]?.symbol as string | undefined;
+        if (first_symbol) {
+            this.symbol = first_symbol;
+            return;
+        }
+
+        // Third try: keep whatever was in storage (set during restoreFromStorage)
+        // symbol may already be set from storage, leave it unchanged
     };
 
     onSymbolChange = (symbol: string) => {
@@ -117,9 +134,14 @@ export default class ChartStore {
             } else {
                 this.granularity = 0;
                 this.chart_type = 'line';
+                // Default symbol for first-time users so chart renders immediately
+                this.symbol = 'R_100';
             }
         } catch {
             LocalStore.remove('bot.chart_props');
+            this.granularity = 0;
+            this.chart_type = 'line';
+            this.symbol = 'R_100';
         }
     };
 

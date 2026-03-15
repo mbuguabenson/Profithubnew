@@ -47,20 +47,18 @@ const DigitCracker = lazy(() => import('@/pages/digit-cracker/index'));
 const Settings = lazy(() => import('@/pages/settings/index'));
 const Strategies = lazy(() => import('@/pages/strategies/index'));
 const FreeBotsTab = lazy(() => import('@/pages/free-bots/free-bots-tab'));
+const DerivCourse = lazy(() => import('@/pages/deriv-course/DerivCourse'));
 
 const Portal = observer(({ type }: { type: 'dtrader' | 'dtooltrades' }) => {
     const { client } = useStore();
-    const targetBaseUrl =
-        type === 'dtrader'
-            ? atob('aHR0cHM6Ly9kdHJhZGVyLnByb2ZpdGh1YnRvb2wudmVyY2VsLmFwcA==')
-            : atob('aHR0cHM6Ly9kdG9vbC5wcm9maXRodWJ0b29sLnZlcmNlbC5hcHA=');
-    // Fallback to localhost if we are on localhost
     const finalBaseUrl =
         window.location.hostname === 'localhost'
             ? type === 'dtrader'
                 ? 'https://localhost:8443'
                 : 'http://localhost:3000'
-            : targetBaseUrl;
+            : type === 'dtrader'
+            ? 'https://dtrader.profithubtool.vercel.app'
+            : 'https://dtooltrades.vercel.app/';
 
     const ssoUrl = getSsoUrl(finalBaseUrl, client.accounts);
 
@@ -84,6 +82,8 @@ const Portal = observer(({ type }: { type: 'dtrader' | 'dtooltrades' }) => {
     );
 });
 
+import MarketSelector from '@/components/market-selector/market-selector';
+
 /** Combined Trading Tools tab: SmartAuto24 + DigitCracker side-by-side sub-tabs */
 const TradingTools = () => {
     const [activeTab, setActiveTab] = React.useState<'smartauto' | 'digitcracker'>('smartauto');
@@ -91,50 +91,73 @@ const TradingTools = () => {
         <div style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
             <div
                 style={{
-                    display: 'flex',
-                    gap: '8px',
-                    padding: '12px 16px',
                     background: 'var(--general-section-1)',
                     borderBottom: '1px solid var(--general-section-2)',
+                    width: '100%',
                 }}
             >
-                <button
-                    onClick={() => setActiveTab('smartauto')}
+                <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
+                    <MarketSelector />
+                </div>
+            </div>
+
+            <div
+                style={{
+                    background: 'var(--general-section-1)',
+                    borderBottom: '1px solid var(--general-section-2)',
+                    width: '100%',
+                }}
+            >
+                <div
                     style={{
-                        padding: '8px 20px',
-                        borderRadius: '20px',
-                        border: 'none',
-                        cursor: 'pointer',
-                        fontWeight: 600,
-                        background: activeTab === 'smartauto' ? 'var(--brand-red-coral)' : 'var(--general-section-2)',
-                        color: activeTab === 'smartauto' ? '#fff' : 'var(--text-general)',
-                        transition: 'all 0.2s',
+                        display: 'flex',
+                        gap: '8px',
+                        padding: '12px 24px',
+                        maxWidth: '1200px',
+                        margin: '0 auto',
                     }}
                 >
-                    Smart Auto 24
-                </button>
-                <button
-                    onClick={() => setActiveTab('digitcracker')}
-                    style={{
-                        padding: '8px 20px',
-                        borderRadius: '20px',
-                        border: 'none',
-                        cursor: 'pointer',
-                        fontWeight: 600,
-                        background:
-                            activeTab === 'digitcracker' ? 'var(--brand-red-coral)' : 'var(--general-section-2)',
-                        color: activeTab === 'digitcracker' ? '#fff' : 'var(--text-general)',
-                        transition: 'all 0.2s',
-                    }}
-                >
-                    Digit Cracker
-                </button>
+                    <button
+                        onClick={() => setActiveTab('smartauto')}
+                        style={{
+                            padding: '8px 20px',
+                            borderRadius: '20px',
+                            border: 'none',
+                            cursor: 'pointer',
+                            fontWeight: 600,
+                            background: activeTab === 'smartauto' ? 'var(--brand-red-coral)' : 'var(--general-section-2)',
+                            color: activeTab === 'smartauto' ? '#fff' : 'var(--text-general)',
+                            transition: 'all 0.2s',
+                        }}
+                    >
+                        Smart Auto 24
+                    </button>
+                    <button
+                        onClick={() => setActiveTab('digitcracker')}
+                        style={{
+                            padding: '8px 20px',
+                            borderRadius: '20px',
+                            border: 'none',
+                            cursor: 'pointer',
+                            fontWeight: 600,
+                            background: activeTab === 'digitcracker' ? 'var(--brand-red-coral)' : 'var(--general-section-2)',
+                            color: activeTab === 'digitcracker' ? '#fff' : 'var(--text-general)',
+                            transition: 'all 0.2s',
+                        }}
+                    >
+                        Digit Cracker
+                    </button>
+                </div>
             </div>
-            <div style={{ flex: 1, overflow: 'auto' }}>
-                <Suspense fallback={<ChunkLoader message={localize('Loading...')} />}>
-                    {activeTab === 'smartauto' ? <SmartAuto24 /> : <DigitCracker />}
-                </Suspense>
+
+            <div style={{ flex: 1, overflow: 'auto', width: '100%', display: 'flex', justifyContent: 'center' }}>
+                <div style={{ width: '100%', maxWidth: '1200px', padding: '0 24px' }}>
+                    <Suspense fallback={<ChunkLoader message={localize('Loading...')} />}>
+                        {activeTab === 'smartauto' ? <SmartAuto24 /> : <DigitCracker />}
+                    </Suspense>
+                </div>
             </div>
+
         </div>
     );
 };
@@ -181,6 +204,7 @@ const AppWrapper = observer(() => {
         'settings',
         'tutorials',
         'dtooltrades',
+        'deriv_course',
     ];
     const { isDesktop } = useDevice();
     const location = useLocation();
@@ -643,6 +667,27 @@ const AppWrapper = observer(() => {
                                     id='id-dtooltrades'
                                 >
                                     <Portal type='dtooltrades' />
+                                </div>
+                            ) : null}
+
+                            {/* Tab 11: Deriv Course */}
+                            {admin.visible_tabs.deriv_course ? (
+                                <div
+                                    label={
+                                        <div className='main__tabs-label'>
+                                            <span style={{ fontSize: '20px', marginRight: '8px' }}>🎓</span>
+                                            <Localize i18n_default_text='Deriv Course' />
+                                        </div>
+                                    }
+                                    id='id-deriv-course'
+                                >
+                                    <PageContentWrapper>
+                                        <Suspense
+                                            fallback={<ChunkLoader message={localize('Loading Deriv Course...')} />}
+                                        >
+                                            <DerivCourse />
+                                        </Suspense>
+                                    </PageContentWrapper>
                                 </div>
                             ) : null}
                         </Tabs>

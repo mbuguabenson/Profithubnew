@@ -2,18 +2,17 @@ import { lazy, Suspense, useEffect, useRef, useState } from 'react';
 import { observer } from 'mobx-react-lite';
 import ErrorBoundary from '@/components/error-component/error-boundary';
 import ErrorComponent from '@/components/error-component/error-component';
-import ChunkLoader from '@/components/loader/chunk-loader';
+import InitialLoader from '@/components/loader/initial-loader';
 import { api_base } from '@/external/bot-skeleton';
 import { useStore } from '@/hooks/useStore';
 import useTMB from '@/hooks/useTMB';
-import { localize } from '@deriv-com/translations';
 import './app-root.scss';
 
 const AppContent = lazy(() => import('./app-content'));
 const RiskDisclaimerModal = lazy(() => import('@/components/shared/risk-disclaimer-modal'));
 
 const AppRootLoader = () => {
-    return <ChunkLoader message={localize('Loading...')} />;
+    return <InitialLoader />;
 };
 
 const ErrorComponentWrapper = observer(() => {
@@ -48,6 +47,7 @@ const AppRoot = observer(() => {
 
     const api_base_initialized = useRef(false);
     const [is_api_initialized, setIsApiInitialized] = useState(false);
+    const [min_loader_passed, setMinLoaderPassed] = useState(false);
     const [is_tmb_check_complete, setIsTmbCheckComplete] = useState(false);
     const [, setIsTmbEnabled] = useState(false);
     const { isTmbEnabled } = useTMB();
@@ -83,13 +83,18 @@ const AppRoot = observer(() => {
     }, [isTmbEnabled]);
 
     useEffect(() => {
+        // Enforce 5s minimum display time
+        const minTimer = setTimeout(() => {
+            setMinLoaderPassed(true);
+        }, 3000);
+
         if (!is_tmb_check_complete) return;
 
         const timeoutId = setTimeout(() => {
             if (!is_api_initialized) {
                 setIsApiInitialized(true);
             }
-        }, 5000);
+        }, 8000); // safety timeout
 
         const initializeApi = async () => {
             if (!api_base_initialized.current) {
@@ -107,10 +112,13 @@ const AppRoot = observer(() => {
         };
 
         initializeApi();
-        return () => clearTimeout(timeoutId);
+        return () => {
+            clearTimeout(timeoutId);
+            clearTimeout(minTimer);
+        };
     }, [is_tmb_check_complete]);
 
-    if (!store || !is_api_initialized) return <AppRootLoader />;
+    if (!store || !is_api_initialized || !min_loader_passed) return <AppRootLoader />;
 
     return (
         <Suspense fallback={<AppRootLoader />}>

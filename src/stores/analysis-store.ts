@@ -1,8 +1,6 @@
 import { action, makeObservable, observable, reaction, runInAction } from 'mobx';
-import { api_base } from '@/external/bot-skeleton';
 import { DigitStatsEngine } from '@/lib/digit-stats-engine';
 import { DigitTradeEngine } from '@/lib/digit-trade-engine';
-import subscriptionManager from '@/lib/subscription-manager';
 import RootStore from './root-store';
 
 export type TDigitStat = {
@@ -26,14 +24,6 @@ type TTick = {
     epoch: number;
 };
 
-type TDerivResponse = {
-    msg_type: string;
-    tick?: TTick;
-    history?: { prices: (number | string)[] };
-    ticks_history?: { prices: (number | string)[] };
-    subscription?: { id: string };
-    error?: { code: string; message: string };
-};
 
 export default class AnalysisStore {
     root_store: RootStore;
@@ -95,6 +85,27 @@ export default class AnalysisStore {
         // Sync engine configs
         this.updateEngineConfig();
 
+        // Sync with unified market store
+        reaction(
+            () => {
+                const market = this.root_store.analysis_market;
+                if (!market) return { price: undefined, digit: undefined, symbol: undefined };
+                return {
+                    price: market.current_price,
+                    digit: market.last_digit,
+                    symbol: market.symbol
+                };
+            },
+            ({ price, digit, symbol }) => {
+                if (symbol === this.symbol) {
+                    runInAction(() => {
+                        this.current_price = price;
+                        this.last_digit = digit;
+                    });
+                }
+            }
+        );
+
         reaction(
             () => this.root_store.common?.is_socket_opened,
             is_socket_opened => {
@@ -112,9 +123,35 @@ export default class AnalysisStore {
 
         if (this.root_store.common?.is_socket_opened) {
             this.is_connected = true;
-            this.fetchMarkets();
-            this.subscribeToTicks();
         }
+
+        // Global symbol sync
+        reaction(
+            () => this.root_store.analysis_market?.symbol,
+            (market_symbol) => {
+                if (!market_symbol) return;
+                runInAction(() => {
+                    this.symbol = market_symbol;
+                });
+            }
+        );
+
+        // Global ticks sync
+        reaction(
+            () => {
+                const market = this.root_store.analysis_market;
+                if (!market) return { ticks: [], price: undefined };
+                return {
+                    ticks: market.ticks,
+                    price: market.current_price,
+                };
+            },
+            ({ ticks, price }) => {
+                if (ticks.length > 0 && price !== undefined) {
+                    this.updateDigitStats([...ticks], [price]);
+                }
+            }
+        );
     }
 
     @action
@@ -188,88 +225,8 @@ export default class AnalysisStore {
     };
 
     @action
-    subscribeToTicks = async (retry_count = 0) => {
-        if (!this.is_connected || !this.symbol) {
-            return;
-        }
-
-        // Prevent duplicate subscription attempts
-        if (this.is_subscribing || this.unsubscribe_ticks) {
-            return;
-        }
-
-        this.is_subscribing = true;
-        this.is_loading = true;
-        this.error_message = null;
-
-        try {
-            // Unsubscribe existing if any (safety check)
-            const unsubscribe = this.unsubscribe_ticks;
-            if (unsubscribe && typeof unsubscribe === 'function') {
-                (unsubscribe as () => void)();
-                this.unsubscribe_ticks = null;
-            }
-
-            console.log(`[AnalysisStore] Subscribing to ${this.symbol} (attempt ${retry_count + 1})`);
-
-            this.unsubscribe_ticks = await subscriptionManager.subscribeToTicks(this.symbol, (data: unknown) => {
-                const response = data as TDerivResponse;
-                if (response.msg_type === 'tick' && response.tick) {
-                    if (response.tick.symbol === this.symbol) {
-                        this.handleTick(response.tick);
-                    }
-                } else if (response.msg_type === 'history' && (response.history || response.ticks_history)) {
-                    console.log(`[AnalysisStore] Processing history for ${this.symbol}`);
-                    const history = response.history || response.ticks_history;
-                    if (history && history.prices && history.prices.length > 0) {
-                        const prices = history.prices;
-                        runInAction(() => {
-                            const price_numbers = prices.map((p: string | number) => Number(p));
-                            const last_digits = prices.map((p: number | string) => {
-                                return this.stats_engine.extractLastDigit(p);
-                            });
-
-                            const last_price = price_numbers[price_numbers.length - 1];
-                            this.current_price = last_price;
-                            this.ticks = last_digits;
-                            this.last_digit = this.stats_engine.extractLastDigit(last_price);
-
-                            // Hydrate engine
-                            this.stats_engine.update(last_digits, price_numbers);
-                            this.refreshStats();
-                            this.is_loading = false;
-                            this.error_message = null;
-                        });
-                    }
-                }
-            });
-
-            console.log('[AnalysisStore] Subscription successful');
-        } catch (e: unknown) {
-            console.error('[AnalysisStore] Subscribe error:', e);
-            const message = (e as Error)?.message || 'Failed to subscribe';
-
-            runInAction(() => {
-                this.error_message = message;
-                this.is_loading = false;
-                this.unsubscribe_ticks = null;
-            });
-
-            // Auto-retry logic: Max 3 retries with 2s delay
-            if (retry_count < 3) {
-                console.log(`[AnalysisStore] Retrying subscription in 2s... (${retry_count + 1}/3)`);
-                setTimeout(() => {
-                    runInAction(() => {
-                        this.is_subscribing = false; // Reset so retry can proceed
-                        this.subscribeToTicks(retry_count + 1);
-                    });
-                }, 2000);
-            }
-        } finally {
-            runInAction(() => {
-                this.is_subscribing = false;
-            });
-        }
+    subscribeToTicks = async () => {
+        // Now handled by AnalysisMarketStore
     };
 
     @action
@@ -332,40 +289,7 @@ export default class AnalysisStore {
 
     @action
     fetchMarkets = async () => {
-        try {
-            if (!api_base.api) return;
-            const response = (await api_base.api.send({ active_symbols: 'brief' })) as {
-                active_symbols?: Record<string, unknown>[];
-            };
-
-            if (response.active_symbols) {
-                const groups: Record<string, { group: string; items: { value: string; label: string }[] }> = {};
-
-                response.active_symbols.forEach((s: Record<string, unknown>) => {
-                    // Show all trading markets
-                    if (s.is_trading_suspended) return;
-
-                    const market_name = (s.market_display_name as string) || (s.market as string);
-                    if (!groups[market_name]) groups[market_name] = { group: market_name, items: [] };
-                    groups[market_name].items.push({ value: s.symbol as string, label: s.display_name as string });
-
-                    if (s.pip) {
-                        const pip = Math.abs(Math.log10(s.pip as number)); // Convert pip to decimals
-                        this.symbol_pips.set(s.symbol as string, pip);
-                        if (s.symbol === this.symbol) {
-                            this.pip = pip;
-                            this.updateEngineConfig();
-                        }
-                    }
-                });
-
-                runInAction(() => {
-                    this.markets = Object.values(groups).sort((a, b) => a.group.localeCompare(b.group));
-                });
-            }
-        } catch (error) {
-            console.error('Error fetching markets in AnalysisStore:', error);
-        }
+        // Now handled by AnalysisMarketStore
     };
 
     @action

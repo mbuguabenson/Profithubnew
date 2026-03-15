@@ -4,7 +4,7 @@ import { ToastContainer } from 'react-toastify';
 import AuthLoadingWrapper from '@/components/auth-loading-wrapper';
 import useLiveChat from '@/components/chat/useLiveChat';
 import { BOT_RESTRICTED_COUNTRIES_LIST } from '@/components/layout/header/utils';
-import ChunkLoader from '@/components/loader/chunk-loader';
+import InitialLoader from '@/components/loader/initial-loader';
 import PWAInstallModal from '@/components/pwa-install-modal';
 import { getUrlBase } from '@/components/shared';
 import TncStatusUpdateModal from '@/components/tnc-status-update-modal';
@@ -35,6 +35,7 @@ import '../components/bot-notification/bot-notification.scss';
 const AppContent = observer(() => {
     const [is_api_initialized, setIsApiInitialized] = React.useState(false);
     const [is_loading, setIsLoading] = React.useState(true);
+    const [min_loader_passed, setMinLoaderPassed] = React.useState(false);
     const [is_eu_error_loading, setIsEuErrorLoading] = React.useState(true);
     const [offline_timeout, setOfflineTimeout] = React.useState(null);
     const store = useStore();
@@ -87,14 +88,10 @@ const AppContent = observer(() => {
 
     // Handle offline scenarios and general loading hangs - don't wait indefinitely for API
     useEffect(() => {
-        // Safety timeout to ensure loading screen always disappears
-        const global_loading_timeout = setTimeout(() => {
-            if (is_loading) {
-                console.warn('[AppContent] Aggressive loading timeout reached, forcing dashboard view');
-                setIsLoading(false);
-                setIsApiInitialized(true);
-            }
-        }, 10000); // Increased to 10s for more headroom on slow connections
+        // Enforce 5s minimum display time
+        const minTimer = setTimeout(() => {
+            setMinLoaderPassed(true);
+        }, 3000);
 
         if (!isOnline && is_loading) {
             console.log('[Offline] Detected offline state, setting timeout to show dashboard');
@@ -116,7 +113,7 @@ const AppContent = observer(() => {
         }
 
         return () => {
-            clearTimeout(global_loading_timeout);
+            clearTimeout(minTimer);
             if (offline_timeout) {
                 clearTimeout(offline_timeout);
             }
@@ -314,8 +311,8 @@ const AppContent = observer(() => {
         );
     }
 
-    return is_loading ? (
-        <ChunkLoader message={getLoadingMessage()} />
+    return is_loading || !min_loader_passed ? (
+        <InitialLoader />
     ) : (
         <AuthLoadingWrapper>
             <ThemeProvider theme={is_dark_mode_on ? 'dark' : 'light'}>

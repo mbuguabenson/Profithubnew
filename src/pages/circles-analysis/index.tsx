@@ -1,15 +1,13 @@
 import { useEffect } from 'react';
 import { observer } from 'mobx-react-lite';
 import { useStore } from '@/hooks/useStore';
+import MarketSelector from '@/components/market-selector/market-selector';
 import { AnalysisSection, DigitCircles, TradingEngine } from './components';
 import './circles-analysis.scss';
 
 const CirclesAnalysis = observer(() => {
     const { analysis } = useStore();
     const {
-        current_price,
-        symbol,
-        total_ticks,
         even_odd_history,
         over_under_history,
         matches_differs_history,
@@ -21,34 +19,9 @@ const CirclesAnalysis = observer(() => {
             match_diff: { count: 0, type: 'MATCH' },
             rise_fall: { count: 0, type: 'RISE' },
         },
-        setSymbol,
-        setTotalTicks,
-        last_digit,
-        markets,
         over_under_threshold,
         match_diff_digit,
     } = analysis;
-
-    const availableMarkets =
-        markets.length > 0
-            ? markets
-            : [
-                  {
-                      group: 'Synthetic Indices',
-                      items: [
-                          { value: '1HZ10V', label: 'Volatility 10 (1s) Index' },
-                          { value: '1HZ25V', label: 'Volatility 25 (1s) Index' },
-                          { value: '1HZ50V', label: 'Volatility 50 (1s) Index' },
-                          { value: '1HZ75V', label: 'Volatility 75 (1s) Index' },
-                          { value: '1HZ100V', label: 'Volatility 100 (1s) Index' },
-                          { value: 'R_10', label: 'Volatility 10 Index' },
-                          { value: 'R_25', label: 'Volatility 25 Index' },
-                          { value: 'R_50', label: 'Volatility 50 Index' },
-                          { value: 'R_75', label: 'Volatility 75 Index' },
-                          { value: 'R_100', label: 'Volatility 100 Index' },
-                      ],
-                  },
-              ];
 
     useEffect(() => {
         // Initialization if needed
@@ -56,46 +29,7 @@ const CirclesAnalysis = observer(() => {
 
     return (
         <div className='circles-analysis-container'>
-            <header className='analysis-header'>
-                <div className='header-left'>
-                    <div className='market-selector-wrapper'>
-                        <label>Select Market</label>
-                        <select value={symbol} onChange={e => setSymbol(e.target.value)} className='premium-select'>
-                            {availableMarkets.map(group => (
-                                <optgroup key={group.group} label={group.group}>
-                                    {group.items.map(item => (
-                                        <option key={item.value} value={item.value}>
-                                            {item.label}
-                                        </option>
-                                    ))}
-                                </optgroup>
-                            ))}
-                        </select>
-                    </div>
-                    <div className='ticks-input-wrapper'>
-                        <label>Last Ticks</label>
-                        <input
-                            type='number'
-                            value={total_ticks}
-                            onChange={e => setTotalTicks(parseInt(e.target.value))}
-                            className='premium-input'
-                        />
-                    </div>
-                </div>
-
-                <div className='header-right'>
-                    <div className='price-display-card'>
-                        <span className='label'>LIVE PRICE</span>
-                        <span className='price-value'>{current_price}</span>
-                    </div>
-                    <div
-                        className={`digit-display-card ${last_digit !== null ? (last_digit % 2 === 0 ? 'digit--even' : 'digit--odd') : ''}`}
-                    >
-                        <span className='label'>LAST DIGIT</span>
-                        <span className='digit-value'>{last_digit ?? '-'}</span>
-                    </div>
-                </div>
-            </header>
+            <MarketSelector />
 
             <DigitCircles />
 

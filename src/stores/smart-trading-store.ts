@@ -11,7 +11,6 @@ import {
     TradingSignal,
 } from '@/lib/analysis/smart-predictions';
 import { VSenseEngine, VSenseSignal } from '@/lib/analysis/v-sense-engine';
-import subscriptionManager from '@/lib/subscription-manager';
 import { getSafeLastDigit } from '@/utils/digit-utils';
 import RootStore from './root-store';
 
@@ -510,12 +509,40 @@ export default class SmartTradingStore {
             () => this.root_store.common?.is_socket_opened,
             is_socket_opened => {
                 this.is_connected = !!is_socket_opened;
-                if (is_socket_opened) {
-                    this.fetchMarkets();
-                    this.subscribeToActiveSymbol();
-                }
             },
             { fireImmediately: true }
+        );
+
+        // Global symbol sync
+        reaction(
+            () => {
+                const market = this.root_store.analysis_market;
+                if (!market) return undefined;
+                return market.symbol;
+            },
+            (market_symbol) => {
+                if (!market_symbol) return;
+                runInAction(() => {
+                    this.symbol = market_symbol;
+                });
+            }
+        );
+
+        // Global ticks sync
+        reaction(
+            () => {
+                const market = this.root_store.analysis_market;
+                if (!market) return { ticks: [], price: undefined };
+                return {
+                    ticks: market.ticks || [],
+                    price: market.current_price,
+                };
+            },
+            ({ ticks, price }) => {
+                if (ticks.length > 0 && price !== undefined) {
+                    this.updateDigitStats([...ticks], price);
+                }
+            }
         );
 
         reaction(
@@ -692,122 +719,22 @@ export default class SmartTradingStore {
 
     @action
     fetchMarkets = async () => {
-        if (!ApiHelpers.instance) {
-            const { api_base } = await import('@/external/bot-skeleton');
-            if (api_base.api) {
-                ApiHelpers.setInstance({
-                    server_time: this.root_store.common.server_time,
-                    ws: api_base.api,
-                });
-            } else {
-                return;
-            }
-        }
-        try {
-            const symbols = await (
-                ApiHelpers.instance as unknown as {
-                    active_symbols: {
-                        retrieveActiveSymbols: () => Promise<
-                            Array<{
-                                is_trading_suspended: number;
-                                market_display_name?: string;
-                                market: string;
-                                symbol: string;
-                                display_name: string;
-                                pip: number;
-                            }>
-                        >;
-                    };
-                }
-            ).active_symbols.retrieveActiveSymbols();
-            runInAction(() => {
-                if (symbols && Array.isArray(symbols)) {
-                    const groups: Record<string, { group: string; items: { value: string; label: string }[] }> = {};
-                    const symbolData: Record<string, { pip: number; symbol: string; display_name: string }> = {};
-
-                    symbols.forEach(
-                        (s: {
-                            is_trading_suspended: number | boolean;
-                            market_display_name?: string;
-                            market: string;
-                            symbol: string;
-                            display_name: string;
-                            pip: number;
-                        }) => {
-                            if (s.is_trading_suspended) return;
-                            const market_name = s.market_display_name || s.market;
-                            if (!groups[market_name]) groups[market_name] = { group: market_name, items: [] };
-                            groups[market_name].items.push({ value: s.symbol, label: s.display_name });
-                            symbolData[s.symbol] = s;
-                        }
-                    );
-                    this.markets = Object.values(groups).sort((a, b) => a.group.localeCompare(b.group));
-                    this.active_symbols_data = symbolData;
-                }
-            });
-        } catch (error) {
-            console.error('Error fetching markets in SmartTrading:', error);
-        }
+        // Now handled by AnalysisMarketStore
     };
 
     @action
     setSymbol = (symbol: string) => {
-        if (this.symbol !== symbol) {
-            this.symbol = symbol;
-            this.resetStats();
-            this.root_store.analysis.setSymbol(symbol);
-            this.root_store.auto_trader.setSymbol(symbol);
-            // Re-subscribe to new symbol
-            this.subscribeToActiveSymbol();
-        }
+        this.root_store.analysis_market.setSymbol(symbol);
     };
 
     private unsubscribeTicks: (() => void) | null = null;
 
     @action
     subscribeToActiveSymbol = async () => {
-        // Clear existing subscription
-        if (this.unsubscribeTicks) {
-            this.unsubscribeTicks();
-            this.unsubscribeTicks = null;
-        }
-
-        if (!this.symbol || !this.is_connected) return;
-
-        try {
-            this.unsubscribeTicks = await subscriptionManager.subscribeToTicks(this.symbol, (data: any) => {
-                if (data.msg_type === 'tick') {
-                    const quote = data.tick.quote;
-                    // Construct single-item array or just pass quote if updateDigitStats handles parsing
-                    // updateDigitStats expects last_digits array.
-                    // We need to maintain a local history if we are the primary source,
-                    // or just pass what we have.
-                    // Ideally, we should fetch history first, but for now let's push the new tick.
-
-                    // Extract digit
-                    const symbol_info = this.active_symbols_data[this.symbol];
-                    const pip = symbol_info?.pip || 2;
-                    const digit = getSafeLastDigit(quote, pip);
-
-                    // Append to current ticks if valid
-                    if (!isNaN(digit)) {
-                        // We need to pass the *full* updated array to updateDigitStats because it replaces `this.ticks`
-                        const new_ticks = [...this.ticks, digit].slice(-1000); // Keep last 1000
-                        this.updateDigitStats(new_ticks, quote);
-                    }
-                } else if (data.msg_type === 'history') {
-                    const symbol_info = this.active_symbols_data[this.symbol];
-                    const pip = symbol_info?.pip || 2;
-                    const digits = prices.map((p: any) => {
-                        return getSafeLastDigit(p, pip);
-                    });
-                    this.updateDigitStats(digits, prices);
-                }
-            });
-        } catch (error) {
-            console.error('[SmartTrading] Tick subscription failed:', error);
-        }
+        // Now handled by AnalysisMarketStore
     };
+
+    @action
 
     @action
     setSpeedbotContractType = action((type: string) => {
@@ -1475,7 +1402,7 @@ export default class SmartTradingStore {
                 const targets = [most_appearing, second_most, least_appearing];
                 const increasing_target = targets.find(d => getPowerTrend(d) === 'increasing');
 
-                const isMarketRising = (this.percentages.rise || 0) > (this.percentages.fall || 0);
+                const isMarketRising = (this.root_store.analysis_market.rise_percentage || 0) > (this.root_store.analysis_market.fall_percentage || 0);
 
                 if (increasing_target !== undefined && isMarketRising) {
                     strategy.market_message = `TRADING MATCHES ${increasing_target}...`;

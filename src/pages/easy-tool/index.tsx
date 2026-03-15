@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { observer } from 'mobx-react-lite';
 import { useStore } from '@/hooks/useStore';
 import DigitDistributionCircles from './digit-distribution-circles';
-import MarketSelector from '@/pages/smart-trading/components/market-selector';
+import MarketSelector from '@/components/market-selector/market-selector';
 import { Localize } from '@deriv-com/translations';
 import AdvancedOUAnalyzer from './advanced-ou-analyzer';
 import EvenOddPattern from './even-odd-pattern';

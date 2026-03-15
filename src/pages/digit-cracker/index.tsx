@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { runInAction } from 'mobx';
 import { observer } from 'mobx-react-lite';
 import { useStore } from '@/hooks/useStore';
+import { Localize } from '@deriv-com/translations';
 import { TTradeConfig, TTradeLog } from '@/lib/digit-trade-engine';
 import { TAnalysisHistory, TDigitStat } from '@/stores/analysis-store';
 import {
@@ -9,10 +10,11 @@ import {
     LabelPairedPlayMdFillIcon,
     LabelPairedSquareMdFillIcon,
 } from '@deriv/quill-icons/LabelPaired';
+import '../easy-tool/easy-tool.scss';
 import './digit-cracker.scss';
 
 const DigitCracker = observer(() => {
-    const { digit_cracker, client } = useStore();
+    const { digit_cracker, client, common, ui, smart_trading } = useStore();
     const [activeStrategy, setActiveStrategy] = useState<'even_odd' | 'differs' | 'matches' | 'over_under'>('even_odd');
     const [activeLogTab, setActiveLogTab] = useState<'summary' | 'transactions' | 'journal'>('summary');
     const logRef = useRef<HTMLDivElement>(null);
@@ -23,13 +25,15 @@ const DigitCracker = observer(() => {
         percentages,
         even_odd_history,
         over_under_history,
-        symbol,
-        markets,
         trade_engine,
-        is_connected,
-        is_subscribing,
     } = digit_cracker;
     const { trade_status, is_executing, session_profit, total_profit, logs } = trade_engine;
+    
+    // Header Stats
+    const { balance, currency } = client;
+    const { latency, is_socket_opened } = common;
+    const { is_dark_mode_on } = ui;
+    const { current_price } = smart_trading;
 
     // Initialize/Cleanup
     useEffect(() => {
@@ -47,9 +51,6 @@ const DigitCracker = observer(() => {
 
     // Autorun removed as AnalysisStore handles tick processing internally
 
-    const handleMarketChange = (newSymbol: string) => {
-        digit_cracker.setSymbol(newSymbol);
-    };
 
     const renderDigitCircles = () => {
         // Split digits into two groups: 0-4 and 5-9
@@ -84,15 +85,15 @@ const DigitCracker = observer(() => {
                             </div>
                         )}
                         <div className='digit-main-circle'>
-                            <svg width='70' height='70' viewBox='0 0 70 70'>
+                            <svg viewBox='0 0 70 70' width='70' height='70' preserveAspectRatio='xMidYMid meet'>
                                 <circle
                                     className='circle-track'
                                     cx='35'
                                     cy='35'
                                     r='30'
                                     fill='none'
-                                    stroke='rgba(255, 255, 255, 0.05)'
-                                    strokeWidth='6'
+                                    stroke='var(--general-hover)'
+                                    strokeWidth='4'
                                 />
                                 <circle
                                     className='circle-progress-arc'
@@ -101,19 +102,18 @@ const DigitCracker = observer(() => {
                                     r='30'
                                     fill='none'
                                     stroke={color}
-                                    strokeWidth='6'
+                                    strokeWidth='4'
                                     strokeLinecap='round'
-                                    // Arc at bottom: dasharray is 1/4 of circumference
                                     strokeDasharray={`${(2 * Math.PI * 30) / 4} ${2 * Math.PI * 30}`}
-                                    strokeDashoffset={-(2 * Math.PI * 30) * 0.375} // Rotate to bottom
-                                    style={{ filter: isCurrent ? `drop-shadow(0 0 8px ${color})` : 'none' }}
+                                    strokeDashoffset={-(2 * Math.PI * 30) * 0.375}
+                                    style={{ filter: isCurrent ? `drop-shadow(0 0 6px ${color})` : 'none' }}
                                 />
                             </svg>
                             <div className='digit-center-text'>
-                                <span className='digit-num' style={{ color: isCurrent ? color : '#fff' }}>
+                                <span className='digit-num' style={{ color: isCurrent ? color : 'var(--text-prominent)' }}>
                                     {stat.digit}
                                 </span>
-                                <span className='digit-pct' style={{ color: isCurrent ? color : '#60a5fa' }}>
+                                <span className='digit-pct' style={{ color: isCurrent ? color : 'var(--text-general)' }}>
                                     {stat.percentage.toFixed(1)}%
                                 </span>
                             </div>
@@ -232,90 +232,58 @@ const DigitCracker = observer(() => {
                         <>
                             <div className='input-field'>
                                 <label>Trigger Condition</label>
-                                <select
-                                    style={{
-                                        width: '100%',
-                                        padding: '0.8rem',
-                                        borderRadius: '4px',
-                                        background: 'rgba(0,0,0,0.2)',
-                                        color: 'white',
-                                        border: '1px solid rgba(255,255,255,0.1)',
-                                    }}
-                                    value={config.trigger_condition || 'EITHER'}
-                                    onChange={e =>
-                                        trade_engine.updateConfig(
-                                            activeStrategy,
-                                            'trigger_condition' as keyof TTradeConfig,
-                                            e.target.value as any
-                                        )
-                                    }
-                                >
-                                    <option value='EITHER' style={{ background: '#1f2937' }}>
-                                        Either (Even/Odd)
-                                    </option>
-                                    <option value='EVEN' style={{ background: '#1f2937' }}>
-                                        Even Only
-                                    </option>
-                                    <option value='ODD' style={{ background: '#1f2937' }}>
-                                        Odd Only
-                                    </option>
-                                </select>
+                                <div className='select-wrapper'>
+                                    <select
+                                        value={config.trigger_condition || 'EITHER'}
+                                        onChange={e =>
+                                            trade_engine.updateConfig(
+                                                activeStrategy,
+                                                'trigger_condition' as keyof TTradeConfig,
+                                                e.target.value as any
+                                            )
+                                        }
+                                    >
+                                        <option value='EITHER'>Either (Even/Odd)</option>
+                                        <option value='EVEN'>Even Only</option>
+                                        <option value='ODD'>Odd Only</option>
+                                    </select>
+                                </div>
                             </div>
                             <div className='input-field'>
                                 <label>Target Prediction</label>
-                                <select
-                                    style={{
-                                        width: '100%',
-                                        padding: '0.8rem',
-                                        borderRadius: '4px',
-                                        background: 'rgba(0,0,0,0.2)',
-                                        color: 'white',
-                                        border: '1px solid rgba(255,255,255,0.1)',
-                                    }}
-                                    value={config.target_prediction || 'EVEN'}
-                                    onChange={e =>
-                                        trade_engine.updateConfig(
-                                            activeStrategy,
-                                            'target_prediction' as keyof TTradeConfig,
-                                            e.target.value as any
-                                        )
-                                    }
-                                >
-                                    <option value='EVEN' style={{ background: '#1f2937' }}>
-                                        Trade Even
-                                    </option>
-                                    <option value='ODD' style={{ background: '#1f2937' }}>
-                                        Trade Odd
-                                    </option>
-                                </select>
+                                <div className='select-wrapper'>
+                                    <select
+                                        value={config.target_prediction || 'EVEN'}
+                                        onChange={e =>
+                                            trade_engine.updateConfig(
+                                                activeStrategy,
+                                                'target_prediction' as keyof TTradeConfig,
+                                                e.target.value as any
+                                            )
+                                        }
+                                    >
+                                        <option value='EVEN'>Trade Even</option>
+                                        <option value='ODD'>Trade Odd</option>
+                                    </select>
+                                </div>
                             </div>
                             <div className='input-field'>
                                 <label>Entry Pattern</label>
-                                <select
-                                    style={{
-                                        width: '100%',
-                                        padding: '0.8rem',
-                                        borderRadius: '4px',
-                                        background: 'rgba(0,0,0,0.2)',
-                                        color: 'white',
-                                        border: '1px solid rgba(255,255,255,0.1)',
-                                    }}
-                                    value={config.entry_pattern || 'PATTERN_1'}
-                                    onChange={e =>
-                                        trade_engine.updateConfig(
-                                            activeStrategy,
-                                            'entry_pattern' as keyof TTradeConfig,
-                                            e.target.value as any
-                                        )
-                                    }
-                                >
-                                    <option value='PATTERN_1' style={{ background: '#1f2937' }}>
-                                        Threshold + Consec.
-                                    </option>
-                                    <option value='PATTERN_2' style={{ background: '#1f2937' }}>
-                                        High/2nd/Least Rankings
-                                    </option>
-                                </select>
+                                <div className='select-wrapper'>
+                                    <select
+                                        value={config.entry_pattern || 'PATTERN_1'}
+                                        onChange={e =>
+                                            trade_engine.updateConfig(
+                                                activeStrategy,
+                                                'entry_pattern' as keyof TTradeConfig,
+                                                e.target.value as any
+                                            )
+                                        }
+                                    >
+                                        <option value='PATTERN_1'>Threshold + Consec.</option>
+                                        <option value='PATTERN_2'>High/2nd/Least Rankings</option>
+                                    </select>
+                                </div>
                             </div>
                             {config.entry_pattern !== 'PATTERN_2' && (
                                 <>
@@ -472,32 +440,32 @@ const DigitCracker = observer(() => {
                     <div className='summary-content'>
                         <div className='summary-grid'>
                             <div className='summary-card'>
-                                <span className='label'>Total Trades</span>
-                                <span className='value'>{totalTrades}</span>
+                                <div className='label'>Total Trades</div>
+                                <div className='value'>{totalTrades}</div>
                             </div>
                             <div className='summary-card'>
-                                <span className='label'>Wins</span>
-                                <span className='value success'>{wins}</span>
+                                <div className='label'>Wins</div>
+                                <div className='value success'>{wins}</div>
                             </div>
                             <div className='summary-card'>
-                                <span className='label'>Losses</span>
-                                <span className='value error'>{losses}</span>
+                                <div className='label'>Losses</div>
+                                <div className='value error'>{losses}</div>
                             </div>
                             <div className='summary-card'>
-                                <span className='label'>Win Rate</span>
-                                <span className='value'>{winRate}%</span>
+                                <div className='label'>Win Rate</div>
+                                <div className='value'>{winRate}%</div>
                             </div>
                             <div className='summary-card'>
-                                <span className='label'>Session Profit</span>
-                                <span className={`value ${session_profit >= 0 ? 'success' : 'error'}`}>
+                                <div className='label'>Session Profit</div>
+                                <div className={`value ${session_profit >= 0 ? 'success' : 'error'}`}>
                                     ${session_profit.toFixed(2)}
-                                </span>
+                                </div>
                             </div>
                             <div className='summary-card'>
-                                <span className='label'>Total Profit</span>
-                                <span className={`value ${total_profit >= 0 ? 'success' : 'error'}`}>
+                                <div className='label'>Total Profit</div>
+                                <div className={`value ${total_profit >= 0 ? 'success' : 'error'}`}>
                                     ${total_profit.toFixed(2)}
-                                </span>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -515,11 +483,14 @@ const DigitCracker = observer(() => {
                         ) : (
                             <div className='transaction-list'>
                                 {tradeLogs.map((log: TTradeLog, i: number) => (
-                                    <div key={i} className={`transaction-item ${log.type}`}>
-                                        <span className='timestamp'>
+                                    <div key={i} className={`log-row transaction-item ${log.type}`}>
+                                        <div className='log-time'>
                                             {new Date(log.timestamp).toLocaleTimeString()}
-                                        </span>
-                                        <span className='message'>{log.message}</span>
+                                        </div>
+                                        <div className='log-message'>{log.message}</div>
+                                        <div className='log-status-icon'>
+                                            {log.type === 'success' ? '✅' : log.type === 'error' ? '❌' : '⚡'}
+                                        </div>
                                     </div>
                                 ))}
                             </div>
@@ -534,541 +505,251 @@ const DigitCracker = observer(() => {
                         {logs.length === 0 ? (
                             <div className='empty-log'>No journal entries...</div>
                         ) : (
-                            logs.map((log: TTradeLog, i: number) => (
-                                <div key={i} className={`log-entry ${log.type}`}>
-                                    <span className='timestamp'>[{new Date(log.timestamp).toLocaleTimeString()}]</span>
-                                    <span className='message'>{log.message}</span>
-                                </div>
-                            ))
+                            <div className='journal-list'>
+                                {logs.map((log: TTradeLog, i: number) => (
+                                    <div key={i} className={`log-row log-entry ${log.type}`}>
+                                        <div className='log-time'>
+                                            {new Date(log.timestamp).toLocaleTimeString()}
+                                        </div>
+                                        <div className='log-message'>{log.message}</div>
+                                    </div>
+                                ))}
+                            </div>
                         )}
                     </div>
                 );
         }
     };
-
-    // Get available markets or use default volatility indices
-    const availableMarkets =
-        markets.length > 0
-            ? markets.flatMap(group => group.items)
-            : [
-                  { value: '1HZ10V', label: 'Volatility 10 (1s) Index' },
-                  { value: '1HZ25V', label: 'Volatility 25 (1s) Index' },
-                  { value: '1HZ50V', label: 'Volatility 50 (1s) Index' },
-                  { value: '1HZ75V', label: 'Volatility 75 (1s) Index' },
-                  { value: '1HZ100V', label: 'Volatility 100 (1s) Index' },
-                  { value: 'R_10', label: 'Volatility 10 Index' },
-                  { value: 'R_25', label: 'Volatility 25 Index' },
-                  { value: 'R_50', label: 'Volatility 50 Index' },
-                  { value: 'R_75', label: 'Volatility 75 Index' },
-                  { value: 'R_100', label: 'Volatility 100 Index' },
-              ];
-
+    
     return (
-        <div className='digit-cracker-page'>
-            <div className='cracker-header'>
-                <div className='header-title'>
-                    <h1>⚡ Digit Cracker Strategy</h1>
-                    <p className='subtitle'>Automated Probability-Based Trading Engine</p>
-                </div>
-                <div className='header-controls'>
-                    <div className='control-group'>
-                        <label>Select Market</label>
-                        <select
-                            className='market-selector'
-                            value={symbol}
-                            onChange={e => handleMarketChange(e.target.value)}
-                            disabled={is_subscribing}
-                        >
-                            {availableMarkets.map(opt => (
-                                <option key={opt.value} value={opt.value}>
-                                    {opt.label}
-                                </option>
-                            ))}
-                        </select>
-                    </div>
-                    <div className='stat-card connection'>
-                        <span className='label'>WebSocket</span>
-                        <span className={`status ${is_connected ? 'connected' : 'disconnected'}`}>
-                            {is_subscribing ? '⏳ Connecting...' : is_connected ? '🟢 Connected' : '🔴 Disconnected'}
-                        </span>
+        <div className={`easy-tool digit-cracker-page ${is_dark_mode_on ? 'easy-tool--dark' : 'easy-tool--light'}`}>
+            <div className='easy-tool__header'>
+                <div className='easy-tool__title-group'>
+                    <div className='easy-tool__title'>
+                        <Localize i18n_default_text='Digit Cracker' />
                     </div>
                 </div>
-                <div className='header-stats'>
-                    <div className='stat-card balance'>
-                        <span className='label'>Balance</span>
-                        <span className='value'>
-                            ${client.balance ? parseFloat(String(client.balance)).toFixed(2) : '0.00'}
+
+                <div className='easy-tool__vitals-row'>
+                    <div className='v-item'>
+                        <span className='l'>PRICE</span>
+                        <span className='v'>{current_price}</span>
+                    </div>
+                    <div className='v-item'>
+                        <span className='l'>DIGIT</span>
+                        <span className='v digit'>{last_digit ?? '-'}</span>
+                    </div>
+                    <div className='v-item'>
+                        <span className='l'>BALANCE</span>
+                        <span className='v balance'>
+                            {balance} {currency}
                         </span>
                     </div>
-                    <div className='stat-card market'>
-                        <span className='label'>Market</span>
-                        <span className='value'>{symbol || 'N/A'}</span>
+                    <div className='v-item'>
+                        <span className='l'>PING</span>
+                        <span className='v'>{latency}ms</span>
                     </div>
-                    <div className='stat-card price'>
-                        <span className='label'>Spot Price</span>
-                        <span className='value'>{is_subscribing ? '...' : digit_cracker.current_price}</span>
-                    </div>
-                    <div className='stat-card live-digit'>
-                        <span className='label'>Live Digit</span>
-                        <span className='value digit-display'>
-                            {is_subscribing ? '-' : last_digit !== null && last_digit !== undefined ? last_digit : '-'}
-                        </span>
-                    </div>
-                    <div className='stat-card tick-count'>
-                        <span className='label'>Ticks Analyzed</span>
-                        <span className='value'>
-                            {digit_cracker.ticks.length}/{digit_cracker.total_ticks}
+                    <div className='v-item'>
+                        <span className='l'>STATUS</span>
+                        <span className={`v-status ${is_socket_opened ? 'online' : 'offline'}`}>
+                            {is_socket_opened ? 'Connected' : 'Disconnected'}
                         </span>
                     </div>
                 </div>
             </div>
 
-            <div className='analytics-section'>
-                <div className='section-title'>
-                    <h2>📊 Digits Distribution Analytics</h2>
-                    <span className='tick-info'>Last 60 Ticks • Real-Time Analysis</span>
-                </div>
-                {renderDigitCircles()}
-            </div>
-
-            <div className='strategy-section'>
-                <div className='strategy-tabs'>
-                    <button
-                        className={activeStrategy === 'even_odd' ? 'active' : ''}
-                        onClick={() => setActiveStrategy('even_odd')}
-                    >
-                        EVEN/ODD
-                    </button>
-                    <button
-                        className={activeStrategy === 'differs' ? 'active' : ''}
-                        onClick={() => setActiveStrategy('differs')}
-                    >
-                        DIFFERS
-                    </button>
-                    <button
-                        className={activeStrategy === 'matches' ? 'active' : ''}
-                        onClick={() => setActiveStrategy('matches')}
-                    >
-                        MATCHES
-                    </button>
-                    <button
-                        className={activeStrategy === 'over_under' ? 'active' : ''}
-                        onClick={() => setActiveStrategy('over_under')}
-                    >
-                        OVER/UNDER
-                    </button>
+            <div className='easy-tool__content'>
+                {/* 1. Analytics Section */}
+                <div className='easy-tool__section analytics-section'>
+                    <div className='section-card'>
+                        <div className='section-card__header'>
+                            <Localize i18n_default_text='Digits Distribution Analytics' />
+                            <span style={{ fontSize: '10px', opacity: 0.5, textTransform: 'none', marginLeft: 'auto' }}>
+                                Last 60 Ticks • Real-Time Analysis
+                            </span>
+                        </div>
+                        {renderDigitCircles()}
+                    </div>
                 </div>
 
-                <div className='strategy-content'>
-                    <div className='content-left'>
-                        {activeStrategy === 'even_odd' && (
-                            <div className='strategy-info'>
-                                <h3>Even vs Odd Strategy</h3>
-                                <div className='strategy-description'>
-                                    <p>
-                                        <strong>Logic:</strong> Follows the configured trigger conditions, target, and
-                                        entry pattern (consecutive opposite digits or high/2nd/least rankings).
-                                    </p>
-                                    <p>
-                                        <strong>Max Runs:</strong> Selected in configuration (default 12).
-                                    </p>
-                                </div>
-                                <div className='power-display'>
-                                    <div className='power-item'>
-                                        <span className='label'>EVEN Power:</span>
-                                        <span className='value green'>{percentages.even.toFixed(1)}%</span>
-                                    </div>
-                                    <div className='power-item'>
-                                        <span className='label'>ODD Power:</span>
-                                        <span className='value red'>{percentages.odd.toFixed(1)}%</span>
-                                    </div>
-                                    <div className='power-item prediction'>
-                                        <span className='label'>🎯 Current Signal:</span>
-                                        <span className='value' style={{ color: '#a855f7', fontWeight: 'bold' }}>
-                                            {percentages.even >= (trade_engine.even_odd_config.trigger_percentage || 55)
-                                                ? 'EVEN threshold met'
-                                                : percentages.odd >=
-                                                    (trade_engine.even_odd_config.trigger_percentage || 55)
-                                                  ? 'ODD threshold met'
-                                                  : `Waiting for ${trade_engine.even_odd_config.trigger_percentage || 55}%+ threshold...`}
-                                        </span>
-                                    </div>
-                                </div>
-                                <div className='history-section'>
-                                    <span className='history-label'>Recent Pattern:</span>
-                                    <div className='history-boxes'>
-                                        {even_odd_history.slice(0, 20).map((h: TAnalysisHistory, i: number) => (
-                                            <div key={i} className={`history-box ${h.type.toLowerCase()}`}>
-                                                {h.type === 'E' ? 'E' : 'O'}
+                {/* 2. Strategy Section */}
+                <div className='easy-tool__section strategy-section'>
+                    <div className='section-card'>
+                        <div className='strategy-tabs'>
+                            <button
+                                className={activeStrategy === 'even_odd' ? 'active' : ''}
+                                onClick={() => setActiveStrategy('even_odd')}
+                            >
+                                EVEN/ODD
+                            </button>
+                            <button
+                                className={activeStrategy === 'differs' ? 'active' : ''}
+                                onClick={() => setActiveStrategy('differs')}
+                            >
+                                DIFFERS
+                            </button>
+                            <button
+                                className={activeStrategy === 'matches' ? 'active' : ''}
+                                onClick={() => setActiveStrategy('matches')}
+                            >
+                                MATCHES
+                            </button>
+                            <button
+                                className={activeStrategy === 'over_under' ? 'active' : ''}
+                                onClick={() => setActiveStrategy('over_under')}
+                            >
+                                OVER/UNDER
+                            </button>
+                        </div>
+
+                        <div className='strategy-content'>
+                            <div className='content-left'>
+                                {activeStrategy === 'even_odd' && (
+                                    <div className='strategy-info'>
+                                        <h3>Even vs Odd Strategy</h3>
+                                        <div className='strategy-description'>
+                                            <p>
+                                                <strong>Logic:</strong> Follows the configured trigger conditions, target, and
+                                                entry pattern.
+                                            </p>
+                                        </div>
+                                        <div className='power-display'>
+                                            <div className='power-item'>
+                                                <span className='label'>EVEN Power:</span>
+                                                <span className='value green'>{percentages.even.toFixed(1)}%</span>
                                             </div>
-                                        ))}
-                                    </div>
-                                </div>
-                            </div>
-                        )}
-
-                        {activeStrategy === 'over_under' && (
-                            <div className='strategy-info'>
-                                <h3>Over/Under Strategy</h3>
-                                <div className='strategy-description'>
-                                    <p>
-                                        <strong>Logic:</strong> UNDER (0-4) vs OVER (5-9). If UNDER has highest % and
-                                        increasing, wait for 2+ consecutive OVER digits then when UNDER appears start
-                                        trading. Same for OVER.
-                                    </p>
-                                    <p>
-                                        <strong>Suggestions:</strong> System recommends best prediction automatically
-                                    </p>
-                                </div>
-                                <div className='power-display'>
-                                    <div className='power-item'>
-                                        <span className='label'>OVER (5-9):</span>
-                                        <span className='value blue'>{percentages.over.toFixed(1)}%</span>
-                                    </div>
-                                    <div className='power-item'>
-                                        <span className='label'>UNDER (0-4):</span>
-                                        <span className='value orange'>{percentages.under.toFixed(1)}%</span>
-                                    </div>
-                                    {percentages.under > 55 && (
-                                        <div className='power-item suggestion'>
-                                            <span className='label'>💡 Best Prediction (Trade UNDER):</span>
-                                            <div
-                                                className='prediction-buttons'
-                                                style={{
-                                                    display: 'flex',
-                                                    gap: '0.5rem',
-                                                    marginTop: '0.5rem',
-                                                    flexWrap: 'wrap',
-                                                }}
-                                            >
-                                                {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9].map(p => (
-                                                    <button
-                                                        key={p}
-                                                        className={`pred-btn ${trade_engine.over_under_config.prediction === p ? 'active' : ''} ${[6, 7, 8, 9].includes(p) ? 'suggested' : ''}`}
-                                                        style={{
-                                                            padding: '0.4rem 0.8rem',
-                                                            borderRadius: '6px',
-                                                            background:
-                                                                trade_engine.over_under_config.prediction === p
-                                                                    ? '#10b981'
-                                                                    : [6, 7, 8, 9].includes(p)
-                                                                      ? '#374151'
-                                                                      : '#1f2937',
-                                                            color: '#fff',
-                                                            border: [6, 7, 8, 9].includes(p)
-                                                                ? '1px solid #10b981'
-                                                                : 'none',
-                                                            cursor: 'pointer',
-                                                            fontWeight: 'bold',
-                                                            fontSize: '0.85rem',
-                                                        }}
-                                                        onClick={() =>
-                                                            trade_engine.updateConfig('over_under', 'prediction', p)
-                                                        }
-                                                    >
-                                                        {p}
-                                                    </button>
+                                            <div className='power-item'>
+                                                <span className='label'>ODD Power:</span>
+                                                <span className='value red'>{percentages.odd.toFixed(1)}%</span>
+                                            </div>
+                                        </div>
+                                        <div className='history-section'>
+                                            <span className='history-label'>Recent Pattern:</span>
+                                            <div className='history-boxes'>
+                                                {even_odd_history.slice(0, 20).map((h: TAnalysisHistory, i: number) => (
+                                                    <div key={i} className={`history-box ${h.type.toLowerCase()}`}>
+                                                        {h.type === 'E' ? 'E' : 'O'}
+                                                    </div>
                                                 ))}
                                             </div>
                                         </div>
-                                    )}
-                                    {percentages.over > 55 && (
-                                        <div className='power-item suggestion'>
-                                            <span className='label'>💡 Best Prediction (Trade OVER):</span>
-                                            <div
-                                                className='prediction-buttons'
-                                                style={{
-                                                    display: 'flex',
-                                                    gap: '0.5rem',
-                                                    marginTop: '0.5rem',
-                                                    flexWrap: 'wrap',
-                                                }}
-                                            >
-                                                {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9].map(p => (
-                                                    <button
-                                                        key={p}
-                                                        className={`pred-btn ${trade_engine.over_under_config.prediction === p ? 'active' : ''} ${[0, 1, 2, 3].includes(p) ? 'suggested' : ''}`}
-                                                        style={{
-                                                            padding: '0.4rem 0.8rem',
-                                                            borderRadius: '6px',
-                                                            background:
-                                                                trade_engine.over_under_config.prediction === p
-                                                                    ? '#10b981'
-                                                                    : [0, 1, 2, 3].includes(p)
-                                                                      ? '#374151'
-                                                                      : '#1f2937',
-                                                            color: '#fff',
-                                                            border: [0, 1, 2, 3].includes(p)
-                                                                ? '1px solid #10b981'
-                                                                : 'none',
-                                                            cursor: 'pointer',
-                                                            fontWeight: 'bold',
-                                                            fontSize: '0.85rem',
-                                                        }}
-                                                        onClick={() =>
-                                                            trade_engine.updateConfig('over_under', 'prediction', p)
-                                                        }
-                                                    >
-                                                        {p}
-                                                    </button>
+                                    </div>
+                                )}
+                                {activeStrategy === 'over_under' && (
+                                    <div className='strategy-info'>
+                                        <h3>Over/Under Strategy</h3>
+                                        <div className='strategy-description'>
+                                            <p><strong>Logic:</strong> UNDER (0-4) vs OVER (5-9).</p>
+                                        </div>
+                                        <div className='power-display'>
+                                            <div className='power-item'>
+                                                <span className='label'>OVER (5-9):</span>
+                                                <span className='value blue'>{percentages.over.toFixed(1)}%</span>
+                                            </div>
+                                            <div className='power-item'>
+                                                <span className='label'>UNDER (0-4):</span>
+                                                <span className='value orange'>{percentages.under.toFixed(1)}%</span>
+                                            </div>
+                                        </div>
+                                        <div className='history-section'>
+                                            <span className='history-label'>Recent Pattern:</span>
+                                            <div className='history-boxes'>
+                                                {over_under_history.slice(0, 20).map((h: TAnalysisHistory, i: number) => (
+                                                    <div key={i} className={`history-box ${h.type.toLowerCase()}`}>
+                                                        {h.type === 'O' ? 'O' : 'U'}
+                                                    </div>
                                                 ))}
                                             </div>
                                         </div>
-                                    )}
-                                    <div className='power-item prediction'>
-                                        <span className='label'>🎯 Current Signal:</span>
-                                        <span className='value' style={{ color: '#a855f7', fontWeight: 'bold' }}>
-                                            {percentages.under > 55
-                                                ? 'UNDER dominant - Wait for 2+ OVER then UNDER'
-                                                : percentages.over > 55
-                                                  ? 'OVER dominant - Wait for 2+ UNDER then OVER'
-                                                  : 'Waiting for 55%+ threshold...'}
-                                        </span>
                                     </div>
-                                </div>
-                                <div className='history-section'>
-                                    <span className='history-label'>Recent Pattern:</span>
-                                    <div className='history-boxes'>
-                                        {over_under_history.slice(0, 20).map((h: TAnalysisHistory, i: number) => (
-                                            <div key={i} className={`history-box ${h.type.toLowerCase()}`}>
-                                                {h.type === 'O' ? 'O' : 'U'}
-                                            </div>
-                                        ))}
-                                    </div>
-                                </div>
-                            </div>
-                        )}
-
-                        {activeStrategy === 'differs' && (
-                            <div className='strategy-info'>
-                                <h3>Differs Strategy</h3>
-                                <div className='strategy-description'>
-                                    <p>
-                                        <strong>Logic:</strong> Choose digit 2-7 that is NOT most appearing, 2nd most,
-                                        or least appearing. Digit must be below 10% and decreasing.
-                                    </p>
-                                    <p>
-                                        <strong>Entry:</strong> Start trading when selected digit drops/decreases in
-                                        percentage
-                                    </p>
-                                    <p>
-                                        <strong>Dynamic:</strong> Can change prediction automatically
-                                    </p>
-                                </div>
-                                <div className='digit-rankings'>
-                                    {digit_stats
-                                        .slice()
-                                        .sort((a: TDigitStat, b: TDigitStat) => a.percentage - b.percentage)
-                                        .slice(0, 10)
-                                        .map((s: TDigitStat) => {
-                                            const sortedStats = [...digit_stats].sort(
-                                                (a: TDigitStat, b: TDigitStat) => b.power - a.power
-                                            );
-                                            const highest = sortedStats[0].digit;
-                                            const second = sortedStats[1].digit;
-                                            const least = sortedStats[9].digit;
-                                            const isEligible =
-                                                s.digit >= 2 &&
-                                                s.digit <= 7 &&
-                                                s.digit !== highest &&
-                                                s.digit !== second &&
-                                                s.digit !== least &&
-                                                s.percentage < 10 &&
-                                                !s.is_increasing;
-
-                                            return (
-                                                <div
-                                                    key={s.digit}
-                                                    className={`rank-row ${isEligible ? 'eligible' : ''}`}
-                                                >
+                                )}
+                                {activeStrategy === 'differs' && (
+                                    <div className='strategy-info'>
+                                        <h3>Differs Strategy</h3>
+                                        <div className='strategy-description'>
+                                            <p><strong>Logic:</strong> Choose stable digits below 10%.</p>
+                                        </div>
+                                        <div className='digit-rankings'>
+                                            {digit_stats.slice(0, 5).map((s: TDigitStat) => (
+                                                <div key={s.digit} className='rank-row'>
                                                     <span className='rank'>#{s.rank}</span>
                                                     <span className='digit'>Digit {s.digit}</span>
-                                                    <div className='power-track'>
-                                                        <div
-                                                            className='fill'
-                                                            style={{
-                                                                width: `${s.power}%`,
-                                                                backgroundColor: isEligible ? '#a855f7' : '#6b7280',
-                                                            }}
-                                                        />
-                                                    </div>
                                                     <span className='power'>{s.percentage.toFixed(1)}%</span>
-                                                    {isEligible && <span className='badge'>ELIGIBLE</span>}
                                                 </div>
-                                            );
-                                        })}
-                                </div>
-                                <div className='power-item prediction' style={{ marginTop: '1rem' }}>
-                                    <span className='label'>🎯 Auto-Selected Target:</span>
-                                    <span className='value' style={{ color: '#a855f7', fontWeight: 'bold' }}>
-                                        {(() => {
-                                            const sortedStats = [...digit_stats].sort(
-                                                (a: TDigitStat, b: TDigitStat) => b.power - a.power
-                                            );
-                                            const highest = sortedStats[0].digit;
-                                            const second = sortedStats[1].digit;
-                                            const least = sortedStats[9].digit;
-                                            const eligible = digit_stats.filter(
-                                                (s: TDigitStat) =>
-                                                    s.digit >= 2 &&
-                                                    s.digit <= 7 &&
-                                                    s.digit !== highest &&
-                                                    s.digit !== second &&
-                                                    s.digit !== least &&
-                                                    s.percentage < 10 &&
-                                                    !s.is_increasing
-                                            );
-                                            return eligible.length > 0
-                                                ? `Digit ${eligible.sort((a: TDigitStat, b: TDigitStat) => a.percentage - b.percentage)[0].digit} (${eligible[0].percentage.toFixed(1)}% ↓)`
-                                                : 'Waiting for eligible digit...';
-                                        })()}
+                                            ))}
+                                        </div>
+                                    </div>
+                                )}
+                                {activeStrategy === 'matches' && (
+                                    <div className='strategy-info'>
+                                        <h3>Matches Strategy</h3>
+                                        <div className='strategy-description'>
+                                            <p><strong>Logic:</strong> Choose dominant digits showing upwards trend.</p>
+                                        </div>
+                                        <div className='digit-rankings'>
+                                            {digit_stats.slice(0, 5).map((s: TDigitStat) => (
+                                                <div key={s.digit} className='rank-row'>
+                                                    <span className='rank'>#{s.rank}</span>
+                                                    <span className='digit'>Digit {s.digit}</span>
+                                                    <span className='power'>{s.percentage.toFixed(1)}%</span>
+                                                </div>
+                                            ))}
+                                        </div>
+                                    </div>
+                                )}
+                            </div>
+                            <div className='content-right'>{renderStrategyControls()}</div>
+                        </div>
+                    </div>
+                </div>
+
+                {/* 3. Trading Ledger Section */}
+                <div className='easy-tool__section trading-log-section'>
+                    <div className='section-card'>
+                        <div className='section-card__header'>
+                            <Localize i18n_default_text='Trading Ledger' />
+                            <div className='log-tabs' style={{ marginLeft: '20px' }}>
+                                <button className={activeLogTab === 'summary' ? 'active' : ''} onClick={() => setActiveLogTab('summary')}>Summary</button>
+                                <button className={activeLogTab === 'transactions' ? 'active' : ''} onClick={() => setActiveLogTab('transactions')}>Transactions</button>
+                                <button className={activeLogTab === 'journal' ? 'active' : ''} onClick={() => setActiveLogTab('journal')}>Journal</button>
+                            </div>
+                            <button className='clear-log-btn' style={{ marginLeft: 'auto', padding: '4px 10px', fontSize: '10px' }} onClick={() => trade_engine.clearLogs()}>Clear Logs</button>
+                        </div>
+
+                        <div className='trading-log-header' style={{ borderBottom: '1px solid var(--border-subtle)', padding: '10px 15px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                            <div className='status-left' style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                                <div className={`status-indicator ${is_executing ? 'active' : ''}`} style={{ width: '8px', height: '8px', borderRadius: '50%', background: is_executing ? '#00ff41' : '#ff073a' }} />
+                                <span className='status-text'>{trade_status}</span>
+                            </div>
+                            <div className='profit-display'>
+                                <div className='profit-item'>
+                                    <span className='label' style={{ fontSize: '10px', marginRight: '5px' }}>SESSION:</span>
+                                    <span className={`value ${session_profit >= 0 ? 'success' : 'error'}`} style={{ fontSize: '14px', fontWeight: 'bold' }}>
+                                        {session_profit >= 0 ? '+' : ''}${session_profit.toFixed(2)}
                                     </span>
                                 </div>
                             </div>
-                        )}
+                        </div>
 
-                        {activeStrategy === 'matches' && (
-                            <div className='strategy-info'>
-                                <h3>Matches Strategy</h3>
-                                <div className='strategy-description'>
-                                    <p>
-                                        <strong>Logic:</strong> Choose digit 0-9 that is most appearing, 2nd most
-                                        appearing, or least appearing. Only when increasing.
-                                    </p>
-                                    <p>
-                                        <strong>Entry:</strong> Start trading when selected digit increases in
-                                        percentage
-                                    </p>
-                                    <p>
-                                        <strong>Dynamic:</strong> Can change prediction automatically
-                                    </p>
-                                </div>
-                                <div className='digit-rankings'>
-                                    {digit_stats
-                                        .slice()
-                                        .sort((a: TDigitStat, b: TDigitStat) => b.power - a.power)
-                                        .slice(0, 10)
-                                        .map((s: TDigitStat) => {
-                                            const sortedStats = [...digit_stats].sort(
-                                                (a: TDigitStat, b: TDigitStat) => b.power - a.power
-                                            );
-                                            const candidates = [sortedStats[0], sortedStats[1], sortedStats[9]];
-                                            const isCandidate = candidates.some(c => c.digit === s.digit);
-                                            const isEligible = isCandidate && s.is_increasing;
+                        <div className='trading-log-content' ref={logRef} style={{ height: '300px', overflowY: 'auto' }}>
+                            {renderLogContent()}
+                        </div>
 
-                                            return (
-                                                <div
-                                                    key={s.digit}
-                                                    className={`rank-row ${isEligible ? 'eligible' : ''}`}
-                                                >
-                                                    <span className='rank'>#{s.rank}</span>
-                                                    <span className='digit'>Digit {s.digit}</span>
-                                                    <div className='power-track'>
-                                                        <div
-                                                            className='fill'
-                                                            style={{
-                                                                width: `${s.power}%`,
-                                                                backgroundColor: isEligible ? '#10b981' : '#6b7280',
-                                                            }}
-                                                        />
-                                                    </div>
-                                                    <span className='power'>{s.percentage.toFixed(1)}%</span>
-                                                    {isEligible && <span className='badge success'>ELIGIBLE</span>}
-                                                </div>
-                                            );
-                                        })}
-                                </div>
-                                <div className='power-item prediction' style={{ marginTop: '1rem' }}>
-                                    <span className='label'>🎯 Auto-Selected Target:</span>
-                                    <span className='value' style={{ color: '#10b981', fontWeight: 'bold' }}>
-                                        {(() => {
-                                            const sortedStats = [...digit_stats].sort(
-                                                (a: TDigitStat, b: TDigitStat) => b.power - a.power
-                                            );
-                                            const candidates = [sortedStats[0], sortedStats[1], sortedStats[9]];
-                                            const validCandidates = candidates.filter(s => s.is_increasing);
-                                            return validCandidates.length > 0
-                                                ? `Digit ${validCandidates[0].digit} (${validCandidates[0].percentage.toFixed(1)}% ↑)`
-                                                : 'Waiting for increasing trend...';
-                                        })()}
+                        <div className='section-card__footer' style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '10px 15px', borderTop: '1px solid var(--border-subtle)' }}>
+                            <div className='profit-display'>
+                                <div className='profit-item'>
+                                    <span className='label' style={{ fontSize: '10px', marginRight: '5px' }}>TOTAL PROFIT:</span>
+                                    <span className={`value ${total_profit >= 0 ? 'success' : 'error'}`} style={{ fontSize: '14px', fontWeight: 'bold' }}>
+                                        {total_profit >= 0 ? '+' : ''}${total_profit.toFixed(2)}
                                     </span>
                                 </div>
                             </div>
-                        )}
-                    </div>
-
-                    <div className='content-right'>{renderStrategyControls()}</div>
-                </div>
-            </div>
-
-            <div className='trading-log-section'>
-                <div className='log-header'>
-                    <h3>📑 Trading Activity</h3>
-                    <div className='log-tabs'>
-                        <button
-                            className={activeLogTab === 'summary' ? 'active' : ''}
-                            onClick={() => setActiveLogTab('summary')}
-                        >
-                            Summary
-                        </button>
-                        <button
-                            className={activeLogTab === 'transactions' ? 'active' : ''}
-                            onClick={() => setActiveLogTab('transactions')}
-                        >
-                            Transactions
-                        </button>
-                        <button
-                            className={activeLogTab === 'journal' ? 'active' : ''}
-                            onClick={() => setActiveLogTab('journal')}
-                        >
-                            Journal
-                        </button>
-                    </div>
-                    <button className='clear-log' onClick={() => trade_engine.clearLogs()}>
-                        Clear
-                    </button>
-                </div>
-                <div className='log-content' ref={logRef}>
-                    {renderLogContent()}
-                </div>
-            </div>
-
-            <div className='status-footer'>
-                <div className='status-left'>
-                    <div className={`status-indicator ${is_executing ? 'active' : ''}`} />
-                    <span className='status-text'>{trade_status}</span>
-                </div>
-                <div className='profit-display'>
-                    <div className='profit-item session'>
-                        <span className='label'>Session:</span>
-                        <span className={`value ${session_profit >= 0 ? 'profit' : 'loss'}`}>
-                            {session_profit >= 0 ? '+' : ''}
-                            {session_profit.toFixed(2)}
-                        </span>
-                    </div>
-                    <div className='profit-item total'>
-                        <span className='label'>Total:</span>
-                        <span className={`value ${total_profit >= 0 ? 'profit' : 'loss'}`}>
-                            {total_profit >= 0 ? '+' : ''}
-                            {total_profit.toFixed(2)}
-                        </span>
+                            <button className='reset-btn' style={{ padding: '6px 15px', fontSize: '11px' }} onClick={() => runInAction(() => { trade_engine.session_profit = 0; trade_engine.total_profit = 0; trade_engine.clearLogs(); })}>
+                                Reset
+                            </button>
+                        </div>
                     </div>
                 </div>
-                <button
-                    className='reset-btn'
-                    onClick={() => {
-                        runInAction(() => {
-                            trade_engine.session_profit = 0;
-                            trade_engine.total_profit = 0;
-                            trade_engine.last_result = null;
-                            trade_engine.current_streak = 0;
-                            trade_engine.clearLogs();
-                        });
-                    }}
-                >
-                    <LabelPairedArrowsRotateMdRegularIcon />
-                    Reset
-                </button>
             </div>
         </div>
     );

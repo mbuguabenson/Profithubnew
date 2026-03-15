@@ -27,12 +27,13 @@ export default class AdminStore {
         analysis_tool: true,
         trading_tools: true,
         copy_trading: true,
-        strategies: true,
+        strategies: false,
         settings: true,
-        tutorials: true,
+        tutorials: false,
         free_bots: true,
         dtrader: true,
         dtooltrades: true,
+        deriv_course: true,
     };
 
     // Mock Data for Table & Radial Chart

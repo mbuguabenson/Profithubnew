@@ -1,7 +1,6 @@
 import React from 'react';
-import ChunkLoader from '@/components/loader/chunk-loader';
+import InitialLoader from '@/components/loader/initial-loader';
 import { useOfflineDetection } from '@/hooks/useOfflineDetection';
-import { localize } from '@deriv-com/translations';
 import { URLUtils } from '@deriv-com/utils';
 import App from './App';
 
@@ -40,6 +39,7 @@ const setLocalStorageToken = async (loginInfo: URLUtils.LoginInfo[], paramsToDel
 
 export const AuthWrapper = () => {
     const [isAuthComplete, setIsAuthComplete] = React.useState(false);
+    const [min_loader_passed, setMinLoaderPassed] = React.useState(false);
     const { loginInfo, paramsToDelete } = URLUtils.getLoginInfoFromURL();
     const { isOnline } = useOfflineDetection();
 
@@ -63,7 +63,13 @@ export const AuthWrapper = () => {
             setIsAuthComplete(true);
         }
 
+        // Enforce 5s minimum display time
+        const minTimer = setTimeout(() => {
+            setMinLoaderPassed(true);
+        }, 3000);
+
         initializeAuth();
+        return () => clearTimeout(minTimer);
     }, [loginInfo, paramsToDelete, isOnline]);
 
     // Add timeout for offline scenarios to prevent infinite loading
@@ -77,13 +83,9 @@ export const AuthWrapper = () => {
         }
     }, [isOnline, isAuthComplete]);
 
-    const getLoadingMessage = () => {
-        if (!isOnline) return localize('Loading offline mode...');
-        return localize('Initializing...');
-    };
 
-    if (!isAuthComplete) {
-        return <ChunkLoader message={getLoadingMessage()} />;
+    if (!isAuthComplete || !min_loader_passed) {
+        return <InitialLoader />;
     }
 
     return <App />;

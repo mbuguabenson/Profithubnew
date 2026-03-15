@@ -1,7 +1,6 @@
 import { action, makeObservable, observable, reaction, runInAction } from 'mobx';
 import { DigitStatsEngine } from '@/lib/digit-stats-engine';
 import { DigitTradeEngine } from '@/lib/digit-trade-engine';
-import subscriptionManager from '@/lib/subscription-manager';
 import RootStore from './root-store';
 
 export type TDigitStat = {
@@ -62,6 +61,27 @@ export default class DigitCrackerStore {
         this.updateFromEngine();
 
         this.initConnection();
+        
+        // Sync with unified market store
+        reaction(
+            () => {
+                const market = this.root_store.analysis_market;
+                if (!market) return { price: undefined, digit: undefined, symbol: undefined };
+                return {
+                    price: market.current_price,
+                    digit: market.last_digit,
+                    symbol: market.symbol
+                };
+            },
+            ({ price, digit, symbol }) => {
+                if (symbol === this.symbol) {
+                    runInAction(() => {
+                        this.current_price = price;
+                        this.last_digit = digit;
+                    });
+                }
+            }
+        );
     }
 
     @action
@@ -70,50 +90,68 @@ export default class DigitCrackerStore {
         reaction(
             () => this.root_store.common?.is_socket_opened,
             is_socket_opened => {
-                this.is_connected = !!is_socket_opened;
+                runInAction(() => {
+                    this.is_connected = !!is_socket_opened;
+                });
                 if (is_socket_opened) {
                     this.fetchMarkets();
-                    if (!this.unsubscribe_ticks) {
-                        this.subscribeToTicks(); // Auto-subscribe if connected
-                    }
                 } else {
                     this.dispose(); // Clean up on disconnect
                 }
             }
         );
 
-        // Init immediately if already opened
-        if (this.root_store.common?.is_socket_opened) {
-            this.is_connected = true;
-            this.fetchMarkets();
-            this.subscribeToTicks();
-        }
+        // Global ticks sync
+        reaction(
+            () => {
+                const market = this.root_store.analysis_market;
+                if (!market) return { ticks: [], price: undefined, symbol: undefined };
+                return {
+                    ticks: market.ticks || [],
+                    price: market.current_price,
+                    symbol: market.symbol
+                };
+            },
+            ({ ticks, price, symbol }) => {
+                if (ticks.length > 0 && price !== undefined) {
+                    if (symbol !== this.symbol) {
+                        runInAction(() => {
+                            this.symbol = symbol || 'R_100';
+                        });
+                    }
+                    
+                    const num_price = Number(price);
+                    
+                    runInAction(() => {
+                        this.ticks = [...ticks];
+                        this.current_price = num_price;
+                        this.last_digit = ticks[ticks.length - 1];
+                        
+                        // 1. Update stats engine
+                        this.stats_engine.updateWithHistory(this.ticks, num_price);
+                        
+                        // 2. Sync observables with stats
+                        this.updateFromEngine();
+                        
+                        // 3. Process trade logic
+                        this.trade_engine.processTick(
+                            this.last_digit,
+                            { 
+                                percentages: this.stats_engine.getPercentages(), 
+                                digit_stats: this.stats_engine.digit_stats 
+                            },
+                            this.symbol,
+                            this.root_store.client?.currency || 'USD'
+                        );
+                    });
+                }
+            }
+        );
     };
 
     @action
     fetchMarkets = async () => {
-        try {
-            const { api_base } = await import('@/external/bot-skeleton');
-            if (!api_base.api) return;
-            const response = (await api_base.api.send({ active_symbols: 'brief' })) as {
-                active_symbols?: Record<string, unknown>[];
-            };
-            if (response.active_symbols) {
-                const grouped = Object.values(
-                    response.active_symbols.reduce((acc: any, s: any) => {
-                        const market = s.market_display_name || s.market;
-                        if (!acc[market]) acc[market] = { group: market, items: [] };
-                        acc[market].items.push({ value: s.symbol, label: s.display_name });
-                        return acc;
-                    }, {})
-                );
-                runInAction(() => {
-                    this.markets = grouped;
-                });
-            }
-        } catch (e) {
-            console.error('[DigitCrackerStore] Failed to fetch markets:', e);
-        }
+        // Now handled by AnalysisMarketStore
     };
 
     @action
@@ -169,55 +207,7 @@ export default class DigitCrackerStore {
 
     @action
     subscribeToTicks = async () => {
-        if (!this.is_connected) return;
-
-        if (this.unsubscribe_ticks) {
-            this.unsubscribe_ticks();
-        }
-
-        this.is_subscribing = true;
-
-        try {
-            this.unsubscribe_ticks = await subscriptionManager.subscribeToTicks(this.symbol, (data: unknown) => {
-                const typed_data = data as Record<string, unknown>;
-                if (typed_data.msg_type === 'tick' && typed_data.tick) {
-                    const tick_data = typed_data.tick as Record<string, unknown>;
-                    if (tick_data.symbol === this.symbol) {
-                        this.handleTick(tick_data);
-                    }
-                } else if (typed_data.msg_type === 'history' && (typed_data.history || typed_data.ticks_history)) {
-                    console.log(`[DigitCrackerStore] Processing history for ${this.symbol}`);
-                    const history_data = (typed_data.history || typed_data.ticks_history) as Record<string, unknown>;
-                    if (history_data && history_data.prices && Array.isArray(history_data.prices)) {
-                        const prices = history_data.prices;
-                        runInAction(() => {
-                            const price_numbers = prices.map((p: string | number) => Number(p));
-                            const last_digits = prices.map((p: number | string) => {
-                                return this.stats_engine.extractLastDigit(p);
-                            });
-
-                            const last_price = price_numbers[price_numbers.length - 1];
-                            this.current_price = last_price;
-                            this.ticks = last_digits;
-                            this.last_digit = this.stats_engine.extractLastDigit(last_price);
-
-                            this.stats_engine.update(last_digits, price_numbers);
-                            this.updateFromEngine();
-                            this.is_subscribing = false; // Mark as done after history
-                        });
-                    }
-                }
-            });
-
-            runInAction(() => {
-                this.is_connected = true;
-            });
-        } catch (e) {
-            console.error('[DigitCrackerStore] Subscription failed:', e);
-            runInAction(() => {
-                this.is_subscribing = false;
-            });
-        }
+        // Now handled by AnalysisMarketStore
     };
 
     @action

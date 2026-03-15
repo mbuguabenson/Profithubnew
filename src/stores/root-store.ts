@@ -1,5 +1,6 @@
 import { api_base } from '@/external/bot-skeleton/services/api/api-base';
 import AnalysisStore from './analysis-store';
+import AnalysisMarketStore from './analysis-market-store';
 import AppStore from './app-store';
 import AutoTraderStore from './auto-trader-store';
 import BlocklyStore from './blockly-store';
@@ -32,6 +33,7 @@ import AdminStore from './admin-store';
 export default class RootStore {
     public dbot;
     public analysis: AnalysisStore;
+    public analysis_market: AnalysisMarketStore;
     public app: AppStore;
     public summary_card: SummaryCardStore;
     public auto_trader: AutoTraderStore;
@@ -76,6 +78,7 @@ export default class RootStore {
         this.common = new CommonStore();
 
         this.analysis = new AnalysisStore(this);
+        this.analysis_market = new AnalysisMarketStore(this);
 
         this.core = {
             ui: this.ui,

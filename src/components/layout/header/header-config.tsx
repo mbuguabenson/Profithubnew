@@ -3,6 +3,7 @@ import { standalone_routes } from '@/components/shared';
 import {
     LegacyCashierIcon as CashierLogo,
     LegacyReportsIcon as ReportsLogo,
+    LegacyOrdersIcon as CourseLogo,
 } from '@deriv/quill-icons/Legacy';
 import {
     DerivProductBrandLightDerivBotLogoWordmarkIcon as DerivBotLogo,
@@ -61,5 +62,11 @@ export const MenuItems: MenuItemsConfig[] = [
         href: standalone_routes.reports,
         icon: <ReportsLogo iconSize='xs' />,
         label: localize('Reports'),
+    },
+    {
+        as: 'a',
+        href: standalone_routes.deriv_course,
+        icon: <CourseLogo iconSize='xs' />,
+        label: localize('Deriv Course'),
     },
 ];
