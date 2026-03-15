@@ -60,7 +60,8 @@ const Portal = observer(({ type }: { type: 'dtrader' | 'dtooltrades' }) => {
             ? 'https://dtrader.profithubtool.vercel.app'
             : 'https://dtooltrades.vercel.app/';
 
-    const ssoUrl = getSsoUrl(finalBaseUrl, client.accounts);
+    // Only apply SSO to dtrader for now, or use direct URL if it solves the "not working" issue
+    const ssoUrl = type === 'dtrader' ? getSsoUrl(finalBaseUrl, client.accounts) : finalBaseUrl;
 
     return (
         <div
@@ -665,6 +666,7 @@ const AppWrapper = observer(() => {
                                         </div>
                                     }
                                     id='id-dtooltrades'
+                                    style={{ height: '100%' }}
                                 >
                                     <Portal type='dtooltrades' />
                                 </div>

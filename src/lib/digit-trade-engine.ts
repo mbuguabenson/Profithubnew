@@ -149,7 +149,7 @@ export class DigitTradeEngine {
     };
 
     @action
-    toggleStrategy = (strategy: 'even_odd' | 'over_under' | 'differs' | 'matches') => {
+    toggleStrategy = (strategy: 'even_odd' | 'over_under' | 'differs' | 'matches', is_auto: boolean = true) => {
         const config = (this as Record<string, unknown>)[`${strategy}_config`] as TTradeConfig;
 
         if (config.is_running) {
@@ -167,9 +167,10 @@ export class DigitTradeEngine {
             });
 
             config.is_running = true;
+            config.is_auto = is_auto;
             this.active_strategy = strategy;
-            this.trade_status = 'RUNNING';
-            this.addLog(`Strategy started: ${strategy.toUpperCase()}`, 'success');
+            this.trade_status = is_auto ? 'RUNNING (AUTO)' : 'RUNNING (ONCE)';
+            this.addLog(`Strategy started: ${strategy.toUpperCase()} (${is_auto ? 'Auto' : 'Once'})`, 'success');
         }
     };
 
@@ -291,7 +292,7 @@ export class DigitTradeEngine {
         symbol: string,
         currency: string
     ) => {
-        let prediction = config.prediction;
+        const prediction = config.prediction;
         if (percentages.under > 55 && this.consecutive_under >= 1) {
             this.executeTrade('DIGITUNDER', prediction, config, symbol, currency);
         } else if (percentages.over > 55 && this.consecutive_over >= 1) {
@@ -522,8 +523,12 @@ export class DigitTradeEngine {
 
         if (config.runs_count !== undefined) config.runs_count++;
 
-        if (isLastBulkTrade && config.is_running) {
-            this.trade_status = 'RUNNING';
+        if (isLastBulkTrade) {
+            if (config.is_auto && config.is_running) {
+                this.trade_status = 'RUNNING';
+            } else {
+                this.stopAll(result === 'WIN' ? 'TRADE COMPLETED' : 'TRADE FAILED');
+            }
         }
     };
 

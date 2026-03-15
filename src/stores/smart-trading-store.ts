@@ -1,7 +1,7 @@
 import { action, makeObservable, observable, reaction, runInAction } from 'mobx';
 import { DBOT_TABS } from '@/constants/bot-contents';
 import { contract_stages } from '@/constants/contract-stage';
-import { ApiHelpers, api_base, observer as globalObserver } from '@/external/bot-skeleton';
+import { api_base, observer as globalObserver } from '@/external/bot-skeleton';
 import AnalysisEngine from '@/lib/analysis-engine';
 import {
     HotColdData,
@@ -727,7 +727,6 @@ export default class SmartTradingStore {
         this.root_store.analysis_market.setSymbol(symbol);
     };
 
-    private unsubscribeTicks: (() => void) | null = null;
 
     @action
     subscribeToActiveSymbol = async () => {
@@ -1619,8 +1618,15 @@ export default class SmartTradingStore {
         this.root_store.run_panel.setContractStage(contract_stages.PURCHASE_SENT);
         globalObserver.emit('contract.status', { id: 'contract.purchase_sent' });
 
-        const stake = this.current_stake;
+        const stake = Number(this.current_stake);
         const symbol = this.symbol;
+
+        if (isNaN(stake) || stake <= 0) {
+            console.error('SmartTrading: Invalid stake amount:', stake);
+            this.is_executing = false;
+            this.root_store.run_panel.setIsRunning(false);
+            return;
+        }
 
         try {
             if (!api_base.api) {
@@ -2513,7 +2519,7 @@ export default class SmartTradingStore {
 
             const contract_id = buy.buy.contract_id;
 
-            const subscription = api_base.api.onMessage().subscribe((msg: any) => {
+            const subscription = api_base.api.onMessage().subscribe((msg: { msg_type: string; proposal_open_contract: Record<string, any> }) => {
                 if (
                     msg.msg_type === 'proposal_open_contract' &&
                     msg.proposal_open_contract.contract_id === contract_id

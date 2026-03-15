@@ -2,8 +2,6 @@ import {
     FlagArabLeagueIcon,
     FlagBangladeshIcon,
     FlagCambodiaIcon,
-    FlagChinaSimplifiedIcon,
-    FlagChinaTraditionalIcon,
     FlagFranceIcon,
     FlagGermanyIcon,
     FlagItalyIcon,
@@ -149,19 +147,5 @@ export const LANGUAGES = [
         icon: <FlagVietnamIcon height={24} width={36} />,
         placeholderIcon: <FlagVietnamIcon height={12} width={18} />,
         placeholderIconInMobile: <FlagVietnamIcon height={14.67} width={22} />,
-    },
-    {
-        code: 'ZH_CN',
-        displayName: '简体中文',
-        icon: <FlagChinaSimplifiedIcon height={24} width={36} />,
-        placeholderIcon: <FlagChinaSimplifiedIcon height={12} width={18} />,
-        placeholderIconInMobile: <FlagChinaSimplifiedIcon height={14.67} width={22} />,
-    },
-    {
-        code: 'ZH_TW',
-        displayName: '繁體中文',
-        icon: <FlagChinaTraditionalIcon height={24} width={36} />,
-        placeholderIcon: <FlagChinaTraditionalIcon height={12} width={18} />,
-        placeholderIconInMobile: <FlagChinaTraditionalIcon height={14.67} width={22} />,
     },
 ];

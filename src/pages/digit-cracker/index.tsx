@@ -157,10 +157,11 @@ const DigitCracker = observer(() => {
                         <input
                             type='number'
                             step='0.01'
-                            value={config.stake}
-                            onChange={e =>
-                                trade_engine.updateConfig(activeStrategy, 'stake', parseFloat(e.target.value))
-                            }
+                            value={config.stake || ''}
+                            onChange={e => {
+                                const val = parseFloat(e.target.value);
+                                trade_engine.updateConfig(activeStrategy, 'stake', isNaN(val) ? 0 : val);
+                            }}
                         />
                     </div>
                     <div className='input-field'>
@@ -168,10 +169,11 @@ const DigitCracker = observer(() => {
                         <input
                             type='number'
                             step='0.01'
-                            value={config.take_profit || 10}
-                            onChange={e =>
-                                trade_engine.updateConfig(activeStrategy, 'take_profit', parseFloat(e.target.value))
-                            }
+                            value={config.take_profit || ''}
+                            onChange={e => {
+                                const val = parseFloat(e.target.value);
+                                trade_engine.updateConfig(activeStrategy, 'take_profit', isNaN(val) ? 0 : val);
+                            }}
                         />
                     </div>
                     <div className='input-field'>
@@ -179,10 +181,11 @@ const DigitCracker = observer(() => {
                         <input
                             type='number'
                             step='0.01'
-                            value={config.max_loss}
-                            onChange={e =>
-                                trade_engine.updateConfig(activeStrategy, 'max_loss', parseFloat(e.target.value))
-                            }
+                            value={config.max_loss || ''}
+                            onChange={e => {
+                                const val = parseFloat(e.target.value);
+                                trade_engine.updateConfig(activeStrategy, 'max_loss', isNaN(val) ? 0 : val);
+                            }}
                         />
                     </div>
                     <div className='input-field'>
@@ -190,28 +193,33 @@ const DigitCracker = observer(() => {
                         <input
                             type='number'
                             step='0.1'
-                            value={config.multiplier}
-                            onChange={e =>
-                                trade_engine.updateConfig(activeStrategy, 'multiplier', parseFloat(e.target.value))
-                            }
+                            value={config.multiplier || ''}
+                            onChange={e => {
+                                const val = parseFloat(e.target.value);
+                                trade_engine.updateConfig(activeStrategy, 'multiplier', isNaN(val) ? 0 : val);
+                            }}
                         />
                     </div>
                     <div className='input-field'>
                         <label>Maximum Runs</label>
                         <input
                             type='number'
-                            value={config.max_runs || 12}
-                            onChange={e =>
-                                trade_engine.updateConfig(activeStrategy, 'max_runs', parseInt(e.target.value))
-                            }
+                            value={config.max_runs || ''}
+                            onChange={e => {
+                                const val = parseInt(e.target.value);
+                                trade_engine.updateConfig(activeStrategy, 'max_runs', isNaN(val) ? 0 : val);
+                            }}
                         />
                     </div>
                     <div className='input-field'>
                         <label>Tick Duration</label>
                         <input
                             type='number'
-                            value={config.ticks}
-                            onChange={e => trade_engine.updateConfig(activeStrategy, 'ticks', parseInt(e.target.value))}
+                            value={config.ticks || ''}
+                            onChange={e => {
+                                const val = parseInt(e.target.value);
+                                trade_engine.updateConfig(activeStrategy, 'ticks', isNaN(val) ? 1 : val);
+                            }}
                         />
                     </div>
                     {['over_under', 'matches', 'differs'].includes(activeStrategy) && (
@@ -221,10 +229,11 @@ const DigitCracker = observer(() => {
                                 type='number'
                                 min='0'
                                 max='9'
-                                value={config.prediction}
-                                onChange={e =>
-                                    trade_engine.updateConfig(activeStrategy, 'prediction', parseInt(e.target.value))
-                                }
+                                value={config.prediction ?? 0}
+                                onChange={e => {
+                                    const val = parseInt(e.target.value);
+                                    trade_engine.updateConfig(activeStrategy, 'prediction', isNaN(val) ? 0 : val);
+                                }}
                             />
                         </div>
                     )}
@@ -291,28 +300,30 @@ const DigitCracker = observer(() => {
                                         <label>Trigger %</label>
                                         <input
                                             type='number'
-                                            value={config.trigger_percentage || 55}
-                                            onChange={e =>
+                                            value={config.trigger_percentage || ''}
+                                            onChange={e => {
+                                                const val = parseFloat(e.target.value);
                                                 trade_engine.updateConfig(
                                                     activeStrategy,
                                                     'trigger_percentage' as keyof TTradeConfig,
-                                                    parseFloat(e.target.value) as any
-                                                )
-                                            }
+                                                    isNaN(val) ? 0 : val as any
+                                                );
+                                            }}
                                         />
                                     </div>
                                     <div className='input-field'>
                                         <label>Consecutive Ticks</label>
                                         <input
                                             type='number'
-                                            value={config.consecutive_ticks || 2}
-                                            onChange={e =>
+                                            value={config.consecutive_ticks || ''}
+                                            onChange={e => {
+                                                const val = parseInt(e.target.value);
                                                 trade_engine.updateConfig(
                                                     activeStrategy,
                                                     'consecutive_ticks' as keyof TTradeConfig,
-                                                    parseInt(e.target.value) as any
-                                                )
-                                            }
+                                                    isNaN(val) ? 0 : val as any
+                                                );
+                                            }}
                                         />
                                     </div>
                                 </>
@@ -326,14 +337,15 @@ const DigitCracker = observer(() => {
                                 <input
                                     type='number'
                                     step='1'
-                                    value={config.differs_max_percentage ?? 9}
-                                    onChange={e =>
+                                    value={config.differs_max_percentage ?? ''}
+                                    onChange={e => {
+                                        const val = parseFloat(e.target.value);
                                         trade_engine.updateConfig(
                                             activeStrategy,
                                             'differs_max_percentage' as keyof TTradeConfig,
-                                            parseFloat(e.target.value) as any
-                                        )
-                                    }
+                                            isNaN(val) ? 0 : val as any
+                                        );
+                                    }}
                                 />
                             </div>
                             <div className='input-field'>
@@ -342,14 +354,15 @@ const DigitCracker = observer(() => {
                                     type='number'
                                     step='1'
                                     min='1'
-                                    value={config.differs_target_ticks ?? 2}
-                                    onChange={e =>
+                                    value={config.differs_target_ticks ?? ''}
+                                    onChange={e => {
+                                        const val = parseInt(e.target.value);
                                         trade_engine.updateConfig(
                                             activeStrategy,
                                             'differs_target_ticks' as keyof TTradeConfig,
-                                            parseInt(e.target.value) as any
-                                        )
-                                    }
+                                            isNaN(val) ? 1 : val as any
+                                        );
+                                    }}
                                 />
                             </div>
                             <div className='input-field'>
@@ -359,14 +372,15 @@ const DigitCracker = observer(() => {
                                     step='1'
                                     min='1'
                                     max='10'
-                                    value={config.bulk_trades_count ?? 1}
-                                    onChange={e =>
+                                    value={config.bulk_trades_count ?? ''}
+                                    onChange={e => {
+                                        const val = parseInt(e.target.value);
                                         trade_engine.updateConfig(
                                             activeStrategy,
                                             'bulk_trades_count' as keyof TTradeConfig,
-                                            parseInt(e.target.value) as any
-                                        )
-                                    }
+                                            isNaN(val) ? 1 : val as any
+                                        );
+                                    }}
                                 />
                             </div>
                         </>
@@ -404,22 +418,22 @@ const DigitCracker = observer(() => {
                 <div className='action-row'>
                     <button
                         className='btn-trade-once'
-                        onClick={() => trade_engine.toggleStrategy(activeStrategy)}
-                        disabled={config.is_running && config.is_auto}
+                        onClick={() => trade_engine.toggleStrategy(activeStrategy, false)}
+                        disabled={config.is_running}
                     >
                         <LabelPairedPlayMdFillIcon />
                         Trade Once
                     </button>
                     <button
-                        className={`btn-auto-trade ${config.is_running ? 'active glowing' : ''}`}
-                        onClick={() => trade_engine.toggleStrategy(activeStrategy)}
+                        className={`btn-auto-trade ${config.is_running && config.is_auto ? 'active glowing' : ''}`}
+                        onClick={() => trade_engine.toggleStrategy(activeStrategy, true)}
                     >
                         {config.is_running && config.is_auto ? (
                             <LabelPairedSquareMdFillIcon />
                         ) : (
                             <LabelPairedArrowsRotateMdRegularIcon />
                         )}
-                        {config.is_running ? 'Stop Auto Trading' : 'Start Auto Trading'}
+                        {config.is_running && config.is_auto ? 'Stop Auto Trading' : 'Start Auto Trading'}
                     </button>
                 </div>
             </div>
