@@ -38,6 +38,7 @@ const useMobileMenuConfig = () => {
                     label: localize('Dark theme'),
                     LeftComponent: LegacyTheme1pxIcon,
                     RightComponent: <ToggleSwitch value={is_dark_mode_on} onChange={toggleTheme} />,
+                    onClick: toggleTheme,
                 },
             ].filter(Boolean) as TMenuConfig,
             [

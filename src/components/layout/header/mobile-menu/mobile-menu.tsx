@@ -61,7 +61,6 @@ const MobileMenu = () => {
                                 onLanguageSwitch={code => {
                                     switchLanguage(code);
                                     window.location.replace(getActiveTabUrl());
-                                    window.location.reload();
                                 }}
                                 selectedLanguage={currentLang}
                                 wrapperClassName='mobile-menu__language-drawer'

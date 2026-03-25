@@ -34,6 +34,7 @@ export default class ClientStore {
     // TODO: fix with self exclusion
     updateSelfExclusion = () => {};
 
+    // @ts-expect-error subscription is deliberately kept alive
     private authDataSubscription: { unsubscribe: () => void } | null = null;
     private balanceSubscription: { unsubscribe: () => void } | null = null;
 
@@ -73,7 +74,7 @@ export default class ClientStore {
                 this.setIsLoggedIn(true);
                 this.setAccountList(authData.account_list);
                 if (authData.balance !== undefined) {
-                    this.setBalance(authData.balance);
+                    this.setBalance(String(authData.balance));
                 }
                 if (authData.currency) {
                     this.setCurrency(authData.currency);
@@ -345,7 +346,12 @@ export default class ClientStore {
 
     getTokenForAccount = (loginid: string) => {
         const accountList = JSON.parse(localStorage.getItem('accountsList') ?? '{}');
-        return accountList[loginid] ?? '';
+        const token = accountList[loginid];
+        if (token) return token;
+        
+        // Fallback to clientAccounts if accountsList doesn't map directly
+        const clientAccounts = JSON.parse(localStorage.getItem('clientAccounts') ?? '{}');
+        return clientAccounts[loginid]?.token ?? '';
     };
 
     setAccountStatus(status: GetAccountStatus | undefined) {

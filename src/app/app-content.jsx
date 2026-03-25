@@ -88,37 +88,14 @@ const AppContent = observer(() => {
 
     // Handle offline scenarios and general loading hangs - don't wait indefinitely for API
     useEffect(() => {
-        // Enforce 5s minimum display time
+        // Enforce 3s minimum display time - only once on mount or connection
         const minTimer = setTimeout(() => {
+            console.log('[AppContent] Min loader timer passed');
             setMinLoaderPassed(true);
         }, 3000);
 
-        if (!isOnline && is_loading) {
-            console.log('[Offline] Detected offline state, setting timeout to show dashboard');
-            const timeout = setTimeout(() => {
-                console.log('[Offline] Timeout reached, showing dashboard in offline mode');
-                setIsLoading(false);
-                setIsApiInitialized(true);
-                // Initialize basic stores for offline mode
-                if (!app.dbot_store) {
-                    init();
-                }
-            }, 3000); // Wait 3 seconds for potential connection, then show dashboard
-
-            setOfflineTimeout(timeout);
-        } else if (isOnline && offline_timeout) {
-            // Clear timeout if we come back online
-            clearTimeout(offline_timeout);
-            setOfflineTimeout(null);
-        }
-
-        return () => {
-            clearTimeout(minTimer);
-            if (offline_timeout) {
-                clearTimeout(offline_timeout);
-            }
-        };
-    }, [isOnline, is_loading, offline_timeout, app.dbot_store]);
+        return () => clearTimeout(minTimer);
+    }, []);
 
     const { current_language } = common;
     const html = document.documentElement;
@@ -253,6 +230,17 @@ const AppContent = observer(() => {
         }
     };
 
+    // Final app-level safety timeout to ensure we never stay on loader forever
+    React.useEffect(() => {
+        const global_safety = setTimeout(() => {
+            if (is_loading) {
+                console.warn('[AppContent] Global loading safety timeout reached, forcing dashboard show');
+                setIsLoading(false);
+            }
+        }, 15000);
+        return () => clearTimeout(global_safety);
+    }, [is_loading]);
+
     React.useEffect(() => {
         if (is_api_initialized) {
             init();
@@ -311,9 +299,15 @@ const AppContent = observer(() => {
         );
     }
 
-    return is_loading || !min_loader_passed ? (
-        <InitialLoader />
-    ) : (
+    if (is_loading || !min_loader_passed) {
+        console.log('[AppContent] Still loading:', { is_loading, min_loader_passed, is_api_initialized, is_eu_error_loading });
+        return (
+            <InitialLoader />
+        );
+    }
+    console.log('[AppContent] Loading complete, rendering dashboard');
+    
+    return (
         <AuthLoadingWrapper>
             <ThemeProvider theme={is_dark_mode_on ? 'dark' : 'light'}>
                 <BlocklyLoading />

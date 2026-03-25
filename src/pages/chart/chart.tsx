@@ -30,7 +30,8 @@ type TError = null | {
     };
 };
 
-const subscriptions: TSubscription = {};
+// We will move these into the component using useRef to prevent multi-tab leaks/persistence
+
 
 const Chart = observer(({ show_digits_stats }: { show_digits_stats: boolean }) => {
     const barriers: [] = [];
@@ -55,6 +56,7 @@ const Chart = observer(({ show_digits_stats }: { show_digits_stats: boolean }) =
         chart_subscription_id,
     } = chart_store;
     const chartSubscriptionIdRef = useRef(chart_subscription_id);
+    const onMessageSubscriptions = useRef<Record<string, { unsubscribe: () => void }>>({});
     const { isDesktop, isMobile } = useDevice();
     const { is_drawer_open } = run_panel;
     const { is_chart_modal_visible } = dashboard;
@@ -77,7 +79,11 @@ const Chart = observer(({ show_digits_stats }: { show_digits_stats: boolean }) =
         setIsSafari(isSafariBrowser());
 
         return () => {
-            chart_api.api.forgetAll('ticks');
+            // Clean up all active onMessage subscriptions
+            Object.values(onMessageSubscriptions.current).forEach(sub => sub?.unsubscribe?.());
+            if (chart_api.api) {
+                chart_api.api.send({ forget_all: 'ticks' });
+            }
         };
     }, []);
 
@@ -120,26 +126,64 @@ const Chart = observer(({ show_digits_stats }: { show_digits_stats: boolean }) =
     const requestAPI = (req: ServerTimeRequest | ActiveSymbolsRequest | TradingTimesRequest) => {
         return chart_api.api.send(req);
     };
+
+    // Fix: Properly forget a single subscription by ID
+    const requestForget = (subscription_id: string) => {
+        if (!subscription_id) return;
+        // Unsubscribe the onMessage listener
+        if (onMessageSubscriptions.current[subscription_id]) {
+            onMessageSubscriptions.current[subscription_id].unsubscribe();
+            delete onMessageSubscriptions.current[subscription_id];
+        }
+        // Tell the Deriv API to forget this stream
+        if (chart_api.api) {
+            chart_api.api.send({ forget: subscription_id });
+        }
+    };
+
+    // Fix: Forget a stream subscription (called by SmartChart on symbol change)
     const requestForgetStream = (subscription_id: string) => {
-        subscription_id && chart_api.api.forget(subscription_id);
+        requestForget(subscription_id);
     };
 
     const requestSubscribe = async (req: TicksStreamRequest, callback: (data: any) => void) => {
         try {
-            requestForgetStream(chartSubscriptionIdRef.current);
+            // Forget the previous subscription before creating a new one
+            if (chartSubscriptionIdRef.current) {
+                requestForget(chartSubscriptionIdRef.current);
+            }
             const history = await chart_api.api.send(req);
-            setChartSubscriptionId(history?.subscription.id);
+            const subscription_id = history?.subscription?.id;
+            if (subscription_id) {
+                setChartSubscriptionId(subscription_id);
+            }
             if (history) callback(history);
-            if (req.subscribe === 1) {
-                subscriptions[history?.subscription.id] = chart_api.api
+            if (req.subscribe === 1 && subscription_id) {
+                const msgSub = chart_api.api
                     .onMessage()
-                    ?.subscribe(({ data }: { data: TicksHistoryResponse }) => {
-                        callback(data);
+                    ?.subscribe(({ data }: { data: any }) => {
+                        const msg_type = data.msg_type;
+                        let response_symbol = '';
+
+                        if (msg_type === 'tick') response_symbol = data.tick?.symbol;
+                        else if (msg_type === 'ohlc') response_symbol = data.ohlc?.symbol;
+                        else if (msg_type === 'candles') response_symbol = data.candles?.[0]?.symbol;
+                        else if (msg_type === 'history') response_symbol = data.history?.symbol;
+
+                        if (response_symbol === req.ticks_history || response_symbol === req.symbol) {
+                            callback(data);
+                        } else if (response_symbol) {
+                             // Log mismatched data to confirm theory of cross-talk
+                             // console.warn(`[Chart] Ignoring data for ${response_symbol} (Expected ${req.ticks_history})`);
+                        }
                     });
+                if (msgSub) {
+                    onMessageSubscriptions.current[subscription_id] = msgSub;
+                }
             }
         } catch (e) {
             // eslint-disable-next-line no-console
-            (e as TError)?.error?.code === 'MarketIsClosed' && callback([]); //if market is closed sending a empty array  to resolve
+            (e as TError)?.error?.code === 'MarketIsClosed' && callback([]); //if market is closed sending empty array to resolve
             console.log((e as TError)?.error?.message);
         }
     };
@@ -206,8 +250,8 @@ const Chart = observer(({ show_digits_stats }: { show_digits_stats: boolean }) =
                 enabledNavigationWidget={isDesktop}
                 granularity={granularity}
                 requestAPI={requestAPI}
-                requestForget={() => {}}
-                requestForgetStream={() => {}}
+                requestForget={requestForget}
+                requestForgetStream={requestForgetStream}
                 requestSubscribe={requestSubscribe}
                 settings={settings}
                 symbol={symbol}

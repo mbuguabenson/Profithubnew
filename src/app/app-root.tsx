@@ -44,17 +44,22 @@ const AppRoot = observer(() => {
         document.body.classList.remove('theme--light', 'theme--dark');
         document.body.classList.add(themeClass);
     }, [is_dark_mode_on]);
+    
+    const [min_loader_passed, setMinLoaderPassed] = useState(false);
+    useEffect(() => {
+        const minTimer = setTimeout(() => {
+            console.log('[AppRoot] Min loader timer passed');
+            setMinLoaderPassed(true);
+        }, 3000);
+        return () => clearTimeout(minTimer);
+    }, []);
 
     const api_base_initialized = useRef(false);
     const [is_api_initialized, setIsApiInitialized] = useState(false);
-    const [min_loader_passed, setMinLoaderPassed] = useState(false);
     const [is_tmb_check_complete, setIsTmbCheckComplete] = useState(false);
-    const [, setIsTmbEnabled] = useState(false);
     const { isTmbEnabled } = useTMB();
 
     useEffect(() => {
-        if (is_tmb_check_complete) return;
-
         const safetyTimeout = setTimeout(() => {
             if (!is_tmb_check_complete) {
                 console.warn('[AppRoot] TMB check safety timeout reached');
@@ -67,8 +72,6 @@ const AppRoot = observer(() => {
                 const tmb_status = await isTmbEnabled();
                 const final_status = tmb_status || window.is_tmb_enabled === true;
                 console.log('[AppRoot] TMB status determined:', final_status);
-
-                setIsTmbEnabled(final_status);
                 setIsTmbCheckComplete(true);
             } catch (error) {
                 console.error('[AppRoot] TMB check failed:', error);
@@ -83,18 +86,12 @@ const AppRoot = observer(() => {
     }, [isTmbEnabled]);
 
     useEffect(() => {
-        // Enforce 5s minimum display time
-        const minTimer = setTimeout(() => {
-            setMinLoaderPassed(true);
-        }, 3000);
-
-        if (!is_tmb_check_complete) return;
-
         const timeoutId = setTimeout(() => {
             if (!is_api_initialized) {
+                console.log('[AppRoot] API init safety timeout reached');
                 setIsApiInitialized(true);
             }
-        }, 8000); // safety timeout
+        }, 8000);
 
         const initializeApi = async () => {
             if (!api_base_initialized.current) {
@@ -103,22 +100,26 @@ const AppRoot = observer(() => {
                     api_base_initialized.current = true;
                 } catch (error) {
                     console.error('API initialization failed:', error);
-                    api_base_initialized.current = false;
                 } finally {
+                    console.log('[AppRoot] API initialization complete');
                     setIsApiInitialized(true);
                     clearTimeout(timeoutId);
                 }
             }
         };
 
-        initializeApi();
-        return () => {
-            clearTimeout(timeoutId);
-            clearTimeout(minTimer);
-        };
+        if (is_tmb_check_complete) {
+            initializeApi();
+        }
+
+        return () => clearTimeout(timeoutId);
     }, [is_tmb_check_complete]);
 
-    if (!store || !is_api_initialized || !min_loader_passed) return <AppRootLoader />;
+    if (!store || !is_api_initialized || !min_loader_passed) {
+        console.log('[AppRoot] Still loading:', { store: !!store, is_api_initialized, min_loader_passed });
+        return <AppRootLoader />;
+    }
+    console.log('[AppRoot] Loading complete, rendering AppContent');
 
     return (
         <Suspense fallback={<AppRootLoader />}>
