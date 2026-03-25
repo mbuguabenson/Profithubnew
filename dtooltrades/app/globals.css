@@ -1,0 +1,401 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+@import '../styles/premium-design-system.css';
+@custom-variant dark (&:is(.dark *));
+
+:root {
+    /* Revamped Premium Color Tokens */
+    --background: oklch(5% 0.01 240deg);
+
+    /* Deep Midnight Blue */
+    --foreground: oklch(98% 0 0deg);
+    --card: oklch(10% 0.02 240deg);
+    --card-foreground: oklch(98% 0 0deg);
+    --popover: oklch(10% 0.02 240deg);
+    --popover-foreground: oklch(98% 0 0deg);
+    --primary: oklch(60% 0.2 250deg);
+
+    /* Vivid Blue */
+    --primary-foreground: oklch(100% 0 0deg);
+    --secondary: oklch(70% 0.15 70deg);
+
+    /* Soft Gold */
+    --secondary-foreground: oklch(20% 0.05 70deg);
+    --muted: oklch(20% 0.03 240deg);
+    --muted-foreground: oklch(70% 0.02 240deg);
+    --accent: oklch(60% 0.2 300deg);
+
+    /* Deep Purple Accent */
+    --accent-foreground: oklch(100% 0 0deg);
+    --destructive: oklch(60% 0.25 25deg);
+    --destructive-foreground: oklch(100% 0 0deg);
+    --border: oklch(20% 0.04 240deg);
+    --input: oklch(15% 0.04 240deg);
+    --ring: oklch(60% 0.2 250deg);
+    --chart-1: oklch(60% 0.2 250deg);
+    --chart-2: oklch(70% 0.15 70deg);
+    --chart-3: oklch(60% 0.2 300deg);
+    --chart-4: oklch(65% 0.2 150deg);
+    --chart-5: oklch(75% 0.15 40deg);
+    --radius: 0.75rem;
+    --sidebar: oklch(8% 0.02 240deg);
+    --sidebar-foreground: oklch(98% 0 0deg);
+    --sidebar-primary: oklch(60% 0.2 250deg);
+    --sidebar-primary-foreground: oklch(100% 0 0deg);
+    --sidebar-accent: oklch(20% 0.03 240deg);
+    --sidebar-accent-foreground: oklch(98% 0 0deg);
+    --sidebar-border: oklch(20% 0.04 240deg);
+    --sidebar-ring: oklch(60% 0.2 250deg);
+}
+
+.dark {
+    --background: oklch(5% 0.01 240deg);
+    --foreground: oklch(98% 0 0deg);
+    --card: oklch(10% 0.02 240deg);
+    --card-foreground: oklch(98% 0 0deg);
+    --popover: oklch(10% 0.02 240deg);
+    --popover-foreground: oklch(98% 0 0deg);
+    --primary: oklch(60% 0.2 250deg);
+    --primary-foreground: oklch(100% 0 0deg);
+    --secondary: oklch(70% 0.15 70deg);
+    --secondary-foreground: oklch(20% 0.05 70deg);
+    --muted: oklch(20% 0.03 240deg);
+    --muted-foreground: oklch(70% 0.02 240deg);
+    --accent: oklch(60% 0.2 300deg);
+    --accent-foreground: oklch(100% 0 0deg);
+    --destructive: oklch(60% 0.25 25deg);
+    --destructive-foreground: oklch(100% 0 0deg);
+    --border: oklch(20% 0.04 240deg);
+    --input: oklch(15% 0.04 240deg);
+    --ring: oklch(50% 0.2 250deg);
+    --chart-1: oklch(60% 0.2 250deg);
+    --chart-2: oklch(70% 0.15 70deg);
+    --chart-3: oklch(60% 0.2 300deg);
+    --chart-4: oklch(65% 0.2 150deg);
+    --chart-5: oklch(75% 0.15 40deg);
+}
+
+@theme inline {
+    --color-background: var(--background);
+    --color-foreground: var(--foreground);
+    --color-card: var(--card);
+    --color-card-foreground: var(--card-foreground);
+    --color-popover: var(--popover);
+    --color-popover-foreground: var(--popover-foreground);
+    --color-primary: var(--primary);
+    --color-primary-foreground: var(--primary-foreground);
+    --color-secondary: var(--secondary);
+    --color-secondary-foreground: var(--secondary-foreground);
+    --color-muted: var(--muted);
+    --color-muted-foreground: var(--muted-foreground);
+    --color-accent: var(--accent);
+    --color-accent-foreground: var(--accent-foreground);
+    --color-destructive: var(--destructive);
+    --color-destructive-foreground: var(--destructive-foreground);
+    --color-border: var(--border);
+    --color-input: var(--input);
+    --color-ring: var(--ring);
+    --color-chart-1: var(--chart-1);
+    --color-chart-2: var(--chart-2);
+    --color-chart-3: var(--chart-3);
+    --color-chart-4: var(--chart-4);
+    --color-chart-5: var(--chart-5);
+    --radius-sm: calc(var(--radius) - 4px);
+    --radius-md: calc(var(--radius) - 2px);
+    --radius-lg: var(--radius);
+    --radius-xl: calc(var(--radius) + 4px);
+    --color-sidebar: var(--sidebar);
+    --color-sidebar-foreground: var(--sidebar-foreground);
+    --color-sidebar-primary: var(--sidebar-primary);
+    --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+    --color-sidebar-accent: var(--sidebar-accent);
+    --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+    --color-sidebar-border: var(--sidebar-border);
+    --color-sidebar-ring: var(--sidebar-ring);
+}
+
+@layer base {
+    * {
+        @apply border-border outline-ring/50;
+    }
+
+    body {
+        @apply bg-background text-foreground;
+    }
+}
+
+/* Revamped UI Utilities */
+@layer utilities {
+    /* Premium Glow Effects */
+    .glow-soft-blue {
+        box-shadow:
+            0 0 25px oklch(60% 0.2 250deg / 25%),
+            inset 0 0 15px oklch(60% 0.2 250deg / 10%);
+    }
+
+    .glow-soft-gold {
+        box-shadow:
+            0 0 25px oklch(70% 0.15 70deg / 25%),
+            inset 0 0 15px oklch(70% 0.15 70deg / 10%);
+    }
+
+    .glow-soft-purple {
+        box-shadow:
+            0 0 25px oklch(60% 0.2 300deg / 25%),
+            inset 0 0 15px oklch(60% 0.2 300deg / 10%);
+    }
+
+    .soft-surface {
+        background: linear-gradient(135deg, rgb(15 22 41 / 40%), rgb(26 35 53 / 40%));
+        backdrop-filter: blur(12px);
+        border: 1px solid rgb(59 130 246 / 15%);
+    }
+
+    .soft-card {
+        background: linear-gradient(135deg, rgb(15 22 41 / 60%), rgb(26 35 53 / 60%));
+        backdrop-filter: blur(16px);
+        border: 1px solid rgb(59 130 246 / 20%);
+        border-radius: 0.75rem;
+    }
+
+    /* Glowing edge animations */
+    .animate-edge-glow {
+        animation: edgeGlowPulse 3s ease-in-out infinite;
+    }
+
+    /* Digit styles */
+    .digit-0 {
+        @apply bg-linear-to-br from-pink-500 to-pink-600;
+    }
+
+    .digit-1 {
+        @apply bg-linear-to-br from-blue-500 to-blue-600;
+    }
+
+    .digit-2 {
+        @apply bg-linear-to-br from-cyan-500 to-cyan-600;
+    }
+
+    .digit-3 {
+        @apply bg-linear-to-br from-pink-400 to-pink-500;
+    }
+
+    .digit-4 {
+        @apply bg-linear-to-br from-cyan-400 to-cyan-500;
+    }
+
+    .digit-5 {
+        @apply bg-linear-to-br from-blue-400 to-blue-500;
+    }
+
+    .digit-6 {
+        @apply bg-linear-to-br from-red-500 to-red-600;
+    }
+
+    .digit-7 {
+        @apply bg-linear-to-br from-pink-500 to-pink-600;
+    }
+
+    .digit-8 {
+        @apply bg-linear-to-br from-orange-500 to-orange-600;
+    }
+
+    .digit-9 {
+        @apply bg-linear-to-br from-blue-500 to-purple-600;
+    }
+
+    /* Responsive text sizing - Tightened for Mobile */
+    .text-responsive-sm {
+        @apply text-[10px] sm:text-xs md:text-sm;
+    }
+
+    .text-responsive-base {
+        @apply text-xs sm:text-sm md:text-base;
+    }
+
+    .text-responsive-lg {
+        @apply text-sm sm:text-base md:text-lg;
+    }
+
+    .text-responsive-xl {
+        @apply text-base sm:text-lg md:text-xl;
+    }
+
+    .text-responsive-2xl {
+        @apply text-lg sm:text-xl md:text-2xl;
+    }
+
+    /* Responsive padding - Tightened for Mobile */
+    .p-responsive {
+        @apply p-1.5 sm:p-2.5 md:p-4;
+    }
+
+    .px-responsive {
+        @apply px-1.5 sm:px-2.5 md:px-4;
+    }
+
+    .py-responsive {
+        @apply py-1.5 sm:py-2.5 md:py-4;
+    }
+
+    /* Responsive gap - Tightened for Mobile */
+    .gap-responsive {
+        @apply gap-1.5 sm:gap-2.5 md:gap-4;
+    }
+
+    /* Fintech Gradients */
+    .gradient-red-crimson {
+        @apply bg-linear-to-r from-red-500 to-rose-700;
+    }
+
+    .gradient-pink-orange {
+        @apply bg-linear-to-r from-pink-500 to-orange-400;
+    }
+
+    .gradient-teal-green {
+        @apply bg-linear-to-r from-teal-400 to-emerald-500;
+    }
+
+    .gradient-blue-indigo {
+        @apply bg-linear-to-r from-blue-500 to-indigo-600;
+    }
+
+    .gradient-cyan-sky {
+        @apply bg-linear-to-r from-cyan-400 to-sky-500;
+    }
+
+    .glass-fintech {
+        @apply bg-slate-900/80 backdrop-blur-md border border-slate-700/50 shadow-xl;
+    }
+}
+
+@keyframes edgeGlowPulse {
+    0%,
+    100% {
+        box-shadow:
+            0 0 30px rgb(59 130 246 / 30%),
+            inset 0 0 30px rgb(59 130 246 / 10%);
+    }
+
+    50% {
+        box-shadow:
+            0 0 50px rgb(34 211 238 / 40%),
+            inset 0 0 30px rgb(34 211 238 / 15%);
+    }
+}
+
+@keyframes glowBlue {
+    0%,
+    100% {
+        box-shadow:
+            0 0 20px rgb(59 130 246 / 30%),
+            0 0 40px rgb(59 130 246 / 15%);
+    }
+
+    50% {
+        box-shadow:
+            0 0 30px rgb(59 130 246 / 50%),
+            0 0 60px rgb(59 130 246 / 25%);
+    }
+}
+
+@keyframes foxRun {
+    0% {
+        transform: translateX(0);
+    }
+
+    50% {
+        transform: translateX(10px);
+    }
+
+    100% {
+        transform: translateX(0);
+    }
+}
+
+@keyframes liquidFill {
+    0% {
+        height: 0%;
+    }
+
+    100% {
+        height: 100%;
+    }
+}
+
+/* Add card-specific glowing animations */
+@keyframes cardGlowPulse {
+    0%,
+    100% {
+        box-shadow:
+            0 0 20px rgb(59 130 246 / 20%),
+            inset 0 0 15px rgb(59 130 246 / 5%);
+    }
+
+    50% {
+        box-shadow:
+            0 0 40px rgb(34 211 238 / 30%),
+            inset 0 0 25px rgb(34 211 238 / 10%);
+    }
+}
+
+@keyframes borderGlowPulse {
+    0%,
+    100% {
+        border-color: rgb(59 130 246 / 30%);
+    }
+
+    50% {
+        border-color: rgb(34 211 238 / 60%);
+    }
+}
+
+@layer utilities {
+    .animate-glow-blue {
+        animation: glowBlue 2s ease-in-out infinite;
+    }
+
+    .animate-fox-run {
+        animation: foxRun 2s ease-in-out infinite;
+    }
+
+    .animate-liquid-fill {
+        animation: liquidFill 3s ease-in-out forwards;
+    }
+
+    .glass-light {
+        background: rgb(255 255 255 / 70%);
+        backdrop-filter: blur(20px) saturate(180%);
+        backdrop-filter: blur(20px) saturate(180%);
+        border: 1px solid rgb(209 213 219 / 30%);
+    }
+
+    .frost-light {
+        background: linear-gradient(135deg, rgb(255 255 255 / 80%), rgb(255 255 255 / 60%));
+        backdrop-filter: blur(16px);
+        backdrop-filter: blur(16px);
+        box-shadow: 0 8px 32px 0 rgb(31 38 135 / 15%);
+    }
+
+    .card-glow-animate {
+        animation: cardGlowPulse 3s ease-in-out infinite;
+    }
+
+    .border-glow-animate {
+        animation: borderGlowPulse 2s ease-in-out infinite;
+    }
+
+    /* Fixed circular reference - replaced @apply with direct CSS properties */
+    .glow-card {
+        background: linear-gradient(135deg, rgb(59 130 246 / 10%), rgb(34 211 238 / 10%));
+        border: 1px solid rgb(59 130 246 / 20%);
+        border-radius: 0.75rem;
+        box-shadow:
+            0 0 20px rgb(59 130 246 / 20%),
+            inset 0 0 15px rgb(59 130 246 / 5%);
+    }
+
+    .glow-card-active {
+        animation: cardGlowPulse 3s ease-in-out infinite;
+    }
+}

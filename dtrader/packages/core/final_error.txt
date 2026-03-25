@@ -1,0 +1,611 @@
+﻿
+     - while 
+fulfilling desired 
+order of chunk 
+group(s) 
+trader-app-v2, 
+account-app[39m[22m
+  
+  [1m[33m333 
+WARNINGS in child 
+compilations (Use 
+'stats.children: true' 
+resp. 
+'--stats-children' for 
+more details)[39m[22m
+  
+  1 warning has 
+detailed information 
+that is not shown.
+> Use 
+'stats.errorDetails: 
+true' resp. '--stats-er
+ror-details' to show 
+it.
+  
+> [1m[31mERROR[39m[
+22m in [1m./sass/app.s
+css[39m[22m
+  [1mModule build [1m
+[31mfailed[39m[22m[
+1m (from ../../../node_
+modules/mini-css-extrac
+t-plugin/dist/loader.js
+):
+> ModuleBuildError: 
+Module build [1m[31mf
+ailed[39m[22m[1m 
+(from ../../../node_mod
+ules/sass-loader/dist/c
+js.js):
+> SassError: Can't 
+find stylesheet to 
+import.
+      ╷
+  722 │ @import '~@deri
+v/shared/src/styles/goo
+gle-fonts.scss';
+      │         ^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^
+      ╵
+    src\sass\app.scss 
+722:9  root stylesheet
+      at 
+context.callback 
+(F:\Trading Site\New fo
+lder\dtrader\node_modul
+es\loader-runner\lib\Lo
+aderRunner.js:124:13)
+      at Object.loader 
+(F:\Trading Site\New fo
+lder\dtrader\node_modul
+es\sass-loader\dist\ind
+ex.js:69:5)[39m[22m
+   @ ./App/app.jsx 
+25:0-23
+   @ ./index.tsx 
+10:0-30 33:36-39
+  
+> [1m[31mERROR[39m[
+22m in [1m../../accoun
+t/src/Components/poa/co
+ntinue-trading-button/c
+ontinue-trading-button.
+tsx[39m[22m [1m[32m
+5:0-63[39m[22m
+> [1mModule 
+[1m[31mnot 
+found[39m[22m[1m: [
+1m[31mError[39m[22m
+[1m: Can't resolve '@de
+riv/shared/src/utils/ro
+utes/routes' in 
+'F:\Trading Site\New fo
+lder\dtrader\packages\a
+ccount\src\Components\p
+oa\continue-trading-but
+ton'[39m[22m
+   @ ../../account/src/
+Components/poi/idv-stat
+us/idv-verified/idv-ver
+ified.tsx 6:0-101 
+47:46-67
+   @ ../../account/src/
+Components/poi/idv-stat
+us/idv-verified/index.j
+s 1:0-41 2:15-26
+   @ ../../account/src/
+Sections/Verification/P
+roofOfIdentity/idv.jsx 
+5:0-74 37:31-42
+   @ ../../account/src/
+Sections/Verification/P
+roofOfIdentity/proof-of
+-identity-container.jsx
+ 10:0-37 210:31-43
+   @ ../../account/src/
+Sections/Verification/P
+roofOfIdentity/index.js
+ 2:0-88 2:0-88
+   @ ./App/Containers/R
+outes/routes.jsx 
+13:0-49 84:27-39
+   @ 
+./App/AppContent.tsx 
+19:0-52 148:36-42
+   @ ./App/app.jsx 
+24:0-38 150:48-58
+   @ ./index.tsx 
+10:0-30 33:36-39
+  
+> [1m[31mERROR[39m[
+22m in [1m../../accoun
+t/src/Sections/Assessme
+nt/TradingAssessment/tr
+ading-assessment.jsx[3
+9m[22m [1m[32m18:0-8
+7[39m[22m
+> [1mModule 
+[1m[31mnot 
+found[39m[22m[1m: [
+1m[31mError[39m[22m
+[1m: Can't resolve 'Con
+stants/trading-assessme
+nt-questions' in 
+'F:\Trading Site\New fo
+lder\dtrader\packages\a
+ccount\src\Sections\Ass
+essment\TradingAssessme
+nt'[39m[22m
+   @ ../../account/src/
+Sections/Assessment/Tra
+dingAssessment/index.js
+ 1:0-57 2:15-32
+   @ ../../account/src/
+Constants/routes-config
+.tsx 20:66-116
+   @ ../../account/src/
+Components/Routes/binar
+y-routes.tsx 10:0-60 
+27:16-31
+   @ ../../account/src/
+Components/Routes/index
+.ts 2:0-58 2:0-58
+   @ ../../account/src/
+Containers/routes.tsx 
+8:0-52 34:32-44
+   @ ./App/Containers/R
+outes/routes.jsx 
+13:0-49 84:27-39
+   @ 
+./App/AppContent.tsx 
+19:0-52 148:36-42
+   @ ./App/app.jsx 
+24:0-38 150:48-58
+   @ ./index.tsx 
+10:0-30 33:36-39
+  
+> [1m[31mERROR[39m[
+22m in [1m../../accoun
+t/src/Sections/Verifica
+tion/ProofOfOwnership/p
+roof-of-ownership-form.
+tsx[39m[22m [1m[32m
+23:0-60[39m[22m
+> [1mModule 
+[1m[31mnot 
+found[39m[22m[1m: [
+1m[31mError[39m[22m
+[1m: Can't resolve 'Con
+stants/api-[1m[31merr
+or[39m[22m[1m-codes'
+ in 'F:\Trading 
+Site\New folder\dtrader
+\packages\account\src\S
+ections\Verification\Pr
+oofOfOwnership'[39m[2
+2m
+   @ ../../account/src/
+Sections/Verification/P
+roofOfOwnership/proof-o
+f-ownership.tsx 6:0-61 
+60:29-49
+   @ ../../account/src/
+Sections/Verification/P
+roofOfOwnership/index.t
+s 1:0-39 2:15-18
+   @ ../../account/src/
+Sections/index.js 
+4:0-70 10:0-207
+   @ ../../account/src/
+Constants/routes-config
+.tsx 6:0-148 35:13-30 
+38:13-20 52:17-32 
+77:17-36 81:17-35 
+85:17-33 89:17-30
+   @ ../../account/src/
+Components/Routes/binar
+y-routes.tsx 10:0-60 
+27:16-31
+   @ ./App/Containers/R
+outes/routes.jsx 
+13:0-49 84:27-39
+   @ 
+./App/AppContent.tsx 
+19:0-52 148:36-42
+   @ ./App/app.jsx 
+24:0-38 150:48-58
+   @ ./index.tsx 
+10:0-30 33:36-39
+  
+> [1m[31mERROR[39m[
+22m in [1m../../accoun
+t/src/Sections/Verifica
+tion/ProofOfOwnership/v
+alidation.ts[39m[22m 
+[1m[32m3:0-88[39m[2
+2m
+> [1mModule 
+[1m[31mnot 
+found[39m[22m[1m: [
+1m[31mError[39m[22m
+[1m: Can't resolve 'Con
+stants/poo-identifier' 
+in 'F:\Trading 
+Site\New folder\dtrader
+\packages\account\src\S
+ections\Verification\Pr
+oofOfOwnership'[39m[2
+2m
+   @ ../../account/src/
+Sections/Verification/P
+roofOfOwnership/proof-o
+f-ownership-form.tsx 
+22:0-75 111:51-81 
+142:30-41
+   @ ../../account/src/
+Sections/Verification/P
+roofOfOwnership/proof-o
+f-ownership.tsx 6:0-61 
+60:29-49
+   @ ../../account/src/
+Sections/Verification/P
+roofOfOwnership/index.t
+s 1:0-39 2:15-18
+   @ ../../account/src/
+Sections/index.js 
+4:0-70 10:0-207
+   @ ../../account/src/
+Constants/routes-config
+.tsx 6:0-148 35:13-30 
+38:13-20 52:17-32 
+77:17-36 81:17-35 
+85:17-33 89:17-30
+   @ ./App/Containers/R
+outes/routes.jsx 
+13:0-49 84:27-39
+   @ 
+./App/AppContent.tsx 
+19:0-52 148:36-42
+   @ ./App/app.jsx 
+24:0-38 150:48-58
+   @ ./index.tsx 
+10:0-30 33:36-39
+  
+> [1m[31mERROR[39m[
+22m in [1m../../cashie
+r/src/containers/routes
+/binary-routes.tsx[39m
+[22m [1m[32m12:0-54
+[39m[22m
+> [1mModule 
+[1m[31mnot 
+found[39m[22m[1m: [
+1m[31mError[39m[22m
+[1m: Can't resolve 'Con
+stants/routes-config' 
+in 'F:\Trading 
+Site\New folder\dtrader
+\packages\cashier\src\c
+ontainers\routes'[39m
+[22m
+   @ ../../cashier/src/
+containers/routes/route
+s.tsx 9:0-43 26:27-39
+   @ ../../cashier/src/
+containers/routes/index
+.ts 1:0-30 2:15-21
+   @ ../../cashier/src/
+app-content.tsx 3:0-41 
+15:88-94
+   @ ../../cashier/src/
+app.tsx 2:0-39 17:36-46
+   @ ../../cashier/src/
+index.tsx 5:52-126
+   @ ./App/Containers/R
+outes/routes.jsx 
+13:0-49 84:27-39
+   @ 
+./App/AppContent.tsx 
+19:0-52 148:36-42
+   @ ./App/app.jsx 
+24:0-38 150:48-58
+   @ ./index.tsx 
+10:0-30 33:36-39
+  
+> [1m[31mERROR[39m[
+22m in [1m../../cashie
+r/src/containers/routes
+/useUnsafeCashierRouteH
+andler.ts[39m[22m [1
+m[32m3:0-58[39m[22m
+> [1mModule 
+[1m[31mnot 
+found[39m[22m[1m: [
+1m[31mError[39m[22m
+[1m: Can't resolve 'Sto
+res/useCashierStores' 
+in 'F:\Trading 
+Site\New folder\dtrader
+\packages\cashier\src\c
+ontainers\routes'[39m
+[22m
+   @ ../../cashier/src/
+app-content.tsx 4:0-92 
+13:2-30
+   @ ../../cashier/src/
+app.tsx 2:0-39 17:36-46
+   @ ../../cashier/src/
+index.tsx 5:52-126
+   @ ./App/Constants/ro
+utes-config.js 36:9-66
+   @ ./App/Components/R
+outes/binary-routes.jsx
+ 9:0-58 53:16-31
+   @ ./App/Containers/R
+outes/routes.jsx 
+13:0-49 84:27-39
+   @ 
+./App/AppContent.tsx 
+19:0-52 148:36-42
+   @ ./App/app.jsx 
+24:0-38 150:48-58
+   @ ./index.tsx 
+10:0-30 33:36-39
+  
+> [1m[31mERROR[39m[
+22m in [1m../../cfd/sr
+c/Components/Routes/bin
+ary-routes.tsx[39m[22
+m [1m[32m9:0-54[39m
+[22m
+> [1mModule 
+[1m[31mnot 
+found[39m[22m[1m: [
+1m[31mError[39m[22m
+[1m: Can't resolve 'Con
+stants/routes-config' 
+in 'F:\Trading 
+Site\New folder\dtrader
+\packages\cfd\src\Compo
+nents\Routes'[39m[22m
+   @ ../../cfd/src/Comp
+onents/Routes/index.ts 
+1:0-43 3:15-27
+   @ ../../cfd/src/Cont
+ainers/routes/routes.ts
+x 8:0-51 31:27-39
+   @ ../../cfd/src/Cont
+ainers/routes/index.ts 
+1:0-30 2:15-21
+   @ 
+../../cfd/src/app.tsx 
+2:0-41 13:32-38
+   @ ../../cfd/src/inde
+x.tsx 5:33-103
+   @ ./App/Containers/R
+outes/routes.jsx 
+13:0-49 84:27-39
+   @ 
+./App/AppContent.tsx 
+19:0-52 148:36-42
+   @ ./App/app.jsx 
+24:0-38 150:48-58
+   @ ./index.tsx 
+10:0-30 33:36-39
+  
+> [1m[31mERROR[39m[
+22m in [1m./App/Consta
+nts/routes-config.js[3
+9m[22m [1m[32m17:57-
+159[39m[22m
+> [1mModule 
+[1m[31mnot 
+found[39m[22m[1m: [
+1m[31mError[39m[22m
+[1m: Can't resolve '@de
+riv/cfd/src/Containers/
+cfd-compare-accounts' 
+in 'F:\Trading 
+Site\New folder\dtrader
+\packages\core\src\App\
+Constants'[39m[22m
+   @ ./App/Components/R
+outes/binary-routes.jsx
+ 9:0-58 53:16-31
+   @ ./App/Components/R
+outes/index.js 4:0-47 
+7:15-27
+   @ ./App/Containers/R
+outes/routes.jsx 
+13:0-49 84:27-39
+   @ 
+./App/AppContent.tsx 
+19:0-52 148:36-42
+   @ ./App/app.jsx 
+24:0-38 150:48-58
+   @ ./index.tsx 
+10:0-30 33:36-39
+  
+> [1m[31mERROR[39m[
+22m in [1m./App/Consta
+nts/routes-config.js[3
+9m[22m [1m[32m40:9-7
+6[39m[22m
+> [1mModule 
+[1m[31mnot 
+found[39m[22m[1m: [
+1m[31mError[39m[22m
+[1m: Can't resolve 
+'@deriv/bot-web-ui' in 
+'F:\Trading Site\New fo
+lder\dtrader\packages\c
+ore\src\App\Constants'
+[39m[22m
+   @ ./App/Components/R
+outes/binary-routes.jsx
+ 9:0-58 53:16-31
+   @ ./App/Components/R
+outes/index.js 4:0-47 
+7:15-27
+   @ ./App/Containers/R
+outes/routes.jsx 
+13:0-49 84:27-39
+   @ 
+./App/AppContent.tsx 
+19:0-52 148:36-42
+   @ ./App/app.jsx 
+24:0-38 150:48-58
+   @ ./index.tsx 
+10:0-30 33:36-39
+  
+> [1m[31mERROR[39m[
+22m in [1m./App/Contai
+ners/ConfirmEmailModal/
+confirm-email-modal.tsx
+[39m[22m [1m[32m9:0
+-76[39m[22m
+> [1mModule 
+[1m[31mnot 
+found[39m[22m[1m: [
+1m[31mError[39m[22m
+[1m: Can't resolve '@de
+riv/account/src/Compone
+nts/sent-email-modal' 
+in 'F:\Trading 
+Site\New folder\dtrader
+\packages\core\src\App\
+Containers\ConfirmEmail
+Modal'[39m[22m
+   @ ./App/Containers/R
+esetEmailModal/reset-em
+ail-modal.tsx 7:0-77 
+45:29-46
+   @ ./App/Containers/R
+esetEmailModal/index.ts
+ 1:0-50 2:15-30
+   @ ./App/Containers/M
+odals/app-modals.jsx 
+30:54-126
+   @ ./App/Containers/M
+odals/index.js 1:0-41 
+2:15-24
+   @ 
+./App/AppContent.tsx 
+18:0-44 154:34-43
+   @ ./App/app.jsx 
+24:0-38 150:48-58
+   @ ./index.tsx 
+10:0-30 33:36-39
+  
+> [1m[31mERROR[39m[
+22m in [1m./App/Contai
+ners/CurrencySelectionM
+odal/curreny-selection-
+modal.tsx[39m[22m [1
+m[32m2:0-86[39m[22m
+> [1mModule 
+[1m[31mnot 
+found[39m[22m[1m: [
+1m[31mError[39m[22m
+[1m: Can't resolve '@de
+riv/account/src/Configs
+/get-status-badge-confi
+g' in 'F:\Trading 
+Site\New folder\dtrader
+\packages\core\src\App\
+Containers\CurrencySele
+ctionModal'[39m[22m
+   @ ./App/Containers/C
+urrencySelectionModal/i
+ndex.ts 1:0-63 3:15-37
+   @ ./App/Containers/L
+ayout/header/header-leg
+acy.tsx 13:0-75 
+173:141-163
+   @ ./App/Containers/L
+ayout/header/header.tsx
+ 13:61-126
+   @ ./App/Containers/L
+ayout/header/index.ts 
+1:0-30 2:15-21
+   @ 
+./App/AppContent.tsx 
+17:0-48 145:93-99
+   @ ./App/app.jsx 
+24:0-38 150:48-58
+   @ ./index.tsx 
+10:0-30 33:36-39
+  
+> [1m[31mERROR[39m[
+22m in [1m./App/Contai
+ners/Modals/Verificatio
+nDocumentSubmitted/veri
+fication-document-submi
+tted.tsx[39m[22m [1m
+[32m6:0-84[39m[22m
+> [1mModule 
+[1m[31mnot 
+found[39m[22m[1m: [
+1m[31mError[39m[22m
+[1m: Can't resolve '@de
+riv/account/src/Compone
+nts/icon-message-conten
+t' in 'F:\Trading 
+Site\New folder\dtrader
+\packages\core\src\App\
+Containers\Modals\Verif
+icationDocumentSubmitte
+d'[39m[22m
+   @ ./App/Containers/M
+odals/VerificationDocum
+entSubmitted/index.ts 
+1:0-78 2:15-44
+   @ ./App/Containers/M
+odals/app-modals.jsx 
+33:68-172
+   @ ./App/Containers/M
+odals/index.js 1:0-41 
+2:15-24
+   @ 
+./App/AppContent.tsx 
+18:0-44 154:34-43
+   @ ./App/app.jsx 
+24:0-38 150:48-58
+   @ ./index.tsx 
+10:0-30 33:36-39
+  
+> [1m[31mERROR[39m[
+22m in [1m./App/Contai
+ners/Modals/risk-accept
+-test-warning-modal.jsx
+[39m[22m [1m[32m2:0
+-81[39m[22m
+> [1mModule 
+[1m[31mnot 
+found[39m[22m[1m: [
+1m[31mError[39m[22m
+[1m: Can't resolve '@de
+riv/account/dist/accoun
+t/js/test-warning-modal
+' in 'F:\Trading 
+Site\New folder\dtrader
+\packages\core\src\App\
+Containers\Modals'[39m
+[22m
+   @ ./App/Containers/M
+odals/app-modals.jsx 
+17:0-74 177:42-68
+   @ ./App/Containers/M
+odals/index.js 1:0-41 
+2:15-24
+   @ 
+./App/AppContent.tsx 
+18:0-44 154:34-43
+   @ ./App/app.jsx 
+24:0-38 150:48-58
+   @ ./index.tsx 
+10:0-30 33:36-39
+
+

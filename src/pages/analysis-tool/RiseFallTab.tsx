@@ -5,8 +5,15 @@ import './rise-fall-tab.scss';
 
 const RiseFallTab = observer(() => {
     const { analysis_market } = useStore();
-    const { current_price, is_rising, is_falling, tick_history, rise_percentage, fall_percentage, subscribe } =
-        analysis_market;
+    const { 
+        current_price, 
+        is_rising, 
+        is_falling, 
+        tick_history, 
+        rise_percentage, 
+        fall_percentage,
+        subscribe
+    } = analysis_market;
 
     useEffect(() => {
         subscribe();
@@ -48,7 +55,9 @@ const RiseFallTab = observer(() => {
                             <span className='direction-icon'>{tick.direction === 'up' ? '▲' : '▼'}</span>
                         </div>
                     ))}
-                    {tick_history.length === 0 && <div className='loading-placeholder'>Waiting for market data...</div>}
+                    {tick_history.length === 0 && (
+                        <div className='loading-placeholder'>Waiting for market data...</div>
+                    )}
                 </div>
             </div>
         </div>

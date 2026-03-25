@@ -186,6 +186,7 @@ const AppHeader = observer(({ isAuthenticating }: TAppHeaderProps) => {
                 <MobileMenu />
                 <AppLogo />
                 {isDesktop && <MenuItems />}
+
             </Wrapper>
             <Wrapper variant='right'>
                 {!isDesktop && <PWAInstallButton variant='primary' size='medium' />}

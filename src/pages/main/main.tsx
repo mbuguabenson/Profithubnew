@@ -57,8 +57,8 @@ const Portal = observer(({ type }: { type: 'dtrader' | 'dtooltrades' }) => {
                 ? 'https://localhost:8443'
                 : 'http://localhost:3000'
             : type === 'dtrader'
-              ? 'https://dtrader.profithubtool.vercel.app'
-              : 'https://dtooltrades.vercel.app/';
+            ? 'https://dtrader.profithubtool.vercel.app'
+            : 'https://dtooltrades.vercel.app/';
 
     // Only apply SSO to dtrader for now, or use direct URL if it solves the "not working" issue
     const ssoUrl = type === 'dtrader' ? getSsoUrl(finalBaseUrl, client.accounts) : finalBaseUrl;
@@ -126,8 +126,7 @@ const TradingTools = () => {
                             border: 'none',
                             cursor: 'pointer',
                             fontWeight: 600,
-                            background:
-                                activeTab === 'smartauto' ? 'var(--brand-red-coral)' : 'var(--general-section-2)',
+                            background: activeTab === 'smartauto' ? 'var(--brand-red-coral)' : 'var(--general-section-2)',
                             color: activeTab === 'smartauto' ? '#fff' : 'var(--text-general)',
                             transition: 'all 0.2s',
                         }}
@@ -142,8 +141,7 @@ const TradingTools = () => {
                             border: 'none',
                             cursor: 'pointer',
                             fontWeight: 600,
-                            background:
-                                activeTab === 'digitcracker' ? 'var(--brand-red-coral)' : 'var(--general-section-2)',
+                            background: activeTab === 'digitcracker' ? 'var(--brand-red-coral)' : 'var(--general-section-2)',
                             color: activeTab === 'digitcracker' ? '#fff' : 'var(--text-general)',
                             transition: 'all 0.2s',
                         }}
@@ -160,6 +158,7 @@ const TradingTools = () => {
                     </Suspense>
                 </div>
             </div>
+
         </div>
     );
 };

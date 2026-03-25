@@ -26,7 +26,7 @@ export default class AnalysisMarketStore {
         makeObservable(this);
         this.root_store = root_store;
         this.stats_engine = new DigitStatsEngine();
-
+        
         // Use symbol from main analysis store if available
         if (this.root_store.analysis?.symbol) {
             this.symbol = this.root_store.analysis.symbol;
@@ -120,7 +120,7 @@ export default class AnalysisMarketStore {
             };
 
             const response = await chart_api.api.send(req);
-
+            
             if (response?.history) {
                 const { prices, times } = response.history;
                 runInAction(() => {
@@ -132,10 +132,8 @@ export default class AnalysisMarketStore {
                     });
 
                     this.tick_history = [...mapped_ticks].reverse(); // Latest first
-                    this.ticks = mapped_ticks.map((m: { price: number }) =>
-                        this.stats_engine.extractLastDigit(m.price)
-                    );
-
+                    this.ticks = mapped_ticks.map((m: { price: number }) => this.stats_engine.extractLastDigit(m.price));
+                    
                     if (prices.length > 0) {
                         const last_price = Number(prices[prices.length - 1]);
                         this.current_price = last_price.toFixed(2);
@@ -171,22 +169,22 @@ export default class AnalysisMarketStore {
     onTick = (tick: any) => {
         const price = Number(tick.quote);
         const time = tick.epoch * 1000;
-
+        
         runInAction(() => {
             if (this.prev_price !== null) {
                 this.is_rising = price > this.prev_price;
                 this.is_falling = price < this.prev_price;
             }
-
+            
             this.current_price = price.toFixed(tick.pip_size || 2);
             const digit = this.stats_engine.extractLastDigit(price);
             this.last_digit = digit;
-
+            
             const direction = price >= (this.prev_price || 0) ? 'up' : 'down';
-
+            
             this.tick_history.unshift({ price, time, direction });
             if (this.tick_history.length > 1000) this.tick_history.pop();
-
+            
             this.ticks.push(digit);
             if (this.ticks.length > 1000) this.ticks.shift();
 
@@ -197,7 +195,7 @@ export default class AnalysisMarketStore {
                 this.rise_percentage = Math.round((rises / total) * 100);
                 this.fall_percentage = 100 - this.rise_percentage;
             }
-
+            
             this.prev_price = price;
         });
     };

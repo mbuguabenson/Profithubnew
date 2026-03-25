@@ -31,10 +31,7 @@ const DigitStats = observer(() => {
                                 : 2;
 
                         const digits = ticks.map(t => {
-                            const digit = getSafeLastDigit(
-                                t.quote as string | number,
-                                active_symbols && active_symbols[symbol]?.pip ? active_symbols[symbol].pip : 2
-                            );
+                            const digit = getSafeLastDigit(t.quote as string | number, active_symbols && active_symbols[symbol]?.pip ? active_symbols[symbol].pip : 2);
                             return isNaN(digit) ? 0 : digit;
                         });
 

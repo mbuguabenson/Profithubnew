@@ -1,0 +1,500 @@
+﻿
+> @deriv/core@0.1.0 build
+> webpack --config "./build/webpack.config.js"
+
+npm : Failed to load 
+./.env.
+At line:1 char:63
++ ... rAction 
+SilentlyContinue; npm 
+run build > 
+build_errors_clean.txt 
+2>&1
++                      
+         ~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~
+    + CategoryInfo     
+         : NotSpecifi  
+  ed: (Failed to loa   
+ d ./.env.:String)     
+[], RemoteExceptio    n
+    + FullyQualifiedEr 
+   rorId : NativeComm  
+  andError
+ 
+Browserslist: browsers 
+data (caniuse-lite) is 
+14 months old. Please 
+run:
+  npx update-browsersli
+st-db@latest
+  Why you should do it 
+regularly: https://gith
+ub.com/browserslist/upd
+ate-db#readme
+(node:18892) [DEP_WEBPA
+CK_DEPRECATION_ARRAY_TO
+_SET] 
+DeprecationWarning: 
+Compilation.chunks was 
+changed from Array to 
+Set (using Array 
+method 'filter' is 
+deprecated)
+(Use `node 
+--trace-deprecation 
+...` to show where the 
+warning was created)
+(node:18892) [DEP_WEBPA
+CK_DEPRECATION_ARRAY_TO
+_SET_LENGTH] 
+DeprecationWarning: 
+chunk.files was 
+changed from Array to 
+Set (using Array 
+property 'length' is 
+deprecated)
+(node:18892) [DEP_WEBPA
+CK_DEPRECATION_ARRAY_TO
+_SET_INDEXER] 
+DeprecationWarning: 
+chunk.files was 
+changed from Array to 
+Set (indexing Array is 
+deprecated)
+assets by status 48.8 MiB [1m[32m[cached][39m[22m 387 assets
+assets by status 67.6 MiB [1m[33m[compared for emit][39m[22m
+  assets by path [1m[32mpublic/[39m[22m 25.4 MiB 121 assets
+  assets by path [1m[32mjs/smartcharts/[39m[22m 36.5 MiB 64 assets
+  assets by path [1m[32massets/[39m[22m 1.75 MiB 9 assets
+  assets by path [1m[32mbot/assets/[39m[22m 1.75 MiB 9 assets
+  assets by path [1m[32mcontract/assets/[39m[22m 1.75 MiB 9 assets
+  assets by path [1m[32m*.html[39m[22m 23.1 KiB 4 assets
+  assets by path [1m[32m*.json[39m[22m 75.9 KiB 3 assets
+  assets by path [1m[32m*.map[39m[22m 215 KiB 2 assets
+  assets by path [1m[32m*.js[39m[22m 120 KiB 2 assets
+  assets by path [1m[32m.well-known/[39m[22m 6.13 KiB 2 assets
+  + 4 assets
+Entrypoint [1mmain[39m[22m 26.6 MiB = 10 assets
+orphan modules 20 MiB (javascript) 978 KiB (css/mini-extract) [1m[33m[orphan][39m[22m 8033 modules
+runtime modules 16.1 KiB 21 modules
+built modules 18.8 MiB (javascript) 2.24 MiB (css/mini-extract) [1m[33m[built][39m[22m
+  modules by path [1m../../[39m[22m 16.9 MiB (javascript) 1.98 MiB (css/mini-extract) 2747 modules
+  modules by path [1m./[39m[22m 1.27 MiB (javascript) 263 KiB (css/mini-extract) 372 modules
+  modules by path [1m../node_modules/[39m[22m 598 KiB (javascript) 3.68 KiB (css/mini-extract)
+    javascript modules 598 KiB
+      modules by path [1m../node_modules/@deriv-com/auth-client/dist/*.js[39m[22m 24.1 KiB 3 modules
+      modules by path [1m../node_modules/@deriv-com/auth-client/dist/oidc/*.js[39m[22m 97.5 KiB 3 modules
+      modules by path [1m../node_modules/@deriv-com/auth-client/dist/tmb/*.js[39m[22m 1.62 KiB 2 modules
+      + 5 modules
+    css modules 3.68 KiB
+      css ../../../node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].use[1]!../../../node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].use[2]!../../../node_modules/resolve-url-loader/index.js??ruleSet[1].rules[6].use[3]!../../../node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[6].use[4]!../../../node_modules/sass-resources-loader/lib/loader.js??ruleSet[1].rules[6].use[5]![1m../node_modules/@deriv-com/auth-client/dist/assets/Callback.css[39m[22m 132 bytes [1m[33m[built][39m[22m [1m[33m[code generated][39m[22m
+      css ../../../node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].use[1]!../../../node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].use[2]!../../../node_modules/resolve-url-loader/index.js??ruleSet[1].rules[6].use[3]!../../../node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[6].use[4]!../../../node_modules/sass-resources-loader/lib/loader.js??ruleSet[1].rules[6].use[5]![1m../node_modules/@deriv-com/auth-client/dist/assets/Callback.css (1)[39m[22m 3.55 KiB [1m[33m[built][39m[22m [1m[33m[code generated][39m[22m
+
+[1mLOG from GenerateSW[39m[22m
+<i> [1m[32mThe service worker at service-worker.js will precache[39m[22m
+<i> [1m[32m        0 URLs, totaling 0 B.[39m[22m
+
+[1m[33mWARNING[39m[22m in [1m../../account/src/Constants/routes-config.tsx[39m[22m [1m[32m35:13-30[39m[22m
+[1mexport 'DeactivateAccount' (imported as 'DeactivateAccount') was [1m[31mnot found[39m[22m[1m in '../Sections' (possible exports: [1m[32mEmploymentTaxInfo[39m[22m[1m)[39m[22m
+ @ ../../account/src/Components/Routes/binary-link.tsx 11:0-60 22:38-53
+ @ ../../account/src/Components/Routes/index.ts 1:0-54 1:0-54
+ @ ../../account/src/Containers/routes.tsx 8:0-52 34:32-44
+ @ ../../account/src/App.tsx 1:0-41 26:94-100
+ @ ../../account/src/index.tsx 5:52-126
+ @ ./App/Constants/routes-config.js 32:9-66
+ @ ./App/Components/Routes/binary-link.tsx 13:0-60 36:38-53
+ @ ./App/Components/Routes/index.js 1:0-39 6:0-56
+ @ ./Stores/notification-store.js 14:0-51 881:41-51
+ @ ./Stores/index.js 6:0-53 20:29-46
+ @ ./App/initStore.js 4:0-31 66:25-34
+ @ ./index.tsx 9:0-38 29:40-49 29:87-96
+
+[1m[33mWARNING[39m[22m in [1m../../account/src/Constants/routes-config.tsx[39m[22m [1m[32m38:13-20[39m[22m
+[1mexport 'Account' (imported as 'Account') was [1m[31mnot found[39m[22m[1m in '../Sections' (possible exports: [1m[32mEmploymentTaxInfo[39m[22m[1m)[39m[22m
+ @ ../../account/src/Components/Routes/binary-link.tsx 11:0-60 22:38-53
+ @ ../../account/src/Components/Routes/index.ts 1:0-54 1:0-54
+ @ ../../account/src/Containers/routes.tsx 8:0-52 34:32-44
+ @ ../../account/src/App.tsx 1:0-41 26:94-100
+ @ ../../account/src/index.tsx 5:52-126
+ @ ./App/Constants/routes-config.js 32:9-66
+ @ ./App/Components/Routes/binary-link.tsx 13:0-60 36:38-53
+ @ ./App/Components/Routes/index.js 1:0-39 6:0-56
+ @ ./Stores/notification-store.js 14:0-51 881:41-51
+ @ ./Stores/index.js 6:0-53 20:29-46
+ @ ./App/initStore.js 4:0-31 66:25-34
+ @ ./index.tsx 9:0-38 29:40-49 29:87-96
+
+[1m[33mWARNING[39m[22m in [1m../../account/src/Constants/routes-config.tsx[39m[22m [1m[32m52:17-32[39m[22m
+[1mexport 'PersonalDetails' (imported as 'PersonalDetails') was [1m[31mnot found[39m[22m[1m in '../Sections' (possible exports: [1m[32mEmploymentTaxInfo[39m[22m[1m)[39m[22m
+ @ ../../account/src/Components/Routes/binary-link.tsx 11:0-60 22:38-53
+ @ ../../account/src/Components/Routes/index.ts 1:0-54 1:0-54
+ @ ../../account/src/Containers/routes.tsx 8:0-52 34:32-44
+ @ ../../account/src/App.tsx 1:0-41 26:94-100
+ @ ../../account/src/index.tsx 5:52-126
+ @ ./App/Constants/routes-config.js 32:9-66
+ @ ./App/Components/Routes/binary-link.tsx 13:0-60 36:38-53
+ @ ./App/Components/Routes/index.js 1:0-39 6:0-56
+ @ ./Stores/notification-store.js 14:0-51 881:41-51
+ @ ./Stores/index.js 6:0-53 20:29-46
+ @ ./App/initStore.js 4:0-31 66:25-34
+ @ ./index.tsx 9:0-38 29:40-49 29:87-96
+
+[1m[33mWARNING[39m[22m in [1m../../account/src/Constants/routes-config.tsx[39m[22m [1m[32m77:17-36[39m[22m
+[1mexport 'ProofOfIdentityFlow' (imported as 'ProofOfIdentityFlow') was [1m[31mnot found[39m[22m[1m in '../Sections' (possible exports: [1m[32mEmploymentTaxInfo[39m[22m[1m)[39m[22m
+ @ ../../account/src/Components/Routes/binary-link.tsx 11:0-60 22:38-53
+ @ ../../account/src/Components/Routes/index.ts 1:0-54 1:0-54
+ @ ../../account/src/Containers/routes.tsx 8:0-52 34:32-44
+ @ ../../account/src/App.tsx 1:0-41 26:94-100
+ @ ../../account/src/index.tsx 5:52-126
+ @ ./App/Constants/routes-config.js 32:9-66
+ @ ./App/Components/Routes/binary-link.tsx 13:0-60 36:38-53
+ @ ./App/Components/Routes/index.js 1:0-39 6:0-56
+ @ ./Stores/notification-store.js 14:0-51 881:41-51
+ @ ./Stores/index.js 6:0-53 20:29-46
+ @ ./App/initStore.js 4:0-31 66:25-34
+ @ ./index.tsx 9:0-38 29:40-49 29:87-96
+
+[1m[33mWARNING[39m[22m in [1m../../account/src/Constants/routes-config.tsx[39m[22m [1m[32m81:17-35[39m[22m
+[1mexport 'ProofOfAddressFlow' (imported as 'ProofOfAddressFlow') was [1m[31mnot found[39m[22m[1m in '../Sections' (possible exports: [1m[32mEmploymentTaxInfo[39m[22m[1m)[39m[22m
+ @ ../../account/src/Components/Routes/binary-link.tsx 11:0-60 22:38-53
+ @ ../../account/src/Components/Routes/index.ts 1:0-54 1:0-54
+ @ ../../account/src/Containers/routes.tsx 8:0-52 34:32-44
+ @ ../../account/src/App.tsx 1:0-41 26:94-100
+ @ ../../account/src/index.tsx 5:52-126
+ @ ./App/Constants/routes-config.js 32:9-66
+ @ ./App/Components/Routes/binary-link.tsx 13:0-60 36:38-53
+ @ ./App/Components/Routes/index.js 1:0-39 6:0-56
+ @ ./Stores/notification-store.js 14:0-51 881:41-51
+ @ ./Stores/index.js 6:0-53 20:29-46
+ @ ./App/initStore.js 4:0-31 66:25-34
+ @ ./index.tsx 9:0-38 29:40-49 29:87-96
+
+[1m[33mWARNING[39m[22m in [1m../../account/src/Constants/routes-config.tsx[39m[22m [1m[32m85:17-33[39m[22m
+[1mexport 'ProofOfOwnership' (imported as 'ProofOfOwnership') was [1m[31mnot found[39m[22m[1m in '../Sections' (possible exports: [1m[32mEmploymentTaxInfo[39m[22m[1m)[39m[22m
+ @ ../../account/src/Components/Routes/binary-link.tsx 11:0-60 22:38-53
+ @ ../../account/src/Components/Routes/index.ts 1:0-54 1:0-54
+ @ ../../account/src/Containers/routes.tsx 8:0-52 34:32-44
+ @ ../../account/src/App.tsx 1:0-41 26:94-100
+ @ ../../account/src/index.tsx 5:52-126
+ @ ./App/Constants/routes-config.js 32:9-66
+ @ ./App/Components/Routes/binary-link.tsx 13:0-60 36:38-53
+ @ ./App/Components/Routes/index.js 1:0-39 6:0-56
+ @ ./Stores/notification-store.js 14:0-51 881:41-51
+ @ ./Stores/index.js 6:0-53 20:29-46
+ @ ./App/initStore.js 4:0-31 66:25-34
+ @ ./index.tsx 9:0-38 29:40-49 29:87-96
+
+[1m[33mWARNING[39m[22m in [1m../../account/src/Constants/routes-config.tsx[39m[22m [1m[32m89:17-30[39m[22m
+[1mexport 'ProofOfIncome' (imported as 'ProofOfIncome') was [1m[31mnot found[39m[22m[1m in '../Sections' (possible exports: [1m[32mEmploymentTaxInfo[39m[22m[1m)[39m[22m
+ @ ../../account/src/Components/Routes/binary-link.tsx 11:0-60 22:38-53
+ @ ../../account/src/Components/Routes/index.ts 1:0-54 1:0-54
+ @ ../../account/src/Containers/routes.tsx 8:0-52 34:32-44
+ @ ../../account/src/App.tsx 1:0-41 26:94-100
+ @ ../../account/src/index.tsx 5:52-126
+ @ ./App/Constants/routes-config.js 32:9-66
+ @ ./App/Components/Routes/binary-link.tsx 13:0-60 36:38-53
+ @ ./App/Components/Routes/index.js 1:0-39 6:0-56
+ @ ./Stores/notification-store.js 14:0-51 881:41-51
+ @ ./Stores/index.js 6:0-53 20:29-46
+ @ ./App/initStore.js 4:0-31 66:25-34
+ @ ./index.tsx 9:0-38 29:40-49 29:87-96
+
+[1m[33mWARNING[39m[22m in [1mDefinePlugin
+[1m[31mConflicting[39m[22m[1m values for 'process.env.NODE_ENV'[39m[22m
+
+[1m[33m266 WARNINGS in child compilations (Use 'stats.children: true' resp. '--stats-children' for more details)[39m[22m
+
+1 warning has detailed information that is not shown.
+Use 'stats.errorDetails: true' resp. '--stats-error-details' to show it.
+
+[1m[31mERROR[39m[22m in [1m./sass/app.scss[39m[22m
+[1mModule build [1m[31mfailed[39m[22m[1m (from ../../../node_modules/mini-css-extract-plugin/dist/loader.js):
+ModuleBuildError: Module build [1m[31mfailed[39m[22m[1m (from ../../../node_modules/sass-loader/dist/cjs.js):
+SassError: Can't find stylesheet to import.
+    Γò╖
+722 Γöé @import '~@deriv/shared/src/styles/google-fonts.scss';
+    Γöé         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    Γò╡
+  src\sass\app.scss 722:9  root stylesheet
+    at processResult (F:\Trading Site\New folder\dtrader\node_modules\webpack\lib\NormalModule.js:891:19)
+    at F:\Trading Site\New folder\dtrader\node_modules\webpack\lib\NormalModule.js:1037:5
+    at F:\Trading Site\New folder\dtrader\node_modules\loader-runner\lib\LoaderRunner.js:400:11
+    at F:\Trading Site\New folder\dtrader\node_modules\loader-runner\lib\LoaderRunner.js:252:18
+    at context.callback (F:\Trading Site\New folder\dtrader\node_modules\loader-runner\lib\LoaderRunner.js:124:13)
+    at Object.loader (F:\Trading Site\New folder\dtrader\node_modules\sass-loader\dist\index.js:69:5)[39m[22m
+ @ ./App/app.jsx 25:0-23
+ @ ./index.tsx 10:0-30 33:36-39
+
+[1m[31mERROR[39m[22m in [1m../../account/src/Sections/Assessment/FinancialAssessment/financial-assessment.tsx[39m[22m [1m[32m19:0-50[39m[22m
+[1mModule [1m[31mnot found[39m[22m[1m: [1m[31mError[39m[22m[1m: Can't resolve 'Components/demo-message' in 'F:\Trading Site\New folder\dtrader\packages\account\src\Sections\Assessment\FinancialAssessment'[39m[22m
+ @ ../../account/src/Sections/Assessment/FinancialAssessment/index.ts 1:0-57 2:15-34
+ @ ../../account/src/Constants/routes-config.tsx 19:68-120
+ @ ../../account/src/Components/Routes/binary-link.tsx 11:0-60 22:38-53
+ @ ../../account/src/Components/Routes/index.ts 1:0-54 1:0-54
+ @ ../../account/src/Containers/routes.tsx 8:0-52 34:32-44
+ @ ../../account/src/App.tsx 1:0-41 26:94-100
+ @ ../../account/src/index.tsx 5:52-126
+ @ ./App/Constants/routes-config.js 32:9-66
+ @ ./App/Components/Routes/binary-link.tsx 13:0-60 36:38-53
+ @ ./App/Components/Routes/index.js 1:0-39 6:0-56
+ @ ./Stores/notification-store.js 14:0-51 881:41-51
+ @ ./Stores/index.js 6:0-53 20:29-46
+ @ ./App/initStore.js 4:0-31 66:25-34
+ @ ./index.tsx 9:0-38 29:40-49 29:87-96
+
+[1m[31mERROR[39m[22m in [1m../../account/src/Sections/Assessment/FinancialAssessment/financial-assessment.tsx[39m[22m [1m[32m20:0-44[39m[22m
+[1mModule [1m[31mnot found[39m[22m[1m: [1m[31mError[39m[22m[1m: Can't resolve 'Components/form-body' in 'F:\Trading Site\New folder\dtrader\packages\account\src\Sections\Assessment\FinancialAssessment'[39m[22m
+ @ ../../account/src/Sections/Assessment/FinancialAssessment/index.ts 1:0-57 2:15-34
+ @ ../../account/src/Constants/routes-config.tsx 19:68-120
+ @ ../../account/src/Components/Routes/binary-link.tsx 11:0-60 22:38-53
+ @ ../../account/src/Components/Routes/index.ts 1:0-54 1:0-54
+ @ ../../account/src/Containers/routes.tsx 8:0-52 34:32-44
+ @ ../../account/src/App.tsx 1:0-41 26:94-100
+ @ ../../account/src/index.tsx 5:52-126
+ @ ./App/Constants/routes-config.js 32:9-66
+ @ ./App/Components/Routes/binary-link.tsx 13:0-60 36:38-53
+ @ ./App/Components/Routes/index.js 1:0-39 6:0-56
+ @ ./Stores/notification-store.js 14:0-51 881:41-51
+ @ ./Stores/index.js 6:0-53 20:29-46
+ @ ./App/initStore.js 4:0-31 66:25-34
+ @ ./index.tsx 9:0-38 29:40-49 29:87-96
+
+[1m[31mERROR[39m[22m in [1m../../account/src/Sections/Assessment/FinancialAssessment/financial-assessment.tsx[39m[22m [1m[32m21:0-59[39m[22m
+[1mModule [1m[31mnot found[39m[22m[1m: [1m[31mError[39m[22m[1m: Can't resolve 'Components/form-body-section' in 'F:\Trading Site\New folder\dtrader\packages\account\src\Sections\Assessment\FinancialAssessment'[39m[22m
+ @ ../../account/src/Sections/Assessment/FinancialAssessment/index.ts 1:0-57 2:15-34
+ @ ../../account/src/Constants/routes-config.tsx 19:68-120
+ @ ../../account/src/Components/Routes/binary-link.tsx 11:0-60 22:38-53
+ @ ../../account/src/Components/Routes/index.ts 1:0-54 1:0-54
+ @ ../../account/src/Containers/routes.tsx 8:0-52 34:32-44
+ @ ../../account/src/App.tsx 1:0-41 26:94-100
+ @ ../../account/src/index.tsx 5:52-126
+ @ ./App/Constants/routes-config.js 32:9-66
+ @ ./App/Components/Routes/binary-link.tsx 13:0-60 36:38-53
+ @ ./App/Components/Routes/index.js 1:0-39 6:0-56
+ @ ./Stores/notification-store.js 14:0-51 881:41-51
+ @ ./Stores/index.js 6:0-53 20:29-46
+ @ ./App/initStore.js 4:0-31 66:25-34
+ @ ./index.tsx 9:0-38 29:40-49 29:87-96
+
+[1m[31mERROR[39m[22m in [1m../../account/src/Sections/Assessment/FinancialAssessment/financial-assessment.tsx[39m[22m [1m[32m22:0-48[39m[22m
+[1mModule [1m[31mnot found[39m[22m[1m: [1m[31mError[39m[22m[1m: Can't resolve 'Components/form-footer' in 'F:\Trading Site\New folder\dtrader\packages\account\src\Sections\Assessment\FinancialAssessment'[39m[22m
+ @ ../../account/src/Sections/Assessment/FinancialAssessment/index.ts 1:0-57 2:15-34
+ @ ../../account/src/Constants/routes-config.tsx 19:68-120
+ @ ../../account/src/Components/Routes/binary-link.tsx 11:0-60 22:38-53
+ @ ../../account/src/Components/Routes/index.ts 1:0-54 1:0-54
+ @ ../../account/src/Containers/routes.tsx 8:0-52 34:32-44
+ @ ../../account/src/App.tsx 1:0-41 26:94-100
+ @ ../../account/src/index.tsx 5:52-126
+ @ ./App/Constants/routes-config.js 32:9-66
+ @ ./App/Components/Routes/binary-link.tsx 13:0-60 36:38-53
+ @ ./App/Components/Routes/index.js 1:0-39 6:0-56
+ @ ./Stores/notification-store.js 14:0-51 881:41-51
+ @ ./Stores/index.js 6:0-53 20:29-46
+ @ ./App/initStore.js 4:0-31 66:25-34
+ @ ./index.tsx 9:0-38 29:40-49 29:87-96
+
+[1m[31mERROR[39m[22m in [1m../../account/src/Sections/Assessment/FinancialAssessment/financial-assessment.tsx[39m[22m [1m[32m23:0-55[39m[22m
+[1mModule [1m[31mnot found[39m[22m[1m: [1m[31mError[39m[22m[1m: Can't resolve 'Components/form-sub-header' in 'F:\Trading Site\New folder\dtrader\packages\account\src\Sections\Assessment\FinancialAssessment'[39m[22m
+ @ ../../account/src/Sections/Assessment/FinancialAssessment/index.ts 1:0-57 2:15-34
+ @ ../../account/src/Constants/routes-config.tsx 19:68-120
+ @ ../../account/src/Components/Routes/binary-link.tsx 11:0-60 22:38-53
+ @ ../../account/src/Components/Routes/index.ts 1:0-54 1:0-54
+ @ ../../account/src/Containers/routes.tsx 8:0-52 34:32-44
+ @ ../../account/src/App.tsx 1:0-41 26:94-100
+ @ ../../account/src/index.tsx 5:52-126
+ @ ./App/Constants/routes-config.js 32:9-66
+ @ ./App/Components/Routes/binary-link.tsx 13:0-60 36:38-53
+ @ ./App/Components/Routes/index.js 1:0-39 6:0-56
+ @ ./Stores/notification-store.js 14:0-51 881:41-51
+ @ ./Stores/index.js 6:0-53 20:29-46
+ @ ./App/initStore.js 4:0-31 66:25-34
+ @ ./index.tsx 9:0-38 29:40-49 29:87-96
+
+[1m[31mERROR[39m[22m in [1m../../account/src/Sections/Assessment/FinancialAssessment/financial-assessment.tsx[39m[22m [1m[32m24:0-69[39m[22m
+[1mModule [1m[31mnot found[39m[22m[1m: [1m[31mError[39m[22m[1m: Can't resolve 'Components/forms/form-fields' in 'F:\Trading Site\New folder\dtrader\packages\account\src\Sections\Assessment\FinancialAssessment'[39m[22m
+ @ ../../account/src/Sections/Assessment/FinancialAssessment/index.ts 1:0-57 2:15-34
+ @ ../../account/src/Constants/routes-config.tsx 19:68-120
+ @ ../../account/src/Components/Routes/binary-link.tsx 11:0-60 22:38-53
+ @ ../../account/src/Components/Routes/index.ts 1:0-54 1:0-54
+ @ ../../account/src/Containers/routes.tsx 8:0-52 34:32-44
+ @ ../../account/src/App.tsx 1:0-41 26:94-100
+ @ ../../account/src/index.tsx 5:52-126
+ @ ./App/Constants/routes-config.js 32:9-66
+ @ ./App/Components/Routes/binary-link.tsx 13:0-60 36:38-53
+ @ ./App/Components/Routes/index.js 1:0-39 6:0-56
+ @ ./Stores/notification-store.js 14:0-51 881:41-51
+ @ ./Stores/index.js 6:0-53 20:29-46
+ @ ./App/initStore.js 4:0-31 66:25-34
+ @ ./index.tsx 9:0-38 29:40-49 29:87-96
+
+[1m[31mERROR[39m[22m in [1m../../account/src/Sections/Assessment/FinancialAssessment/financial-assessment.tsx[39m[22m [1m[32m25:0-65[39m[22m
+[1mModule [1m[31mnot found[39m[22m[1m: [1m[31mError[39m[22m[1m: Can't resolve 'Components/icon-message-content' in 'F:\Trading Site\New folder\dtrader\packages\account\src\Sections\Assessment\FinancialAssessment'[39m[22m
+ @ ../../account/src/Sections/Assessment/FinancialAssessment/index.ts 1:0-57 2:15-34
+ @ ../../account/src/Constants/routes-config.tsx 19:68-120
+ @ ../../account/src/Components/Routes/binary-link.tsx 11:0-60 22:38-53
+ @ ../../account/src/Components/Routes/index.ts 1:0-54 1:0-54
+ @ ../../account/src/Containers/routes.tsx 8:0-52 34:32-44
+ @ ../../account/src/App.tsx 1:0-41 26:94-100
+ @ ../../account/src/index.tsx 5:52-126
+ @ ./App/Constants/routes-config.js 32:9-66
+ @ ./App/Components/Routes/binary-link.tsx 13:0-60 36:38-53
+ @ ./App/Components/Routes/index.js 1:0-39 6:0-56
+ @ ./Stores/notification-store.js 14:0-51 881:41-51
+ @ ./Stores/index.js 6:0-53 20:29-46
+ @ ./App/initStore.js 4:0-31 66:25-34
+ @ ./index.tsx 9:0-38 29:40-49 29:87-96
+
+[1m[31mERROR[39m[22m in [1m../../account/src/Sections/Assessment/FinancialAssessment/financial-assessment.tsx[39m[22m [1m[32m26:0-52[39m[22m
+[1mModule [1m[31mnot found[39m[22m[1m: [1m[31mError[39m[22m[1m: Can't resolve 'Components/leave-confirm' in 'F:\Trading Site\New folder\dtrader\packages\account\src\Sections\Assessment\FinancialAssessment'[39m[22m
+ @ ../../account/src/Sections/Assessment/FinancialAssessment/index.ts 1:0-57 2:15-34
+ @ ../../account/src/Constants/routes-config.tsx 19:68-120
+ @ ../../account/src/Components/Routes/binary-link.tsx 11:0-60 22:38-53
+ @ ../../account/src/Components/Routes/index.ts 1:0-54 1:0-54
+ @ ../../account/src/Containers/routes.tsx 8:0-52 34:32-44
+ @ ../../account/src/App.tsx 1:0-41 26:94-100
+ @ ../../account/src/index.tsx 5:52-126
+ @ ./App/Constants/routes-config.js 32:9-66
+ @ ./App/Components/Routes/binary-link.tsx 13:0-60 36:38-53
+ @ ./App/Components/Routes/index.js 1:0-39 6:0-56
+ @ ./Stores/notification-store.js 14:0-51 881:41-51
+ @ ./Stores/index.js 6:0-53 20:29-46
+ @ ./App/initStore.js 4:0-31 66:25-34
+ @ ./index.tsx 9:0-38 29:40-49 29:87-96
+
+[1m[31mERROR[39m[22m in [1m../../account/src/Sections/Assessment/FinancialAssessment/financial-assessment.tsx[39m[22m [1m[32m27:0-61[39m[22m
+[1mModule [1m[31mnot found[39m[22m[1m: [1m[31mError[39m[22m[1m: Can't resolve 'Components/load-[1m[31merror[39m[22m[1m-message' in 'F:\Trading Site\New folder\dtrader\packages\account\src\Sections\Assessment\FinancialAssessment'[39m[22m
+ @ ../../account/src/Sections/Assessment/FinancialAssessment/index.ts 1:0-57 2:15-34
+ @ ../../account/src/Constants/routes-config.tsx 19:68-120
+ @ ../../account/src/Components/Routes/binary-link.tsx 11:0-60 22:38-53
+ @ ../../account/src/Components/Routes/index.ts 1:0-54 1:0-54
+ @ ../../account/src/Containers/routes.tsx 8:0-52 34:32-44
+ @ ../../account/src/App.tsx 1:0-41 26:94-100
+ @ ../../account/src/index.tsx 5:52-126
+ @ ./App/Constants/routes-config.js 32:9-66
+ @ ./App/Components/Routes/binary-link.tsx 13:0-60 36:38-53
+ @ ./App/Components/Routes/index.js 1:0-39 6:0-56
+ @ ./Stores/notification-store.js 14:0-51 881:41-51
+ @ ./Stores/index.js 6:0-53 20:29-46
+ @ ./App/initStore.js 4:0-31 66:25-34
+ @ ./index.tsx 9:0-38 29:40-49 29:87-96
+
+[1m[31mERROR[39m[22m in [1m../../account/src/Sections/Assessment/FinancialAssessment/financial-assessment.tsx[39m[22m [1m[32m28:0-78[39m[22m
+[1mModule [1m[31mnot found[39m[22m[1m: [1m[31mError[39m[22m[1m: Can't resolve 'Configs/financial-details-config' in 'F:\Trading Site\New folder\dtrader\packages\account\src\Sections\Assessment\FinancialAssessment'[39m[22m
+ @ ../../account/src/Sections/Assessment/FinancialAssessment/index.ts 1:0-57 2:15-34
+ @ ../../account/src/Constants/routes-config.tsx 19:68-120
+ @ ../../account/src/Components/Routes/binary-link.tsx 11:0-60 22:38-53
+ @ ../../account/src/Components/Routes/index.ts 1:0-54 1:0-54
+ @ ../../account/src/Containers/routes.tsx 8:0-52 34:32-44
+ @ ../../account/src/App.tsx 1:0-41 26:94-100
+ @ ../../account/src/index.tsx 5:52-126
+ @ ./App/Constants/routes-config.js 32:9-66
+ @ ./App/Components/Routes/binary-link.tsx 13:0-60 36:38-53
+ @ ./App/Components/Routes/index.js 1:0-39 6:0-56
+ @ ./Stores/notification-store.js 14:0-51 881:41-51
+ @ ./Stores/index.js 6:0-53 20:29-46
+ @ ./App/initStore.js 4:0-31 66:25-34
+ @ ./index.tsx 9:0-38 29:40-49 29:87-96
+
+[1m[31mERROR[39m[22m in [1m../../account/src/Sections/Assessment/TradingAssessment/trading-assessment.jsx[39m[22m [1m[32m14:0-44[39m[22m
+[1mModule [1m[31mnot found[39m[22m[1m: [1m[31mError[39m[22m[1m: Can't resolve 'Components/form-body' in 'F:\Trading Site\New folder\dtrader\packages\account\src\Sections\Assessment\TradingAssessment'[39m[22m
+ @ ../../account/src/Sections/Assessment/TradingAssessment/index.js 1:0-57 2:15-32
+ @ ../../account/src/Constants/routes-config.tsx 20:66-116
+ @ ../../account/src/Components/Routes/binary-link.tsx 11:0-60 22:38-53
+ @ ../../account/src/Components/Routes/index.ts 1:0-54 1:0-54
+ @ ../../account/src/Containers/routes.tsx 8:0-52 34:32-44
+ @ ../../account/src/App.tsx 1:0-41 26:94-100
+ @ ../../account/src/index.tsx 5:52-126
+ @ ./App/Constants/routes-config.js 32:9-66
+ @ ./App/Components/Routes/binary-link.tsx 13:0-60 36:38-53
+ @ ./App/Components/Routes/index.js 1:0-39 6:0-56
+ @ ./Stores/notification-store.js 14:0-51 881:41-51
+ @ ./Stores/index.js 6:0-53 20:29-46
+ @ ./App/initStore.js 4:0-31 66:25-34
+ @ ./index.tsx 9:0-38 29:40-49 29:87-96
+
+[1m[31mERROR[39m[22m in [1m../../account/src/Sections/Assessment/TradingAssessment/trading-assessment.jsx[39m[22m [1m[32m15:0-48[39m[22m
+[1mModule [1m[31mnot found[39m[22m[1m: [1m[31mError[39m[22m[1m: Can't resolve 'Components/form-footer' in 'F:\Trading Site\New folder\dtrader\packages\account\src\Sections\Assessment\TradingAssessment'[39m[22m
+ @ ../../account/src/Sections/Assessment/TradingAssessment/index.js 1:0-57 2:15-32
+ @ ../../account/src/Constants/routes-config.tsx 20:66-116
+ @ ../../account/src/Components/Routes/binary-link.tsx 11:0-60 22:38-53
+ @ ../../account/src/Components/Routes/index.ts 1:0-54 1:0-54
+ @ ../../account/src/Containers/routes.tsx 8:0-52 34:32-44
+ @ ../../account/src/App.tsx 1:0-41 26:94-100
+ @ ../../account/src/index.tsx 5:52-126
+ @ ./App/Constants/routes-config.js 32:9-66
+ @ ./App/Components/Routes/binary-link.tsx 13:0-60 36:38-53
+ @ ./App/Components/Routes/index.js 1:0-39 6:0-56
+ @ ./Stores/notification-store.js 14:0-51 881:41-51
+ @ ./Stores/index.js 6:0-53 20:29-46
+ @ ./App/initStore.js 4:0-31 66:25-34
+ @ ./index.tsx 9:0-38 29:40-49 29:87-96
+
+[1m[31mERROR[39m[22m in [1m../../account/src/Sections/Assessment/TradingAssessment/trading-assessment.jsx[39m[22m [1m[32m16:0-55[39m[22m
+[1mModule [1m[31mnot found[39m[22m[1m: [1m[31mError[39m[22m[1m: Can't resolve 'Components/form-sub-header' in 'F:\Trading Site\New folder\dtrader\packages\account\src\Sections\Assessment\TradingAssessment'[39m[22m
+ @ ../../account/src/Sections/Assessment/TradingAssessment/index.js 1:0-57 2:15-32
+ @ ../../account/src/Constants/routes-config.tsx 20:66-116
+ @ ../../account/src/Components/Routes/binary-link.tsx 11:0-60 22:38-53
+ @ ../../account/src/Components/Routes/index.ts 1:0-54 1:0-54
+ @ ../../account/src/Containers/routes.tsx 8:0-52 34:32-44
+ @ ../../account/src/App.tsx 1:0-41 26:94-100
+ @ ../../account/src/index.tsx 5:52-126
+ @ ./App/Constants/routes-config.js 32:9-66
+ @ ./App/Components/Routes/binary-link.tsx 13:0-60 36:38-53
+ @ ./App/Components/Routes/index.js 1:0-39 6:0-56
+ @ ./Stores/notification-store.js 14:0-51 881:41-51
+ @ ./Stores/index.js 6:0-53 20:29-46
+ @ ./App/initStore.js 4:0-31 66:25-34
+ @ ./index.tsx 9:0-38 29:40-49 29:87-96
+
+[1m[31mERROR[39m[22m in [1m../../account/src/Sections/Assessment/TradingAssessment/trading-assessment.jsx[39m[22m [1m[32m17:0-92[39m[22m
+[1mModule [1m[31mnot found[39m[22m[1m: [1m[31mError[39m[22m[1m: Can't resolve 'Components/trading-assessment' in 'F:\Trading Site\New folder\dtrader\packages\account\src\Sections\Assessment\TradingAssessment'[39m[22m
+ @ ../../account/src/Sections/Assessment/TradingAssessment/index.js 1:0-57 2:15-32
+ @ ../../account/src/Constants/routes-config.tsx 20:66-116
+ @ ../../account/src/Components/Routes/binary-link.tsx 11:0-60 22:38-53
+ @ ../../account/src/Components/Routes/index.ts 1:0-54 1:0-54
+ @ ../../account/src/Containers/routes.tsx 8:0-52 34:32-44
+ @ ../../account/src/App.tsx 1:0-41 26:94-100
+ @ ../../account/src/index.tsx 5:52-126
+ @ ./App/Constants/routes-config.js 32:9-66
+ @ ./App/Components/Routes/binary-link.tsx 13:0-60 36:38-53
+ @ ./App/Components/Routes/index.js 1:0-39 6:0-56
+ @ ./Stores/notification-store.js 14:0-51 881:41-51
+ @ ./Stores/index.js 6:0-53 20:29-46
+ @ ./App/initStore.js 4:0-31 66:25-34
+ @ ./index.tsx 9:0-38 29:40-49 29:87-96
+
+[1m[31mERROR[39m[22m in [1m../../account/src/Sections/Assessment/TradingAssessment/trading-assessment.jsx[39m[22m [1m[32m18:0-87[39m[22m
+[1mModule [1m[31mnot found[39m[22m[1m: [1m[31mError[39m[22m[1m: Can't resolve 'Constants/trading-assessment-questions' in 'F:\Trading Site\New folder\dtrader\packages\account\src\Sections\Assessment\TradingAssessment'[39m[22m
+ @ ../../account/src/Sections/Assessment/TradingAssessment/index.js 1:0-57 2:15-32
+ @ ../../account/src/Constants/routes-config.tsx 20:66-116
+ @ ../../account/src/Components/Routes/binary-link.tsx 11:0-60 22:38-53
+ @ ../../account/src/Components/Routes/index.ts 1:0-54 1:0-54
+ @ ../../account/src/Containers/routes.tsx 8:0-52 34:32-44
+ @ ../../account/src/App.tsx 1:0-41 26:94-100
+ @ ../../account/src/index.tsx 5:52-126
+ @ ./App/Constants/routes-config.js 32:9-66
+ @ ./App/Components/Routes/binary-link.tsx 13:0-60 36:38-53
+ @ ./App/Components/Routes/index.js 1:0-39 6:0-56
+ @ ./Stores/notification-store.js 14:0-51 881:41-51
+ @ ./Stores/index.js 6:0-53 20:29-46
+ @ ./App/initStore.js 4:0-31 66:25-34
+ @ ./index.tsx 9:0-38 29:40-49 29:87-96
+
+[1m[31mERROR[39m[22m in [1m../../account/src/Sections/index.js[39m[22m [1m[32m1:0-63[39m[22m
+[1mModule [1m[31mnot found[39m[22m[1m: [1m[31mError[39m[22m[1m: Can't resolve 'Sections/Profile/PersonalDetails' in 'F:\Trading Site\New folder\dtrader\packages\account\src\Sections'[39m[22m
+ @ ../../account/src/Constants/routes-config.tsx 6:0-148 35:13-30 38:13-20 52:17-32 77:17-36 81:17-35 85:17-33 89:17-30
+ @ ../../account/src/Components/Routes/binary-link.tsx 11:0-60 22:38-53
+ @ ../../account/src/Components/Routes/index.ts 1:0-54 1:0-54
+ @ ../../account/src/Containers/routes.tsx 8:0-52 34:32-44
+ @ ../../account/src/App.tsx 1:0-41 26:94-100
+ @ ../../account/src/index.tsx 5:52-126
+ @ ./App/Constants/routes-config.js 32:9-66
+ @ ./App/Components/Routes/binary-link.tsx 13:0-60 36:38-53
+ @ ./App/Components/Routes/index.js 1:0-39 6:0-56
+ @ ./Stores/notification-store.js 14:0-51 881:41-51
+ @ ./Stores/index.js 6:0-53 20:29-46
+ @ ./App/initStore.js 4:0-31 66:25-34
+ @ ./index.tsx 9:0-38 29:40-49 29:87-96
+

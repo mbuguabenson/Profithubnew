@@ -19,9 +19,16 @@ const DigitCracker = observer(() => {
     const [activeLogTab, setActiveLogTab] = useState<'summary' | 'transactions' | 'journal'>('summary');
     const logRef = useRef<HTMLDivElement>(null);
 
-    const { digit_stats, last_digit, percentages, even_odd_history, over_under_history, trade_engine } = digit_cracker;
+    const {
+        digit_stats,
+        last_digit,
+        percentages,
+        even_odd_history,
+        over_under_history,
+        trade_engine,
+    } = digit_cracker;
     const { trade_status, is_executing, session_profit, total_profit, logs } = trade_engine;
-
+    
     // Header Stats
     const { balance, currency } = client;
     const { latency, is_socket_opened } = common;
@@ -43,6 +50,7 @@ const DigitCracker = observer(() => {
     }, [logs.length]);
 
     // Autorun removed as AnalysisStore handles tick processing internally
+
 
     const renderDigitCircles = () => {
         // Split digits into two groups: 0-4 and 5-9
@@ -102,16 +110,10 @@ const DigitCracker = observer(() => {
                                 />
                             </svg>
                             <div className='digit-center-text'>
-                                <span
-                                    className='digit-num'
-                                    style={{ color: isCurrent ? color : 'var(--text-prominent)' }}
-                                >
+                                <span className='digit-num' style={{ color: isCurrent ? color : 'var(--text-prominent)' }}>
                                     {stat.digit}
                                 </span>
-                                <span
-                                    className='digit-pct'
-                                    style={{ color: isCurrent ? color : 'var(--text-general)' }}
-                                >
+                                <span className='digit-pct' style={{ color: isCurrent ? color : 'var(--text-general)' }}>
                                     {stat.percentage.toFixed(1)}%
                                 </span>
                             </div>
@@ -304,7 +306,7 @@ const DigitCracker = observer(() => {
                                                 trade_engine.updateConfig(
                                                     activeStrategy,
                                                     'trigger_percentage' as keyof TTradeConfig,
-                                                    isNaN(val) ? 0 : (val as any)
+                                                    isNaN(val) ? 0 : val as any
                                                 );
                                             }}
                                         />
@@ -319,7 +321,7 @@ const DigitCracker = observer(() => {
                                                 trade_engine.updateConfig(
                                                     activeStrategy,
                                                     'consecutive_ticks' as keyof TTradeConfig,
-                                                    isNaN(val) ? 0 : (val as any)
+                                                    isNaN(val) ? 0 : val as any
                                                 );
                                             }}
                                         />
@@ -341,7 +343,7 @@ const DigitCracker = observer(() => {
                                         trade_engine.updateConfig(
                                             activeStrategy,
                                             'differs_max_percentage' as keyof TTradeConfig,
-                                            isNaN(val) ? 0 : (val as any)
+                                            isNaN(val) ? 0 : val as any
                                         );
                                     }}
                                 />
@@ -358,7 +360,7 @@ const DigitCracker = observer(() => {
                                         trade_engine.updateConfig(
                                             activeStrategy,
                                             'differs_target_ticks' as keyof TTradeConfig,
-                                            isNaN(val) ? 1 : (val as any)
+                                            isNaN(val) ? 1 : val as any
                                         );
                                     }}
                                 />
@@ -376,7 +378,7 @@ const DigitCracker = observer(() => {
                                         trade_engine.updateConfig(
                                             activeStrategy,
                                             'bulk_trades_count' as keyof TTradeConfig,
-                                            isNaN(val) ? 1 : (val as any)
+                                            isNaN(val) ? 1 : val as any
                                         );
                                     }}
                                 />
@@ -496,7 +498,9 @@ const DigitCracker = observer(() => {
                             <div className='transaction-list'>
                                 {tradeLogs.map((log: TTradeLog, i: number) => (
                                     <div key={i} className={`log-row transaction-item ${log.type}`}>
-                                        <div className='log-time'>{new Date(log.timestamp).toLocaleTimeString()}</div>
+                                        <div className='log-time'>
+                                            {new Date(log.timestamp).toLocaleTimeString()}
+                                        </div>
                                         <div className='log-message'>{log.message}</div>
                                         <div className='log-status-icon'>
                                             {log.type === 'success' ? '✅' : log.type === 'error' ? '❌' : '⚡'}
@@ -518,7 +522,9 @@ const DigitCracker = observer(() => {
                             <div className='journal-list'>
                                 {logs.map((log: TTradeLog, i: number) => (
                                     <div key={i} className={`log-row log-entry ${log.type}`}>
-                                        <div className='log-time'>{new Date(log.timestamp).toLocaleTimeString()}</div>
+                                        <div className='log-time'>
+                                            {new Date(log.timestamp).toLocaleTimeString()}
+                                        </div>
                                         <div className='log-message'>{log.message}</div>
                                     </div>
                                 ))}
@@ -528,7 +534,7 @@ const DigitCracker = observer(() => {
                 );
         }
     };
-
+    
     return (
         <div className={`easy-tool digit-cracker-page ${is_dark_mode_on ? 'easy-tool--dark' : 'easy-tool--light'}`}>
             <div className='easy-tool__header'>
@@ -617,8 +623,8 @@ const DigitCracker = observer(() => {
                                         <h3>Even vs Odd Strategy</h3>
                                         <div className='strategy-description'>
                                             <p>
-                                                <strong>Logic:</strong> Follows the configured trigger conditions,
-                                                target, and entry pattern.
+                                                <strong>Logic:</strong> Follows the configured trigger conditions, target, and
+                                                entry pattern.
                                             </p>
                                         </div>
                                         <div className='power-display'>
@@ -647,9 +653,7 @@ const DigitCracker = observer(() => {
                                     <div className='strategy-info'>
                                         <h3>Over/Under Strategy</h3>
                                         <div className='strategy-description'>
-                                            <p>
-                                                <strong>Logic:</strong> UNDER (0-4) vs OVER (5-9).
-                                            </p>
+                                            <p><strong>Logic:</strong> UNDER (0-4) vs OVER (5-9).</p>
                                         </div>
                                         <div className='power-display'>
                                             <div className='power-item'>
@@ -664,13 +668,11 @@ const DigitCracker = observer(() => {
                                         <div className='history-section'>
                                             <span className='history-label'>Recent Pattern:</span>
                                             <div className='history-boxes'>
-                                                {over_under_history
-                                                    .slice(0, 20)
-                                                    .map((h: TAnalysisHistory, i: number) => (
-                                                        <div key={i} className={`history-box ${h.type.toLowerCase()}`}>
-                                                            {h.type === 'O' ? 'O' : 'U'}
-                                                        </div>
-                                                    ))}
+                                                {over_under_history.slice(0, 20).map((h: TAnalysisHistory, i: number) => (
+                                                    <div key={i} className={`history-box ${h.type.toLowerCase()}`}>
+                                                        {h.type === 'O' ? 'O' : 'U'}
+                                                    </div>
+                                                ))}
                                             </div>
                                         </div>
                                     </div>
@@ -679,9 +681,7 @@ const DigitCracker = observer(() => {
                                     <div className='strategy-info'>
                                         <h3>Differs Strategy</h3>
                                         <div className='strategy-description'>
-                                            <p>
-                                                <strong>Logic:</strong> Choose stable digits below 10%.
-                                            </p>
+                                            <p><strong>Logic:</strong> Choose stable digits below 10%.</p>
                                         </div>
                                         <div className='digit-rankings'>
                                             {digit_stats.slice(0, 5).map((s: TDigitStat) => (
@@ -698,9 +698,7 @@ const DigitCracker = observer(() => {
                                     <div className='strategy-info'>
                                         <h3>Matches Strategy</h3>
                                         <div className='strategy-description'>
-                                            <p>
-                                                <strong>Logic:</strong> Choose dominant digits showing upwards trend.
-                                            </p>
+                                            <p><strong>Logic:</strong> Choose dominant digits showing upwards trend.</p>
                                         </div>
                                         <div className='digit-rankings'>
                                             {digit_stats.slice(0, 5).map((s: TDigitStat) => (
@@ -725,113 +723,42 @@ const DigitCracker = observer(() => {
                         <div className='section-card__header'>
                             <Localize i18n_default_text='Trading Ledger' />
                             <div className='log-tabs' style={{ marginLeft: '20px' }}>
-                                <button
-                                    className={activeLogTab === 'summary' ? 'active' : ''}
-                                    onClick={() => setActiveLogTab('summary')}
-                                >
-                                    Summary
-                                </button>
-                                <button
-                                    className={activeLogTab === 'transactions' ? 'active' : ''}
-                                    onClick={() => setActiveLogTab('transactions')}
-                                >
-                                    Transactions
-                                </button>
-                                <button
-                                    className={activeLogTab === 'journal' ? 'active' : ''}
-                                    onClick={() => setActiveLogTab('journal')}
-                                >
-                                    Journal
-                                </button>
+                                <button className={activeLogTab === 'summary' ? 'active' : ''} onClick={() => setActiveLogTab('summary')}>Summary</button>
+                                <button className={activeLogTab === 'transactions' ? 'active' : ''} onClick={() => setActiveLogTab('transactions')}>Transactions</button>
+                                <button className={activeLogTab === 'journal' ? 'active' : ''} onClick={() => setActiveLogTab('journal')}>Journal</button>
                             </div>
-                            <button
-                                className='clear-log-btn'
-                                style={{ marginLeft: 'auto', padding: '4px 10px', fontSize: '10px' }}
-                                onClick={() => trade_engine.clearLogs()}
-                            >
-                                Clear Logs
-                            </button>
+                            <button className='clear-log-btn' style={{ marginLeft: 'auto', padding: '4px 10px', fontSize: '10px' }} onClick={() => trade_engine.clearLogs()}>Clear Logs</button>
                         </div>
 
-                        <div
-                            className='trading-log-header'
-                            style={{
-                                borderBottom: '1px solid var(--border-subtle)',
-                                padding: '10px 15px',
-                                display: 'flex',
-                                justifyContent: 'space-between',
-                                alignItems: 'center',
-                            }}
-                        >
+                        <div className='trading-log-header' style={{ borderBottom: '1px solid var(--border-subtle)', padding: '10px 15px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                             <div className='status-left' style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                                <div
-                                    className={`status-indicator ${is_executing ? 'active' : ''}`}
-                                    style={{
-                                        width: '8px',
-                                        height: '8px',
-                                        borderRadius: '50%',
-                                        background: is_executing ? '#00ff41' : '#ff073a',
-                                    }}
-                                />
+                                <div className={`status-indicator ${is_executing ? 'active' : ''}`} style={{ width: '8px', height: '8px', borderRadius: '50%', background: is_executing ? '#00ff41' : '#ff073a' }} />
                                 <span className='status-text'>{trade_status}</span>
                             </div>
                             <div className='profit-display'>
                                 <div className='profit-item'>
-                                    <span className='label' style={{ fontSize: '10px', marginRight: '5px' }}>
-                                        SESSION:
-                                    </span>
-                                    <span
-                                        className={`value ${session_profit >= 0 ? 'success' : 'error'}`}
-                                        style={{ fontSize: '14px', fontWeight: 'bold' }}
-                                    >
+                                    <span className='label' style={{ fontSize: '10px', marginRight: '5px' }}>SESSION:</span>
+                                    <span className={`value ${session_profit >= 0 ? 'success' : 'error'}`} style={{ fontSize: '14px', fontWeight: 'bold' }}>
                                         {session_profit >= 0 ? '+' : ''}${session_profit.toFixed(2)}
                                     </span>
                                 </div>
                             </div>
                         </div>
 
-                        <div
-                            className='trading-log-content'
-                            ref={logRef}
-                            style={{ height: '300px', overflowY: 'auto' }}
-                        >
+                        <div className='trading-log-content' ref={logRef} style={{ height: '300px', overflowY: 'auto' }}>
                             {renderLogContent()}
                         </div>
 
-                        <div
-                            className='section-card__footer'
-                            style={{
-                                display: 'flex',
-                                justifyContent: 'space-between',
-                                alignItems: 'center',
-                                padding: '10px 15px',
-                                borderTop: '1px solid var(--border-subtle)',
-                            }}
-                        >
+                        <div className='section-card__footer' style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '10px 15px', borderTop: '1px solid var(--border-subtle)' }}>
                             <div className='profit-display'>
                                 <div className='profit-item'>
-                                    <span className='label' style={{ fontSize: '10px', marginRight: '5px' }}>
-                                        TOTAL PROFIT:
-                                    </span>
-                                    <span
-                                        className={`value ${total_profit >= 0 ? 'success' : 'error'}`}
-                                        style={{ fontSize: '14px', fontWeight: 'bold' }}
-                                    >
+                                    <span className='label' style={{ fontSize: '10px', marginRight: '5px' }}>TOTAL PROFIT:</span>
+                                    <span className={`value ${total_profit >= 0 ? 'success' : 'error'}`} style={{ fontSize: '14px', fontWeight: 'bold' }}>
                                         {total_profit >= 0 ? '+' : ''}${total_profit.toFixed(2)}
                                     </span>
                                 </div>
                             </div>
-                            <button
-                                className='reset-btn'
-                                style={{ padding: '6px 15px', fontSize: '11px' }}
-                                onClick={() =>
-                                    runInAction(() => {
-                                        trade_engine.session_profit = 0;
-                                        trade_engine.total_profit = 0;
-                                        trade_engine.clearLogs();
-                                    })
-                                }
-                            >
+                            <button className='reset-btn' style={{ padding: '6px 15px', fontSize: '11px' }} onClick={() => runInAction(() => { trade_engine.session_profit = 0; trade_engine.total_profit = 0; trade_engine.clearLogs(); })}>
                                 Reset
                             </button>
                         </div>

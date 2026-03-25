@@ -520,7 +520,7 @@ export default class SmartTradingStore {
                 if (!market) return undefined;
                 return market.symbol;
             },
-            market_symbol => {
+            (market_symbol) => {
                 if (!market_symbol) return;
                 runInAction(() => {
                     this.symbol = market_symbol;
@@ -727,12 +727,14 @@ export default class SmartTradingStore {
         this.root_store.analysis_market.setSymbol(symbol);
     };
 
+
     @action
     subscribeToActiveSymbol = async () => {
         // Now handled by AnalysisMarketStore
     };
 
     @action
+
     @action
     setSpeedbotContractType = action((type: string) => {
         this.speedbot_contract_type = type;
@@ -1399,9 +1401,7 @@ export default class SmartTradingStore {
                 const targets = [most_appearing, second_most, least_appearing];
                 const increasing_target = targets.find(d => getPowerTrend(d) === 'increasing');
 
-                const isMarketRising =
-                    (this.root_store.analysis_market.rise_percentage || 0) >
-                    (this.root_store.analysis_market.fall_percentage || 0);
+                const isMarketRising = (this.root_store.analysis_market.rise_percentage || 0) > (this.root_store.analysis_market.fall_percentage || 0);
 
                 if (increasing_target !== undefined && isMarketRising) {
                     strategy.market_message = `TRADING MATCHES ${increasing_target}...`;
@@ -2519,41 +2519,36 @@ export default class SmartTradingStore {
 
             const contract_id = buy.buy.contract_id;
 
-            const subscription = api_base.api
-                .onMessage()
-                .subscribe((msg: { msg_type: string; proposal_open_contract: Record<string, any> }) => {
-                    if (
-                        msg.msg_type === 'proposal_open_contract' &&
-                        msg.proposal_open_contract.contract_id === contract_id
-                    ) {
-                        const contract = msg.proposal_open_contract;
-                        if (contract.is_sold) {
-                            runInAction(() => {
-                                const status = contract.status; // 'won' or 'lost'
-                                const profit = parseFloat(contract.profit);
-                                const is_win = status === 'won';
+            const subscription = api_base.api.onMessage().subscribe((msg: { msg_type: string; proposal_open_contract: Record<string, any> }) => {
+                if (
+                    msg.msg_type === 'proposal_open_contract' &&
+                    msg.proposal_open_contract.contract_id === contract_id
+                ) {
+                    const contract = msg.proposal_open_contract;
+                    if (contract.is_sold) {
+                        runInAction(() => {
+                            const status = contract.status; // 'won' or 'lost'
+                            const profit = parseFloat(contract.profit);
+                            const is_win = status === 'won';
 
-                                this.addScpLog(
-                                    `Trade ${status.toUpperCase()}: ${profit}`,
-                                    is_win ? 'success' : 'error'
-                                );
+                            this.addScpLog(`Trade ${status.toUpperCase()}: ${profit}`, is_win ? 'success' : 'error');
 
-                                this.addScpJournalEntry({
-                                    timestamp: Date.now(),
-                                    market: config.market,
-                                    strategy: config.strategyId,
-                                    stake: config.stake,
-                                    digit: parseInt(contract.current_spot_display_value.slice(-1)),
-                                    result: is_win ? 'WIN' : 'LOSS',
-                                    profit: profit,
-                                });
-                                this.session_pl += profit;
-                                this.is_executing = false;
-                                subscription.unsubscribe();
+                            this.addScpJournalEntry({
+                                timestamp: Date.now(),
+                                market: config.market,
+                                strategy: config.strategyId,
+                                stake: config.stake,
+                                digit: parseInt(contract.current_spot_display_value.slice(-1)),
+                                result: is_win ? 'WIN' : 'LOSS',
+                                profit: profit,
                             });
-                        }
+                            this.session_pl += profit;
+                            this.is_executing = false;
+                            subscription.unsubscribe();
+                        });
                     }
-                });
+                }
+            });
 
             // Safety timeout
             setTimeout(() => {

@@ -12,7 +12,11 @@ const MarketSelector = observer(() => {
                 <div className='selector-group'>
                     <label className='selector-label'>SELECT MARKET</label>
                     <div className='select-wrapper'>
-                        <select value={symbol} onChange={e => setSymbol(e.target.value)} className='market-select-v2'>
+                        <select
+                            value={symbol}
+                            onChange={(e) => setSymbol(e.target.value)}
+                            className='market-select-v2'
+                        >
                             {markets.map(group => (
                                 <optgroup key={group.group} label={group.group}>
                                     {group.items.map(item => (
@@ -32,9 +36,7 @@ const MarketSelector = observer(() => {
                         <span className='stat-label'>LIVE PRICE</span>
                         <span className='stat-value'>{current_price}</span>
                     </div>
-                    <div
-                        className={`stat-item digit ${last_digit !== null ? (last_digit % 2 === 0 ? 'even' : 'odd') : ''}`}
-                    >
+                    <div className={`stat-item digit ${last_digit !== null ? (last_digit % 2 === 0 ? 'even' : 'odd') : ''}`}>
                         <span className='stat-label'>LAST DIGIT</span>
                         <span className='stat-value'>{last_digit ?? '-'}</span>
                     </div>

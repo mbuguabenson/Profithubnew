@@ -1,0 +1,15 @@
+{
+    "extends": "../../tsconfig.json",
+    "compilerOptions": {
+        "outDir": "./lib",
+        "baseUrl": "./",
+        "typeRoots": ["./@types", "../../node_modules/@types"],
+        "paths": {
+            "@deriv/*": ["../*/src"],
+            "@contentpass/zxcvbn": ["./@types/contentpass__zxcvbn/index.d.ts"],
+            "react-div-100vh": ["./@types/react-div-100vh/index.d.ts"],
+            "react-drag-drawer": ["./@types/react-drag-drawer/index.d.ts"]
+        }
+    },
+    "include": ["src", "./@types/**/*.d.ts"]
+}
