@@ -11,11 +11,25 @@ class ErrorBoundary extends React.Component {
     componentDidCatch = (error, info) => {
         if (window.TrackJS) window.TrackJS.console.log(this.props.root_store);
 
+        // Handle ChunkLoadError - often caused by redeployments
+        if (error.name === 'ChunkLoadError' || (error.message && error.message.includes('Loading chunk'))) {
+            const has_reloaded = sessionStorage.getItem('chunk_load_error_reload');
+            if (!has_reloaded) {
+                sessionStorage.setItem('chunk_load_error_reload', 'true');
+                window.location.reload();
+                return;
+            }
+        }
+
         this.setState({
             hasError: true,
             error,
             info,
         });
+
+        // Clear the reload flag if we've successfully reached this point after a reload
+        // or if it was another error
+        setTimeout(() => sessionStorage.removeItem('chunk_load_error_reload'), 5000);
     };
     render = () => (this.state.hasError ? <ErrorComponent should_show_refresh={true} /> : this.props.children);
 }
