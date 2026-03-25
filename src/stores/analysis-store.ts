@@ -24,7 +24,6 @@ type TTick = {
     epoch: number;
 };
 
-
 export default class AnalysisStore {
     root_store: RootStore;
     stats_engine: DigitStatsEngine;
@@ -93,7 +92,7 @@ export default class AnalysisStore {
                 return {
                     price: market.current_price,
                     digit: market.last_digit,
-                    symbol: market.symbol
+                    symbol: market.symbol,
                 };
             },
             ({ price, digit, symbol }) => {
@@ -128,7 +127,7 @@ export default class AnalysisStore {
         // Global symbol sync
         reaction(
             () => this.root_store.analysis_market?.symbol,
-            (market_symbol) => {
+            market_symbol => {
                 if (!market_symbol) return;
                 runInAction(() => {
                     this.symbol = market_symbol;

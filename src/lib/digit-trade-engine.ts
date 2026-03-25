@@ -254,8 +254,14 @@ export class DigitTradeEngine {
                 stats.percentages.odd >= trigger_pct &&
                 this.consecutive_even >= consecutive;
 
-            if (even_triggered) console.log(`[DigitTradeEngine] EVEN Triggered! Pct: ${stats.percentages.even}, Cons: ${this.consecutive_odd}`);
-            if (odd_triggered) console.log(`[DigitTradeEngine] ODD Triggered! Pct: ${stats.percentages.odd}, Cons: ${this.consecutive_even}`);
+            if (even_triggered)
+                console.log(
+                    `[DigitTradeEngine] EVEN Triggered! Pct: ${stats.percentages.even}, Cons: ${this.consecutive_odd}`
+                );
+            if (odd_triggered)
+                console.log(
+                    `[DigitTradeEngine] ODD Triggered! Pct: ${stats.percentages.odd}, Cons: ${this.consecutive_even}`
+                );
 
             if (even_triggered || odd_triggered) {
                 tradeType = target === 'EVEN' ? 'DIGITEVEN' : 'DIGITODD';

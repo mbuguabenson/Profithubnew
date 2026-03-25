@@ -4,12 +4,32 @@ import { COURSE_OVERVIEW, COURSE_CHAPTERS } from './course-data';
 import './deriv-course.scss';
 
 const RESOURCES = [
-    { icon: '📖', title: 'Trading Glossary', desc: 'Comprehensive dictionary of key trading terms and definitions specific to Deriv.' },
-    { icon: '📊', title: 'Contract Comparison', desc: 'Side-by-side comparison matrix of all Deriv contract types and their mechanics.' },
-    { icon: '🧮', title: 'Risk Calculator', desc: 'Interactive tool to calculate position sizes and risk parameters based on balance.' },
+    {
+        icon: '📖',
+        title: 'Trading Glossary',
+        desc: 'Comprehensive dictionary of key trading terms and definitions specific to Deriv.',
+    },
+    {
+        icon: '📊',
+        title: 'Contract Comparison',
+        desc: 'Side-by-side comparison matrix of all Deriv contract types and their mechanics.',
+    },
+    {
+        icon: '🧮',
+        title: 'Risk Calculator',
+        desc: 'Interactive tool to calculate position sizes and risk parameters based on balance.',
+    },
     { icon: '📋', title: 'Journal Template', desc: 'Downloadable framework for tracking and analyzing trade history.' },
-    { icon: '📝', title: 'Trading Plan Template', desc: 'Structured document to help define strategy, entry/exit, and risk limits.' },
-    { icon: '⚠️', title: 'Scam Warning List', desc: 'Updated list of known fraudulent services and red flags in the space.' },
+    {
+        icon: '📝',
+        title: 'Trading Plan Template',
+        desc: 'Structured document to help define strategy, entry/exit, and risk limits.',
+    },
+    {
+        icon: '⚠️',
+        title: 'Scam Warning List',
+        desc: 'Updated list of known fraudulent services and red flags in the space.',
+    },
 ];
 
 export default function DerivCourse() {
@@ -38,14 +58,14 @@ export default function DerivCourse() {
 
     return (
         <div className='deriv-course'>
-            <motion.div 
+            <motion.div
                 className='deriv-course__hero'
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.8 }}
             >
                 <div className='deriv-course__hero-content'>
-                    <motion.span 
+                    <motion.span
                         className='hero-badge'
                         initial={{ scale: 0.8, opacity: 0 }}
                         animate={{ scale: 1, opacity: 1 }}
@@ -53,14 +73,14 @@ export default function DerivCourse() {
                     >
                         Master the Markets
                     </motion.span>
-                    <motion.h1 
-                        initial={{ x: -30, opacity: 0 }} 
+                    <motion.h1
+                        initial={{ x: -30, opacity: 0 }}
                         animate={{ x: 0, opacity: 1 }}
                         transition={{ delay: 0.3 }}
                     >
                         {COURSE_OVERVIEW.welcome}
                     </motion.h1>
-                    <motion.p 
+                    <motion.p
                         className='hero-subtitle'
                         initial={{ x: -20, opacity: 0 }}
                         animate={{ x: 0, opacity: 1 }}
@@ -68,7 +88,7 @@ export default function DerivCourse() {
                     >
                         <span>📘</span> Your Path to Trading Excellence
                     </motion.p>
-                    <motion.p 
+                    <motion.p
                         className='hero-description'
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
@@ -76,13 +96,13 @@ export default function DerivCourse() {
                     >
                         {COURSE_OVERVIEW.description}
                     </motion.p>
-                    <motion.div 
+                    <motion.div
                         className='hero-actions'
                         initial={{ y: 20, opacity: 0 }}
                         animate={{ y: 0, opacity: 1 }}
                         transition={{ delay: 0.6 }}
                     >
-                        <motion.button 
+                        <motion.button
                             className='hero-btn'
                             whileHover={{ scale: 1.05 }}
                             whileTap={{ scale: 0.95 }}
@@ -102,27 +122,30 @@ export default function DerivCourse() {
                 </div>
                 <div className='deriv-course__hero-visual'>
                     <div className='hero-image-container'>
-                        <img src='/C:/Users/benso/.gemini/antigravity/brain/a7bcb02c-43c8-46b9-bd55-d0d8ae8fa941/deriv_course_hero_banner_1773578170432.png' alt='Deriv Course' />
+                        <img
+                            src='/C:/Users/benso/.gemini/antigravity/brain/a7bcb02c-43c8-46b9-bd55-d0d8ae8fa941/deriv_course_hero_banner_1773578170432.png'
+                            alt='Deriv Course'
+                        />
                     </div>
                 </div>
             </motion.div>
 
             <div className='deriv-course__tabs-wrapper'>
                 <div className='deriv-course__tabs'>
-                    <button 
-                        className={activeTab === 'overview' ? 'active' : ''} 
+                    <button
+                        className={activeTab === 'overview' ? 'active' : ''}
                         onClick={() => setActiveTab('overview')}
                     >
                         Overview {activeTab === 'overview' ? '▴' : '▾'}
                     </button>
-                    <button 
-                        className={activeTab === 'chapters' ? 'active' : ''} 
+                    <button
+                        className={activeTab === 'chapters' ? 'active' : ''}
                         onClick={() => setActiveTab('chapters')}
                     >
                         All Chapters {activeTab === 'chapters' ? '▴' : '▾'}
                     </button>
-                    <button 
-                        className={activeTab === 'resources' ? 'active' : ''} 
+                    <button
+                        className={activeTab === 'resources' ? 'active' : ''}
                         onClick={() => setActiveTab('resources')}
                     >
                         Resources {activeTab === 'resources' ? '▴' : '▾'}
@@ -137,7 +160,7 @@ export default function DerivCourse() {
             <main className='deriv-course__content'>
                 <AnimatePresence exitBeforeEnter>
                     {activeTab === 'overview' && (
-                        <motion.div 
+                        <motion.div
                             key='overview'
                             className='deriv-course__overview'
                             initial={{ opacity: 0, y: 20 }}
@@ -147,12 +170,14 @@ export default function DerivCourse() {
                             <div className='overview-layout'>
                                 <section className='curriculum-content'>
                                     <div className='grid-header'>
-                                        <h2 style={{ fontSize: '32px', marginBottom: '40px', color: '#fff' }}>Course Blueprint</h2>
+                                        <h2 style={{ fontSize: '32px', marginBottom: '40px', color: '#fff' }}>
+                                            Course Blueprint
+                                        </h2>
                                     </div>
                                     <div className='curriculum-grid'>
                                         {COURSE_OVERVIEW.curriculum.map((cat, i) => (
-                                            <motion.div 
-                                                key={i} 
+                                            <motion.div
+                                                key={i}
                                                 className='curriculum-card'
                                                 initial={{ opacity: 0, scale: 0.9 }}
                                                 animate={{ opacity: 1, scale: 1 }}
@@ -166,7 +191,11 @@ export default function DerivCourse() {
                                                         {cat.items.slice(0, 3).map((item, j) => (
                                                             <li key={j}>{item}</li>
                                                         ))}
-                                                        {cat.items.length > 3 && <li className='more'>View {cat.items.length - 3} more...</li>}
+                                                        {cat.items.length > 3 && (
+                                                            <li className='more'>
+                                                                View {cat.items.length - 3} more...
+                                                            </li>
+                                                        )}
                                                     </ul>
                                                 </div>
                                             </motion.div>
@@ -176,15 +205,21 @@ export default function DerivCourse() {
 
                                 <div className='sidebar-section'>
                                     <div className='glass-panel quick-start'>
-                                        <h3><span>🚀</span> Accelerate</h3>
+                                        <h3>
+                                            <span>🚀</span> Accelerate
+                                        </h3>
                                         <div className='steps-container'>
                                             {COURSE_OVERVIEW.quickStart.map((s, i) => (
-                                                <div key={i} className='step-btn' onClick={() => {
-                                                    if (s.step === 1) jumpToChapter(1);
-                                                    if (s.step === 2) jumpToChapter(7);
-                                                    if (s.step === 3) jumpToChapter(17);
-                                                    if (s.step === 4) jumpToChapter(30);
-                                                }}>
+                                                <div
+                                                    key={i}
+                                                    className='step-btn'
+                                                    onClick={() => {
+                                                        if (s.step === 1) jumpToChapter(1);
+                                                        if (s.step === 2) jumpToChapter(7);
+                                                        if (s.step === 3) jumpToChapter(17);
+                                                        if (s.step === 4) jumpToChapter(30);
+                                                    }}
+                                                >
                                                     <div className='num'>{s.step}</div>
                                                     <div className='info'>
                                                         <h5>{s.title}</h5>
@@ -196,13 +231,23 @@ export default function DerivCourse() {
                                     </div>
 
                                     <div className='glass-panel key-topics'>
-                                        <h3><span>⭐</span> Foundations</h3>
+                                        <h3>
+                                            <span>⭐</span> Foundations
+                                        </h3>
                                         <div className='topics-grid'>
                                             {COURSE_OVERVIEW.keyTopics.map((topic, i) => (
-                                                <div key={i} className='topic-card' style={{ marginBottom: '20px', display: 'flex', gap: '12px' }}>
-                                                    <span className='icon' style={{ fontSize: '20px' }}>{topic.icon}</span>
+                                                <div
+                                                    key={i}
+                                                    className='topic-card'
+                                                    style={{ marginBottom: '20px', display: 'flex', gap: '12px' }}
+                                                >
+                                                    <span className='icon' style={{ fontSize: '20px' }}>
+                                                        {topic.icon}
+                                                    </span>
                                                     <div className='txt'>
-                                                        <h5 style={{ color: '#fff', fontSize: '14px' }}>{topic.title}</h5>
+                                                        <h5 style={{ color: '#fff', fontSize: '14px' }}>
+                                                            {topic.title}
+                                                        </h5>
                                                         <p style={{ opacity: 0.5, fontSize: '12px' }}>{topic.desc}</p>
                                                     </div>
                                                 </div>
@@ -215,7 +260,7 @@ export default function DerivCourse() {
                     )}
 
                     {activeTab === 'chapters' && (
-                        <motion.div 
+                        <motion.div
                             key='chapters'
                             className='deriv-course__chapters'
                             initial={{ opacity: 0, scale: 0.98 }}
@@ -230,34 +275,43 @@ export default function DerivCourse() {
                                     {isAllExpanded ? 'Collapse All' : 'Expand All'}
                                 </button>
                             </div>
-                            
+
                             <div className='chapters-stack'>
-                                {COURSE_CHAPTERS.map((chap) => (
-                                    <div 
-                                        key={chap.id} 
+                                {COURSE_CHAPTERS.map(chap => (
+                                    <div
+                                        key={chap.id}
                                         id={`chapter-${chap.id}`}
                                         className={`chapter-accordion ${openChapter === chap.id || isAllExpanded ? 'active' : ''}`}
                                     >
-                                        <div className='chapter-accordion-header' onClick={() => toggleChapter(chap.id)}>
+                                        <div
+                                            className='chapter-accordion-header'
+                                            onClick={() => toggleChapter(chap.id)}
+                                        >
                                             <div className='left-side'>
                                                 <span className='label'>Module {chap.id}</span>
                                                 <span className='title'>{chap.title}</span>
                                             </div>
                                             <div className='right-side'>
-                                                <span className='time'>{Math.ceil(chap.content.length / 500)} min read</span>
-                                                <span className={`arrow ${openChapter === chap.id || isAllExpanded ? 'rotated' : ''}`}>▼</span>
+                                                <span className='time'>
+                                                    {Math.ceil(chap.content.length / 500)} min read
+                                                </span>
+                                                <span
+                                                    className={`arrow ${openChapter === chap.id || isAllExpanded ? 'rotated' : ''}`}
+                                                >
+                                                    ▼
+                                                </span>
                                             </div>
                                         </div>
                                         <AnimatePresence>
                                             {(openChapter === chap.id || isAllExpanded) && (
-                                                <motion.div 
+                                                <motion.div
                                                     className='chapter-accordion-body'
                                                     initial={{ height: 0, opacity: 0 }}
                                                     animate={{ height: 'auto', opacity: 1 }}
                                                     exit={{ height: 0, opacity: 0 }}
                                                     transition={{ duration: 0.4 }}
                                                 >
-                                                    <div 
+                                                    <div
                                                         className='content-renderer'
                                                         dangerouslySetInnerHTML={{ __html: chap.content }}
                                                     />
@@ -271,14 +325,14 @@ export default function DerivCourse() {
                     )}
 
                     {activeTab === 'resources' && (
-                        <motion.div 
+                        <motion.div
                             key='resources'
                             className='deriv-course__resources'
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                         >
                             <div className='resource-grid'>
-                                {RESOURCES.map((res) => (
+                                {RESOURCES.map(res => (
                                     <div key={res.title} className='resource-tile'>
                                         <div className='icon-box'>{res.icon}</div>
                                         <div className='tile-content'>

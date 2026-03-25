@@ -71,7 +71,9 @@ export default class ChartStore {
         // First try: get symbol from Blockly workspace
         try {
             const workspace = window.Blockly?.derivWorkspace;
-            const market_block = workspace?.getAllBlocks().find((block: any) => block.type === 'trade_definition_market');
+            const market_block = workspace
+                ?.getAllBlocks()
+                .find((block: any) => block.type === 'trade_definition_market');
             const blockly_symbol = market_block?.getFieldValue('SYMBOL_LIST');
             if (blockly_symbol) {
                 this.symbol = blockly_symbol;

@@ -1294,7 +1294,7 @@
         .summary-card {
             background: rgba(255, 255, 255, 0.04) !important;
             border-color: rgba(255, 255, 255, 0.1) !important;
-            
+
             &:hover {
                 background: rgba(255, 255, 255, 0.08) !important;
                 border-color: rgba(168, 85, 247, 0.4) !important;
@@ -1324,7 +1324,7 @@
         // Strategy tab inactive state
         .strategy-tabs button {
             color: rgba(255, 255, 255, 0.7);
-            
+
             &.active {
                 background: rgba(168, 85, 247, 0.2);
                 color: #e879f9; // Brighter pinkish-purple for contrast against dark background

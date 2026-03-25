@@ -61,7 +61,7 @@ export default class DigitCrackerStore {
         this.updateFromEngine();
 
         this.initConnection();
-        
+
         // Sync with unified market store
         reaction(
             () => {
@@ -70,7 +70,7 @@ export default class DigitCrackerStore {
                 return {
                     price: market.current_price,
                     digit: market.last_digit,
-                    symbol: market.symbol
+                    symbol: market.symbol,
                 };
             },
             ({ price, digit, symbol }) => {
@@ -109,7 +109,7 @@ export default class DigitCrackerStore {
                 return {
                     ticks: market.ticks || [],
                     price: market.current_price,
-                    symbol: market.symbol
+                    symbol: market.symbol,
                 };
             },
             ({ ticks, price, symbol }) => {
@@ -119,26 +119,26 @@ export default class DigitCrackerStore {
                             this.symbol = symbol || 'R_100';
                         });
                     }
-                    
+
                     const num_price = Number(price);
-                    
+
                     runInAction(() => {
                         this.ticks = [...ticks];
                         this.current_price = num_price;
                         this.last_digit = ticks[ticks.length - 1];
-                        
+
                         // 1. Update stats engine
                         this.stats_engine.updateWithHistory(this.ticks, num_price);
-                        
+
                         // 2. Sync observables with stats
                         this.updateFromEngine();
-                        
+
                         // 3. Process trade logic
                         this.trade_engine.processTick(
                             this.last_digit,
-                            { 
-                                percentages: this.stats_engine.getPercentages(), 
-                                digit_stats: this.stats_engine.digit_stats 
+                            {
+                                percentages: this.stats_engine.getPercentages(),
+                                digit_stats: this.stats_engine.digit_stats,
                             },
                             this.symbol,
                             this.root_store.client?.currency || 'USD'

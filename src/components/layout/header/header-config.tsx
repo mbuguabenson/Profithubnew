@@ -5,9 +5,7 @@ import {
     LegacyReportsIcon as ReportsLogo,
     LegacyOrdersIcon as CourseLogo,
 } from '@deriv/quill-icons/Legacy';
-import {
-    DerivProductBrandLightDerivBotLogoWordmarkIcon as DerivBotLogo,
-} from '@deriv/quill-icons/Logo';
+import { DerivProductBrandLightDerivBotLogoWordmarkIcon as DerivBotLogo } from '@deriv/quill-icons/Logo';
 import { localize } from '@deriv-com/translations';
 
 export type PlatformsConfig = {
@@ -48,7 +46,6 @@ export const platformsConfig: PlatformsConfig[] = [
         showInEU: false,
     },
 ];
-
 
 export const MenuItems: MenuItemsConfig[] = [
     {
