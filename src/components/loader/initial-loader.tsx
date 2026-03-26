@@ -14,15 +14,20 @@ const QUANTUM_LOGS = [
 ];
 
 const CAPABILITIES = [
-    { icon: '🤖', label: 'Bot Builder',     desc: 'Automated strategy engine' },
-    { icon: '📊', label: 'Charts',           desc: 'Real-time market charts' },
-    { icon: '🧪', label: 'Analysis Tool',    desc: 'Advanced market analytics' },
-    { icon: '⚡', label: 'Easy Tool',        desc: 'Quick-start trading bots' },
-    { icon: '🆓', label: 'Free Bots',        desc: 'Pre-built expert bots' },
-    { icon: '📋', label: 'Reports',          desc: 'P&L & performance reports' },
-    { icon: '📡', label: 'Signals',          desc: 'Real-time entry alerts' },
-    { icon: '👥', label: 'Copy Trade',       desc: 'Follow top expert bots' },
-    { icon: '🛡️', label: 'Risk Guard',       desc: 'Smart capital protection' },
+    { icon: '🤖', label: 'Free Bots' },
+    { icon: '🧠', label: 'AI Bots' },
+    { icon: '🧪', label: 'Analysis Tool' },
+    { icon: '✨', label: 'Smart Analysis' },
+    { icon: '👥', label: 'Copy Trading' },
+    { icon: '📡', label: 'Signals' },
+];
+
+const STEPS = [
+    { id: 1, label: 'CONNECTION' },
+    { id: 2, label: 'MARKET DATA' },
+    { id: 3, label: 'AI ENGINE' },
+    { id: 4, label: 'TRADING BOTS' },
+    { id: 5, label: 'FINAL SETUP' },
 ];
 
 const SOCIAL_LINKS = [
@@ -68,129 +73,89 @@ export default function InitialLoader() {
             </svg>
 
             <div className='quantum-bg'>
-                <div className='q-aurora q-aurora--magenta' />
-                <div className='q-aurora q-aurora--purple' />
                 <div className='q-grid' />
             </div>
 
-            <div className='quantum-content'>
-                {/* ── PROFITHUB LOGO ── */}
-                <motion.div 
-                    className='q-brand-logo-container'
-                    initial={{ opacity: 0, scale: 0.8 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ duration: 0.8 }}
-                >
-                    <img src="/logo-ph.png" alt="ProfitHub Logo" className="q-brand-logo" />
-                </motion.div>
-
-                <motion.h1 
-                    className='q-title q-title--orange'
-                    initial={{ opacity: 0, y: 15 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.2 }}
-                >
-                    PROFIT HUB TRADING TOOL
-                </motion.h1>
-
-                <motion.p 
-                    className='q-subtitle q-subtitle--green'
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ delay: 0.3 }}
-                >
-                    Advanced Trading with Precision and Automation
-                </motion.p>
-
-                {/* ── CAPABILITIES GRID (3x3 Layout) ── */}
-                <div className='q-capabilities'>
-                    <div className='q-grid-layout'>
-                        {CAPABILITIES.map((cap, i) => (
-                            <motion.div 
-                                key={cap.label}
-                                className='q-card'
-                                initial={{ opacity: 0, scale: 0.9 }}
-                                animate={{ opacity: 1, scale: 1 }}
-                                transition={{ delay: 0.4 + (i * 0.05) }}
-                            >
-                                <div className='q-card-icon'>{cap.icon}</div>
-                                <div className='q-card-content'>
-                                    <div className='q-card-label'>{cap.label}</div>
-                                    <div className='q-card-desc'>{cap.desc}</div>
-                                </div>
-                            </motion.div>
-                        ))}
-                    </div>
-                </div>
-
-                {/* ── PROGRESS SECTION ── */}
-                <div className='q-progress-section'>
-                    <div className='q-progress-header'>
-                        <div className='q-ph-left'>
-                            <span className='q-loading-icon'>🌀</span>
-                            System Syncing
+            <motion.div 
+                className='q-main-card'
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.5 }}
+            >
+                <div className='q-card-header'>
+                    <div className='q-logo-row'>
+                        <svg className='q-logo-svg' viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M3 3V21H21" stroke="#22d3ee" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                            <path d="M7 14L11 10L15 14L21 8" stroke="#22d3ee" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                        </svg>
+                        <div className='q-brand-titles'>
+                            <h1 className='q-main-title'>SMART</h1>
+                            <span className='q-main-subtitle'>TRADING HUB</span>
                         </div>
-                        <div className='q-ph-right'>{Math.floor(progress)}%</div>
                     </div>
-                    <div className='q-bar-rail'>
-                        <motion.div 
-                            className='q-bar-fill'
-                            animate={{ width: `${progress}%` }}
-                            transition={{ duration: 0.1 }}
-                        >
-                            <div className='q-bar-glow' />
-                        </motion.div>
-                    </div>
-                    <div className='q-status-text'>
-                        <AnimatePresence exitBeforeEnter>
-                            <motion.span
-                                key={logIndex}
-                                initial={{ opacity: 0, y: 5 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                exit={{ opacity: 0, y: -5 }}
-                            >
-                                {QUANTUM_LOGS[logIndex]}
-                            </motion.span>
-                        </AnimatePresence>
-                    </div>
+                    <p className='q-welcome-text'>Welcome to <span className='q-highlight'>D-Botspace</span></p>
+                    <p className='q-welcome-sub'>Automated Precision Trading System</p>
                 </div>
 
-                {/* ── SOCIAL HUB (Updated Socials) ── */}
-                <div className='q-social-hub'>
-                    {SOCIAL_LINKS.map((social, i) => (
-                        <motion.div 
-                            key={social.type}
-                            className='q-squircle-wrapper'
-                            initial={{ opacity: 0, y: 15 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ delay: 1.5 + (i * 0.08) }}
-                        >
-                            <div className='q-sq-backdrop' />
-                            <div className={`q-sq-icon-box q-sq-icon-box--${social.type}`} style={{ clipPath: 'url(#squircleClip)' }}>
-                                <svg viewBox="0 0 24 24" fill="currentColor">
-                                    <path d={social.path} />
-                                </svg>
+                <div className='q-steps-row'>
+                    {STEPS.map((step, idx) => (
+                        <div key={step.id} className='q-step-item'>
+                            <div className={`q-step-circle ${step.id === 1 ? 'q-step-circle--active' : ''}`}>
+                                {step.id}
                             </div>
+                            <span className='q-step-label'>{step.label}</span>
+                            {idx < STEPS.length - 1 && <div className='q-step-line' />}
+                        </div>
+                    ))}
+                </div>
+
+                <div className='q-grid-layout'>
+                    {CAPABILITIES.map((cap, i) => (
+                        <motion.div 
+                            key={cap.label}
+                            className='q-cap-card'
+                            initial={{ opacity: 0, y: 10 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: 0.2 + (i * 0.05) }}
+                        >
+                            <div className='q-cap-icon'>{cap.icon}</div>
+                            <div className='q-cap-label'>{cap.label}</div>
                         </motion.div>
                     ))}
                 </div>
 
-                {/* ── BRANDING ── */}
-                <div className='q-branding'>
-                    <div className='q-brand-text'>PROFIT HUB TECHNOLOGIES INC.</div>
-                    
-                    <motion.div 
-                        className='q-powered-by'
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        transition={{ delay: 2.2 }}
-                    >
-                        <span className='q-pb-label'>POWERED BY</span>
-                        <img src="/deriv-logo.svg" alt="Deriv Logo" className="q-pb-logo" />
-                        <span className='q-pb-name'>DERIV</span>
-                    </motion.div>
+                <div className='q-progress-area'>
+                    <div className='q-status-msg'>
+                        <p className='q-msg-primary'>Establishing secure connection...</p>
+                        <p className='q-msg-secondary'>
+                            <AnimatePresence exitBeforeEnter>
+                                <motion.span
+                                    key={logIndex}
+                                    initial={{ opacity: 0 }}
+                                    animate={{ opacity: 1 }}
+                                    exit={{ opacity: 0 }}
+                                >
+                                    {QUANTUM_LOGS[logIndex]}
+                                </motion.span>
+                            </AnimatePresence>
+                        </p>
+                    </div>
+                    <div className='q-progress-bar-container'>
+                        <div className='q-bar-rail'>
+                            <motion.div 
+                                className='q-bar-fill'
+                                animate={{ width: `${progress}%` }}
+                                transition={{ duration: 0.1 }}
+                            />
+                        </div>
+                        <span className='q-progress-percent'>{Math.floor(progress)}%</span>
+                    </div>
                 </div>
-            </div>
+
+                <div className='q-card-footer'>
+                    <p>© 2025 D-Botspace Powered by Deriv. All rights reserved.</p>
+                </div>
+            </motion.div>
         </div>
     );
 }
