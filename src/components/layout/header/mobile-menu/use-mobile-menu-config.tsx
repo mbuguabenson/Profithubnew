@@ -35,7 +35,7 @@ const useMobileMenuConfig = () => {
             [
                 {
                     as: 'button',
-                    label: localize('Dark theme'),
+                    label: is_dark_mode_on ? localize('Dark theme') : localize('Light theme'),
                     LeftComponent: LegacyTheme1pxIcon,
                     RightComponent: <ToggleSwitch value={is_dark_mode_on} onChange={toggleTheme} />,
                     onClick: toggleTheme,
@@ -54,7 +54,7 @@ const useMobileMenuConfig = () => {
                     : null,
             ].filter(Boolean) as TMenuConfig,
         ],
-        [is_dark_mode_on, is_livechat_available, icAvailable]
+        [is_dark_mode_on, is_livechat_available, icAvailable, toggleTheme, localize]
     );
 
     return {
