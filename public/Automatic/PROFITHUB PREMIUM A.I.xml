@@ -1,4 +1,5 @@
-<xml xmlns="https://developers.google.com/blockly/xml" is_dbot="true" collection="false">
+<xml xmlns="http://www.w3.org/1999/xhtml" collection="false" is_dbot="true">
+
   <variables>
     <variable id="7Q4y$nr_sr!x2NkOu%)2">Stake</variable>
     <variable id="!(f!MzWu/SJJ;NaP]=?!">Tick 1</variable>
@@ -167,7 +168,7 @@
     </statement>
     <statement name="SUBMARKET">
       <block type="trade_definition_tradeoptions" id="{Dkfk~3kkr.wc8@{)~m0">
-        <mutation xmlns="http://www.w3.org/1999/xhtml" has_first_barrier="false" has_second_barrier="false" has_prediction="true"></mutation>
+        <mutation has_first_barrier="false" has_second_barrier="false" has_prediction="true"></mutation>
         <field name="DURATIONTYPE_LIST">t</field>
         <value name="DURATION">
           <shadow type="math_number" id="%PF8u9|zX9*I{Sj|1VT@">
@@ -196,12 +197,12 @@
   <block type="after_purchase" id="Q!WjmqV!JmoPK$1p=,Z`" collapsed="true" x="900" y="60">
     <statement name="AFTERPURCHASE_STACK">
       <block type="controls_if" id=")DN{cw.=-)6[,2s01][y">
-        <mutation xmlns="http://www.w3.org/1999/xhtml" elseif="1" else="1"></mutation>
+        <mutation elseif="1" else="1"></mutation>
         <value name="IF0">
           <block type="logic_compare" id="_A{.]PjMZUh!;SaEL(PQ">
             <field name="OP">GT</field>
             <value name="A">
-              <block type="total_profit" id="kF8CU|)Q8);OEBV23B35"></block>
+              <block type="total_profit" id="kF8CU|)Q8);OEBV23B35"/>
             </value>
             <value name="B">
               <block type="variables_get" id="H6A]tIXPMPJiME$*UNm5">
@@ -217,7 +218,7 @@
               <block type="text_statement" id="1g~?n9%iP08%^|a}^)D-">
                 <value name="TEXT">
                   <shadow type="text" id="8x84,??pD;a}S^9Xe,fn">
-                    <field name="TEXT"></field>
+                    <field name="TEXT"/>
                   </shadow>
                   <block type="text" id="#GiuOl|!IS#.dQ,z^u{[">
                     <field name="TEXT">CONGRATULATIONS! You have hit your Session Profit. Wait for atleast 30 mins before another session. Profit Achieved -&gt; </field>
@@ -227,9 +228,9 @@
                   <block type="text_statement" id="Wzeq`?|_(.Zo(MF%PVUa">
                     <value name="TEXT">
                       <shadow type="text" id="}N!T)apd~+!_c/N8Si}1">
-                        <field name="TEXT"></field>
+                        <field name="TEXT"/>
                       </shadow>
-                      <block type="total_profit" id="{kIC:;hH!GMLK%hKOr-T"></block>
+                      <block type="total_profit" id="{kIC:;hH!GMLK%hKOr-T"/>
                     </value>
                   </block>
                 </next>
@@ -253,7 +254,7 @@
           <block type="logic_compare" id="(3lxZO)+TFHkO/ZE-H{_">
             <field name="OP">LTE</field>
             <value name="A">
-              <block type="total_profit" id="92Qbg1t!lVn)NW*Q=FuP"></block>
+              <block type="total_profit" id="92Qbg1t!lVn)NW*Q=FuP"/>
             </value>
             <value name="B">
               <block type="math_single" id="sf,dgQghD-NYMjkPa9V}">
@@ -281,7 +282,7 @@
         </statement>
         <statement name="ELSE">
           <block type="controls_if" id="y|Maz[iF+,XXr*SS;dMc">
-            <mutation xmlns="http://www.w3.org/1999/xhtml" else="1"></mutation>
+            <mutation else="1"></mutation>
             <value name="IF0">
               <block type="contract_check_result" id="XV2Q0E0iQiX9MAc}Ef8A">
                 <field name="CHECK_RESULT">win</field>
@@ -448,7 +449,7 @@
                       </block>
                     </statement>
                     <next>
-                      <block type="trade_again" id="dX9#uq8!`~,W]rcu15[e"></block>
+                      <block type="trade_again" id="dX9#uq8!`~,W]rcu15[e"/>
                     </next>
                   </block>
                 </next>
@@ -461,8 +462,23 @@
   </block>
   <block type="before_purchase" id="Gs}:IU2/fgSK=gw}wEzj" deletable="false" x="0" y="1156">
     <statement name="BEFOREPURCHASE_STACK">
-      <block type="controls_if" id="{JUMUeN0qE_yhh6o;bv`">
-        <mutation xmlns="http://www.w3.org/1999/xhtml" else="1"></mutation>
+      
+    <block type="notify" id="custom_notify_ld">
+  <field name="NOTIFICATION_TYPE">info</field>
+  <field name="NOTIFICATION_SOUND">silent</field>
+  <value name="MESSAGE">
+    <block type="text_join">
+      <mutation items="2"/>
+      <value name="ADD0">
+        <shadow type="text"><field name="TEXT">Last Digit: </field></shadow>
+      </value>
+      <value name="ADD1">
+        <block type="last_digit"/>
+      </value>
+    </block>
+  </value>
+<next><block type="controls_if" id="{JUMUeN0qE_yhh6o;bv`">
+        <mutation else="1"></mutation>
         <value name="IF0">
           <block type="logic_compare" id="9Krsro|CE%1!_``.zV12" collapsed="true">
             <field name="OP">EQ</field>
@@ -488,8 +504,7 @@
             <field name="PURCHASE_LIST">DIGITOVER</field>
           </block>
         </statement>
-      </block>
-    </statement>
+      </block></next></block></statement>
   </block>
   <block type="tick_analysis" id="5*Ez@IpGDv={02K!#6{0" collapsed="true" x="0" y="1508">
     <statement name="TICKANALYSIS_STACK">
@@ -497,11 +512,11 @@
         <field name="VAR" id="!(f!MzWu/SJJ;NaP]=?!">Tick 1</field>
         <value name="VALUE">
           <block type="lists_getIndex" id="V-_v/ltdfZ0_gw[7sZ%D">
-            <mutation xmlns="http://www.w3.org/1999/xhtml" statement="false" at="true"></mutation>
+            <mutation statement="false" at="true"></mutation>
             <field name="MODE">GET</field>
             <field name="WHERE">FROM_END</field>
             <value name="VALUE">
-              <block type="lastDigitList" id="!axiWwLg+Y_H[p4o.%7{"></block>
+              <block type="lastDigitList" id="!axiWwLg+Y_H[p4o.%7{"/>
             </value>
             <value name="AT">
               <block type="math_number" id="EVYc}ISMX{$(fd;kO]HZ">
@@ -515,11 +530,11 @@
             <field name="VAR" id="/.fQ=@I~l,Dz0|e2a)(n">Tick 2</field>
             <value name="VALUE">
               <block type="lists_getIndex" id="AM;`M0b:,/EJt1XskQIf">
-                <mutation xmlns="http://www.w3.org/1999/xhtml" statement="false" at="true"></mutation>
+                <mutation statement="false" at="true"></mutation>
                 <field name="MODE">GET</field>
                 <field name="WHERE">FROM_END</field>
                 <value name="VALUE">
-                  <block type="lastDigitList" id="|{#7{s!ym/=GN8Yt]B/6"></block>
+                  <block type="lastDigitList" id="|{#7{s!ym/=GN8Yt]B/6"/>
                 </value>
                 <value name="AT">
                   <block type="math_number" id="m(d]|a4;SOs=ZXA@,4={">
@@ -533,11 +548,11 @@
                 <field name="VAR" id="1sRF8Ow=LBCxCjDWi$Th">Tick 3</field>
                 <value name="VALUE">
                   <block type="lists_getIndex" id="iCxRzDV60hVbJx)IZA9o">
-                    <mutation xmlns="http://www.w3.org/1999/xhtml" statement="false" at="true"></mutation>
+                    <mutation statement="false" at="true"></mutation>
                     <field name="MODE">GET</field>
                     <field name="WHERE">FROM_END</field>
                     <value name="VALUE">
-                      <block type="lastDigitList" id="HhGz/hkz{Sc/0k@0b+ny"></block>
+                      <block type="lastDigitList" id="HhGz/hkz{Sc/0k@0b+ny"/>
                     </value>
                     <value name="AT">
                       <block type="math_number" id="mwNTJ[C%7j/g#:(3[sD5">
@@ -551,11 +566,11 @@
                     <field name="VAR" id="-,,SFHLGG.vq!}k=`g7Z">Tick 4</field>
                     <value name="VALUE">
                       <block type="lists_getIndex" id="69;_}6s,T.@Z]`Tj~Kn8">
-                        <mutation xmlns="http://www.w3.org/1999/xhtml" statement="false" at="true"></mutation>
+                        <mutation statement="false" at="true"></mutation>
                         <field name="MODE">GET</field>
                         <field name="WHERE">FROM_END</field>
                         <value name="VALUE">
-                          <block type="lastDigitList" id="xc^|HTNq[0uN)k0T@g2r"></block>
+                          <block type="lastDigitList" id="xc^|HTNq[0uN)k0T@g2r"/>
                         </value>
                         <value name="AT">
                           <block type="math_number" id="(7jcNG?6n;8GnTaU+P!o">
@@ -569,11 +584,11 @@
                         <field name="VAR" id="m,z.@5Yu$?_Bd{8Q2W!G">Tick 5</field>
                         <value name="VALUE">
                           <block type="lists_getIndex" id="yZ`_Z5mh0|w2Az6?wrJb">
-                            <mutation xmlns="http://www.w3.org/1999/xhtml" statement="false" at="true"></mutation>
+                            <mutation statement="false" at="true"></mutation>
                             <field name="MODE">GET</field>
                             <field name="WHERE">FROM_END</field>
                             <value name="VALUE">
-                              <block type="lastDigitList" id="tE|)Q[n9KtbiVfiTu}Z."></block>
+                              <block type="lastDigitList" id="tE|)Q[n9KtbiVfiTu}Z."/>
                             </value>
                             <value name="AT">
                               <block type="math_number" id="ctz!Wqc5YSsz!YJPSt~Z">
@@ -587,11 +602,11 @@
                             <field name="VAR" id="ukT(SY)bu+~AVg_WMSD4">Tick 6</field>
                             <value name="VALUE">
                               <block type="lists_getIndex" id="FL.gH3s#*GUa@[+yj8d~">
-                                <mutation xmlns="http://www.w3.org/1999/xhtml" statement="false" at="true"></mutation>
+                                <mutation statement="false" at="true"></mutation>
                                 <field name="MODE">GET</field>
                                 <field name="WHERE">FROM_END</field>
                                 <value name="VALUE">
-                                  <block type="lastDigitList" id="DO|i|*DyB1ScFSgRzVG]"></block>
+                                  <block type="lastDigitList" id="DO|i|*DyB1ScFSgRzVG]"/>
                                 </value>
                                 <value name="AT">
                                   <block type="math_number" id="V_l)c*BFe^5chN5@Nw?X">
@@ -723,4 +738,5 @@
       </block>
     </statement>
   </block>
+
 </xml>

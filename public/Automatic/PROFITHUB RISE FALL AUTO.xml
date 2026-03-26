@@ -1,4 +1,5 @@
-<xml xmlns="https://developers.google.com/blockly/xml" is_dbot="true" collection="false">
+<xml xmlns="http://www.w3.org/1999/xhtml" collection="false" is_dbot="true">
+
   <variables>
     <variable id=":Z8WvPXWG?qCe|8=iii1">Expected Profit</variable>
     <variable id="L.cN$B-UUzkS|eDQm2xZ">Stop Loss</variable>
@@ -106,7 +107,7 @@
     </statement>
     <statement name="SUBMARKET">
       <block type="trade_definition_tradeoptions" id="z6./oNpdu*[(#,JHl:JK">
-        <mutation xmlns="http://www.w3.org/1999/xhtml" has_first_barrier="false" has_second_barrier="false" has_prediction="false"></mutation>
+        <mutation has_first_barrier="false" has_second_barrier="false" has_prediction="true"></mutation>
         <field name="DURATIONTYPE_LIST">t</field>
         <value name="DURATION">
           <shadow type="math_number" id="0!:Y*LHcEwK$1[xiOL9g">
@@ -121,18 +122,18 @@
             <field name="VAR" id="7Q4y$nr_sr!x2NkOu%)2">Stake</field>
           </block>
         </value>
-      </block>
+      <value name="PREDICTION"><shadow type="math_number_positive"><field name="NUM">0</field></shadow></value></block>
     </statement>
   </block>
   <block type="after_purchase" id="j*(I5o}LW2.%Gv0F[Kc7" x="1153" y="60">
     <statement name="AFTERPURCHASE_STACK">
       <block type="controls_if" id="GH[y|a^[7lvZ2m:A,yaM">
-        <mutation xmlns="http://www.w3.org/1999/xhtml" elseif="1" else="1"></mutation>
+        <mutation elseif="1" else="1"></mutation>
         <value name="IF0">
           <block type="logic_compare" id="8CcN,ZwU!Cp0nbQSdw%a">
             <field name="OP">GT</field>
             <value name="A">
-              <block type="total_profit" id="Y5:+1h@gd-t39D;Wy_Qh"></block>
+              <block type="total_profit" id="Y5:+1h@gd-t39D;Wy_Qh"/>
             </value>
             <value name="B">
               <block type="variables_get" id="WAdB0uXl#E80~mlQyu,9">
@@ -148,7 +149,7 @@
               <block type="text_statement" id="Zw/X[#|6]g3#*:mJcNTs">
                 <value name="TEXT">
                   <shadow type="text" id="?S;lTwx9EryR3;h[6?Ag">
-                    <field name="TEXT"></field>
+                    <field name="TEXT"/>
                   </shadow>
                   <block type="text" id="bD+4A..]Du?YLC6.4xP3">
                     <field name="TEXT">PROFITHUB RISE FALL AUTO</field>
@@ -158,7 +159,7 @@
                   <block type="text_statement" id="C,LPPkaJ{t~3i7]XK#U6">
                     <value name="TEXT">
                       <shadow type="text" id="EtUTC;$mr?p24ZIi5*vv">
-                        <field name="TEXT"></field>
+                        <field name="TEXT"/>
                       </shadow>
                       <block type="text" id="Cz1@uVOGxJ^t6;$7Qz)*">
                         <field name="TEXT">&lt;&lt; CONGRATULATIONS. &gt;&gt; EARNED... &amp;</field>
@@ -168,9 +169,9 @@
                       <block type="text_statement" id="9f{1C(p0j|Qnzj?*BUo[">
                         <value name="TEXT">
                           <shadow type="text" id="*E#11KELMt=G|ISb(E1$">
-                            <field name="TEXT"></field>
+                            <field name="TEXT"/>
                           </shadow>
-                          <block type="total_profit" id="?fXkQ#d9x3}]ByI+@6e:"></block>
+                          <block type="total_profit" id="?fXkQ#d9x3}]ByI+@6e:"/>
                         </value>
                       </block>
                     </next>
@@ -196,7 +197,7 @@
           <block type="logic_compare" id="{|g$A9yE+0q;+1}A[Mdz" collapsed="true">
             <field name="OP">LTE</field>
             <value name="A">
-              <block type="total_profit" id="N8~9l%Y+mFzn/e/w;dTP"></block>
+              <block type="total_profit" id="N8~9l%Y+mFzn/e/w;dTP"/>
             </value>
             <value name="B">
               <block type="math_single" id="$qZ2kVY6q@,X0{ro0p6+">
@@ -224,7 +225,7 @@
         </statement>
         <statement name="ELSE">
           <block type="controls_if" id="BjN/JX?VXE,Cy~[@]01X">
-            <mutation xmlns="http://www.w3.org/1999/xhtml" else="1"></mutation>
+            <mutation else="1"></mutation>
             <value name="IF0">
               <block type="contract_check_result" id="ENlm_M?ub1gUvYYL{0Ue">
                 <field name="CHECK_RESULT">loss</field>
@@ -324,7 +325,7 @@
             </statement>
             <next>
               <block type="controls_if" id="kju.t15;eO=)+d)S*5xK" collapsed="true">
-                <mutation xmlns="http://www.w3.org/1999/xhtml" else="1"></mutation>
+                <mutation else="1"></mutation>
                 <value name="IF0">
                   <block type="logic_compare" id="[N+hWQop~Q5cHvkkMU6%">
                     <field name="OP">GT</field>
@@ -472,7 +473,7 @@
                       </block>
                     </statement>
                     <next>
-                      <block type="trade_again" id="H]1PJsg/h4@::|?{7!Ei"></block>
+                      <block type="trade_again" id="H]1PJsg/h4@::|?{7!Ei"/>
                     </next>
                   </block>
                 </next>
@@ -485,7 +486,22 @@
   </block>
   <block type="before_purchase" id="T$2NrEvKp#2fVL%Z717i" deletable="false" x="0" y="916">
     <statement name="BEFOREPURCHASE_STACK">
-      <block type="controls_if" id="4)G@d$AHKkO/gMcIHPkV">
+      
+    <block type="notify" id="custom_notify_ld">
+  <field name="NOTIFICATION_TYPE">info</field>
+  <field name="NOTIFICATION_SOUND">silent</field>
+  <value name="MESSAGE">
+    <block type="text_join">
+      <mutation items="2"/>
+      <value name="ADD0">
+        <shadow type="text"><field name="TEXT">Last Digit: </field></shadow>
+      </value>
+      <value name="ADD1">
+        <block type="last_digit"/>
+      </value>
+    </block>
+  </value>
+<next><block type="controls_if" id="4)G@d$AHKkO/gMcIHPkV">
         <value name="IF0">
           <block type="logic_compare" id="R.xhthu?JFdc=}_8bkJ2">
             <field name="OP">NEQ</field>
@@ -570,8 +586,7 @@
             </statement>
           </block>
         </next>
-      </block>
-    </statement>
+      </block></next></block></statement>
   </block>
   <block type="tick_analysis" id="R?_F=*xM%;[kmT)zSv-q" x="0" y="1428">
     <statement name="TICKANALYSIS_STACK">
@@ -597,4 +612,5 @@
       </block>
     </statement>
   </block>
+
 </xml>

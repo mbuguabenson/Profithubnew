@@ -1,4 +1,5 @@
-<xml xmlns="https://developers.google.com/blockly/xml" is_dbot="true" collection="false">
+<xml xmlns="http://www.w3.org/1999/xhtml" collection="false" is_dbot="true">
+
   <variables>
     <variable id="6o_9Nu#$3m#.?zV=ahjK">Select 8 or 9</variable>
     <variable id="rUPB[)tUi3we;byHr`7]">1 or 2 seconds</variable>
@@ -130,7 +131,7 @@
     </statement>
     <statement name="SUBMARKET">
       <block type="trade_definition_tradeoptions" id="Kszy$t;dmMnU=/jxC1]D">
-        <mutation xmlns="http://www.w3.org/1999/xhtml" has_first_barrier="false" has_second_barrier="false" has_prediction="true"></mutation>
+        <mutation has_first_barrier="false" has_second_barrier="false" has_prediction="true"></mutation>
         <field name="DURATIONTYPE_LIST">t</field>
         <value name="DURATION">
           <block type="variables_get" id="7a8:-3ae0d--8A)@0h[z">
@@ -156,7 +157,7 @@
   <block type="after_purchase" id="tv^t?%1u*:W4IT%pX|zi" collapsed="true" x="1055" y="-43">
     <statement name="AFTERPURCHASE_STACK">
       <block type="controls_if" id="sJy=W27to^xWtEfx^!In">
-        <mutation xmlns="http://www.w3.org/1999/xhtml" else="1"></mutation>
+        <mutation else="1"></mutation>
         <value name="IF0">
           <block type="contract_check_result" id="f]tjuq1|sUj(]nr6M7kS">
             <field name="CHECK_RESULT">win</field>
@@ -169,7 +170,7 @@
               <block type="text_statement" id="X%Gq.^p$,4upbkB:6uG6">
                 <value name="TEXT">
                   <shadow type="text" id="wR[F5j:j}_}AIHKj`/@]">
-                    <field name="TEXT"></field>
+                    <field name="TEXT"/>
                   </shadow>
                   <block type="text" id="ofXQ2#?`|+.v^e{h7qwK">
                     <field name="TEXT">B20 Bruno Trader VITÒRIA +</field>
@@ -179,7 +180,7 @@
                   <block type="text_statement" id="712]i{I(V{L6i9.Wc?T^">
                     <value name="TEXT">
                       <shadow type="text" id="4M~2JZK-6NWn8_tB%Lfz">
-                        <field name="TEXT"></field>
+                        <field name="TEXT"/>
                       </shadow>
                       <block type="read_details" id="ntYjAA|;7owvxr2YL!M;">
                         <field name="DETAIL_INDEX">4</field>
@@ -231,7 +232,7 @@
                                   </block>
                                 </value>
                                 <next>
-                                  <block type="trade_again" id="cw].p*FJWZBupT$eqR!M"></block>
+                                  <block type="trade_again" id="cw].p*FJWZBupT$eqR!M"/>
                                 </next>
                               </block>
                             </next>
@@ -252,7 +253,7 @@
               <block type="text_statement" id="u9XqKYD#Vai.X-[`,uso">
                 <value name="TEXT">
                   <shadow type="text" id="y/YHKw_5m-@Kf^i`(yRS">
-                    <field name="TEXT"></field>
+                    <field name="TEXT"/>
                   </shadow>
                   <block type="text" id="MiNQ+-d*C683iU0`o4md">
                     <field name="TEXT">B20 Perda -</field>
@@ -262,7 +263,7 @@
                   <block type="text_statement" id="Do5M]Ky9%Gr{(pV#Cz/5">
                     <value name="TEXT">
                       <shadow type="text" id="vmMsInvTJ-hw~JKi6lWx">
-                        <field name="TEXT"></field>
+                        <field name="TEXT"/>
                       </shadow>
                       <block type="math_single" id="?fQk@]behN#[bIF{rF[7">
                         <field name="OP">ABS</field>
@@ -386,7 +387,7 @@
               <block type="text_statement" id="0.hK03^|s./];j4,8F0#">
                 <value name="TEXT">
                   <shadow type="text" id="INApBo@yKFM/;3@?@643">
-                    <field name="TEXT"></field>
+                    <field name="TEXT"/>
                   </shadow>
                   <block type="text" id=";pRO7vFM;D,$uWpJQ7lz">
                     <field name="TEXT">B20 LUCRO  +</field>
@@ -396,9 +397,9 @@
                   <block type="text_statement" id="Mdm6aP_wz;NLoG8Tg,5F">
                     <value name="TEXT">
                       <shadow type="text" id="-id||!ljv_ck6p],Hr3Y">
-                        <field name="TEXT"></field>
+                        <field name="TEXT"/>
                       </shadow>
-                      <block type="total_profit" id="g?#o-:15|FA^3)X?~EV["></block>
+                      <block type="total_profit" id="g?#o-:15|FA^3)X?~EV["/>
                     </value>
                   </block>
                 </next>
@@ -415,12 +416,12 @@
                 </value>
                 <next>
                   <block type="controls_if" id="FLa][VYobXnlFN$6x]O#">
-                    <mutation xmlns="http://www.w3.org/1999/xhtml" else="1"></mutation>
+                    <mutation else="1"></mutation>
                     <value name="IF0">
                       <block type="logic_compare" id="P3aB~_;AV$cEuSque9+m">
                         <field name="OP">LT</field>
                         <value name="A">
-                          <block type="total_profit" id="rFO7]5)Jjs9$+b2SUSPi"></block>
+                          <block type="total_profit" id="rFO7]5)Jjs9$+b2SUSPi"/>
                         </value>
                         <value name="B">
                           <block type="variables_get" id="7I/|[$VXtY-)v_kHw=1T">
@@ -431,19 +432,19 @@
                     </value>
                     <statement name="DO0">
                       <block type="controls_if" id="([L*WBMg~O565fbH|+*?">
-                        <mutation xmlns="http://www.w3.org/1999/xhtml" else="1"></mutation>
+                        <mutation else="1"></mutation>
                         <value name="IF0">
                           <block type="logic_operation" id=":XEl)hs$uy/s?bvYCc0F">
                             <field name="OP">AND</field>
                             <value name="A">
                               <block type="math_number_property" id="C38hi(S8$HDRG{A8,X$$">
-                                <mutation xmlns="http://www.w3.org/1999/xhtml" divisor_input="false"></mutation>
+                                <mutation divisor_input="false"></mutation>
                                 <field name="PROPERTY">NEGATIVE</field>
                                 <value name="NUMBER_TO_CHECK">
                                   <shadow type="math_number" id="nUOBSl#cC[ZI/+spB7wR">
                                     <field name="NUM">0</field>
                                   </shadow>
-                                  <block type="total_profit" id="Oe]K,lj}NJFWB2MWDd6^"></block>
+                                  <block type="total_profit" id="Oe]K,lj}NJFWB2MWDd6^"/>
                                 </value>
                               </block>
                             </value>
@@ -457,7 +458,7 @@
                                       <shadow type="math_number" id="TcnDT+bnC{BD.]cZB32f">
                                         <field name="NUM">9</field>
                                       </shadow>
-                                      <block type="total_profit" id="iKiJ.QGJrpE8@DN1TZ:8"></block>
+                                      <block type="total_profit" id="iKiJ.QGJrpE8@DN1TZ:8"/>
                                     </value>
                                   </block>
                                 </value>
@@ -482,7 +483,7 @@
                         <statement name="ELSE">
                           <block type="timeout" id="W`$Um/y[eJMUFV~[k2q,">
                             <statement name="TIMEOUTSTACK">
-                              <block type="trade_again" id="ZP/%[]2Z][ypf^N]KtdN"></block>
+                              <block type="trade_again" id="ZP/%[]2Z][ypf^N]KtdN"/>
                             </statement>
                             <value name="SECONDS">
                               <shadow type="math_number" id="AZ%nLTP@%x4,M2_ao[:Y">
@@ -500,7 +501,7 @@
                           <block type="text_statement" id="2,rW;qA:(lJ,DC]3|3.9">
                             <value name="TEXT">
                               <shadow type="text" id="^HSAwEMu*cN@f)x?[znV">
-                                <field name="TEXT"></field>
+                                <field name="TEXT"/>
                               </shadow>
                               <block type="text" id="dkaG*J8K^vbB[W9:3{Dy">
                                 <field name="TEXT">B20_DIGITS_UNDER</field>
@@ -510,9 +511,9 @@
                               <block type="text_statement" id="[.-J|u^m}oG9-~tv@9NT">
                                 <value name="TEXT">
                                   <shadow type="text" id="q+:H%Y=!J~C/YZV^_iBH">
-                                    <field name="TEXT"></field>
+                                    <field name="TEXT"/>
                                   </shadow>
-                                  <block type="total_profit" id="7E3THS+!(5Cb3Wu-j5#K"></block>
+                                  <block type="total_profit" id="7E3THS+!(5Cb3Wu-j5#K"/>
                                 </value>
                               </block>
                             </next>
@@ -543,9 +544,24 @@
   </block>
   <block type="before_purchase" id="_P/][8`46qGCyQ$AvmG!" deletable="false" x="0" y="952">
     <statement name="BEFOREPURCHASE_STACK">
-      <block type="purchase" id="U]c~],9#*VpiiX^=R!M1">
+      
+    <block type="notify" id="custom_notify_ld">
+  <field name="NOTIFICATION_TYPE">info</field>
+  <field name="NOTIFICATION_SOUND">silent</field>
+  <value name="MESSAGE">
+    <block type="text_join">
+      <mutation items="2"/>
+      <value name="ADD0">
+        <shadow type="text"><field name="TEXT">Last Digit: </field></shadow>
+      </value>
+      <value name="ADD1">
+        <block type="last_digit"/>
+      </value>
+    </block>
+  </value>
+<next><block type="purchase" id="U]c~],9#*VpiiX^=R!M1">
         <field name="PURCHASE_LIST">DIGITUNDER</field>
-      </block>
-    </statement>
+      </block></next></block></statement>
   </block>
+
 </xml>

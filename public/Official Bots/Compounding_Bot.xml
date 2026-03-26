@@ -1,4 +1,5 @@
-<xml xmlns="https://developers.google.com/blockly/xml" is_dbot="true" collection="false">
+<xml xmlns="http://www.w3.org/1999/xhtml" collection="false" is_dbot="true">
+
   <variables>
     <variable id="initial_stake">Initial Stake</variable>
     <variable id="current_stake">Current Stake</variable>
@@ -73,7 +74,7 @@
     </statement>
     <statement name="SUBMARKET">
       <block type="trade_definition_tradeoptions" id="options">
-        <mutation has_first_barrier="false" has_second_barrier="false" has_prediction="false"></mutation>
+        <mutation has_first_barrier="false" has_second_barrier="false" has_prediction="true"/>
         <field name="DURATIONTYPE_LIST">t</field>
         <value name="DURATION">
           <block type="math_number"><field name="NUM">1</field></block>
@@ -81,17 +82,31 @@
         <value name="AMOUNT">
           <block type="variables_get"><field name="VAR" id="current_stake">Current Stake</field></block>
         </value>
-      </block>
+      <value name="PREDICTION"><shadow type="math_number_positive"><field name="NUM">0</field></shadow></value></block>
     </statement>
   </block>
   <block type="before_purchase" id="before" x="0" y="600">
     <statement name="BEFOREPURCHASE_STACK">
-      <block type="purchase" id="buy">
+      
+    <block type="notify" id="custom_notify_ld">
+  <field name="NOTIFICATION_TYPE">info</field>
+  <field name="NOTIFICATION_SOUND">silent</field>
+  <value name="MESSAGE">
+    <block type="text_join">
+      <mutation items="2"/>
+      <value name="ADD0">
+        <shadow type="text"><field name="TEXT">Last Digit: </field></shadow>
+      </value>
+      <value name="ADD1">
+        <block type="last_digit"/>
+      </value>
+    </block>
+  </value>
+<next><block type="purchase" id="buy">
         <field name="PURCHASE_LIST">DIGITEVEN</field>
         <field name="ALLOW_BULK_PURCHASE">no</field>
         <field name="NUM_TRADES">1</field>
-      </block>
-    </statement>
+      </block></next></block></statement>
   </block>
   <block type="after_purchase" id="after" x="0" y="800">
     <statement name="AFTERPURCHASE_STACK">
@@ -126,7 +141,7 @@
                 </value>
                 <next>
                   <block type="controls_if" id="check_limits">
-                    <mutation elseif="1" else="1"></mutation>
+                    <mutation elseif="1" else="1"/>
                     <value name="IF0">
                       <block type="logic_compare">
                         <field name="OP">GTE</field>
@@ -158,7 +173,7 @@
                     </statement>
                     <statement name="ELSE">
                       <block type="controls_if" id="win_loss_logic">
-                        <mutation else="1"></mutation>
+                        <mutation else="1"/>
                         <value name="IF0">
                           <block type="contract_check_result"><field name="CHECK_RESULT">win</field></block>
                         </value>
@@ -187,7 +202,7 @@
                           </block>
                         </statement>
                         <next>
-                          <block type="trade_again"></block>
+                          <block type="trade_again"/>
                         </next>
                       </block>
                     </statement>
@@ -200,4 +215,5 @@
       </block>
     </statement>
   </block>
+
 </xml>

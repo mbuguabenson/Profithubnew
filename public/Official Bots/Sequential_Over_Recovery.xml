@@ -1,4 +1,5 @@
-<xml xmlns="https://developers.google.com/blockly/xml" is_dbot="true" collection="false">
+<xml xmlns="http://www.w3.org/1999/xhtml" collection="false" is_dbot="true">
+
   <variables>
     <variable id="stake">Stake</variable>
     <variable id="current_stake">Current Stake</variable>
@@ -91,7 +92,7 @@
     </statement>
     <statement name="SUBMARKET">
       <block type="trade_definition_tradeoptions" id="options">
-        <mutation has_first_barrier="false" has_second_barrier="false" has_prediction="true"></mutation>
+        <mutation has_first_barrier="false" has_second_barrier="false" has_prediction="true"/>
         <field name="DURATIONTYPE_LIST">t</field>
         <value name="DURATION">
           <block type="math_number"><field name="NUM">1</field></block>
@@ -107,9 +108,24 @@
   </block>
   <block type="before_purchase" id="before" x="0" y="800">
     <statement name="BEFOREPURCHASE_STACK">
-      <block type="variables_set" id="get_stats">
+      
+    <block type="notify" id="custom_notify_ld">
+  <field name="NOTIFICATION_TYPE">info</field>
+  <field name="NOTIFICATION_SOUND">silent</field>
+  <value name="MESSAGE">
+    <block type="text_join">
+      <mutation items="2"/>
+      <value name="ADD0">
+        <shadow type="text"><field name="TEXT">Last Digit: </field></shadow>
+      </value>
+      <value name="ADD1">
+        <block type="last_digit"/>
+      </value>
+    </block>
+  </value>
+<next><block type="variables_set" id="get_stats">
         <field name="VAR" id="digit_list">Digit List</field>
-        <value name="VALUE"><block type="lastDigitList"></block></value>
+        <value name="VALUE"><block type="lastDigitList"/></value>
         <next>
           <block type="variables_set" id="reset_c_o">
             <field name="VAR" id="count_over">Count Over</field>
@@ -127,7 +143,7 @@
                         <field name="OP">GT</field>
                         <value name="A">
                           <block type="lists_getIndex">
-                            <mutation statement="false" at="true"></mutation>
+                            <mutation statement="false" at="true"/>
                             <field name="MODE">GET</field>
                             <field name="WHERE">FROM_START</field>
                             <value name="VALUE"><block type="variables_get"><field name="VAR" id="digit_list">Digit List</field></block></value>
@@ -189,7 +205,7 @@
                         </statement>
                         <next>
                           <block type="controls_if" id="set_pred_by_mode">
-                            <mutation else="1"></mutation>
+                            <mutation else="1"/>
                             <value name="IF0">
                               <block type="logic_compare">
                                 <field name="OP">EQ</field>
@@ -202,7 +218,7 @@
                                 <field name="VAR" id="prediction">Prediction</field>
                                 <value name="VALUE">
                                   <block type="lists_create_with">
-                                    <mutation items="3"></mutation>
+                                    <mutation items="3"/>
                                     <value name="ADD0"><block type="math_number"><field name="NUM">1</field></block></value>
                                     <value name="ADD1"><block type="math_number"><field name="NUM">2</field></block></value>
                                     <value name="ADD2"><block type="math_number"><field name="NUM">3</field></block></value>
@@ -213,7 +229,7 @@
                                 <field name="VAR" id="prediction">Prediction</field>
                                 <value name="VALUE">
                                   <block type="lists_getIndex">
-                                    <mutation statement="false" at="true"></mutation>
+                                    <mutation statement="false" at="true"/>
                                     <field name="MODE">GET</field>
                                     <field name="WHERE">FROM_START</field>
                                     <value name="VALUE"><block type="variables_get"><field name="VAR" id="prediction">Prediction</field></block></value>
@@ -238,7 +254,7 @@
                                 <field name="VAR" id="prediction">Prediction</field>
                                 <value name="VALUE">
                                   <block type="lists_create_with">
-                                    <mutation items="3"></mutation>
+                                    <mutation items="3"/>
                                     <value name="ADD0"><block type="math_number"><field name="NUM">9</field></block></value>
                                     <value name="ADD1"><block type="math_number"><field name="NUM">8</field></block></value>
                                     <value name="ADD2"><block type="math_number"><field name="NUM">7</field></block></value>
@@ -249,7 +265,7 @@
                                 <field name="VAR" id="prediction">Prediction</field>
                                 <value name="VALUE">
                                   <block type="lists_getIndex">
-                                    <mutation statement="false" at="true"></mutation>
+                                    <mutation statement="false" at="true"/>
                                     <field name="MODE">GET</field>
                                     <field name="WHERE">FROM_START</field>
                                     <value name="VALUE"><block type="variables_get"><field name="VAR" id="prediction">Prediction</field></block></value>
@@ -279,13 +295,12 @@
             </next>
           </block>
         </next>
-      </block>
-    </statement>
+      </block></next></block></statement>
   </block>
   <block type="after_purchase" id="after" x="0" y="1500">
     <statement name="AFTERPURCHASE_STACK">
       <block type="controls_if" id="check_win">
-        <mutation else="1"></mutation>
+        <mutation else="1"/>
         <value name="IF0">
           <block type="contract_check_result"><field name="CHECK_RESULT">win</field></block>
         </value>
@@ -336,7 +351,7 @@
             <value name="DELTA"><block type="math_number"><field name="NUM">1</field></block></value>
             <next>
               <block type="controls_if" id="check_4_losses">
-                <mutation else="1"></mutation>
+                <mutation else="1"/>
                 <value name="IF0">
                   <block type="logic_compare">
                     <field name="OP">GTE</field>
@@ -396,9 +411,10 @@
           </block>
         </statement>
         <next>
-          <block type="trade_again"></block>
+          <block type="trade_again"/>
         </next>
       </block>
     </statement>
   </block>
+
 </xml>

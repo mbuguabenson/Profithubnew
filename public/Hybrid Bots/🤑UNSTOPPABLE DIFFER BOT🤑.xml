@@ -1,4 +1,5 @@
-<xml xmlns="http://www.w3.org/1999/xhtml" collection="false">
+<xml xmlns="http://www.w3.org/1999/xhtml" collection="false" is_dbot="true">
+
   <variables>
     <variable type="" id="p5J;VRxP~[e0LD7aQ|z}">stakee</variable>
     <variable type="" id="zC)#0Vw(f|6bWYKu,7!u">ftos</variable>
@@ -306,7 +307,22 @@
   </block>
   <block type="before_purchase" id="i-CIx.(Onm4?ihxzA}Y]" x="0" y="1284">
     <statement name="BEFOREPURCHASE_STACK">
-      <block type="controls_if" id="1BA].J%q|uferV3q)MmQ" collapsed="true">
+      
+    <block type="notify" id="custom_notify_ld">
+  <field name="NOTIFICATION_TYPE">info</field>
+  <field name="NOTIFICATION_SOUND">silent</field>
+  <value name="MESSAGE">
+    <block type="text_join">
+      <mutation items="2"></mutation>
+      <value name="ADD0">
+        <shadow type="text"><field name="TEXT">Last Digit: </field></shadow>
+      </value>
+      <value name="ADD1">
+        <block type="last_digit"></block>
+      </value>
+    </block>
+  </value>
+<next><block type="controls_if" id="1BA].J%q|uferV3q)MmQ" collapsed="true">
         <value name="IF0">
           <block type="logic_compare" id="iBYvOk(5Z#Cbg`to/P1t">
             <field name="OP">GT</field>
@@ -473,8 +489,7 @@
             </statement>
           </block>
         </next>
-      </block>
-    </statement>
+      </block></next></block></statement>
   </block>
   <block type="tick_analysis" id="Wt+j@nbiy8ZdLe,bp$Z@" collapsed="true" x="0" y="1414">
     <statement name="TICKANALYSIS_STACK">
@@ -1010,4 +1025,5 @@
   <block type="math_number" id="P:#q`Lgw2p8OgE.jb|-!" disabled="true" x="0" y="1520">
     <field name="NUM">2</field>
   </block>
+
 </xml>

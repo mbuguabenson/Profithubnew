@@ -235,7 +235,9 @@ class APIBase {
                 },
                 [],
                 this
-            );
+            ).catch((error: unknown) => {
+                console.warn(`[API] Failed to subscribe to ${streamName}:`, error);
+            });
         };
 
         const streamsToSubscribe = ['balance', 'transaction', 'proposal_open_contract'];

@@ -1,469 +1,671 @@
 import { localize } from '@deriv-com/translations';
+import { modifyContextMenu } from '../../../utils';
 
-// Helper to modify context menu (copied from utils)
-const modifyContextMenu = menu => {
-    if (menu && menu.length > 0) {
-        menu.forEach(item => {
-            if (item.text === 'Help') {
-                item.enabled = false;
-            }
-        });
+const getBlockDefinition = (message, args, output, category = window.Blockly.Categories.Tick_Analysis) => ({
+    message0: message,
+    args0: args,
+    output,
+    outputShape: window.Blockly.OUTPUT_SHAPE_ROUND,
+    colour: window.Blockly.Colours.Base.colour,
+    colourSecondary: window.Blockly.Colours.Base.colourSecondary,
+    colourTertiary: window.Blockly.Colours.Base.colourTertiary,
+    category,
+});
+
+const registerBlock = (name, message, args, output, generator) => {
+    window.Blockly.Blocks[name] = {
+        init() {
+            this.jsonInit(getBlockDefinition(message, args, output));
+        },
+        meta() {
+            return {
+                display_name: localize(name.replace(/_/g, ' ')),
+                description: localize(`${name} logic block`),
+            };
+        },
+        customContextMenu(menu) {
+            modifyContextMenu(menu);
+        },
+    };
+    window.Blockly.JavaScript.javascriptGenerator.forBlock[name] = generator;
+};
+
+// 1. Analysis Power
+registerBlock(
+    'analysis_get_power',
+    localize('Analysis Power %1'),
+    [
+        {
+            type: 'field_dropdown',
+            name: 'TARGET',
+            options: [
+                [localize('Even'), 'EVEN'],
+                [localize('Odd'), 'ODD'],
+                [localize('Over'), 'OVER'],
+                [localize('Under'), 'UNDER'],
+            ],
+        },
+    ],
+    'Number',
+    block => {
+        const target = block.getFieldValue('TARGET');
+        return [`Bot.getAnalysisPower('${target}')`, window.Blockly.JavaScript.javascriptGenerator.ORDER_ATOMIC];
     }
-};
+);
 
-window.Blockly.Blocks.analysis_get_power = {
-    init() {
-        this.jsonInit({
-            message0: localize('Analysis: Get Power for %1'),
-            args0: [
-                {
-                    type: 'field_dropdown',
-                    name: 'TARGET',
-                    options: [
-                        [localize('Over (5-9)'), 'OVER'],
-                        [localize('Under (0-4)'), 'UNDER'],
-                        [localize('Even'), 'EVEN'],
-                        [localize('Odd'), 'ODD'],
-                    ],
-                },
+// 2. Analysis Increasing
+registerBlock(
+    'analysis_increasing',
+    localize('Analysis Increasing %1'),
+    [
+        {
+            type: 'field_dropdown',
+            name: 'TARGET',
+            options: [
+                [localize('Even'), 'EVEN'],
+                [localize('Odd'), 'ODD'],
+                [localize('Over'), 'OVER'],
+                [localize('Under'), 'UNDER'],
             ],
-            output: 'Number',
-            outputShape: window.Blockly.OUTPUT_SHAPE_ROUND,
-            colour: '#ec4899',
-            tooltip: localize('Returns the current power percentage for the selected market segment'),
-            category: 'analysis',
-        });
-    },
-    customContextMenu(menu) {
-        modifyContextMenu(menu);
-    },
-};
+        },
+    ],
+    'Boolean',
+    block => {
+        const target = block.getFieldValue('TARGET');
+        return [`Bot.isAnalysisIncreasing('${target}')`, window.Blockly.JavaScript.javascriptGenerator.ORDER_ATOMIC];
+    }
+);
 
-window.Blockly.JavaScript.javascriptGenerator.forBlock.analysis_get_power = function (block) {
-    const target = block.getFieldValue('TARGET');
-    const code = `Bot.getAnalysisPower('${target}')`;
-    return [code, window.Blockly.JavaScript.javascriptGenerator.ORDER_ATOMIC];
-};
+// 3. Digit Frequency
+registerBlock(
+    'analysis_digit_frequency',
+    localize('Digit %1 Frequency in last %2 ticks (%%)'),
+    [
+        { type: 'input_value', name: 'DIGIT', check: 'Number' },
+        { type: 'input_value', name: 'TICKS', check: 'Number' },
+    ],
+    'Number',
+    block => {
+        const digit =
+            window.Blockly.JavaScript.javascriptGenerator.valueToCode(
+                block,
+                'DIGIT',
+                window.Blockly.JavaScript.javascriptGenerator.ORDER_ATOMIC
+            ) || '0';
+        const ticks =
+            window.Blockly.JavaScript.javascriptGenerator.valueToCode(
+                block,
+                'TICKS',
+                window.Blockly.JavaScript.javascriptGenerator.ORDER_ATOMIC
+            ) || '100';
+        return [`Bot.digitFrequency(${digit}, ${ticks})`, window.Blockly.JavaScript.javascriptGenerator.ORDER_ATOMIC];
+    }
+);
 
-window.Blockly.Blocks.analysis_is_increasing = {
-    init() {
-        this.jsonInit({
-            message0: localize('Analysis: Is %1 Power Increasing?'),
-            args0: [
-                {
-                    type: 'field_dropdown',
-                    name: 'TARGET',
-                    options: [
-                        [localize('Over (5-9)'), 'OVER'],
-                        [localize('Under (0-4)'), 'UNDER'],
-                        [localize('Even'), 'EVEN'],
-                        [localize('Odd'), 'ODD'],
-                    ],
-                },
+// 4. Streak Detect
+registerBlock(
+    'analysis_streak_detect',
+    localize('Detect %1 streak of %2 in last %3 ticks'),
+    [
+        {
+            type: 'field_dropdown',
+            name: 'PATTERN',
+            options: [
+                [localize('Consecutive'), 'consecutive'],
+                [localize('Alternating'), 'alternating'],
             ],
-            output: 'Boolean',
-            outputShape: window.Blockly.OUTPUT_SHAPE_ROUND,
-            colour: '#ec4899',
-            tooltip: localize('Returns true if the selected market segment power is increasing'),
-            category: 'analysis',
-        });
-    },
-    customContextMenu(menu) {
-        modifyContextMenu(menu);
-    },
-};
-
-window.Blockly.JavaScript.javascriptGenerator.forBlock.analysis_is_increasing = function (block) {
-    const target = block.getFieldValue('TARGET');
-    const code = `Bot.isAnalysisIncreasing('${target}')`;
-    return [code, window.Blockly.JavaScript.javascriptGenerator.ORDER_ATOMIC];
-};
-
-// Advanced Digit Frequency Analysis Block
-window.Blockly.Blocks.digitFrequencyAnalysis = {
-    init() {
-        this.jsonInit({
-            message0: localize('Digit %1 frequency in last %2 ticks'),
-            args0: [
-                {
-                    type: 'input_value',
-                    name: 'DIGIT',
-                    check: 'Number',
-                },
-                {
-                    type: 'input_value',
-                    name: 'TICK_COUNT',
-                    check: 'Number',
-                },
+        },
+        {
+            type: 'field_dropdown',
+            name: 'VALUE',
+            options: [
+                [localize('Even'), 'even'],
+                [localize('Odd'), 'odd'],
+                [localize('Over 5'), 'over5'],
+                [localize('Under 5'), 'under5'],
             ],
-            output: 'Number',
-            outputShape: window.Blockly.OUTPUT_SHAPE_ROUND,
-            colour: '#ec4899',
-            tooltip: localize('Returns the percentage frequency of a specific digit in the last N ticks'),
-            category: 'analysis',
-        });
-    },
-    customContextMenu(menu) {
-        modifyContextMenu(menu);
-    },
-};
+        },
+        { type: 'input_value', name: 'TICKS', check: 'Number' },
+    ],
+    'Number',
+    block => {
+        const pattern = block.getFieldValue('PATTERN');
+        const value = block.getFieldValue('VALUE');
+        const ticks =
+            window.Blockly.JavaScript.javascriptGenerator.valueToCode(
+                block,
+                'TICKS',
+                window.Blockly.JavaScript.javascriptGenerator.ORDER_ATOMIC
+            ) || '100';
+        return [
+            `Bot.detectStreak('${pattern}', '${value}', ${ticks})`,
+            window.Blockly.JavaScript.javascriptGenerator.ORDER_ATOMIC,
+        ];
+    }
+);
 
-window.Blockly.JavaScript.javascriptGenerator.forBlock.digitFrequencyAnalysis = block => {
-    const digit =
-        window.Blockly.JavaScript.javascriptGenerator.valueToCode(
-            block,
-            'DIGIT',
-            window.Blockly.JavaScript.javascriptGenerator.ORDER_ATOMIC
-        ) || '0';
-    const tickCount =
-        window.Blockly.JavaScript.javascriptGenerator.valueToCode(
-            block,
-            'TICK_COUNT',
-            window.Blockly.JavaScript.javascriptGenerator.ORDER_ATOMIC
-        ) || '50';
-    const code = `Bot.digitFrequency(${digit}, ${tickCount})`;
-    return [code, window.Blockly.JavaScript.javascriptGenerator.ORDER_FUNCTION_CALL];
-};
+// 5. Range Count
+registerBlock(
+    'analysis_range_count',
+    localize('Count digits from %1 to %2 in last %3 ticks'),
+    [
+        { type: 'input_value', name: 'MIN', check: 'Number' },
+        { type: 'input_value', name: 'MAX', check: 'Number' },
+        { type: 'input_value', name: 'TICKS', check: 'Number' },
+    ],
+    'Number',
+    block => {
+        const min =
+            window.Blockly.JavaScript.javascriptGenerator.valueToCode(
+                block,
+                'MIN',
+                window.Blockly.JavaScript.javascriptGenerator.ORDER_ATOMIC
+            ) || '0';
+        const max =
+            window.Blockly.JavaScript.javascriptGenerator.valueToCode(
+                block,
+                'MAX',
+                window.Blockly.JavaScript.javascriptGenerator.ORDER_ATOMIC
+            ) || '9';
+        const ticks =
+            window.Blockly.JavaScript.javascriptGenerator.valueToCode(
+                block,
+                'TICKS',
+                window.Blockly.JavaScript.javascriptGenerator.ORDER_ATOMIC
+            ) || '100';
+        return [
+            `Bot.countDigitsInRange(${min}, ${max}, ${ticks})`,
+            window.Blockly.JavaScript.javascriptGenerator.ORDER_ATOMIC,
+        ];
+    }
+);
 
-// Streak Detection Block
-window.Blockly.Blocks.streakDetection = {
-    init() {
-        this.jsonInit({
-            message0: localize('Detect %1 streak of %2 in last %3 ticks'),
-            args0: [
-                {
-                    type: 'field_dropdown',
-                    name: 'PATTERN_TYPE',
-                    options: [
-                        [localize('consecutive'), 'consecutive'],
-                        [localize('alternating'), 'alternating'],
-                    ],
-                },
-                {
-                    type: 'field_dropdown',
-                    name: 'VALUE_TYPE',
-                    options: [
-                        [localize('even'), 'even'],
-                        [localize('odd'), 'odd'],
-                        [localize('over 5'), 'over5'],
-                        [localize('under 5'), 'under5'],
-                    ],
-                },
-                {
-                    type: 'input_value',
-                    name: 'TICK_COUNT',
-                    check: 'Number',
-                },
+// 6. Volatility
+registerBlock(
+    'analysis_volatility',
+    localize('Market Volatility in last %1 ticks'),
+    [{ type: 'input_value', name: 'TICKS', check: 'Number' }],
+    'Number',
+    block => {
+        const ticks =
+            window.Blockly.JavaScript.javascriptGenerator.valueToCode(
+                block,
+                'TICKS',
+                window.Blockly.JavaScript.javascriptGenerator.ORDER_ATOMIC
+            ) || '100';
+        return [`Bot.calculateVolatility(${ticks})`, window.Blockly.JavaScript.javascriptGenerator.ORDER_ATOMIC];
+    }
+);
+
+// 7. Trend
+registerBlock(
+    'analysis_trend',
+    localize('Market Trend (by %1) in last %2 ticks'),
+    [
+        {
+            type: 'field_dropdown',
+            name: 'TYPE',
+            options: [
+                [localize('Digit Sum'), 'sum'],
+                [localize('Even/Odd Ratio'), 'evenodd'],
             ],
-            output: 'Number',
-            outputShape: window.Blockly.OUTPUT_SHAPE_ROUND,
-            colour: '#ec4899',
-            tooltip: localize('Returns the length of the current streak (consecutive or alternating pattern)'),
-            category: 'analysis',
-        });
-    },
-    customContextMenu(menu) {
-        modifyContextMenu(menu);
-    },
-};
+        },
+        { type: 'input_value', name: 'TICKS', check: 'Number' },
+    ],
+    'String',
+    block => {
+        const type = block.getFieldValue('TYPE');
+        const ticks =
+            window.Blockly.JavaScript.javascriptGenerator.valueToCode(
+                block,
+                'TICKS',
+                window.Blockly.JavaScript.javascriptGenerator.ORDER_ATOMIC
+            ) || '100';
+        return [`Bot.analyzeTrend('${type}', ${ticks})`, window.Blockly.JavaScript.javascriptGenerator.ORDER_ATOMIC];
+    }
+);
 
-window.Blockly.JavaScript.javascriptGenerator.forBlock.streakDetection = block => {
-    const patternType = block.getFieldValue('PATTERN_TYPE');
-    const valueType = block.getFieldValue('VALUE_TYPE');
-    const tickCount =
-        window.Blockly.JavaScript.javascriptGenerator.valueToCode(
-            block,
-            'TICK_COUNT',
-            window.Blockly.JavaScript.javascriptGenerator.ORDER_ATOMIC
-        ) || '10';
-    const code = `Bot.detectStreak('${patternType}', '${valueType}', ${tickCount})`;
-    return [code, window.Blockly.JavaScript.javascriptGenerator.ORDER_FUNCTION_CALL];
-};
+// 8. Digit Rank
+registerBlock(
+    'analysis_digit_rank',
+    localize('Rank %1 digit in last %2 ticks'),
+    [
+        { type: 'input_value', name: 'RANK', check: 'Number' },
+        { type: 'input_value', name: 'TICKS', check: 'Number' },
+    ],
+    'Number',
+    block => {
+        const rank =
+            window.Blockly.JavaScript.javascriptGenerator.valueToCode(
+                block,
+                'RANK',
+                window.Blockly.JavaScript.javascriptGenerator.ORDER_ATOMIC
+            ) || '1';
+        const ticks =
+            window.Blockly.JavaScript.javascriptGenerator.valueToCode(
+                block,
+                'TICKS',
+                window.Blockly.JavaScript.javascriptGenerator.ORDER_ATOMIC
+            ) || '100';
+        return [`Bot.getDigitByRank(${rank}, ${ticks})`, window.Blockly.JavaScript.javascriptGenerator.ORDER_ATOMIC];
+    }
+);
 
-// Digit Range Counter Block
-window.Blockly.Blocks.digitRangeCounter = {
-    init() {
-        this.jsonInit({
-            message0: localize('Count digits from %1 to %2 in last %3 ticks'),
-            args0: [
-                {
-                    type: 'input_value',
-                    name: 'MIN_DIGIT',
-                    check: 'Number',
-                },
-                {
-                    type: 'input_value',
-                    name: 'MAX_DIGIT',
-                    check: 'Number',
-                },
-                {
-                    type: 'input_value',
-                    name: 'TICK_COUNT',
-                    check: 'Number',
-                },
+// 9. Candle Pattern
+registerBlock(
+    'analysis_candle_pattern',
+    localize('Identify Candle Pattern (last %1 candles)'),
+    [{ type: 'input_value', name: 'COUNT', check: 'Number' }],
+    'String',
+    block => {
+        const count =
+            window.Blockly.JavaScript.javascriptGenerator.valueToCode(
+                block,
+                'COUNT',
+                window.Blockly.JavaScript.javascriptGenerator.ORDER_ATOMIC
+            ) || '1';
+        return [`Bot.identifyCandlePattern(${count})`, window.Blockly.JavaScript.javascriptGenerator.ORDER_ATOMIC];
+    }
+);
+
+// 10. Momentum
+registerBlock(
+    'analysis_momentum',
+    localize('Market Momentum (last %1 ticks)'),
+    [{ type: 'input_value', name: 'TICKS', check: 'Number' }],
+    'String',
+    block => {
+        const ticks =
+            window.Blockly.JavaScript.javascriptGenerator.valueToCode(
+                block,
+                'TICKS',
+                window.Blockly.JavaScript.javascriptGenerator.ORDER_ATOMIC
+            ) || '100';
+        return [`Bot.analyzeMomentum(${ticks})`, window.Blockly.JavaScript.javascriptGenerator.ORDER_ATOMIC];
+    }
+);
+
+// 11. Volume Health
+registerBlock(
+    'analysis_volume_health',
+    localize('Market Volume Health (last %1 ticks)'),
+    [{ type: 'input_value', name: 'TICKS', check: 'Number' }],
+    'String',
+    block => {
+        const ticks =
+            window.Blockly.JavaScript.javascriptGenerator.valueToCode(
+                block,
+                'TICKS',
+                window.Blockly.JavaScript.javascriptGenerator.ORDER_ATOMIC
+            ) || '100';
+        return [`Bot.checkVolumeHealth(${ticks})`, window.Blockly.JavaScript.javascriptGenerator.ORDER_ATOMIC];
+    }
+);
+
+// 12. Last Digits Cond
+registerBlock(
+    'analysis_last_digits_cond',
+    localize('Last %1 Digits: %2 %3'),
+    [
+        { type: 'input_value', name: 'COUNT', check: 'Number' },
+        {
+            type: 'field_dropdown',
+            name: 'CONDITION',
+            options: [
+                [localize('equals'), 'eq'],
+                [localize('greater than'), 'gt'],
+                [localize('less than'), 'lt'],
+                [localize('not equal to'), 'neq'],
             ],
-            output: 'Number',
-            outputShape: window.Blockly.OUTPUT_SHAPE_ROUND,
-            colour: '#ec4899',
-            tooltip: localize('Returns the count of digits within a specified range in the last N ticks'),
-            category: 'analysis',
-        });
-    },
-    customContextMenu(menu) {
-        modifyContextMenu(menu);
-    },
-};
+        },
+        { type: 'input_value', name: 'DIGIT', check: 'Number' },
+    ],
+    'Boolean',
+    block => {
+        const count =
+            window.Blockly.JavaScript.javascriptGenerator.valueToCode(
+                block,
+                'COUNT',
+                window.Blockly.JavaScript.javascriptGenerator.ORDER_ATOMIC
+            ) || '1';
+        const condition = block.getFieldValue('CONDITION');
+        const digit =
+            window.Blockly.JavaScript.javascriptGenerator.valueToCode(
+                block,
+                'DIGIT',
+                window.Blockly.JavaScript.javascriptGenerator.ORDER_ATOMIC
+            ) || '0';
+        return [
+            `Bot.getLastDigitsCondition(${count}, '${condition}', ${digit})`,
+            window.Blockly.JavaScript.javascriptGenerator.ORDER_ATOMIC,
+        ];
+    }
+);
 
-window.Blockly.JavaScript.javascriptGenerator.forBlock.digitRangeCounter = block => {
-    const minDigit =
-        window.Blockly.JavaScript.javascriptGenerator.valueToCode(
-            block,
-            'MIN_DIGIT',
-            window.Blockly.JavaScript.javascriptGenerator.ORDER_ATOMIC
-        ) || '0';
-    const maxDigit =
-        window.Blockly.JavaScript.javascriptGenerator.valueToCode(
-            block,
-            'MAX_DIGIT',
-            window.Blockly.JavaScript.javascriptGenerator.ORDER_ATOMIC
-        ) || '2';
-    const tickCount =
-        window.Blockly.JavaScript.javascriptGenerator.valueToCode(
-            block,
-            'TICK_COUNT',
-            window.Blockly.JavaScript.javascriptGenerator.ORDER_ATOMIC
-        ) || '50';
-    const code = `Bot.countDigitsInRange(${minDigit}, ${maxDigit}, ${tickCount})`;
-    return [code, window.Blockly.JavaScript.javascriptGenerator.ORDER_FUNCTION_CALL];
-};
-
-// Volatility Score Block
-window.Blockly.Blocks.volatilityScore = {
-    init() {
-        this.jsonInit({
-            message0: localize('Volatility score of last %1 ticks'),
-            args0: [
-                {
-                    type: 'input_value',
-                    name: 'TICK_COUNT',
-                    check: 'Number',
-                },
+// 13. Digit Ranking
+registerBlock(
+    'analysis_digit_ranking',
+    localize('Get %1 frequent digit in last %2 ticks'),
+    [
+        {
+            type: 'field_dropdown',
+            name: 'RANK',
+            options: [
+                [localize('Most'), 'most'],
+                [localize('Least'), 'least'],
             ],
-            output: 'Number',
-            outputShape: window.Blockly.OUTPUT_SHAPE_ROUND,
-            colour: '#ec4899',
-            tooltip: localize('Returns a volatility score (0-100) based on digit distribution patterns'),
-            category: 'analysis',
-        });
-    },
-    customContextMenu(menu) {
-        modifyContextMenu(menu);
-    },
-};
+        },
+        { type: 'input_value', name: 'TICKS', check: 'Number' },
+    ],
+    'Number',
+    block => {
+        const rank = block.getFieldValue('RANK');
+        const ticks =
+            window.Blockly.JavaScript.javascriptGenerator.valueToCode(
+                block,
+                'TICKS',
+                window.Blockly.JavaScript.javascriptGenerator.ORDER_ATOMIC
+            ) || '100';
+        return [
+            `Bot.getDigitFrequencyRanking('${rank}', ${ticks})`,
+            window.Blockly.JavaScript.javascriptGenerator.ORDER_ATOMIC,
+        ];
+    }
+);
 
-window.Blockly.JavaScript.javascriptGenerator.forBlock.volatilityScore = block => {
-    const tickCount =
-        window.Blockly.JavaScript.javascriptGenerator.valueToCode(
-            block,
-            'TICK_COUNT',
-            window.Blockly.JavaScript.javascriptGenerator.ORDER_ATOMIC
-        ) || '50';
-    const code = `Bot.calculateVolatility(${tickCount})`;
-    return [code, window.Blockly.JavaScript.javascriptGenerator.ORDER_FUNCTION_CALL];
-};
-
-// Trend Direction Block
-window.Blockly.Blocks.trendDirection = {
-    init() {
-        this.jsonInit({
-            message0: localize('%1 trend in last %2 ticks'),
-            args0: [
-                {
-                    type: 'field_dropdown',
-                    name: 'TREND_TYPE',
-                    options: [
-                        [localize('digit sum'), 'sum'],
-                        [localize('even/odd balance'), 'evenodd'],
-                        [localize('high/low balance'), 'highlow'],
-                    ],
-                },
-                {
-                    type: 'input_value',
-                    name: 'TICK_COUNT',
-                    check: 'Number',
-                },
+// 14. Even/Odd Percent
+registerBlock(
+    'analysis_even_odd_percent',
+    localize('%1 percentage in last %2 ticks'),
+    [
+        {
+            type: 'field_dropdown',
+            name: 'TYPE',
+            options: [
+                [localize('Even'), 'even'],
+                [localize('Odd'), 'odd'],
             ],
-            output: 'String',
-            outputShape: window.Blockly.OUTPUT_SHAPE_ROUND,
-            colour: '#ec4899',
-            tooltip: localize('Returns trend direction: "rising", "falling", or "neutral"'),
-            category: 'analysis',
-        });
-    },
-    customContextMenu(menu) {
-        modifyContextMenu(menu);
-    },
-};
+        },
+        { type: 'input_value', name: 'TICKS', check: 'Number' },
+    ],
+    'Number',
+    block => {
+        const type = block.getFieldValue('TYPE');
+        const ticks =
+            window.Blockly.JavaScript.javascriptGenerator.valueToCode(
+                block,
+                'TICKS',
+                window.Blockly.JavaScript.javascriptGenerator.ORDER_ATOMIC
+            ) || '100';
+        return [
+            `Bot.getEvenOddPercent('${type}', ${ticks})`,
+            window.Blockly.JavaScript.javascriptGenerator.ORDER_ATOMIC,
+        ];
+    }
+);
 
-window.Blockly.JavaScript.javascriptGenerator.forBlock.trendDirection = block => {
-    const trendType = block.getFieldValue('TREND_TYPE');
-    const tickCount =
-        window.Blockly.JavaScript.javascriptGenerator.valueToCode(
-            block,
-            'TICK_COUNT',
-            window.Blockly.JavaScript.javascriptGenerator.ORDER_ATOMIC
-        ) || '20';
-    const code = `Bot.analyzeTrend('${trendType}', ${tickCount})`;
-    return [code, window.Blockly.JavaScript.javascriptGenerator.ORDER_FUNCTION_CALL];
-};
-
-// Digit By Rank Block
-window.Blockly.Blocks.digitByRank = {
-    init() {
-        this.jsonInit({
-            message0: localize('Digit by rank %1 (1=least) in last %2 ticks'),
-            args0: [
-                {
-                    type: 'input_value',
-                    name: 'RANK',
-                    check: 'Number',
-                },
-                {
-                    type: 'input_value',
-                    name: 'TICK_COUNT',
-                    check: 'Number',
-                },
+// 15. Over/Under Percent
+registerBlock(
+    'analysis_over_under_percent',
+    localize('%1 %2 percentage in last %3 ticks'),
+    [
+        {
+            type: 'field_dropdown',
+            name: 'TYPE',
+            options: [
+                [localize('Over'), 'over'],
+                [localize('Under'), 'under'],
             ],
-            output: 'Number',
-            outputShape: window.Blockly.OUTPUT_SHAPE_ROUND,
-            colour: '#ec4899',
-            tooltip: localize('Returns the digit with the specified frequency rank (e.g., 3rd least appearing)'),
-            category: 'analysis',
-        });
-    },
-    customContextMenu(menu) {
-        modifyContextMenu(menu);
-    },
-};
+        },
+        { type: 'input_value', name: 'THRESHOLD', check: 'Number' },
+        { type: 'input_value', name: 'TICKS', check: 'Number' },
+    ],
+    'Number',
+    block => {
+        const type = block.getFieldValue('TYPE');
+        const threshold =
+            window.Blockly.JavaScript.javascriptGenerator.valueToCode(
+                block,
+                'THRESHOLD',
+                window.Blockly.JavaScript.javascriptGenerator.ORDER_ATOMIC
+            ) || '4';
+        const ticks =
+            window.Blockly.JavaScript.javascriptGenerator.valueToCode(
+                block,
+                'TICKS',
+                window.Blockly.JavaScript.javascriptGenerator.ORDER_ATOMIC
+            ) || '100';
+        return [
+            `Bot.getOverUnderPercent('${type}', ${threshold}, ${ticks})`,
+            window.Blockly.JavaScript.javascriptGenerator.ORDER_ATOMIC,
+        ];
+    }
+);
 
-window.Blockly.JavaScript.javascriptGenerator.forBlock.digitByRank = block => {
-    const rank =
-        window.Blockly.JavaScript.javascriptGenerator.valueToCode(
-            block,
-            'RANK',
-            window.Blockly.JavaScript.javascriptGenerator.ORDER_ATOMIC
-        ) || '1';
-    const tickCount =
-        window.Blockly.JavaScript.javascriptGenerator.valueToCode(
-            block,
-            'TICK_COUNT',
-            window.Blockly.JavaScript.javascriptGenerator.ORDER_ATOMIC
-        ) || '100';
-    const code = `Bot.getDigitByRank(${rank}, ${tickCount})`;
-    return [code, window.Blockly.JavaScript.javascriptGenerator.ORDER_FUNCTION_CALL];
-};
-
-// Candle Pattern Block
-window.Blockly.Blocks.identifyCandlePattern = {
-    init() {
-        this.jsonInit({
-            message0: localize('Identify candle pattern in last %1 candles'),
-            args0: [
-                {
-                    type: 'input_value',
-                    name: 'TICK_COUNT',
-                    check: 'Number',
-                },
+// 16. Match/Differ Percent
+registerBlock(
+    'analysis_match_differ_percent',
+    localize('%1 %2 percentage in last %3 ticks'),
+    [
+        {
+            type: 'field_dropdown',
+            name: 'TYPE',
+            options: [
+                [localize('Match'), 'match'],
+                [localize('Differ'), 'differ'],
             ],
-            output: 'String',
-            outputShape: window.Blockly.OUTPUT_SHAPE_ROUND,
-            colour: '#ec4899',
-            tooltip: localize('Identifies patterns like hammer, shooting star, or neutral'),
-            category: 'analysis',
-        });
-    },
-    customContextMenu(menu) {
-        modifyContextMenu(menu);
-    },
-};
+        },
+        { type: 'input_value', name: 'TARGET', check: 'Number' },
+        { type: 'input_value', name: 'TICKS', check: 'Number' },
+    ],
+    'Number',
+    block => {
+        const type = block.getFieldValue('TYPE');
+        const target =
+            window.Blockly.JavaScript.javascriptGenerator.valueToCode(
+                block,
+                'TARGET',
+                window.Blockly.JavaScript.javascriptGenerator.ORDER_ATOMIC
+            ) || '0';
+        const ticks =
+            window.Blockly.JavaScript.javascriptGenerator.valueToCode(
+                block,
+                'TICKS',
+                window.Blockly.JavaScript.javascriptGenerator.ORDER_ATOMIC
+            ) || '100';
+        return [
+            `Bot.getMatchDifferPercent('${type}', ${target}, ${ticks})`,
+            window.Blockly.JavaScript.javascriptGenerator.ORDER_ATOMIC,
+        ];
+    }
+);
 
-window.Blockly.JavaScript.javascriptGenerator.forBlock.identifyCandlePattern = block => {
-    const tickCount =
-        window.Blockly.JavaScript.javascriptGenerator.valueToCode(
-            block,
-            'TICK_COUNT',
-            window.Blockly.JavaScript.javascriptGenerator.ORDER_ATOMIC
-        ) || '3';
-    const code = `Bot.identifyCandlePattern(${tickCount})`;
-    return [code, window.Blockly.JavaScript.javascriptGenerator.ORDER_FUNCTION_CALL];
-};
-
-// Market Momentum Block
-window.Blockly.Blocks.analyzeMomentum = {
-    init() {
-        this.jsonInit({
-            message0: localize('Market momentum in last %1 ticks'),
-            args0: [
-                {
-                    type: 'input_value',
-                    name: 'TICK_COUNT',
-                    check: 'Number',
-                },
+// 17. Rise/Fall Percent
+registerBlock(
+    'analysis_rise_fall_percent',
+    localize('%1 percentage in last %2 ticks'),
+    [
+        {
+            type: 'field_dropdown',
+            name: 'TYPE',
+            options: [
+                [localize('Rise'), 'rise'],
+                [localize('Fall'), 'fall'],
             ],
-            output: 'String',
-            outputShape: window.Blockly.OUTPUT_SHAPE_ROUND,
-            colour: '#ec4899',
-            tooltip: localize('Returns momentum strength: strong_bullish, mild_bullish, etc.'),
-            category: 'analysis',
-        });
-    },
-    customContextMenu(menu) {
-        modifyContextMenu(menu);
-    },
-};
+        },
+        { type: 'input_value', name: 'TICKS', check: 'Number' },
+    ],
+    'Number',
+    block => {
+        const type = block.getFieldValue('TYPE');
+        const ticks =
+            window.Blockly.JavaScript.javascriptGenerator.valueToCode(
+                block,
+                'TICKS',
+                window.Blockly.JavaScript.javascriptGenerator.ORDER_ATOMIC
+            ) || '100';
+        return [
+            `Bot.getRiseFallPercent('${type}', ${ticks})`,
+            window.Blockly.JavaScript.javascriptGenerator.ORDER_ATOMIC,
+        ];
+    }
+);
 
-window.Blockly.JavaScript.javascriptGenerator.forBlock.analyzeMomentum = block => {
-    const tickCount =
-        window.Blockly.JavaScript.javascriptGenerator.valueToCode(
-            block,
-            'TICK_COUNT',
-            window.Blockly.JavaScript.javascriptGenerator.ORDER_ATOMIC
-        ) || '10';
-    const code = `Bot.analyzeMomentum(${tickCount})`;
-    return [code, window.Blockly.JavaScript.javascriptGenerator.ORDER_FUNCTION_CALL];
-};
-
-// Volume Health Block
-window.Blockly.Blocks.checkVolumeHealth = {
-    init() {
-        this.jsonInit({
-            message0: localize('Market volume health in last %1 ticks'),
-            args0: [
-                {
-                    type: 'input_value',
-                    name: 'TICK_COUNT',
-                    check: 'Number',
-                },
+// 18. Ticks Direction
+registerBlock(
+    'analysis_ticks_direction',
+    localize('Last %1 ticks are %2'),
+    [
+        { type: 'input_value', name: 'COUNT', check: 'Number' },
+        {
+            type: 'field_dropdown',
+            name: 'DIRECTION',
+            options: [
+                [localize('Rising'), 'rise'],
+                [localize('Falling'), 'fall'],
             ],
-            output: 'String',
-            outputShape: window.Blockly.OUTPUT_SHAPE_ROUND,
-            colour: '#ec4899',
-            tooltip: localize('Returns "high" or "low" based on market activity (ticks movement)'),
-            category: 'analysis',
-        });
-    },
-    customContextMenu(menu) {
-        modifyContextMenu(menu);
-    },
-};
+        },
+    ],
+    'Boolean',
+    block => {
+        const count =
+            window.Blockly.JavaScript.javascriptGenerator.valueToCode(
+                block,
+                'COUNT',
+                window.Blockly.JavaScript.javascriptGenerator.ORDER_ATOMIC
+            ) || '3';
+        const direction = block.getFieldValue('DIRECTION');
+        return [
+            `Bot.getTicksDirection(${count}, '${direction}')`,
+            window.Blockly.JavaScript.javascriptGenerator.ORDER_ATOMIC,
+        ];
+    }
+);
 
-window.Blockly.JavaScript.javascriptGenerator.forBlock.checkVolumeHealth = block => {
-    const tickCount =
-        window.Blockly.JavaScript.javascriptGenerator.valueToCode(
-            block,
-            'TICK_COUNT',
-            window.Blockly.JavaScript.javascriptGenerator.ORDER_ATOMIC
-        ) || '20';
-    const code = `Bot.checkVolumeHealth(${tickCount})`;
-    return [code, window.Blockly.JavaScript.javascriptGenerator.ORDER_FUNCTION_CALL];
-};
+// 19. Candle Color
+registerBlock(
+    'analysis_candle_color',
+    localize('Last Candle is %1'),
+    [
+        {
+            type: 'field_dropdown',
+            name: 'COLOR',
+            options: [
+                [localize('Green (Bullish)'), 'green'],
+                [localize('Red (Bearish)'), 'red'],
+            ],
+        },
+    ],
+    'Boolean',
+    block => {
+        const color = block.getFieldValue('COLOR');
+        return [`Bot.checkCandleColor('${color}')`, window.Blockly.JavaScript.javascriptGenerator.ORDER_ATOMIC];
+    }
+);
+
+// 20. Candle Type
+registerBlock(
+    'analysis_candle_type',
+    localize('Last Candle is %1'),
+    [
+        {
+            type: 'field_dropdown',
+            name: 'TYPE',
+            options: [
+                [localize('Doji'), 'doji'],
+                [localize('Marubozu'), 'marubozu'],
+                [localize('Neutral'), 'neutral'],
+            ],
+        },
+    ],
+    'Boolean',
+    block => {
+        const type = block.getFieldValue('TYPE');
+        return [`Bot.checkCandleType('${type}')`, window.Blockly.JavaScript.javascriptGenerator.ORDER_ATOMIC];
+    }
+);
+
+// 21. Candle Behavior
+registerBlock(
+    'analysis_candle_behavior',
+    localize('Last Candle is %1'),
+    [
+        {
+            type: 'field_dropdown',
+            name: 'BEHAVIOR',
+            options: [
+                [localize('Volatile'), 'volatile'],
+                [localize('Strong'), 'strong'],
+            ],
+        },
+    ],
+    'Boolean',
+    block => {
+        const behavior = block.getFieldValue('BEHAVIOR');
+        return [`Bot.checkCandleBehavior('${behavior}')`, window.Blockly.JavaScript.javascriptGenerator.ORDER_ATOMIC];
+    }
+);
+
+// 22. Candle Movement
+registerBlock(
+    'analysis_candle_movement',
+    localize('Last Candle Movement is %1 (based on %2 ticks)'),
+    [
+        {
+            type: 'field_dropdown',
+            name: 'MOVEMENT',
+            options: [
+                [localize('Bullish'), 'bullish'],
+                [localize('Bearish'), 'bearish'],
+                [localize('Flat'), 'flat'],
+            ],
+        },
+        { type: 'input_value', name: 'TICKS', check: 'Number' },
+    ],
+    'Boolean',
+    block => {
+        const movement = block.getFieldValue('MOVEMENT');
+        const ticks =
+            window.Blockly.JavaScript.javascriptGenerator.valueToCode(
+                block,
+                'TICKS',
+                window.Blockly.JavaScript.javascriptGenerator.ORDER_ATOMIC
+            ) || '10';
+        return [
+            `Bot.checkCandleMovement('${movement}', ${ticks})`,
+            window.Blockly.JavaScript.javascriptGenerator.ORDER_ATOMIC,
+        ];
+    }
+);
+
+// 23. Market Trend
+registerBlock(
+    'analysis_market_trend',
+    localize('Market Trend is %1 (last %2 periods)'),
+    [
+        {
+            type: 'field_dropdown',
+            name: 'TREND',
+            options: [
+                [localize('Bullish'), 'bullish'],
+                [localize('Bearish'), 'bearish'],
+                [localize('Flat'), 'flat'],
+            ],
+        },
+        { type: 'input_value', name: 'PERIODS', check: 'Number' },
+    ],
+    'Boolean',
+    block => {
+        const trend = block.getFieldValue('TREND');
+        const periods =
+            window.Blockly.JavaScript.javascriptGenerator.valueToCode(
+                block,
+                'PERIODS',
+                window.Blockly.JavaScript.javascriptGenerator.ORDER_ATOMIC
+            ) || '100';
+        return [
+            `Bot.checkMarketTrend('${trend}', ${periods})`,
+            window.Blockly.JavaScript.javascriptGenerator.ORDER_ATOMIC,
+        ];
+    }
+);

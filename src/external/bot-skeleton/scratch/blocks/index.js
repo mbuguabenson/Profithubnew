@@ -7,6 +7,7 @@ import './Binary/Before Purchase';
 import './Binary/During Purchase';
 import './Binary/Indicators';
 import './Binary/Tick Analysis';
+import './Binary/Analysis Logics/analysis_logics';
 import './Binary/Tools/Candle';
 import './Binary/Tools/Misc';
 import './Binary/Tools/Time';

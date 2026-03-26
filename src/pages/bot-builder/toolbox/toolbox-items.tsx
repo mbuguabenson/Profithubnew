@@ -179,6 +179,31 @@ export const ToolboxItems = () => {
                 <Block type='after_purchase' />
                 <Block type='trade_again' />
             </Category>
+            <Category name={localize('Analysis Logics')} id='analysis_logics'>
+                <Block type='analysis_get_power' />
+                <Block type='analysis_increasing' />
+                <Block type='analysis_digit_frequency' />
+                <Block type='analysis_streak_detect' />
+                <Block type='analysis_range_count' />
+                <Block type='analysis_volatility' />
+                <Block type='analysis_trend' />
+                <Block type='analysis_digit_rank' />
+                <Block type='analysis_candle_pattern' />
+                <Block type='analysis_momentum' />
+                <Block type='analysis_volume_health' />
+                <Block type='analysis_last_digits_cond' />
+                <Block type='analysis_digit_ranking' />
+                <Block type='analysis_even_odd_percent' />
+                <Block type='analysis_over_under_percent' />
+                <Block type='analysis_match_differ_percent' />
+                <Block type='analysis_rise_fall_percent' />
+                <Block type='analysis_ticks_direction' />
+                <Block type='analysis_candle_color' />
+                <Block type='analysis_candle_type' />
+                <Block type='analysis_candle_behavior' />
+                <Block type='analysis_candle_movement' />
+                <Block type='analysis_market_trend' />
+            </Category>
 
             <Category id='analysis' name={localize('Analysis')}>
                 <Category id='indicators' name={localize('Indicators')}>
