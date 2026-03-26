@@ -53,6 +53,7 @@ export default function InitialLoader() {
             clearInterval(logTimer);
             clearInterval(progTimer);
         };
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     return (

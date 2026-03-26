@@ -161,6 +161,7 @@ const AppContent = observer(() => {
                 msg_listener.current.unsubscribe?.();
             }
         };
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [is_api_initialized, client.is_logged_in, client.loginid, handleMessage, connectionStatus]);
 
     React.useEffect(() => {
@@ -302,7 +303,7 @@ const AppContent = observer(() => {
     if (is_loading || !min_loader_passed) {
         console.log('[AppContent] Still loading:', { is_loading, min_loader_passed, is_api_initialized, is_eu_error_loading });
         return (
-            <InitialLoader />
+            <InitialLoader data-loader-source="AppContent" />
         );
     }
     console.log('[AppContent] Loading complete, rendering dashboard');

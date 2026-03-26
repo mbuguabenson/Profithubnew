@@ -12,7 +12,7 @@ const AppContent = lazy(() => import('./app-content'));
 const RiskDisclaimerModal = lazy(() => import('@/components/shared/risk-disclaimer-modal'));
 
 const AppRootLoader = () => {
-    return <InitialLoader />;
+    return <InitialLoader data-loader-source="AppRoot" />;
 };
 
 const ErrorComponentWrapper = observer(() => {

@@ -70,7 +70,8 @@ export const AuthWrapper = () => {
 
         initializeAuth();
         return () => clearTimeout(minTimer);
-    }, [loginInfo, paramsToDelete, isOnline]);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [isOnline]);
 
     // Add timeout for offline scenarios to prevent infinite loading
     React.useEffect(() => {

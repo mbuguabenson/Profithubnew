@@ -90,7 +90,7 @@ export default defineConfig({
         template: './index.html',
     },
     server: {
-        port: 8445,
+        port: 3000,
         compress: true,
         headers: {
             'Cross-Origin-Opener-Policy': 'same-origin',
@@ -107,6 +107,7 @@ export default defineConfig({
     },
     dev: {
         hmr: false,
+        liveReload: false,
     },
     tools: {
         postcss: config => {

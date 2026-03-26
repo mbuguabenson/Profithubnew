@@ -156,6 +156,7 @@ export default class ClientStore {
             is_trading_experience_incomplete: computed,
             is_cr_account: computed,
             account_open_date: computed,
+            switchAccount: action.bound,
         });
     }
 
@@ -406,6 +407,45 @@ export default class ClientStore {
 
     setIsLoggingOut = (is_logging_out: boolean) => {
         this.is_logging_out = is_logging_out;
+    };
+
+    switchAccount = async (loginId: string) => {
+        if (this.loginid === loginId) return;
+
+        const accountsList = JSON.parse(localStorage.getItem('accountsList') ?? '{}');
+        const token = accountsList[loginId];
+        if (!token) {
+            console.error('[ClientStore] No token found for loginId:', loginId);
+            return;
+        }
+
+        // Stop the bot if it's running before switching
+        const rootStore = (window as any).root_store;
+        if (rootStore?.run_panel?.is_running) {
+            await rootStore.run_panel.stopBot();
+        }
+
+        // Update local storage for persistence across potential future reloads
+        localStorage.setItem('authToken', token);
+        localStorage.setItem('active_loginid', loginId);
+
+        // Update current login ID - this will trigger the reaction in constructor
+        this.setLoginId(loginId);
+
+        // Re-authorize the API connection with the new token
+        await api_base.authorizeAndSubscribe();
+
+        // Update URL without reload
+        const search_params = new URLSearchParams(window.location.search);
+        const selected_account = this.accounts[loginId];
+        if (selected_account) {
+            const account_param = selected_account.is_virtual ? 'demo' : selected_account.currency;
+            search_params.set('account', account_param);
+            sessionStorage.setItem('query_param_currency', account_param);
+            window.history.pushState({}, '', `${window.location.pathname}?${search_params.toString()}`);
+        }
+
+        console.log('[ClientStore] Account switch complete:', loginId);
     };
 
     logout = async () => {

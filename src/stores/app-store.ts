@@ -180,7 +180,13 @@ export default class AppStore {
         if (!this.dbot_store) return;
 
         blockly_store.setLoading(true);
-        await DBot.initWorkspace('/', this.dbot_store, this.api_helpers_store, ui.is_mobile, false);
+        console.warn('[AppStore] Starting DBot.initWorkspace...');
+        try {
+            await DBot.initWorkspace('/', this.dbot_store, this.api_helpers_store, ui.is_mobile, false);
+            console.warn('[AppStore] DBot.initWorkspace FINISHED');
+        } catch (e) {
+            console.error('[AppStore] DBot.initWorkspace FAILED', e);
+        }
 
         blockly_store.setContainerSize();
         blockly_store.setLoading(false);

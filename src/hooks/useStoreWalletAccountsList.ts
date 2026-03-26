@@ -104,6 +104,8 @@ const useStoreWalletAccountsList = () => {
                     };
 
                     const return_icon_type = (is_virtual ? 'demo' : undefined) as 'demo' | undefined;
+                    const dtrade_loginid = wallet.linked_to?.find((link: any) => link.platform === 'dtrade')?.loginid;
+                    const dtrade_balance = all_accounts_balance?.accounts?.[dtrade_loginid || '']?.balance || 0;
 
                     return {
                         ...wallet,
@@ -116,6 +118,8 @@ const useStoreWalletAccountsList = () => {
                         landing_company_name,
                         loginid,
                         gradients,
+                        dtrade_loginid,
+                        dtrade_balance,
                     } as const;
                 }) || []
         );

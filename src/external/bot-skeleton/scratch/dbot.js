@@ -25,8 +25,11 @@ class DBot {
      * Initialises the workspace and mounts it to a container element (app_contents).
      */
     async initWorkspace(public_path, store, api_helpers_store, is_mobile, is_dark_mode) {
+        console.warn('[DBot] initWorkspace started, calling loadBlockly...');
         await loadBlockly(is_dark_mode);
+        console.warn('[DBot] loadBlockly finished, calling getSavedWorkspaces...');
         const recent_files = await getSavedWorkspaces();
+        console.warn('[DBot] getSavedWorkspaces finished', recent_files);
         this.interpreter = Interpreter();
 
         // eslint-disable-next-line @typescript-eslint/no-this-alias
@@ -97,6 +100,7 @@ class DBot {
         };
 
         return new Promise((resolve, reject) => {
+            console.warn('[DBot] entering Promise body...');
             __webpack_public_path__ = public_path; // eslint-disable-line no-global-assign
             ApiHelpers.setInstance(api_helpers_store);
             DBotStore.setInstance(store);
@@ -115,8 +119,10 @@ class DBot {
                     }
                 }
                 const el_scratch_div = document.getElementById('scratch_div');
+                console.warn('[DBot] el_scratch_div is', el_scratch_div);
                 if (!el_scratch_div) {
-                    return;
+                    console.error('[DBot] scratch_div NOT FOUND, resolving early to avoid hang!');
+                    return resolve();
                 }
 
                 this.workspace = window.Blockly.inject(el_scratch_div, {
@@ -191,6 +197,7 @@ class DBot {
                 window.addEventListener('drop', e => DBot.handleDropOver(e, handleFileChange));
                 // disable overflow
                 el_scratch_div.parentNode.style.overflow = 'hidden';
+                console.warn('[DBot] Resolving initWorkspace successfully!');
                 resolve();
             } catch (error) {
                 // TODO: Handle error.
