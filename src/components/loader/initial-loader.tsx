@@ -55,7 +55,11 @@ export default function InitialLoader() {
     }, []);
 
     return (
-        <div className='quantum-loader'>
+        <motion.div 
+            className='quantum-loader'
+            initial={{ opacity: 1 }}
+            exit={{ opacity: 0, transition: { duration: 0.8, ease: 'easeInOut' } }}
+        >
             {/* ── BROWSER CLIP DEFINITION ── */}
             <svg width="0" height="0" style={{ position: 'absolute' }}>
                 <defs>
@@ -82,12 +86,12 @@ export default function InitialLoader() {
                             <path d="M7 14L11 10L15 14L21 8" stroke="#22d3ee" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                         </svg>
                         <div className='q-brand-titles'>
-                            <h1 className='q-main-title'>SMART</h1>
-                            <span className='q-main-subtitle'>TRADING HUB</span>
+                            <h1 className='q-main-title'>PROFIT</h1>
+                            <span className='q-main-subtitle'>HUB SYSTEM</span>
                         </div>
                     </div>
-                    <p className='q-welcome-text'>Welcome to <span className='q-highlight'>D-Botspace</span></p>
-                    <p className='q-welcome-sub'>Automated Precision Trading System</p>
+                    <p className='q-welcome-text'>Welcome to <span className='q-highlight'>ProfitHub</span></p>
+                    <p className='q-welcome-sub'>High-Performance Trading Ecosystem</p>
                 </div>
 
                 <div className='q-steps-row'>
@@ -146,9 +150,9 @@ export default function InitialLoader() {
                 </div>
 
                 <div className='q-card-footer'>
-                    <p>© 2025 D-Botspace Powered by Deriv. All rights reserved.</p>
+                    <p>© 2025 ProfitHub Powered by Deriv. All rights reserved.</p>
                 </div>
             </motion.div>
-        </div>
+        </motion.div>
     );
 }

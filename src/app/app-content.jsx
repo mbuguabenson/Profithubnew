@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { observer } from 'mobx-react-lite';
+import { motion, AnimatePresence } from 'framer-motion';
 import { ToastContainer } from 'react-toastify';
 import AuthLoadingWrapper from '@/components/auth-loading-wrapper';
 import useLiveChat from '@/components/chat/useLiveChat';
@@ -303,7 +304,9 @@ const AppContent = observer(() => {
     if (is_loading || !min_loader_passed) {
         console.log('[AppContent] Still loading:', { is_loading, min_loader_passed, is_api_initialized, is_eu_error_loading });
         return (
-            <InitialLoader data-loader-source="AppContent" />
+            <AnimatePresence mode='wait'>
+                <InitialLoader key='main-app-loader' data-loader-source='AppContent' />
+            </AnimatePresence>
         );
     }
     console.log('[AppContent] Loading complete, rendering dashboard');
