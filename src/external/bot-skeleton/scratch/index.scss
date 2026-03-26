@@ -840,7 +840,7 @@ drag a block and selected text moves instead.
     }
 
     .blocklyTreeIcon {
-        background-image: url('<<<PATH>>>/sprites.png');
+        background-image: url('../../../../public/assets/media/sprites.png');
         height: 16px;
         vertical-align: middle;
         width: 16px;
@@ -1085,7 +1085,7 @@ drag a block and selected text moves instead.
     .blocklyWidgetDiv .goog-option-selected .goog-menuitem-icon,
     .blocklyDropDownDiv .goog-option-selected .goog-menuitem-checkbox,
     .blocklyDropDownDiv .goog-option-selected .goog-menuitem-icon {
-        // background: url('<<<PATH>>>/sprites.png') no-repeat -48px -16px !important;
+        // background: url('../../../../public/assets/media/sprites.png') no-repeat -48px -16px !important;
         position: static;
         float: left;
         margin-left: -24px;
