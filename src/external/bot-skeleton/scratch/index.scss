@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@200;300;400;500;600;700;800;900&display=swap');
+
 $black: #0e0e0e;
 $colour_numPadBackground: $black;
 $colour_numPadBorder: $black;
@@ -220,7 +222,7 @@ $colour_toolboxSelected: $black;
     }
 
     .blocklyDropDownButton {
-        display: inline-block;
+        display: block; // Changed from inline-block because it's floated
         float: left;
         padding: 0;
         margin: 4px;
@@ -246,14 +248,14 @@ $colour_toolboxSelected: $black;
     }
 
     .blocklyDropDownPlaceholder {
-        display: inline-block;
+        display: block; // Changed from inline-block because it's floated
         float: left;
         padding: 0;
         margin: 4px;
     }
 
     .blocklyNumPadButton {
-        display: inline-block;
+        display: block; // Changed from inline-block because it's floated
         float: left;
         padding: 0;
         width: 48px;
@@ -363,17 +365,13 @@ $colour_toolboxSelected: $black;
         cursor: grabbing;
     }
 
-    .blocklyDragging.blocklyDraggingDelete {
-        // cursor: url('<<<PATH>>>/handdelete.cur'), auto;
-    }
+
 
     .blocklyDragging.blocklyDraggingMouseThrough {
         pointer-events: none;
     }
 
-    .blocklyToolboxDelete {
-        // cursor: url('<<<PATH>>>/handdelete.cur'), auto;
-    }
+
 
     .blocklyToolboxGrab {
         cursor: grabbing;
@@ -397,13 +395,13 @@ $colour_toolboxSelected: $black;
 
     .blocklyText {
         fill: #333;
-        font-family: inherit;
-        font-size: 1.63rem;
-        font-weight: normal;
+        font-family: 'Outfit', sans-serif !important;
+        font-size: 14px !important;
+        font-weight: 500;
         font-stretch: normal;
         font-style: normal;
         line-height: 1.5;
-        letter-spacing: normal;
+        letter-spacing: 0.02rem;
     }
 
     .blocklyTextTruncated {
@@ -430,7 +428,9 @@ $colour_toolboxSelected: $black;
 
     .blocklyDropdownText {
         fill: var(--text-prominent) !important;
-        font-size: 1.6rem;
+        font-size: 14px !important;
+        font-family: 'Outfit', sans-serif !important;
+        font-weight: 600;
     }
 
     .blocklyBubbleText {
@@ -673,7 +673,8 @@ drag a block and selected text moves instead.
 
     .blocklyFlyoutBackground {
         fill: $colour_flyout;
-        fill-opacity: 0.8;
+        fill-opacity: 0.95;
+        backdrop-filter: blur(5px);
     }
 
     .blocklyMainWorkspaceScrollbar {
@@ -777,20 +778,19 @@ drag a block and selected text moves instead.
     }
 
     /* Override the default Closure URL. */
-    .blocklyWidgetDiv .goog-option-selected .goog-menuitem-checkbox,
-    .blocklyWidgetDiv .goog-option-selected .goog-menuitem-icon {
-        // background: url('<<<PATH>>>/sprites.png') no-repeat -48px -16px !important;
-    }
+
 
     /* Category tree in Toolbox. */
     .blocklyToolboxDiv {
-        background-color: $colour_toolbox;
-        color: $colour_toolboxText;
+        background-color: #0f172a; // Deep Navy
+        color: #e2e8f0;
         overflow-x: visible;
         overflow-y: auto;
         position: absolute;
-        z-index: 40; /* so blocks go over toolbox when dragging */
-        -webkit-tap-highlight-color: transparent; /* issue #1345 */
+        z-index: 40; 
+        padding: 12px 0;
+        border-right: 1px solid rgba(255, 255, 255, 0.05);
+        -webkit-tap-highlight-color: transparent;
     }
 
     .blocklyTreeRoot {
@@ -841,6 +841,8 @@ drag a block and selected text moves instead.
     }
 
     .blocklyTreeIcon {
+        margin-right: 12px !important;
+        opacity: 0.8;
         // background-image: url('<<<PATH>>>/sprites.png');
         height: 16px;
         vertical-align: middle;
@@ -883,9 +885,7 @@ drag a block and selected text moves instead.
         vertical-align: middle;
     }
 
-    .blocklyToolboxDelete .blocklyTreeLabel {
-        // cursor: url('<<<PATH>>>/handdelete.cur'), auto;
-    }
+
 
     .blocklyTreeSelected .blocklyTreeLabel {
         color: #fff;
