@@ -12,7 +12,7 @@ const AppContent = lazy(() => import('./app-content'));
 const RiskDisclaimerModal = lazy(() => import('@/components/shared/risk-disclaimer-modal'));
 
 const AppRootLoader = () => {
-    return <InitialLoader data-loader-source="AppRoot" />;
+    return <InitialLoader data-loader-source='AppRoot' />;
 };
 
 const ErrorComponentWrapper = observer(() => {
@@ -40,11 +40,16 @@ const AppRoot = observer(() => {
     const { is_dark_mode_on } = ui;
 
     useEffect(() => {
-        const themeClass = is_dark_mode_on ? 'theme--dark' : 'theme--light';
+        const theme = is_dark_mode_on ? 'dark' : 'light';
+        const themeClass = `theme--${theme}`;
+        
         document.body.classList.remove('theme--light', 'theme--dark');
         document.body.classList.add(themeClass);
+        
+        // Also set data-theme on html for compatibility with other libraries
+        document.documentElement.setAttribute('data-theme', theme);
     }, [is_dark_mode_on]);
-    
+
     const [min_loader_passed, setMinLoaderPassed] = useState(false);
     useEffect(() => {
         const minTimer = setTimeout(() => {

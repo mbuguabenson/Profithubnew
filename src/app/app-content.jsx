@@ -302,7 +302,12 @@ const AppContent = observer(() => {
     }
 
     if (is_loading || !min_loader_passed) {
-        console.log('[AppContent] Still loading:', { is_loading, min_loader_passed, is_api_initialized, is_eu_error_loading });
+        console.log('[AppContent] Still loading:', {
+            is_loading,
+            min_loader_passed,
+            is_api_initialized,
+            is_eu_error_loading,
+        });
         return (
             <AnimatePresence mode='wait'>
                 <InitialLoader key='main-app-loader' data-loader-source='AppContent' />
@@ -310,7 +315,7 @@ const AppContent = observer(() => {
         );
     }
     console.log('[AppContent] Loading complete, rendering dashboard');
-    
+
     return (
         <AuthLoadingWrapper>
             <ThemeProvider theme={is_dark_mode_on ? 'dark' : 'light'}>

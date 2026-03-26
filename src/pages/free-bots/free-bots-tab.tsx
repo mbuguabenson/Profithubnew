@@ -162,7 +162,6 @@ const FreeBotsTab = observer(() => {
     return (
         <div className={`free-bots-tab ${is_dark_mode_on ? 'free-bots-tab--dark' : 'free-bots-tab--light'}`}>
             <LiveMarketAnalysis />
-
             <div className='free-bots-tab__categories'>
                 {categories.map(category => (
                     <button

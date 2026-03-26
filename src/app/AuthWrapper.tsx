@@ -84,7 +84,6 @@ export const AuthWrapper = () => {
         }
     }, [isOnline, isAuthComplete]);
 
-
     if (!isAuthComplete || !min_loader_passed) {
         return <InitialLoader />;
     }

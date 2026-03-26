@@ -8,28 +8,15 @@ const useThemeSwitcher = () => {
             is_dark_mode_on: false,
         },
     };
-    const { setDarkMode, is_dark_mode_on } = ui;
 
     const toggleTheme = useCallback(() => {
-        const body = document.querySelector('body');
-        if (!body) return;
-        if (body.classList.contains('theme--dark')) {
-            localStorage.setItem('theme', 'light');
-            body.classList.remove('theme--dark');
-            body.classList.add('theme--light');
-            setDarkMode(false);
-        } else {
-            localStorage.setItem('theme', 'dark');
-            body.classList.remove('theme--light');
-            body.classList.add('theme--dark');
-            setDarkMode(true);
-        }
-    }, [setDarkMode]);
+        ui.setDarkMode(!ui.is_dark_mode_on);
+    }, [ui]);
 
     return {
         toggleTheme,
-        is_dark_mode_on,
-        setDarkMode,
+        is_dark_mode_on: ui.is_dark_mode_on,
+        setDarkMode: ui.setDarkMode,
     };
 };
 

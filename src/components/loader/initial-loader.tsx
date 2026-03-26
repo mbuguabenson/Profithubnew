@@ -95,14 +95,34 @@ export default function InitialLoader() {
                     <div className='ph-logo-icon'>
                         <svg viewBox='0 0 40 40' fill='none' xmlns='http://www.w3.org/2000/svg'>
                             <circle cx='20' cy='20' r='19' stroke='url(#logoRing)' strokeWidth='2' />
-                            <path d='M10 28L16 20L22 24L30 13' stroke='url(#logoLine)' strokeWidth='2.5' strokeLinecap='round' strokeLinejoin='round' />
+                            <path
+                                d='M10 28L16 20L22 24L30 13'
+                                stroke='url(#logoLine)'
+                                strokeWidth='2.5'
+                                strokeLinecap='round'
+                                strokeLinejoin='round'
+                            />
                             <circle cx='30' cy='13' r='2.5' fill='#f97316' />
                             <defs>
-                                <linearGradient id='logoRing' x1='0' y1='0' x2='40' y2='40' gradientUnits='userSpaceOnUse'>
+                                <linearGradient
+                                    id='logoRing'
+                                    x1='0'
+                                    y1='0'
+                                    x2='40'
+                                    y2='40'
+                                    gradientUnits='userSpaceOnUse'
+                                >
                                     <stop stopColor='#3b82f6' />
                                     <stop offset='1' stopColor='#f97316' />
                                 </linearGradient>
-                                <linearGradient id='logoLine' x1='10' y1='28' x2='30' y2='13' gradientUnits='userSpaceOnUse'>
+                                <linearGradient
+                                    id='logoLine'
+                                    x1='10'
+                                    y1='28'
+                                    x2='30'
+                                    y2='13'
+                                    gradientUnits='userSpaceOnUse'
+                                >
                                     <stop stopColor='#22d3ee' />
                                     <stop offset='1' stopColor='#f97316' />
                                 </linearGradient>
@@ -117,7 +137,9 @@ export default function InitialLoader() {
 
                 {/* Welcome Text */}
                 <div className='ph-headline'>
-                    <h1 className='ph-title'>Welcome to <span className='ph-gradient-text'>Smart Deriv Trader</span></h1>
+                    <h1 className='ph-title'>
+                        Welcome to <span className='ph-gradient-text'>Smart Deriv Trader</span>
+                    </h1>
                     <AnimatePresence mode='wait'>
                         <motion.p
                             key={stepIndex}
@@ -156,7 +178,10 @@ export default function InitialLoader() {
                 {/* Connection Steps */}
                 <div className='ph-steps'>
                     {CONNECTION_STEPS.map((step, i) => (
-                        <div key={step.id} className={`ph-step ${i <= stepIndex ? 'ph-step--done' : ''} ${i === stepIndex ? 'ph-step--active' : ''}`}>
+                        <div
+                            key={step.id}
+                            className={`ph-step ${i <= stepIndex ? 'ph-step--done' : ''} ${i === stepIndex ? 'ph-step--active' : ''}`}
+                        >
                             <div className='ph-step-dot' />
                         </div>
                     ))}

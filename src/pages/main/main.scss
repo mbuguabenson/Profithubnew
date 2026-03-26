@@ -26,6 +26,10 @@
         background: linear-gradient(88.07deg, transparent 1.63%, var(--general-section-1) 50.02%);
         display: none; // Hide right shadow indicator
     }
+
+    @include mobile-or-tablet-screen {
+        display: none !important;
+    }
 }
 
 // Global Drawer/Portal z-index overrides
@@ -122,8 +126,23 @@
                 border-top-left-radius: 1rem;
                 border-top-right-radius: 1rem;
 
+                @include mobile-or-tablet-screen {
+                    border-radius: 2rem !important;
+                    background: #7c3aed !important;
+                    color: #ffffff !important;
+                    padding: 0 2rem;
+                    height: 3.6rem;
+                    box-shadow: 0 4px 12px rgba(124, 58, 237, 0.3);
+                }
+
                 svg {
                     fill: #7c3aed !important;
+                }
+                
+                @include mobile-or-tablet-screen {
+                    svg {
+                        fill: #ffffff !important;
+                    }
                 }
             }
 
@@ -138,9 +157,12 @@
                 padding-top: 0.8rem;
                 padding-inline-end: 2rem;
                 flex-wrap: nowrap;
+                gap: 0.4rem;
 
                 @include mobile-or-tablet-screen {
                     padding-inline-end: 1rem;
+                    padding-bottom: 0.8rem;
+                    align-items: center;
                 }
 
                 // Style the scrollbar
@@ -273,8 +295,18 @@
                 margin-inline-end: 0.8rem;
 
                 @include mobile-or-tablet-screen {
-                    margin-inline-end: 0.4rem;
+                    margin-inline-end: 0.6rem;
                 }
+            }
+
+            @include mobile-or-tablet-screen {
+                height: 3.6rem;
+                border-radius: 2rem;
+                background: var(--general-section-2);
+                margin: 0 0.2rem;
+                white-space: nowrap;
+                font-size: 1.3rem;
+                padding: 0 1.6rem;
             }
 
             &__icon {

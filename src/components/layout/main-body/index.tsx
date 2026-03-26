@@ -17,27 +17,25 @@ const MainBody: React.FC<TMainBodyProps> = ({ children }) => {
     const { setDevice } = ui;
     const { isDesktop, isMobile, isTablet } = useDevice();
 
-    useEffect(() => {
-        const body = document.querySelector('body');
-        if (!body) return;
-        if (current_theme === 'light') {
-            body.classList.remove('theme--dark');
-            body.classList.add('theme--light');
-        } else {
-            body.classList.remove('theme--light');
-            body.classList.add('theme--dark');
-        }
-    }, [current_theme]);
+    // Theme handling is now centralized in AppRoot.tsx
+    // Removed redundant/stale localStorage checking logic from here.
 
     useEffect(() => {
-        if (isMobile) {
-            setDevice('mobile');
-        } else if (isTablet) {
-            setDevice('tablet');
-        } else {
-            setDevice('desktop');
-        }
-    }, [isDesktop, isMobile, isTablet, setDevice]);
+        const handleResize = () => {
+            const width = window.innerWidth;
+            if (width < 768) {
+                setDevice('mobile');
+            } else if (width < 1024) {
+                setDevice('tablet');
+            } else {
+                setDevice('desktop');
+            }
+        };
+
+        handleResize(); // Initial check
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, [setDevice]);
 
     return <div className='main-body'>{children}</div>;
 };

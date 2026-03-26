@@ -46,7 +46,8 @@ const SmartAuto24 = lazy(() => import('@/pages/circles-analysis/index'));
 const DigitCracker = lazy(() => import('@/pages/digit-cracker/index'));
 const Settings = lazy(() => import('@/pages/settings/index'));
 const Strategies = lazy(() => import('@/pages/strategies/index'));
-const FreeBotsTab = lazy(() => import('@/pages/free-bots/free-bots-tab'));
+import FreeBotsTab from '@/pages/free-bots/free-bots-tab';
+// const FreeBotsTab = lazy(() => import('@/pages/free-bots/free-bots-tab'));
 const DerivCourse = lazy(() => import('@/pages/deriv-course/DerivCourse'));
 
 const Portal = observer(({ type }: { type: 'dtrader' | 'dtooltrades' }) => {

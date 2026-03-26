@@ -6,14 +6,12 @@ export default class UiStore {
     is_desktop = true;
     is_tablet = false;
     is_chart_layout_default = true;
-    is_dark_mode_on = localStorage.getItem('theme') === 'dark';
+    is_dark_mode_on = false;
     account_switcher_disabled_message = '';
-    current_focus = null;
+    current_focus: string | null = null;
     show_prompt = false;
     is_trading_assessment_for_new_user_enabled = false;
     is_accounts_switcher_on = false;
-
-    // TODO: fix - need to implement this feature
     is_onscreen_keyboard_active = false;
 
     constructor() {
@@ -25,6 +23,8 @@ export default class UiStore {
             is_desktop: observable,
             is_mobile: observable,
             is_tablet: observable,
+            is_chart_layout_default: observable,
+            is_onscreen_keyboard_active: observable,
             is_trading_assessment_for_new_user_enabled: observable,
             show_prompt: observable,
             setAccountSwitcherDisabledMessage: action.bound,
@@ -36,6 +36,10 @@ export default class UiStore {
             toggleAccountsDialog: action.bound,
             toggleOnScreenKeyboard: action.bound,
         });
+
+        const storedTheme = localStorage.getItem('theme');
+        console.warn(`[UiStore] Initializing theme from localStorage: "${storedTheme}"`);
+        this.is_dark_mode_on = storedTheme === 'dark';
     }
 
     setPromptHandler = (should_show: boolean) => {
@@ -45,16 +49,16 @@ export default class UiStore {
     setAccountSwitcherDisabledMessage = (message: string) => {
         if (message) {
             this.account_switcher_disabled_message = message;
-        } else {
-            this.account_switcher_disabled_message = '';
         }
     };
-    setIsTradingAssessmentForNewUserEnabled(value: boolean) {
+
+    setIsTradingAssessmentForNewUserEnabled = (value: boolean) => {
         this.is_trading_assessment_for_new_user_enabled = value;
-    }
+    };
 
     setDarkMode = (value: boolean) => {
         this.is_dark_mode_on = value;
+        localStorage.setItem('theme', value ? 'dark' : 'light');
     };
 
     setDevice = (value: 'mobile' | 'desktop' | 'tablet') => {
@@ -63,16 +67,22 @@ export default class UiStore {
         this.is_tablet = value === 'tablet';
     };
 
-    toggleAccountsDialog(status = !this.is_accounts_switcher_on) {
-        this.is_accounts_switcher_on = status;
-    }
+    toggleAccountsDialog = (message: string | boolean = false) => {
+        if (typeof message === 'string') {
+            this.setAccountSwitcherDisabledMessage(message);
+        }
+        this.is_accounts_switcher_on = !this.is_accounts_switcher_on;
+    };
 
-    toggleOnScreenKeyboard() {
-        this.is_onscreen_keyboard_active = this.current_focus !== null && this.is_mobile && isTouchDevice();
-    }
+    toggleOnScreenKeyboard = (value: boolean) => {
+        this.is_onscreen_keyboard_active = value;
+    };
 
-    setCurrentFocus(value) {
+    setCurrentFocus = (value: string | null) => {
         this.current_focus = value;
-        this.toggleOnScreenKeyboard();
+    };
+
+    get is_touch() {
+        return isTouchDevice();
     }
 }

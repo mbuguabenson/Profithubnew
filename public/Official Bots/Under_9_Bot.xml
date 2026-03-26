@@ -99,7 +99,7 @@
     </statement>
     <statement name="SUBMARKET">
       <block type="trade_definition_tradeoptions" id="options">
-        <mutation has_first_barrier="false" has_second_barrier="false" has_prediction="true"/>
+        <mutation has_first_barrier="false" has_second_barrier="false" has_prediction="true"></mutation>
         <field name="DURATIONTYPE_LIST">t</field>
         <value name="DURATION">
           <block type="math_number"><field name="NUM">1</field></block>
@@ -120,19 +120,15 @@
   <field name="NOTIFICATION_TYPE">info</field>
   <field name="NOTIFICATION_SOUND">silent</field>
   <value name="MESSAGE">
-    <block type="text_join">
-      <mutation items="2"/>
-      <value name="ADD0">
-        <shadow type="text"><field name="TEXT">Last Digit: </field></shadow>
-      </value>
-      <value name="ADD1">
-        <block type="last_digit"/>
-      </value>
-    </block>
+    <block type="text_join"><field xmlns="" name="VARIABLE" id="text_var_8026">text</field>
+      
+      
+      
+    <statement xmlns="" name="STACK"><block type="text_statement" id="txt_stmt_1774562188902_0_7011"><value name="TEXT"><shadow xmlns="http://www.w3.org/1999/xhtml" type="text"><field name="TEXT">Last Digit: </field></shadow></value><next><block type="text_statement" id="txt_stmt_1774562188903_1_4772"><value name="TEXT"><block xmlns="http://www.w3.org/1999/xhtml" type="last_digit"></block></value></block></next></block></statement></block>
   </value>
 <next><block type="variables_set" id="get_list">
         <field name="VAR" id="digit_list">Digit List</field>
-        <value name="VALUE"><block type="lastDigitList"/></value>
+        <value name="VALUE"><block type="lastDigitList"></block></value>
         <next>
           <block type="variables_set" id="reset_count">
             <field name="VAR" id="count_hits">Count Hits</field>
@@ -150,7 +146,7 @@
                         <field name="OP">EQ</field>
                         <value name="A">
                           <block type="lists_getIndex">
-                            <mutation statement="false" at="true"/>
+                            <mutation statement="false" at="true"></mutation>
                             <field name="MODE">GET</field>
                             <field name="WHERE">FROM_START</field>
                             <value name="VALUE"><block type="variables_get"><field name="VAR" id="digit_list">Digit List</field></block></value>
@@ -189,11 +185,11 @@
             <field name="NOTIFICATION_TYPE">warn</field>
             <field name="NOTIFICATION_SOUND">silent</field>
             <value name="MESSAGE">
-              <block type="text_join">
-                <mutation items="2"/>
-                <value name="ADD0"><block type="text"><field name="TEXT">Digit Power: </field></block></value>
-                <value name="ADD1"><block type="variables_get"><field name="VAR" id="digit_power">Digit Power</field></block></value>
-              </block>
+              <block type="text_join"><field xmlns="" name="VARIABLE" id="text_var_9967">text</field>
+                
+                
+                
+              <statement xmlns="" name="STACK"><block type="text_statement" id="txt_stmt_1774562188903_0_1588"><value name="TEXT"><block xmlns="http://www.w3.org/1999/xhtml" type="text"><field name="TEXT">Digit Power: </field></block></value><next><block type="text_statement" id="txt_stmt_1774562188903_1_8979"><value name="TEXT"><block xmlns="http://www.w3.org/1999/xhtml" type="variables_get"><field name="VAR" id="digit_power">Digit Power</field></block></value></block></next></block></statement></block>
             </value>
             <next>
                           <block type="controls_if" id="trigger">
@@ -244,7 +240,7 @@
   <block type="after_purchase" id="after" x="0" y="1500">
     <statement name="AFTERPURCHASE_STACK">
       <block type="controls_if" id="check_win">
-        <mutation else="1"/>
+        <mutation else="1"></mutation>
         <value name="IF0">
           <block type="contract_check_result"><field name="CHECK_RESULT">win</field></block>
         </value>
@@ -267,7 +263,7 @@
           </block>
         </statement>
         <next>
-          <block type="trade_again"/>
+          <block type="trade_again"></block>
         </next>
       </block>
     </statement>

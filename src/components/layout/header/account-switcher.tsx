@@ -136,11 +136,8 @@ const AccountSwitcher = observer(({ activeAccount }: TAccountSwitcher) => {
 
     const switchAccount = async (loginId: string) => {
         await client.switchAccount(loginId);
-        
-        const account_type =
-            loginId
-                .match(/[a-zA-Z]+/g)
-                ?.join('') || '';
+
+        const account_type = loginId.match(/[a-zA-Z]+/g)?.join('') || '';
 
         Analytics.setAttributes({
             account_type,

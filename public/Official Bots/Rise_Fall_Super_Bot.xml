@@ -88,7 +88,7 @@
     </statement>
     <statement name="SUBMARKET">
       <block type="trade_definition_tradeoptions" id="options">
-        <mutation has_first_barrier="false" has_second_barrier="false" has_prediction="true"/>
+        <mutation has_first_barrier="false" has_second_barrier="false" has_prediction="true"></mutation>
         <field name="DURATIONTYPE_LIST">t</field>
         <value name="DURATION">
           <block type="math_number"><field name="NUM">5</field></block>
@@ -106,23 +106,19 @@
   <field name="NOTIFICATION_TYPE">info</field>
   <field name="NOTIFICATION_SOUND">silent</field>
   <value name="MESSAGE">
-    <block type="text_join">
-      <mutation items="2"/>
-      <value name="ADD0">
-        <shadow type="text"><field name="TEXT">Last Digit: </field></shadow>
-      </value>
-      <value name="ADD1">
-        <block type="last_digit"/>
-      </value>
-    </block>
+    <block type="text_join"><field xmlns="" name="VARIABLE" id="text_var_7181">text</field>
+      
+      
+      
+    <statement xmlns="" name="STACK"><block type="text_statement" id="txt_stmt_1774562188340_0_8151"><value name="TEXT"><shadow xmlns="http://www.w3.org/1999/xhtml" type="text"><field name="TEXT">Last Digit: </field></shadow></value><next><block type="text_statement" id="txt_stmt_1774562188341_1_4498"><value name="TEXT"><block xmlns="http://www.w3.org/1999/xhtml" type="last_digit"></block></value></block></next></block></statement></block>
   </value>
 <next><block type="variables_set" id="set_ticks">
         <field name="VAR" id="ticks">Ticks List</field>
-        <value name="VALUE"><block type="ticks"/></value>
+        <value name="VALUE"><block type="ticks"></block></value>
         <next>
           <block type="variables_set" id="set_last_tick">
             <field name="VAR" id="last_tick">Last Tick</field>
-            <value name="VALUE"><block type="tick"/></value>
+            <value name="VALUE"><block type="tick"></block></value>
             <next>
                <block type="variables_set" id="set_rsi">
                  <field name="VAR" id="rsi_val">RSI Value</field>
@@ -148,7 +144,7 @@
                          <field name="VAR" id="bb_mid">BB Middle</field>
                          <value name="VALUE">
                             <block type="lists_getIndex">
-                              <mutation statement="false" at="true"/>
+                              <mutation statement="false" at="true"></mutation>
                               <field name="MODE">GET</field>
                               <field name="WHERE">FROM_START</field>
                               <value name="VALUE"><block type="variables_get"><field name="VAR" id="bb_list">BB List</field></block></value>
@@ -160,7 +156,7 @@
                              <field name="VAR" id="bb_top">BB Upper</field>
                              <value name="VALUE">
                                 <block type="lists_getIndex">
-                                  <mutation statement="false" at="true"/>
+                                  <mutation statement="false" at="true"></mutation>
                                   <field name="MODE">GET</field>
                                   <field name="WHERE">FROM_START</field>
                                   <value name="VALUE"><block type="variables_get"><field name="VAR" id="bb_list">BB List</field></block></value>
@@ -172,7 +168,7 @@
                                  <field name="VAR" id="bb_bot">BB Lower</field>
                                  <value name="VALUE">
                                     <block type="lists_getIndex">
-                                      <mutation statement="false" at="true"/>
+                                      <mutation statement="false" at="true"></mutation>
                                       <field name="MODE">GET</field>
                                       <field name="WHERE">FROM_START</field>
                                       <value name="VALUE"><block type="variables_get"><field name="VAR" id="bb_list">BB List</field></block></value>
@@ -184,19 +180,19 @@
                                       <field name="NOTIFICATION_TYPE">info</field>
                                       <field name="NOTIFICATION_SOUND">silent</field>
                                       <value name="MESSAGE">
-                                        <block type="text_join">
-                                          <mutation items="6"/>
-                                          <value name="ADD0"><block type="text"><field name="TEXT">Chart Analysis | Price: </field></block></value>
-                                          <value name="ADD1"><block type="variables_get"><field name="VAR" id="last_tick">Last Tick</field></block></value>
-                                          <value name="ADD2"><block type="text"><field name="TEXT"> | RSI: </field></block></value>
-                                          <value name="ADD3"><block type="variables_get"><field name="VAR" id="rsi_val">RSI Value</field></block></value>
-                                          <value name="ADD4"><block type="text"><field name="TEXT"> | BB Mid: </field></block></value>
-                                          <value name="ADD5"><block type="variables_get"><field name="VAR" id="bb_mid">BB Middle</field></block></value>
-                                        </block>
+                                        <block type="text_join"><field xmlns="" name="VARIABLE" id="text_var_3946">text</field>
+                                          
+                                          
+                                          
+                                          
+                                          
+                                          
+                                          
+                                        <statement xmlns="" name="STACK"><block type="text_statement" id="txt_stmt_1774562188342_0_6879"><value name="TEXT"><block xmlns="http://www.w3.org/1999/xhtml" type="text"><field name="TEXT">Chart Analysis | Price: </field></block></value><next><block type="text_statement" id="txt_stmt_1774562188342_1_2331"><value name="TEXT"><block xmlns="http://www.w3.org/1999/xhtml" type="variables_get"><field name="VAR" id="last_tick">Last Tick</field></block></value><next><block type="text_statement" id="txt_stmt_1774562188342_2_9369"><value name="TEXT"><block xmlns="http://www.w3.org/1999/xhtml" type="text"><field name="TEXT"> | RSI: </field></block></value><next><block type="text_statement" id="txt_stmt_1774562188342_3_6217"><value name="TEXT"><block xmlns="http://www.w3.org/1999/xhtml" type="variables_get"><field name="VAR" id="rsi_val">RSI Value</field></block></value><next><block type="text_statement" id="txt_stmt_1774562188343_4_481"><value name="TEXT"><block xmlns="http://www.w3.org/1999/xhtml" type="text"><field name="TEXT"> | BB Mid: </field></block></value><next><block type="text_statement" id="txt_stmt_1774562188343_5_8268"><value name="TEXT"><block xmlns="http://www.w3.org/1999/xhtml" type="variables_get"><field name="VAR" id="bb_mid">BB Middle</field></block></value></block></next></block></next></block></next></block></next></block></next></block></statement></block>
                                       </value>
                                       <next>
                                         <block type="controls_if" id="trade_logic">
-                                           <mutation elseif="1"/>
+                                           <mutation elseif="1"></mutation>
                                            <value name="IF0">
                                              <block type="logic_operation">
                                                <field name="OP">AND</field>
@@ -248,7 +244,7 @@
         </value>
         <next>
           <block type="controls_if" id="check_result_martingale">
-            <mutation else="1"/>
+            <mutation else="1"></mutation>
             <value name="IF0"><block type="contract_check_result"><field name="CHECK_RESULT">win</field></block></value>
             <statement name="DO0">
               <block type="variables_set" id="reset_stake">
@@ -270,7 +266,7 @@
             </statement>
             <next>
                <block type="controls_if" id="check_stops">
-                  <mutation elseif="1"/>
+                  <mutation elseif="1"></mutation>
                   <value name="IF0">
                     <block type="logic_compare">
                       <field name="OP">GTE</field>
@@ -297,7 +293,7 @@
                      <block type="text_print"><value name="TEXT"><block type="text"><field name="TEXT">Stop Loss Hit!</field></block></value></block>
                   </statement>
                   <next>
-                     <block type="trade_again"/>
+                     <block type="trade_again"></block>
                   </next>
                </block>
             </next>

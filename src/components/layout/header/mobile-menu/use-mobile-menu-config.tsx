@@ -37,7 +37,7 @@ const useMobileMenuConfig = () => {
                     as: 'button',
                     label: is_dark_mode_on ? localize('Dark theme') : localize('Light theme'),
                     LeftComponent: LegacyTheme1pxIcon,
-                    RightComponent: <ToggleSwitch value={is_dark_mode_on} onChange={toggleTheme} />,
+                    RightComponent: <ToggleSwitch value={is_dark_mode_on} onChange={toggleTheme} className='pointer-events-none' />,
                     onClick: toggleTheme,
                 },
             ].filter(Boolean) as TMenuConfig,

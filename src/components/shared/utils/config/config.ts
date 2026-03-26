@@ -148,7 +148,7 @@ export const generateOAuthURL = () => {
     const hostname = window.location.hostname;
     const lang = window.localStorage.getItem('lang') || 'EN';
     const app_id = getAppId();
-    
+
     let oauth_url = 'https://oauth.deriv.com/oauth2/authorize';
 
     if (hostname.includes('.deriv.me')) {

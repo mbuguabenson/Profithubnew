@@ -177,12 +177,27 @@ export default class AppStore {
             }
         }, 10000);
 
-        if (!this.dbot_store) return;
+        if (!this.dbot_store) {
+            console.error('[AppStore] dbot_store MISSING in onMount');
+            blockly_store.setLoading(false);
+            return;
+        }
 
         blockly_store.setLoading(true);
-        console.warn('[AppStore] Starting DBot.initWorkspace...');
+        console.warn('[AppStore] Starting DBot.initWorkspace reach-out...');
+        
+        let retries = 0;
+        let scratchDiv = document.getElementById('scratch_div');
+        
+        while (!scratchDiv && retries < 10) {
+            console.warn(`[AppStore] scratch_div not found, retry ${retries + 1}/10...`);
+            await new Promise(resolve => setTimeout(resolve, 500));
+            scratchDiv = document.getElementById('scratch_div');
+            retries++;
+        }
+
         try {
-            await DBot.initWorkspace('/', this.dbot_store, this.api_helpers_store, ui.is_mobile, false);
+            await DBot.initWorkspace('/', this.dbot_store, this.api_helpers_store, ui.is_mobile, ui.is_dark_mode_on);
             console.warn('[AppStore] DBot.initWorkspace FINISHED');
         } catch (e) {
             console.error('[AppStore] DBot.initWorkspace FAILED', e);

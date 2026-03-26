@@ -6,15 +6,23 @@ const REMOTE_CONFIG_URL_STAGING =
 const REMOTE_CONFIG_URL_PRODUCTION =
     'https://app-config-prod.firebaseio.com/remote_config/deriv-app/hub_enabled_country_list.json';
 
+let staticCountriesConfig: Record<string, any> | null = null;
+let staticIsLoading = false;
+
 export const useFirebaseCountriesConfig = () => {
-    const [countriesConfig, setCountriesConfig] = useState<Record<string, any>>({
-        hub_enabled_country_list: HUB_ENABLED_COUNTRY_LIST(),
-    });
-    const [isLoading, setIsLoading] = useState(true);
+    const [countriesConfig, setCountriesConfig] = useState<Record<string, any>>(
+        staticCountriesConfig || {
+            hub_enabled_country_list: HUB_ENABLED_COUNTRY_LIST(),
+        }
+    );
+    const [isLoading, setIsLoading] = useState(!staticCountriesConfig);
     const [error, setError] = useState<Error | null>(null);
 
     useEffect(() => {
+        if (staticCountriesConfig || staticIsLoading) return;
+
         const fetchCountriesConfig = async () => {
+            staticIsLoading = true;
             setIsLoading(true);
 
             try {
@@ -31,9 +39,10 @@ export const useFirebaseCountriesConfig = () => {
 
                 const data = await response.json();
 
-                setCountriesConfig({
+                staticCountriesConfig = {
                     hub_enabled_country_list: data,
-                });
+                };
+                setCountriesConfig(staticCountriesConfig);
 
                 setError(null);
             } catch (error) {
@@ -41,12 +50,13 @@ export const useFirebaseCountriesConfig = () => {
                 setError(error instanceof Error ? error : new Error('Unknown error occurred'));
 
                 // Use fallback data if fetch fails
-                const fallbackConfig = {
+                staticCountriesConfig = {
                     hub_enabled_country_list: HUB_ENABLED_COUNTRY_LIST(),
                 };
-                setCountriesConfig(fallbackConfig);
+                setCountriesConfig(staticCountriesConfig);
             } finally {
                 setIsLoading(false);
+                staticIsLoading = false;
             }
         };
 

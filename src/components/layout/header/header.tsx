@@ -30,9 +30,9 @@ type TAppHeaderProps = {
 };
 
 const AppHeader = observer(({ isAuthenticating }: TAppHeaderProps) => {
-    const { isDesktop } = useDevice();
     const { isAuthorizing, activeLoginid } = useApiBase();
-    const { client, common } = useStore() ?? {};
+    const { client, common, ui } = useStore() ?? {};
+    const isDesktop = ui?.is_desktop;
     const language = common?.current_language || 'EN';
 
     const { data: activeAccount } = useActiveAccount({ allBalanceData: client?.all_accounts_balance });
@@ -186,7 +186,6 @@ const AppHeader = observer(({ isAuthenticating }: TAppHeaderProps) => {
                 <MobileMenu />
                 <AppLogo />
                 {isDesktop && <MenuItems />}
-
             </Wrapper>
             <Wrapper variant='right'>
                 {!isDesktop && <PWAInstallButton variant='primary' size='medium' />}

@@ -72,15 +72,11 @@
   <field name="NOTIFICATION_TYPE">info</field>
   <field name="NOTIFICATION_SOUND">silent</field>
   <value name="MESSAGE">
-    <block type="text_join">
-      <mutation items="2"></mutation>
-      <value name="ADD0">
-        <shadow type="text"><field name="TEXT">Last Digit: </field></shadow>
-      </value>
-      <value name="ADD1">
-        <block type="last_digit"></block>
-      </value>
-    </block>
+    <block type="text_join"><field xmlns="" name="VARIABLE" id="text_var_4175">text</field>
+      
+      
+      
+    <statement xmlns="" name="STACK"><block type="text_statement" id="txt_stmt_1774562188581_0_1303"><value name="TEXT"><shadow xmlns="http://www.w3.org/1999/xhtml" type="text"><field name="TEXT">Last Digit: </field></shadow></value><next><block type="text_statement" id="txt_stmt_1774562188581_1_1612"><value name="TEXT"><block xmlns="http://www.w3.org/1999/xhtml" type="last_digit"></block></value></block></next></block></statement></block>
   </value>
 <next><block type="controls_if" id="check-power">
         <value name="IF0">

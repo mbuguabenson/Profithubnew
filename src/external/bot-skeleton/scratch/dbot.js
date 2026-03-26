@@ -113,7 +113,7 @@ class DBot {
                     if (is_mobile) {
                         workspaceScale = 0.6;
                     } else {
-                        const scratch_div_width = document.getElementById('scratch_div')?.offsetWidth;
+                        const scratch_div_width = document.getElementById('scratch_div')?.offsetWidth || 1200;
                         const zoom_scale = scratch_div_width / window_width / 1.5;
                         workspaceScale = zoom_scale;
                     }
@@ -125,14 +125,21 @@ class DBot {
                     return resolve();
                 }
 
-                this.workspace = window.Blockly.inject(el_scratch_div, {
-                    media: 'assets/media/',
-                    renderer: 'zelos',
-                    trashcan: !is_mobile,
-                    zoom: { wheel: true, startScale: workspaceScale },
-                    scrollbars: true,
-                    theme: window.Blockly.Themes.zelos_renderer,
-                });
+                console.warn('[DBot] Injecting Blockly with scale:', workspaceScale);
+                try {
+                    this.workspace = window.Blockly.inject(el_scratch_div, {
+                        media: 'assets/media/',
+                        renderer: 'zelos',
+                        trashcan: !is_mobile,
+                        zoom: { wheel: true, startScale: workspaceScale },
+                        scrollbars: true,
+                        theme: window.Blockly.Themes.zelos_renderer,
+                    });
+                    console.warn('[DBot] Blockly.inject SUCCESSFUL');
+                } catch (e) {
+                    console.error('[DBot] Blockly.inject FAILED', e);
+                    return reject(e);
+                }
 
                 this.workspace.RTL = isDbotRTL();
 
@@ -153,17 +160,22 @@ class DBot {
 
                 window.Blockly.derivWorkspace = this.workspace;
 
+                console.warn('[DBot] Creating Blockly.Names...');
                 const varDB = new window.Blockly.Names('window');
+                
+                console.warn('[DBot] Setting up variableMap...');
                 varDB.variableMap = window.Blockly.derivWorkspace.getVariableMap();
 
                 window.Blockly.JavaScript.variableDB_ = varDB;
 
+                console.warn('[DBot] Adding before-run functions...');
                 this.addBeforeRunFunction(this.unselectBlocks.bind(this));
                 this.addBeforeRunFunction(this.disableStrayBlocks.bind(this));
                 this.addBeforeRunFunction(this.checkForErroredBlocks.bind(this));
                 this.addBeforeRunFunction(this.checkForRequiredBlocks.bind(this));
 
                 // Push main.xml to workspace and reset the undo stack.
+                console.warn('[DBot] Generating current_strategy_id...');
                 this.workspace.current_strategy_id = window.Blockly.utils.idGenerator.genUid();
 
                 window.Blockly.derivWorkspace.strategy_to_load = main_xml;
@@ -172,6 +184,7 @@ class DBot {
 
                 let file_name = config().default_file_name;
                 if (recent_files && recent_files.length) {
+                    console.warn('[DBot] Loading recent strategy...');
                     const latest_file = recent_files[0];
                     window.Blockly.derivWorkspace.strategy_to_load = latest_file.xml;
                     window.Blockly.getMainWorkspace().strategy_to_load = latest_file.xml;
@@ -180,6 +193,7 @@ class DBot {
                     window.Blockly.getMainWorkspace().current_strategy_id = latest_file.id;
                 }
 
+                console.warn('[DBot] Loading XML to workspace...');
                 const event_group = `dbot-load${Date.now()}`;
                 window.Blockly.Events.setGroup(event_group);
                 window.Blockly.Xml.domToWorkspace(
@@ -192,6 +206,7 @@ class DBot {
                 this.workspace.cleanUp(0, is_mobile ? 60 : 56);
                 this.workspace.clearUndo();
 
+                console.warn('[DBot] Triggering final resize and event listeners...');
                 window.dispatchEvent(new Event('resize'));
                 window.addEventListener('dragover', DBot.handleDragOver);
                 window.addEventListener('drop', e => DBot.handleDropOver(e, handleFileChange));

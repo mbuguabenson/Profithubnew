@@ -23,15 +23,7 @@
       <block type="trade_definition_market" id="market">
         <field name="MARKET_LIST">synthetic_index</field>
         <field name="SUBMARKET_LIST">random_index</field>
-        <value name="SYMBOL_LIST">
-          <block type="lists_getIndex">
-            <mutation statement="false" at="true"/>
-            <field name="MODE">GET</field>
-            <field name="WHERE">FROM_START</field>
-            <value name="VALUE"><block type="variables_get"><field name="VAR" id="markets">Markets</field></block></value>
-            <value name="AT"><block type="variables_get"><field name="VAR" id="market_index">Market Index</field></block></value>
-          </block>
-        </value>
+        <field name="SYMBOL_LIST">1HZ10V</field>
         <next>
           <block type="trade_definition_tradetype" id="trade_type">
             <field name="TRADETYPECAT_LIST">digits</field>
@@ -65,7 +57,7 @@
         <field name="VAR" id="markets">Markets</field>
         <value name="VALUE">
           <block type="lists_create_with">
-            <mutation items="5"/>
+            <mutation items="5"></mutation>
             <value name="ADD0"><block type="text"><field name="TEXT">1HZ10V</field></block></value>
             <value name="ADD1"><block type="text"><field name="TEXT">1HZ25V</field></block></value>
             <value name="ADD2"><block type="text"><field name="TEXT">1HZ50V</field></block></value>
@@ -113,7 +105,7 @@
     </statement>
     <statement name="SUBMARKET">
       <block type="trade_definition_tradeoptions" id="options">
-        <mutation has_first_barrier="false" has_second_barrier="false" has_prediction="true"/>
+        <mutation has_first_barrier="false" has_second_barrier="false" has_prediction="true"></mutation>
         <field name="DURATIONTYPE_LIST">t</field>
         <value name="DURATION"><block type="math_number"><field name="NUM">1</field></block></value>
         <value name="AMOUNT"><block type="variables_get"><field name="VAR" id="current_stake">Current Stake</field></block></value>
@@ -134,19 +126,15 @@
   <field name="NOTIFICATION_TYPE">info</field>
   <field name="NOTIFICATION_SOUND">silent</field>
   <value name="MESSAGE">
-    <block type="text_join">
-      <mutation items="2"/>
-      <value name="ADD0">
-        <shadow type="text"><field name="TEXT">Last Digit: </field></shadow>
-      </value>
-      <value name="ADD1">
-        <block type="last_digit"/>
-      </value>
-    </block>
+    <block type="text_join"><field xmlns="" name="VARIABLE" id="text_var_7184">text</field>
+      
+      
+      
+    <statement xmlns="" name="STACK"><block type="text_statement" id="txt_stmt_1774562187669_0_3370"><value name="TEXT"><shadow xmlns="http://www.w3.org/1999/xhtml" type="text"><field name="TEXT">Last Digit: </field></shadow></value><next><block type="text_statement" id="txt_stmt_1774562187669_1_1029"><value name="TEXT"><block xmlns="http://www.w3.org/1999/xhtml" type="last_digit"></block></value></block></next></block></statement></block>
   </value>
 <next><block type="variables_set" id="get_list">
         <field name="VAR" id="digit_list">Digit List</field>
-        <value name="VALUE"><block type="lastDigitList"/></value>
+        <value name="VALUE"><block type="lastDigitList"></block></value>
         <next>
           <block type="variables_set" id="reset_c_even">
             <field name="VAR" id="count_even">Count Even</field>
@@ -160,7 +148,7 @@
                 <statement name="DO">
                   <block type="controls_if" id="check_p_even">
                     <value name="IF0">
-                      <block type="math_number_property"><mutation divisor_input="false"/><field name="PROPERTY">EVEN</field><value name="NUMBER_TO_CHECK"><block type="lists_getIndex"><mutation statement="false" at="true"/><field name="MODE">GET</field><field name="WHERE">FROM_START</field><value name="VALUE"><block type="variables_get"><field name="VAR" id="digit_list">Digit List</field></block></value><value name="AT"><block type="variables_get"><field name="VAR" id="i">i</field></block></value></block></value></block>
+                      <block type="math_number_property"><mutation divisor_input="false"></mutation><field name="PROPERTY">EVEN</field><value name="NUMBER_TO_CHECK"><block type="lists_getIndex"><mutation statement="false" at="true"></mutation><field name="MODE">GET</field><field name="WHERE">FROM_START</field><value name="VALUE"><block type="variables_get"><field name="VAR" id="digit_list">Digit List</field></block></value><value name="AT"><block type="variables_get"><field name="VAR" id="i">i</field></block></value></block></value></block>
                     </value>
                     <statement name="DO0">
                       <block type="math_change" id="inc_p_even"><field name="VAR" id="count_even">Count Even</field><value name="DELTA"><block type="math_number"><field name="NUM">1</field></block></value></block>
@@ -180,34 +168,30 @@
                             <field name="NOTIFICATION_TYPE">info</field>
                             <field name="NOTIFICATION_SOUND">silent</field>
                             <value name="MESSAGE">
-                              <block type="text_join">
-                                <mutation items="3"/>
-                                <value name="ADD0"><block type="text"><field name="TEXT">Scanning </field></block></value>
-                                <value name="ADD1">
-                                  <block type="lists_getIndex">
-                                    <mutation statement="false" at="true"/>
+                              <block type="text_join"><field xmlns="" name="VARIABLE" id="text_var_3319">text</field>
+                                
+                                
+                                
+                                
+                              <statement xmlns="" name="STACK"><block type="text_statement" id="txt_stmt_1774562187670_0_8887"><value name="TEXT"><block xmlns="http://www.w3.org/1999/xhtml" type="text"><field name="TEXT">Scanning </field></block></value><next><block type="text_statement" id="txt_stmt_1774562187670_1_9430"><value name="TEXT"><block xmlns="http://www.w3.org/1999/xhtml" type="lists_getIndex">
+                                    <mutation statement="false" at="true"></mutation>
                                     <field name="MODE">GET</field>
                                     <field name="WHERE">FROM_START</field>
                                     <value name="VALUE"><block type="variables_get"><field name="VAR" id="markets">Markets</field></block></value>
                                     <value name="AT"><block type="variables_get"><field name="VAR" id="market_index">Market Index</field></block></value>
-                                  </block>
-                                </value>
-                                <value name="ADD2">
-                                  <block type="text_join">
-                                    <mutation items="2"/>
+                                  </block></value><next><block type="text_statement" id="txt_stmt_1774562187671_2_9160"><value name="TEXT"><block xmlns="http://www.w3.org/1999/xhtml" type="text_join">
+                                    <mutation items="2"></mutation>
                                     <value name="ADD0"><block type="text"><field name="TEXT"> | EP: </field></block></value>
                                     <value name="ADD1"><block type="variables_get"><field name="VAR" id="power_even">Even Power</field></block></value>
-                                  </block>
-                                </value>
-                              </block>
+                                  </block></value></block></next></block></next></block></statement></block>
                             </value>
                             <next>
                               <block type="controls_if" id="main_logic">
-                                <mutation else="1"/>
+                                <mutation else="1"></mutation>
                                 <value name="IF0"><block type="variables_get"><field name="VAR" id="recovery_mode">Recovery Mode</field></block></value>
                                 <statement name="DO0">
                                   <block type="controls_if" id="rec_buy">
-                                    <mutation else="1"/>
+                                    <mutation else="1"></mutation>
                                     <value name="IF0"><block type="logic_compare"><field name="OP">EQ</field><value name="A"><block type="variables_get"><field name="VAR" id="alternate">Alternate</field></block></value><value name="B"><block type="math_number"><field name="NUM">0</field></block></value></block></value>
                                     <statement name="DO0"><block type="purchase" id="buy_over"><field name="PURCHASE_LIST">DIGITOVER</field><field name="ALLOW_BULK_PURCHASE">no</field><field name="NUM_TRADES">1</field></block></statement>
                                     <statement name="ELSE"><block type="purchase" id="buy_under"><field name="PURCHASE_LIST">DIGITUNDER</field><field name="ALLOW_BULK_PURCHASE">no</field><field name="NUM_TRADES">1</field></block></statement>
@@ -215,7 +199,7 @@
                                 </statement>
                                 <statement name="ELSE">
                                   <block type="controls_if" id="entry_check">
-                                    <mutation elseif="1" else="1"/>
+                                    <mutation elseif="1" else="1"></mutation>
                                     <value name="IF0">
                                       <block type="logic_operation" inline="false">
                                         <field name="OP">AND</field>
@@ -223,12 +207,12 @@
                                         <value name="B">
                                           <block type="logic_operation" inline="false">
                                             <field name="OP">AND</field>
-                                            <value name="A"><block type="math_number_property"><mutation divisor_input="false"/><field name="PROPERTY">EVEN</field><value name="NUMBER_TO_CHECK"><block type="lists_getIndex"><mutation statement="false" at="true"/><field name="MODE">GET</field><field name="WHERE">FROM_START</field><value name="VALUE"><block type="variables_get"><field name="VAR" id="digit_list">Digit List</field></block></value><value name="AT"><block type="math_number"><field name="NUM">1</field></block></value></block></value></block></value>
+                                            <value name="A"><block type="math_number_property"><mutation divisor_input="false"></mutation><field name="PROPERTY">EVEN</field><value name="NUMBER_TO_CHECK"><block type="lists_getIndex"><mutation statement="false" at="true"></mutation><field name="MODE">GET</field><field name="WHERE">FROM_START</field><value name="VALUE"><block type="variables_get"><field name="VAR" id="digit_list">Digit List</field></block></value><value name="AT"><block type="math_number"><field name="NUM">1</field></block></value></block></value></block></value>
                                             <value name="B">
                                               <block type="logic_operation" inline="false">
                                                 <field name="OP">AND</field>
-                                                <value name="A"><block type="math_number_property"><mutation divisor_input="false"/><field name="PROPERTY">ODD</field><value name="NUMBER_TO_CHECK"><block type="lists_getIndex"><mutation statement="false" at="true"/><field name="MODE">GET</field><field name="WHERE">FROM_START</field><value name="VALUE"><block type="variables_get"><field name="VAR" id="digit_list">Digit List</field></block></value><value name="AT"><block type="math_number"><field name="NUM">2</field></block></value></block></value></block></value>
-                                                <value name="B"><block type="math_number_property"><mutation divisor_input="false"/><field name="PROPERTY">ODD</field><value name="NUMBER_TO_CHECK"><block type="lists_getIndex"><mutation statement="false" at="true"/><field name="MODE">GET</field><field name="WHERE">FROM_START</field><value name="VALUE"><block type="variables_get"><field name="VAR" id="digit_list">Digit List</field></block></value><value name="AT"><block type="math_number"><field name="NUM">3</field></block></value></block></value></block></value>
+                                                <value name="A"><block type="math_number_property"><mutation divisor_input="false"></mutation><field name="PROPERTY">ODD</field><value name="NUMBER_TO_CHECK"><block type="lists_getIndex"><mutation statement="false" at="true"></mutation><field name="MODE">GET</field><field name="WHERE">FROM_START</field><value name="VALUE"><block type="variables_get"><field name="VAR" id="digit_list">Digit List</field></block></value><value name="AT"><block type="math_number"><field name="NUM">2</field></block></value></block></value></block></value>
+                                                <value name="B"><block type="math_number_property"><mutation divisor_input="false"></mutation><field name="PROPERTY">ODD</field><value name="NUMBER_TO_CHECK"><block type="lists_getIndex"><mutation statement="false" at="true"></mutation><field name="MODE">GET</field><field name="WHERE">FROM_START</field><value name="VALUE"><block type="variables_get"><field name="VAR" id="digit_list">Digit List</field></block></value><value name="AT"><block type="math_number"><field name="NUM">3</field></block></value></block></value></block></value>
                                               </block>
                                             </value>
                                           </block>
@@ -243,12 +227,12 @@
                                         <value name="B">
                                           <block type="logic_operation" inline="false">
                                             <field name="OP">AND</field>
-                                            <value name="A"><block type="math_number_property"><mutation divisor_input="false"/><field name="PROPERTY">ODD</field><value name="NUMBER_TO_CHECK"><block type="lists_getIndex"><mutation statement="false" at="true"/><field name="MODE">GET</field><field name="WHERE">FROM_START</field><value name="VALUE"><block type="variables_get"><field name="VAR" id="digit_list">Digit List</field></block></value><value name="AT"><block type="math_number"><field name="NUM">1</field></block></value></block></value></block></value>
+                                            <value name="A"><block type="math_number_property"><mutation divisor_input="false"></mutation><field name="PROPERTY">ODD</field><value name="NUMBER_TO_CHECK"><block type="lists_getIndex"><mutation statement="false" at="true"></mutation><field name="MODE">GET</field><field name="WHERE">FROM_START</field><value name="VALUE"><block type="variables_get"><field name="VAR" id="digit_list">Digit List</field></block></value><value name="AT"><block type="math_number"><field name="NUM">1</field></block></value></block></value></block></value>
                                             <value name="B">
                                               <block type="logic_operation" inline="false">
                                                 <field name="OP">AND</field>
-                                                <value name="A"><block type="math_number_property"><mutation divisor_input="false"/><field name="PROPERTY">EVEN</field><value name="NUMBER_TO_CHECK"><block type="lists_getIndex"><mutation statement="false" at="true"/><field name="MODE">GET</field><field name="WHERE">FROM_START</field><value name="VALUE"><block type="variables_get"><field name="VAR" id="digit_list">Digit List</field></block></value><value name="AT"><block type="math_number"><field name="NUM">2</field></block></value></block></value></block></value>
-                                                <value name="B"><block type="math_number_property"><mutation divisor_input="false"/><field name="PROPERTY">EVEN</field><value name="NUMBER_TO_CHECK"><block type="lists_getIndex"><mutation statement="false" at="true"/><field name="MODE">GET</field><field name="WHERE">FROM_START</field><value name="VALUE"><block type="variables_get"><field name="VAR" id="digit_list">Digit List</field></block></value><value name="AT"><block type="math_number"><field name="NUM">3</field></block></value></block></value></block></value>
+                                                <value name="A"><block type="math_number_property"><mutation divisor_input="false"></mutation><field name="PROPERTY">EVEN</field><value name="NUMBER_TO_CHECK"><block type="lists_getIndex"><mutation statement="false" at="true"></mutation><field name="MODE">GET</field><field name="WHERE">FROM_START</field><value name="VALUE"><block type="variables_get"><field name="VAR" id="digit_list">Digit List</field></block></value><value name="AT"><block type="math_number"><field name="NUM">2</field></block></value></block></value></block></value>
+                                                <value name="B"><block type="math_number_property"><mutation divisor_input="false"></mutation><field name="PROPERTY">EVEN</field><value name="NUMBER_TO_CHECK"><block type="lists_getIndex"><mutation statement="false" at="true"></mutation><field name="MODE">GET</field><field name="WHERE">FROM_START</field><value name="VALUE"><block type="variables_get"><field name="VAR" id="digit_list">Digit List</field></block></value><value name="AT"><block type="math_number"><field name="NUM">3</field></block></value></block></value></block></value>
                                               </block>
                                             </value>
                                           </block>
@@ -287,7 +271,7 @@
   <block type="after_purchase" id="after" x="0" y="2400">
     <statement name="AFTERPURCHASE_STACK">
       <block type="controls_if" id="final">
-        <mutation else="1"/>
+        <mutation else="1"></mutation>
         <value name="IF0"><block type="contract_check_result"><field name="CHECK_RESULT">win</field></block></value>
         <statement name="DO0">
           <block type="variables_set" id="win_res">
@@ -345,7 +329,7 @@
             </next>
           </block>
         </statement>
-        <next><block type="trade_again"/></next>
+        <next><block type="trade_again"></block></next>
       </block>
     </statement>
   </block>
