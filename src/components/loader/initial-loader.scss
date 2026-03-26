@@ -1,280 +1,354 @@
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@200;300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap');
 
-// ── TOKENS ─────────────────────────────────────────────────────
-$cyan: #22d3ee;
-$bg: #030712;
-$card-bg: rgba(15, 23, 42, 0.85);
-$border: rgba(255, 255, 255, 0.08);
-$text: #f8fafc;
-$muted: rgba(226, 232, 240, 0.45);
+// ── TOKENS ─────────────────────────────────────────────────────────────────
+$font:        'Outfit', sans-serif;
+$bg:          #080c14;
+$blue:        #3b82f6;
+$cyan:        #22d3ee;
+$orange:      #f97316;
+$purple:      #7c3aed;
+$card-bg:     rgba(14, 22, 40, 0.82);
+$border:      rgba(255, 255, 255, 0.07);
+$text:        #f1f5f9;
+$muted:       rgba(203, 213, 225, 0.5);
 
-.quantum-loader {
+// ── ROOT ────────────────────────────────────────────────────────────────────
+.ph-loader {
     position: fixed;
     inset: 0;
     background: $bg;
-    z-index: 10000;
+    z-index: 99999;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-family: 'Outfit', sans-serif;
-    color: $text;
+    font-family: $font;
     overflow: hidden;
 }
 
-// ── BACKGROUND ───────────────────────────────────────────────
-.quantum-bg {
+// ── FLOATING PARTICLES ──────────────────────────────────────────────────────
+.ph-particles {
     position: fixed;
     inset: 0;
-    z-index: 1;
     pointer-events: none;
+    z-index: 1;
+}
 
-    .q-grid {
-        position: absolute;
-        inset: 0;
-        background-image: 
-            linear-gradient(rgba($cyan, 0.05) 1px, transparent 1px),
-            linear-gradient(90deg, rgba($cyan, 0.05) 1px, transparent 1px);
-        background-size: 50px 50px;
-        opacity: 0.5;
+.ph-particle {
+    position: absolute;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba($cyan, 0.7), transparent 70%);
+}
+
+// ── GRADIENT ORBS ──────────────────────────────────────────────────────────
+.ph-orb {
+    position: fixed;
+    border-radius: 50%;
+    filter: blur(80px);
+    pointer-events: none;
+    z-index: 1;
+    animation: orbFloat 8s ease-in-out infinite;
+
+    &--blue {
+        width: 420px;
+        height: 420px;
+        background: radial-gradient(circle, rgba($blue, 0.22), transparent 70%);
+        top: -120px;
+        left: -100px;
+        animation-delay: 0s;
+    }
+
+    &--orange {
+        width: 340px;
+        height: 340px;
+        background: radial-gradient(circle, rgba($orange, 0.16), transparent 70%);
+        bottom: -80px;
+        right: -80px;
+        animation-delay: -3s;
+    }
+
+    &--purple {
+        width: 280px;
+        height: 280px;
+        background: radial-gradient(circle, rgba($purple, 0.18), transparent 70%);
+        top: 40%;
+        right: 10%;
+        animation-delay: -5s;
     }
 }
 
-// ── MAIN CARD ─────────────────────────────────────────────────
-.q-main-card {
+@keyframes orbFloat {
+    0%, 100% { transform: translateY(0) scale(1); }
+    50%       { transform: translateY(-24px) scale(1.06); }
+}
+
+// ── TICKER BG ──────────────────────────────────────────────────────────────
+.ph-ticker-bg {
+    position: fixed;
+    inset: 0;
+    z-index: 2;
+    pointer-events: none;
+    display: flex;
+    align-items: flex-end;
+    gap: 0;
+    opacity: 0.07;
+}
+
+.ph-ticker-line {
+    position: absolute;
+    bottom: 0;
+    width: 3px;
+    border-radius: 2px;
+
+    &--up   { background: linear-gradient(to top, $cyan, transparent); }
+    &--down { background: linear-gradient(to top, $orange, transparent); }
+}
+
+// ── CARD ────────────────────────────────────────────────────────────────────
+.ph-card {
     position: relative;
     z-index: 10;
-    width: 90%;
+    width: 92%;
     max-width: 480px;
     background: $card-bg;
-    backdrop-filter: blur(25px);
+    backdrop-filter: blur(28px) saturate(160%);
+    -webkit-backdrop-filter: blur(28px) saturate(160%);
     border: 1px solid $border;
     border-radius: 24px;
-    padding: 2.5rem 2rem;
-    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    padding: 2.75rem 2.25rem 2rem;
+    box-shadow:
+        0 32px 64px -16px rgba(0, 0, 0, 0.65),
+        0 0 0 1px rgba(255, 255, 255, 0.04) inset;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 2rem;
+    gap: 1.75rem;
 }
 
-// ── HEADER ───────────────────────────────────────────────────
-.q-card-header {
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-
-    .q-logo-row {
-        display: flex;
-        align-items: center;
-        gap: 0.75rem;
-        margin-bottom: 1rem;
-
-        .q-logo-svg {
-            width: 32px;
-            height: 32px;
-            filter: drop-shadow(0 0 10px rgba($cyan, 0.6));
-        }
-
-        .q-brand-titles {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            line-height: 1;
-
-            .q-main-title {
-                font-size: 1.4rem;
-                font-weight: 900;
-                letter-spacing: 0.1rem;
-                color: #fff;
-            }
-            .q-main-subtitle {
-                font-size: 0.7rem;
-                font-weight: 700;
-                color: $cyan;
-                letter-spacing: 0.2rem;
-            }
-        }
-    }
-
-    .q-welcome-text {
-        font-size: 0.9rem;
-        font-weight: 500;
-        color: $text;
-        margin-bottom: 0.25rem;
-
-        .q-highlight {
-            color: $cyan;
-            font-weight: 700;
-        }
-    }
-
-    .q-welcome-sub {
-        font-size: 0.7rem;
-        color: $muted;
-        letter-spacing: 0.05rem;
-    }
-}
-
-// ── STEPS ─────────────────────────────────────────────────────
-.q-steps-row {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    padding: 0 0.5rem;
-    position: relative;
-}
-
-.q-step-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.5rem;
-    z-index: 2;
-    flex: 1;
-
-    .q-step-circle {
-        width: 28px;
-        height: 28px;
-        border-radius: 50%;
-        background: rgba(255, 255, 255, 0.05);
-        border: 1px solid rgba(255, 255, 255, 0.2);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 0.75rem;
-        font-weight: 700;
-        color: $muted;
-        transition: all 0.3s ease;
-
-        &--active {
-            background: $cyan;
-            border-color: $cyan;
-            color: $bg;
-            box-shadow: 0 0 15px rgba($cyan, 0.4);
-        }
-    }
-
-    .q-step-label {
-        font-size: 0.55rem;
-        font-weight: 700;
-        color: $muted;
-        letter-spacing: 0.05rem;
-    }
-
-    .q-step-line {
-        position: absolute;
-        top: 14px;
-        left: calc(50% + 14px);
-        width: calc(100% - 28px);
-        height: 1px;
-        background: rgba(255, 255, 255, 0.1);
-        z-index: -1;
-    }
-}
-
-// ── GRID ──────────────────────────────────────────────────────
-.q-grid-layout {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 0.75rem;
-    width: 100%;
-}
-
-.q-cap-card {
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    border-radius: 12px;
-    padding: 1.25rem 0.5rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.6rem;
-    transition: all 0.3s ease;
-
-    &:hover {
-        background: rgba($cyan, 0.05);
-        border-color: rgba($cyan, 0.2);
-    }
-
-    .q-cap-icon {
-        font-size: 1.5rem;
-    }
-
-    .q-cap-label {
-        font-size: 0.65rem;
-        font-weight: 600;
-        color: $text;
-        text-align: center;
-    }
-}
-
-// ── PROGRESS ──────────────────────────────────────────────────
-.q-progress-area {
-    width: 100%;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
-}
-
-.q-status-msg {
-    .q-msg-primary {
-        font-size: 0.7rem;
-        color: $muted;
-        margin-bottom: 0.1rem;
-    }
-    .q-msg-secondary {
-        font-size: 0.75rem;
-        color: $cyan;
-        font-weight: 600;
-        height: 1.2rem;
-    }
-}
-
-.q-progress-bar-container {
-    width: 100%;
+// ── LOGO ────────────────────────────────────────────────────────────────────
+.ph-logo {
     display: flex;
     align-items: center;
     gap: 1rem;
 
-    .q-bar-rail {
-        flex: 1;
-        height: 4px;
-        background: rgba(255, 255, 255, 0.1);
-        border-radius: 2px;
-        overflow: hidden;
+    .ph-logo-icon {
+        width: 52px;
+        height: 52px;
+        flex-shrink: 0;
+        filter: drop-shadow(0 0 12px rgba($orange, 0.4));
+
+        svg { width: 100%; height: 100%; }
     }
 
-    .q-bar-fill {
-        height: 100%;
-        background: $cyan;
-        box-shadow: 0 0 10px $cyan;
-    }
+    .ph-logo-text {
+        display: flex;
+        flex-direction: column;
 
-    .q-progress-percent {
-        font-size: 0.7rem;
-        font-weight: 800;
-        color: $cyan;
-        min-width: 25px;
+        .ph-logo-brand {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: $text;
+            letter-spacing: 0.03em;
+            line-height: 1;
+        }
+
+        .ph-logo-tag {
+            font-size: 0.65rem;
+            font-weight: 600;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            background: linear-gradient(90deg, $blue, $orange);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
     }
 }
 
-// ── FOOTER ────────────────────────────────────────────────────
-.q-card-footer {
-    font-size: 0.6rem;
-    color: rgba($text, 0.3);
-    letter-spacing: 0.05rem;
-}
+// ── HEADLINE ────────────────────────────────────────────────────────────────
+.ph-headline {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
 
-@media (max-width: 480px) {
-    .q-main-card {
-        padding: 1.5rem 1rem;
+    .ph-title {
+        font-size: 1.35rem;
+        font-weight: 700;
+        color: $text;
+        margin: 0;
+        line-height: 1.3;
     }
-    .q-grid-layout {
+
+    .ph-subtitle {
+        font-size: 0.82rem;
+        color: $muted;
+        display: flex;
+        align-items: center;
         gap: 0.5rem;
+        min-height: 1.4rem;
+        margin: 0;
+
+        .ph-step-icon { font-size: 1rem; }
     }
-    .q-cap-card {
-        padding: 1rem 0.25rem;
+}
+
+.ph-gradient-text {
+    background: linear-gradient(90deg, $cyan 0%, $blue 50%, $orange 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+// ── PROGRESS ────────────────────────────────────────────────────────────────
+.ph-progress-wrap {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+}
+
+.ph-bar-rail {
+    position: relative;
+    width: 100%;
+    height: 6px;
+    background: rgba(255, 255, 255, 0.06);
+    border-radius: 99px;
+    overflow: hidden;
+}
+
+.ph-bar-fill {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    border-radius: 99px;
+    background: linear-gradient(90deg, $blue 0%, $cyan 50%, $orange 100%);
+    box-shadow: 0 0 14px rgba($cyan, 0.6), 0 0 30px rgba($orange, 0.25);
+    min-width: 4px;
+}
+
+.ph-bar-shimmer {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        90deg,
+        transparent 0%,
+        rgba(255, 255, 255, 0.22) 50%,
+        transparent 100%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 1.8s linear infinite;
+}
+
+@keyframes shimmer {
+    0%   { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+}
+
+.ph-progress-info {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.ph-dots {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+
+    .ph-dot {
+        display: inline-block;
+        width: 5px;
+        height: 5px;
+        border-radius: 50%;
+        background: $cyan;
+        animation: dotPulse 1.2s ease-in-out infinite;
+
+        &:nth-child(2) { animation-delay: 0.2s; background: $blue; }
+        &:nth-child(3) { animation-delay: 0.4s; background: $orange; }
     }
+}
+
+@keyframes dotPulse {
+    0%, 80%, 100% { transform: scale(1);   opacity: 0.4; }
+    40%           { transform: scale(1.5); opacity: 1; }
+}
+
+.ph-percent {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: $cyan;
+    letter-spacing: 0.05em;
+    font-variant-numeric: tabular-nums;
+}
+
+// ── STEPS ───────────────────────────────────────────────────────────────────
+.ph-steps {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.ph-step {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+
+    .ph-step-dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.12);
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        transition: all 0.4s ease;
+    }
+
+    &--done .ph-step-dot {
+        background: rgba($cyan, 0.4);
+        border-color: $cyan;
+    }
+
+    &--active .ph-step-dot {
+        background: $orange;
+        border-color: $orange;
+        box-shadow: 0 0 10px rgba($orange, 0.6);
+        animation: stepPulse 1s ease-in-out infinite;
+    }
+}
+
+@keyframes stepPulse {
+    0%, 100% { box-shadow: 0 0 10px rgba($orange, 0.6); }
+    50%       { box-shadow: 0 0 20px rgba($orange, 0.9); }
+}
+
+// ── FOOTER ──────────────────────────────────────────────────────────────────
+.ph-footer {
+    font-size: 0.58rem;
+    color: rgba($text, 0.25);
+    letter-spacing: 0.06em;
+    margin: 0;
+    text-align: center;
+}
+
+// ── RESPONSIVE ──────────────────────────────────────────────────────────────
+@media (max-width: 480px) {
+    .ph-card {
+        padding: 2rem 1.4rem 1.5rem;
+        gap: 1.4rem;
+        border-radius: 20px;
+    }
+
+    .ph-title { font-size: 1.1rem; }
+
+    .ph-logo .ph-logo-icon { width: 44px; height: 44px; }
+    .ph-logo .ph-logo-brand { font-size: 1.25rem; }
+
+    .ph-orb--blue { width: 250px; height: 250px; }
+    .ph-orb--orange { width: 200px; height: 200px; }
+}
+
+@media (min-width: 768px) {
+    .ph-card { max-width: 500px; padding: 3rem 2.75rem 2.25rem; }
+    .ph-title { font-size: 1.6rem; }
 }
