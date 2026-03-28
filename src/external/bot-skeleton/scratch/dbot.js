@@ -51,7 +51,10 @@ class DBot {
                     const { contracts_for } = ApiHelpers?.instance ?? {};
                     const top_parent_block = this.getTopParent();
                     if (!top_parent_block) return;
+                    
                     const market_block = top_parent_block.getChildByType('trade_definition_market');
+                    if (!market_block) return;
+
                     const market = market_block.getFieldValue('MARKET_LIST');
                     const submarket = market_block.getFieldValue('SUBMARKET_LIST');
                     const symbol = market_block.getFieldValue('SYMBOL_LIST');

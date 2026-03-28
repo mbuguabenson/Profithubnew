@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from 'react';
+import { createContext, useContext, useLayoutEffect, useState } from 'react';
 import RootStore from '@/stores/root-store';
 import Bot from '../external/bot-skeleton/scratch/dbot';
 
@@ -10,10 +10,17 @@ type TStoreProvider = {
 };
 
 const StoreProvider: React.FC<TStoreProvider> = ({ children, mockStore: mockedStore }) => {
-    const [store] = (window as any).root_store
-        ? [(window as any).root_store]
-        : useState<RootStore>(mockedStore || new RootStore(Bot));
-    if (!(window as any).root_store) (window as any).root_store = store;
+    const [store] = useState<RootStore>(() => {
+        if (mockedStore) return mockedStore;
+        if ((window as any).root_store) return (window as any).root_store;
+        return new RootStore(Bot);
+    });
+
+    useLayoutEffect(() => {
+        if (!(window as any).root_store) {
+            (window as any).root_store = store;
+        }
+    }, [store]);
 
     return <StoreContext.Provider value={store}>{children}</StoreContext.Provider>;
 };

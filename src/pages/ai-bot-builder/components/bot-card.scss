@@ -1,0 +1,175 @@
+.bot-card {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(12px);
+    border-radius: 16px;
+    padding: 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: relative;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    overflow: hidden;
+    min-height: 185px;
+    width: 100%;
+    animation: fadeInUp 0.5s ease-out backwards;
+
+    @for $i from 1 through 10 {
+        &:nth-child(#{$i}) { animation-delay: #{$i * 0.1}s; }
+    }
+
+    &:hover {
+        transform: translateY(-8px) scale(1.02);
+        box-shadow: 0 12px 32px rgba(0, 0, 0, 0.25);
+        background: rgba(255, 255, 255, 0.05);
+        border-color: rgba(255, 255, 255, 0.12);
+    }
+
+    &:active {
+        transform: translateY(-4px) scale(0.98);
+    }
+
+    &__header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+    }
+
+    &__badge {
+        font-size: 9px;
+        font-weight: bold;
+        padding: 3px 6px;
+        border-radius: 3px;
+        text-transform: uppercase;
+        background: rgba(var(--brand-red-coral-rgb), 0.1);
+        color: var(--brand-red-coral);
+    }
+
+    &__icon-wrapper {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: var(--general-section-1);
+        
+        svg {
+            width: 22px;
+            height: 22px;
+        }
+    }
+
+    &__content {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+    }
+
+    &__title {
+        line-height: 1.3;
+        font-size: 14px !important;
+    }
+
+    &__description {
+        font-size: 11px !important;
+        line-height: 1.5;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+
+    &__actions {
+        display: flex;
+        gap: 8px;
+        margin-top: 4px;
+    }
+
+    &__btn {
+        flex: 1;
+        height: 32px !important;
+        font-size: 11px !important;
+        font-weight: bold !important;
+        border-radius: 8px !important;
+        transition: all 0.3s ease !important;
+        border: none !important;
+
+        &--outlined {
+            background: rgba(255, 255, 255, 0.05) !important;
+            border: 1px solid rgba(255, 255, 255, 0.1) !important;
+            color: white !important;
+            &:hover {
+                background: rgba(255, 255, 255, 0.1) !important;
+                border-color: rgba(255, 255, 255, 0.2) !important;
+            }
+        }
+
+        &:not(.bot-card__btn--outlined) {
+            background: linear-gradient(135deg, #ff8c42 0%, #ff4c4c 100%) !important;
+            color: white !important;
+            box-shadow: 0 4px 12px rgba(255, 76, 76, 0.3) !important;
+            
+            &:hover {
+                transform: translateY(-1px);
+                box-shadow: 0 6px 16px rgba(255, 76, 76, 0.4) !important;
+                filter: brightness(1.1);
+            }
+        }
+    }
+
+    // Type Specific Overrides
+    &--ai {
+        border-top: 2px solid #00BCD4;
+        .bot-card__icon-wrapper { color: #00BCD4; background: rgba(0, 188, 212, 0.1); }
+    }
+
+    &--builder {
+        border: 1px dashed rgba(255, 255, 255, 0.15);
+        background: rgba(255, 255, 255, 0.01);
+        cursor: pointer;
+        
+        &:hover {
+            border-color: var(--brand-red-coral);
+            background: rgba(var(--brand-red-coral-rgb), 0.03);
+            border-style: solid;
+        }
+
+        .bot-card__icon-wrapper {
+            background: linear-gradient(135deg, #7b61ff 0%, #3f51b5 100%);
+            box-shadow: 0 4px 12px rgba(123, 97, 255, 0.3);
+            overflow: visible;
+        }
+    }
+
+    &__ai-logo {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 100%;
+    }
+
+    &__ai-text {
+        color: white;
+        font-weight: 800;
+        font-size: 16px;
+    }
+
+    &__ai-dot {
+        position: absolute;
+        top: 1px;
+        right: 1px;
+        width: 8px;
+        height: 8px;
+        background: #2ae0b9;
+        border-radius: 50%;
+        border: 1.5px solid #3f51b5;
+        box-shadow: 0 0 8px rgba(42, 224, 185, 0.6);
+        animation: pulse-glow 2s infinite;
+    }
+}

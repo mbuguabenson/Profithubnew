@@ -55,7 +55,7 @@ const AppRoot = observer(() => {
         const minTimer = setTimeout(() => {
             console.log('[AppRoot] Min loader timer passed');
             setMinLoaderPassed(true);
-        }, 3000);
+        }, 300);
         return () => clearTimeout(minTimer);
     }, []);
 
@@ -70,7 +70,7 @@ const AppRoot = observer(() => {
                 console.warn('[AppRoot] TMB check safety timeout reached');
                 setIsTmbCheckComplete(true);
             }
-        }, 3000);
+        }, 1500);
 
         const checkTmbStatus = async () => {
             try {
@@ -96,7 +96,7 @@ const AppRoot = observer(() => {
                 console.log('[AppRoot] API init safety timeout reached');
                 setIsApiInitialized(true);
             }
-        }, 8000);
+        }, 1500);
 
         const initializeApi = async () => {
             if (!api_base_initialized.current) {

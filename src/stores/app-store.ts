@@ -24,6 +24,9 @@ export default class AppStore {
     disposeSwitchAccountListener: unknown;
     disposeLandingCompanyChangeReaction: unknown;
     disposeResidenceChangeReaction: unknown;
+    is_loading: boolean = true;
+    is_api_initialized: boolean = false;
+    is_eu_error_loading: boolean = false;
 
     constructor(root_store: RootStore, core: RootStore['core']) {
         makeObservable(this, {
@@ -37,6 +40,11 @@ export default class AppStore {
             onClickOutsideBlockly: action,
             showDigitalOptionsMaltainvestError: action,
             api_helpers_store: observable,
+            is_loading: observable,
+            is_api_initialized: observable,
+            is_eu_error_loading: observable,
+            setLoading: action,
+            setIsApiInitialized: action,
         });
 
         this.root_store = root_store;
@@ -158,6 +166,9 @@ export default class AppStore {
         return false;
     };
 
+    setLoading = (value: boolean) => (this.is_loading = value);
+    setIsApiInitialized = (value: boolean) => (this.is_api_initialized = value);
+
     onMount = async () => {
         const { blockly_store, run_panel } = this.root_store;
         const { client, ui } = this.core;
@@ -186,12 +197,22 @@ export default class AppStore {
         blockly_store.setLoading(true);
         console.warn('[AppStore] Starting DBot.initWorkspace reach-out...');
         
+        // Resolve deadlock: Allow AppContent to hide splash screen and mount BotBuilder/scratch_div
+        this.setLoading(false);
+        // Fail-safe to ensure loader is always cleared
+        const blockly_safety_timeout = setTimeout(() => {
+            if (blockly_store.is_loading) {
+                console.warn('[AppStore] Blockly loading safety timeout reached, forcing loader off');
+                blockly_store.setLoading(false);
+            }
+        }, 3000);
+
         let retries = 0;
         let scratchDiv = document.getElementById('scratch_div');
         
         while (!scratchDiv && retries < 10) {
             console.warn(`[AppStore] scratch_div not found, retry ${retries + 1}/10...`);
-            await new Promise(resolve => setTimeout(resolve, 500));
+            await new Promise(resolve => setTimeout(resolve, 200));
             scratchDiv = document.getElementById('scratch_div');
             retries++;
         }
@@ -201,10 +222,11 @@ export default class AppStore {
             console.warn('[AppStore] DBot.initWorkspace FINISHED');
         } catch (e) {
             console.error('[AppStore] DBot.initWorkspace FAILED', e);
+        } finally {
+            clearTimeout(blockly_safety_timeout);
+            blockly_store.setContainerSize();
+            blockly_store.setLoading(false);
         }
-
-        blockly_store.setContainerSize();
-        blockly_store.setLoading(false);
 
         this.registerCurrencyReaction.call(this);
         this.registerOnAccountSwitch.call(this);
@@ -269,8 +291,7 @@ export default class AppStore {
             () => {
                 if (!(window as any).Blockly?.derivWorkspace) return;
 
-                const trade_options_blocks = (window as any).Blockly?.derivWorkspace
-                    .getAllBlocks()
+                const trade_options_blocks = ((window as any).Blockly?.derivWorkspace?.getAllBlocks?.() || [])
                     .filter(
                         (b: any) =>
                             b.type === 'trade_definition_tradeoptions' ||
@@ -279,7 +300,7 @@ export default class AppStore {
                             (b.isDescendantOf('trade_definition_multiplier') && b.category_ === 'trade_parameters')
                     );
 
-                trade_options_blocks.forEach(trade_options_block => setCurrency(trade_options_block));
+                trade_options_blocks.forEach((trade_options_block: any) => setCurrency(trade_options_block));
             }
         );
     };
@@ -289,25 +310,26 @@ export default class AppStore {
             () => this.root_store.common?.is_socket_opened,
             is_socket_opened => {
                 if (!is_socket_opened) return;
+                const api_helpers = ApiHelpers as any;
                 this.api_helpers_store = {
                     server_time: this.root_store.common.server_time,
                     ws: api_base.api,
-                    ticks_service: ApiHelpers?.instance?.ticks_service,
+                    ticks_service: api_helpers?.instance?.ticks_service,
                 };
 
-                if (!ApiHelpers?.instance) {
-                    ApiHelpers.setInstance(this.api_helpers_store);
+                if (!api_helpers?.instance) {
+                    api_helpers.setInstance(this.api_helpers_store);
                 }
 
                 this.api_helpers_store = {
                     ...this.api_helpers_store,
-                    ticks_service: ApiHelpers?.instance?.ticks_service,
+                    ticks_service: api_helpers?.instance?.ticks_service,
                 };
 
                 this.showDigitalOptionsMaltainvestError();
 
-                const active_symbols = ApiHelpers?.instance?.active_symbols;
-                const contracts_for = ApiHelpers?.instance?.contracts_for;
+                const active_symbols = api_helpers?.instance?.active_symbols;
+                const contracts_for = api_helpers?.instance?.contracts_for;
 
                 if (ApiHelpers?.instance && active_symbols && contracts_for) {
                     if ((window as any).Blockly?.derivWorkspace) {
@@ -374,18 +396,11 @@ export default class AppStore {
             common,
         } as any;
 
-        // Initialize ApiHelpers if not already done
-        if (!ApiHelpers.instance && api_base.api) {
-            ApiHelpers.setInstance({
-                server_time: common.server_time,
-                ws: api_base.api,
-            });
-        }
-
+        const api_helpers = ApiHelpers as any;
         this.api_helpers_store = {
             server_time: common.server_time,
             ws: api_base.api,
-            ticks_service: ApiHelpers.instance?.ticks_service,
+            ticks_service: api_helpers.instance?.ticks_service,
         };
     };
 

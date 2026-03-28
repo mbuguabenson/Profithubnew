@@ -82,9 +82,9 @@ export const standalone_routes = {
     smarttrader: `${getDerivDomain('smartTrader')}/en/trading.html`,
     statement: `${getDerivDomain('derivApp')}/reports/statement`,
     trade: getDerivDomain('derivApp'),
-    dtrader: window.location.hostname === 'localhost' ? 'https://localhost:8443' : `${window.location.origin}/?dtrader`,
+    dtrader: window.location.hostname === 'localhost' ? `https://${window.location.host}` : `${window.location.origin}/?dtrader`,
     dtooltrades:
-        window.location.hostname === 'localhost' ? 'http://localhost:3000' : `${window.location.origin}/?dtooltrades`,
+        window.location.hostname === 'localhost' ? `https://${window.location.host}` : `${window.location.origin}/?dtooltrades`,
     traders_hub: getDerivDomain('derivApp'),
     traders_hub_lowcode: getDerivDomain('derivHub'),
     recent_transactions: `${getDerivDomain('derivHub')}/tradershub/redirect?action=redirect_to&redirect_to=wallet`,

@@ -3,7 +3,6 @@ import { observer } from 'mobx-react-lite';
 import {
     LabelPairedChartCandlestickCaptionRegularIcon,
     LabelPairedCopyCaptionRegularIcon,
-    LabelPairedLightbulbCaptionRegularIcon,
     LabelPairedPuzzlePieceTwoCaptionBoldIcon,
     LabelPairedSlidersCaptionRegularIcon,
 } from '@deriv/quill-icons/LabelPaired';
@@ -31,19 +30,19 @@ const Dashboard = observer(({ handleTabChange }: { handleTabChange: (index: numb
             keywords: ['bot', 'builder', 'create', 'blockly', 'automation'],
         },
         {
-            id: 'free-bots',
-            title: 'Free Bots',
-            icon: <LabelPairedLightbulbCaptionRegularIcon height='48px' width='48px' />,
-            description: 'Access pre-built bot templates',
-            tabIndex: 6,
-            keywords: ['free', 'bots', 'templates', 'ready', 'download'],
+            id: 'trading-bots',
+            title: 'Trading Bots',
+            icon: <LabelPairedPuzzlePieceTwoCaptionBoldIcon height='48px' width='48px' />,
+            description: 'AI-powered trading bots from prompts',
+            tabIndex: 3,
+            keywords: ['ai', 'bot', 'builder', 'prompt', 'automation', 'xml', 'trading'],
         },
         {
             id: 'smart-analysis',
             title: 'Smart Analysis',
             icon: <LabelPairedChartCandlestickCaptionRegularIcon height='48px' width='48px' />,
             description: 'Advanced market analysis tools',
-            tabIndex: 8,
+            tabIndex: 4, // Corrected to match DBOT_TABS.ANALYSIS_TOOL
             keywords: ['smart', 'analysis', 'charts', 'statistics', 'data'],
         },
         {
@@ -51,7 +50,7 @@ const Dashboard = observer(({ handleTabChange }: { handleTabChange: (index: numb
             title: 'Copy Trading',
             icon: <LabelPairedCopyCaptionRegularIcon height='48px' width='48px' />,
             description: 'Mirror successful traders',
-            tabIndex: 4,
+            tabIndex: 6, // Matches DBOT_TABS.COPY_TRADING
             keywords: ['copy', 'trading', 'mirror', 'follow', 'traders'],
         },
         {
@@ -59,7 +58,7 @@ const Dashboard = observer(({ handleTabChange }: { handleTabChange: (index: numb
             title: 'Auto Trader',
             icon: <LabelPairedSlidersCaptionRegularIcon height='48px' width='48px' />,
             description: 'Automated trading strategies',
-            tabIndex: 3,
+            tabIndex: 7, // Matches DBOT_TABS.STRATEGIES
             keywords: ['auto', 'trader', 'automated', 'strategy', 'bot'],
         },
         {
@@ -67,7 +66,7 @@ const Dashboard = observer(({ handleTabChange }: { handleTabChange: (index: numb
             title: 'AI Analysis',
             icon: <LabelPairedPuzzlePieceTwoCaptionBoldIcon height='48px' width='48px' />,
             description: 'AI-powered predictions',
-            tabIndex: 13,
+            tabIndex: 4, // Redirecting to Smart Analysis (Tab 4) for now
             keywords: ['ai', 'artificial', 'intelligence', 'prediction', 'machine', 'learning'],
         },
     ];

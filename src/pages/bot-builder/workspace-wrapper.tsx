@@ -18,6 +18,26 @@ const WorkspaceWrapper = observer(() => {
         };
     }, []);
 
+    // Profithub AI Strategy Loader
+    React.useEffect(() => {
+        if (!is_loading && window.Blockly?.derivWorkspace) {
+            const pending_xml = localStorage.getItem('profithub_pending_load_xml');
+            if (pending_xml) {
+                try {
+                    const xml_dom = window.Blockly.utils.xml.textToDom(pending_xml);
+                    window.Blockly.derivWorkspace.clear();
+                    window.Blockly.Xml.domToWorkspace(xml_dom, window.Blockly.derivWorkspace);
+                    localStorage.removeItem('profithub_pending_load_xml');
+                    
+                    // Trigger a resize to ensure blockly layout is correct
+                    window.dispatchEvent(new Event('resize'));
+                } catch (e) {
+                    console.error('Profithub AI: Error loading pending XML', e);
+                }
+            }
+        }
+    }, [is_loading]);
+
     if (is_loading) return null;
 
     if (window.Blockly?.derivWorkspace)

@@ -30,7 +30,8 @@ export default class AdminStore {
         strategies: false,
         settings: true,
         tutorials: false,
-        free_bots: true,
+        free_bots: false, // Legacy
+        ai_bot_builder: true,
         dtrader: true,
         dtooltrades: true,
         deriv_course: true,

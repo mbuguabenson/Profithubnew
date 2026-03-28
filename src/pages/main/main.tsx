@@ -46,8 +46,7 @@ const SmartAuto24 = lazy(() => import('@/pages/circles-analysis/index'));
 const DigitCracker = lazy(() => import('@/pages/digit-cracker/index'));
 const Settings = lazy(() => import('@/pages/settings/index'));
 const Strategies = lazy(() => import('@/pages/strategies/index'));
-import FreeBotsTab from '@/pages/free-bots/free-bots-tab';
-// const FreeBotsTab = lazy(() => import('@/pages/free-bots/free-bots-tab'));
+const AIBotBuilder = lazy(() => import('@/pages/ai-bot-builder/AIBotBuilder'));
 const DerivCourse = lazy(() => import('@/pages/deriv-course/DerivCourse'));
 
 const Portal = observer(({ type }: { type: 'dtrader' | 'dtooltrades' }) => {
@@ -55,8 +54,8 @@ const Portal = observer(({ type }: { type: 'dtrader' | 'dtooltrades' }) => {
     const finalBaseUrl =
         window.location.hostname === 'localhost'
             ? type === 'dtrader'
-                ? 'https://localhost:8443'
-                : 'http://localhost:3000'
+                ? `https://${window.location.host}`
+                : `https://${window.location.host}`
             : type === 'dtrader'
             ? 'https://dtrader.profithubtool.vercel.app'
             : 'https://dtooltrades.vercel.app/';
@@ -198,7 +197,7 @@ const AppWrapper = observer(() => {
         'dashboard',
         'bot_builder',
         'chart',
-        'free_bots',
+        'trading_bots',
         'analysis_tool',
         'trading_tools',
         'copy_trading',
@@ -500,20 +499,22 @@ const AppWrapper = observer(() => {
                                 </div>
                             ) : null}
 
-                            {/* Tab 3: Free Bots */}
-                            {admin.visible_tabs.free_bots ? (
+                            {/* Tab 3: Trading Bots */}
+                            {admin.visible_tabs.ai_bot_builder ? (
                                 <div
                                     label={
                                         <div className='main__tabs-label'>
                                             <span style={{ fontSize: '20px', marginRight: '8px' }}>🤖</span>
-                                            <Localize i18n_default_text='Free Bots' />
+                                            <Localize i18n_default_text='Trading Bots' />
                                         </div>
                                     }
-                                    id='id-free-bots'
+                                    id='id-trading-bots'
                                 >
                                     <PageContentWrapper>
-                                        <Suspense fallback={<ChunkLoader message={localize('Loading Free Bots...')} />}>
-                                            <FreeBotsTab />
+                                        <Suspense
+                                            fallback={<ChunkLoader message={localize('Loading Trading Bots...')} />}
+                                        >
+                                            <AIBotBuilder handleTabChange={handleTabChange} />
                                         </Suspense>
                                     </PageContentWrapper>
                                 </div>

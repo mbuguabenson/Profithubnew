@@ -65,37 +65,19 @@ export const getDefaultAppIdAndUrl = () => {
 };
 
 export const getAppId = () => {
-    // 1. Priority: Environment Variable (Deployment)
-    const env_app_id =
-        process.env.VITE_APP_ID ||
-        (import.meta as unknown as { env: { VITE_APP_ID: string } }).env?.VITE_APP_ID ||
-        process.env.REACT_APP_Deriv_APP_ID;
-
-    if (env_app_id) {
-        console.log('[Config] Using App ID from environment variable:', env_app_id);
-        return String(env_app_id);
+    // 1. Priority: Localhost/Test environments ALWAYS use their dedicated app_id
+    //    This prevents stale localStorage values from breaking OAuth login
+    if (isLocal()) {
+        return APP_IDS.LOCALHOST;
     }
 
-    let app_id = null;
-    const config_app_id = window.localStorage.getItem('config.app_id');
+    if (isStaging()) {
+        return APP_IDS.STAGING;
+    }
+
+    // 2. Priority: Production domain mapping / Default
     const current_domain = getCurrentProductionDomain() ?? '';
-
-    // 2. Priority: LocalStorage Override (Endpoint Page)
-    if (config_app_id) {
-        app_id = config_app_id;
-    }
-    // 3. Priority: Staging/Test Environments
-    else if (isStaging()) {
-        app_id = APP_IDS.STAGING;
-    } else if (isTestLink()) {
-        app_id = APP_IDS.LOCALHOST;
-    }
-    // 4. Priority: Production / Default
-    else {
-        app_id = domain_app_ids[current_domain as keyof typeof domain_app_ids] ?? APP_IDS.PRODUCTION;
-    }
-
-    return app_id;
+    return domain_app_ids[current_domain as keyof typeof domain_app_ids] ?? APP_IDS.PRODUCTION;
 };
 
 export const getSocketURL = () => {
@@ -111,15 +93,13 @@ export const checkAndSetEndpointFromUrl = () => {
     if (isTestLink()) {
         const url_params = new URLSearchParams(location.search.slice(1));
 
-        if (url_params.has('qa_server') && url_params.has('app_id')) {
+        if (url_params.has('qa_server')) {
             const qa_server = url_params.get('qa_server') || '';
-            const app_id = url_params.get('app_id') || '';
 
             url_params.delete('qa_server');
-            url_params.delete('app_id');
+            if (url_params.has('app_id')) url_params.delete('app_id');
 
-            if (/^(^(www\.)?qa[0-9]{1,4}\.deriv.dev|(.*)\.derivws\.com)$/.test(qa_server) && /^[0-9]+$/.test(app_id)) {
-                localStorage.setItem('config.app_id', app_id);
+            if (/^(^(www\.)?qa[0-9]{1,4}\.deriv.dev|(.*)\.derivws\.com)$/.test(qa_server)) {
                 localStorage.setItem('config.server_url', qa_server.replace(/"/g, ''));
             }
 
@@ -157,7 +137,8 @@ export const generateOAuthURL = () => {
         oauth_url = 'https://oauth.deriv.be/oauth2/authorize';
     }
 
-    const login_url = `${oauth_url}?app_id=${app_id}&l=${lang}&brand=deriv`;
+    const redirect_uri = `${window.location.protocol}//${window.location.host}${window.location.pathname}`;
+    const login_url = `${oauth_url}?app_id=${app_id}&l=${lang}&brand=deriv&redirect_uri=${redirect_uri}`;
 
     console.log('[Config] Generated OAuth URL:', login_url);
     return login_url;

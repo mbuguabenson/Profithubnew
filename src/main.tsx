@@ -16,6 +16,26 @@ if (currentServerUrl && INVALID_WS_HOSTS.some(h => currentServerUrl.includes(h))
     localStorage.removeItem('config.server_url');
 }
 
+// Ensure @deriv/api-v2 APIProvider uses the same App ID as the OAuth Flow
+import { getAppId, isLocal } from './components/shared/utils/config/config';
+
+// On localhost, clear any stale config.app_id that might have been set from
+// a previous session or different environment (e.g. 1069 from webtrader)
+if (isLocal()) {
+    const staleAppId = localStorage.getItem('config.app_id');
+    if (staleAppId && staleAppId !== String(getAppId())) {
+        console.warn(`[main] Clearing stale config.app_id (${staleAppId}) on localhost`);
+        localStorage.removeItem('config.app_id');
+    }
+}
+
+const currentConfigAppId = localStorage.getItem('config.app_id');
+const activeAppId = getAppId();
+if (!currentConfigAppId || currentConfigAppId !== activeAppId.toString()) {
+    console.warn(`[main] Syncing APIProvider app_id to ${activeAppId}`);
+    localStorage.setItem('config.app_id', activeAppId.toString());
+}
+
 registerPWA()
     .then(registration => {
         if (registration) {

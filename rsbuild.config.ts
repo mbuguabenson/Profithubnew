@@ -18,6 +18,10 @@ export default defineConfig({
         pluginReact(),
         pluginBasicSsl(),
     ],
+    dev: {
+        hmr: false,
+        liveReload: false,
+    },
     source: {
         entry: {
             index: './src/main.tsx',
@@ -90,11 +94,11 @@ export default defineConfig({
         template: './index.html',
     },
     server: {
-        port: 3000,
+        port: 8443,
         compress: true,
         headers: {
-            'Cross-Origin-Opener-Policy': 'same-origin',
-            'Cross-Origin-Embedder-Policy': 'anonymous-only',
+            'Cross-Origin-Opener-Policy': 'unsafe-none',
+            'Cross-Origin-Embedder-Policy': 'unsafe-none',
             'Cross-Origin-Resource-Policy': 'cross-origin',
             'Access-Control-Allow-Origin': '*',
         },
@@ -104,10 +108,6 @@ export default defineConfig({
                 changeOrigin: true,
             },
         },
-    },
-    dev: {
-        hmr: false,
-        liveReload: false,
     },
     tools: {
         postcss: config => {

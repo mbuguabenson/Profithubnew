@@ -37,7 +37,7 @@ const AppContent = observer(() => {
     const [is_api_initialized, setIsApiInitialized] = React.useState(false);
     const [is_loading, setIsLoading] = React.useState(true);
     const [min_loader_passed, setMinLoaderPassed] = React.useState(false);
-    const [is_eu_error_loading, setIsEuErrorLoading] = React.useState(true);
+    const [is_eu_error_loading, setIsEuErrorLoading] = React.useState(false);
     const [offline_timeout, setOfflineTimeout] = React.useState(null);
     const store = useStore();
     const { app, transactions, common, client, dashboard } = store;
@@ -71,6 +71,13 @@ const AppContent = observer(() => {
     useIntercom(token);
 
     useEffect(() => {
+        const timeoutId = setTimeout(() => {
+            if (!is_api_initialized) {
+                console.warn('[AppContent] API initialization safety timeout reached');
+                setIsApiInitialized(true);
+            }
+        }, 3000);
+
         if (connectionStatus === CONNECTION_STATUS.OPENED) {
             setIsApiInitialized(true);
             common.setSocketOpened(true);
@@ -81,19 +88,21 @@ const AppContent = observer(() => {
                 clearTimeout(offline_timeout);
                 setOfflineTimeout(null);
             }
+            clearTimeout(timeoutId);
         } else if (connectionStatus === CONNECTION_STATUS.CLOSED) {
             common.setSocketOpened(false);
             dashboard.setWebSocketState(false);
         }
-    }, [connectionStatus, offline_timeout, common]);
 
-    // Handle offline scenarios and general loading hangs - don't wait indefinitely for API
+        return () => clearTimeout(timeoutId);
+    }, [connectionStatus, offline_timeout, common, is_api_initialized]);
+
     useEffect(() => {
-        // Enforce 3s minimum display time - only once on mount or connection
+        // Enforce 300ms minimum display time - only once on mount or connection
         const minTimer = setTimeout(() => {
             console.log('[AppContent] Min loader timer passed');
             setMinLoaderPassed(true);
-        }, 3000);
+        }, 300);
 
         return () => clearTimeout(minTimer);
     }, []);
@@ -228,20 +237,26 @@ const AppContent = observer(() => {
                     console.log('[Timeout] Active symbols loading timeout, showing dashboard');
                     setIsLoading(false);
                 }
-            }, 10000); // 10 second timeout
+            }, 1500); // 1.5 second timeout
         }
     };
 
     // Final app-level safety timeout to ensure we never stay on loader forever
     React.useEffect(() => {
-        const global_safety = setTimeout(() => {
-            if (is_loading) {
-                console.warn('[AppContent] Global loading safety timeout reached, forcing dashboard show');
+        const nuclear_safety = setTimeout(() => {
+            if (is_loading || !is_api_initialized || is_eu_error_loading) {
+                console.warn('[AppContent] Nuclear safety timeout reached (8s). Forcing dashboard show.');
+                console.warn('[AppContent] Status:', { is_loading, is_api_initialized, min_loader_passed, is_eu_error_loading });
+                
                 setIsLoading(false);
+                setIsApiInitialized(true);
+                setMinLoaderPassed(true);
+                setIsEuErrorLoading(false);
             }
-        }, 15000);
-        return () => clearTimeout(global_safety);
-    }, [is_loading]);
+        }, 8000);
+
+        return () => clearTimeout(nuclear_safety);
+    }, [is_loading, is_api_initialized, is_eu_error_loading]);
 
     React.useEffect(() => {
         if (is_api_initialized) {
@@ -301,9 +316,8 @@ const AppContent = observer(() => {
         );
     }
 
-    if (is_loading || !min_loader_passed) {
-        console.log('[AppContent] Still loading:', {
-            is_loading,
+    if (!is_api_initialized || !min_loader_passed || is_eu_error_loading) {
+        console.log('[AppContent] System still initializing:', {
             min_loader_passed,
             is_api_initialized,
             is_eu_error_loading,
