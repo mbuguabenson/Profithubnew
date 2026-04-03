@@ -271,13 +271,17 @@ export const loadWorkspace = async (xml, event_group, workspace) => {
     await repopulateMarketDropdowns(workspace);
 };
 
-export const repopulateMarketDropdowns = async (workspace) => {
-    // Small delay to ensure ApiHelpers is ready
-    await new Promise(resolve => setTimeout(resolve, 300));
-
+export const repopulateMarketDropdowns = async (workspace, retry_count = 0) => {
     try {
         const ApiHelpers = (await import('../../services/api/api-helpers')).default;
         const { active_symbols } = ApiHelpers?.instance ?? {};
+        
+        // If ApiHelpers is not ready, retry up to 5 times (1.5s total)
+        if (!active_symbols && retry_count < 5) {
+            await new Promise(resolve => setTimeout(resolve, 300));
+            return repopulateMarketDropdowns(workspace, retry_count + 1);
+        }
+        
         if (!active_symbols) return;
 
         const all_blocks = workspace.getAllBlocks();
@@ -303,7 +307,7 @@ export const repopulateMarketDropdowns = async (workspace) => {
             });
         }
 
-        // Populate submarkets based on selected market
+        // Populate submarkets
         const market_val = market_dropdown.getValue() || current_market;
         if (market_val) {
             const submarket_options = active_symbols.getSubmarketDropdownOptions(market_val);
@@ -315,7 +319,7 @@ export const repopulateMarketDropdowns = async (workspace) => {
             }
         }
 
-        // Populate symbols based on selected submarket
+        // Populate symbols
         const submarket_val = submarket_dropdown.getValue() || current_submarket;
         if (submarket_val) {
             const symbol_options = active_symbols.getSymbolDropdownOptions(submarket_val);
@@ -324,6 +328,11 @@ export const repopulateMarketDropdowns = async (workspace) => {
                     default_value: current_symbol,
                     should_pretend_empty: false,
                 });
+                
+                // Final verification: ensure the symbol is actually set correctly in the dropdown
+                if (!symbol_dropdown.getValue() && current_symbol) {
+                    symbol_dropdown.setValue(current_symbol);
+                }
             }
         }
     } catch (e) {

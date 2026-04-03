@@ -24,7 +24,10 @@ type TTabsProps = {
     has_active_line?: boolean;
     has_bottom_line?: boolean;
     header_fit_content?: boolean;
-    history: History;
+    history: {
+        replace: (path: string) => void;
+        location: any;
+    };
     icon_color?: string;
     icon_size?: number;
     is_100vw?: boolean;
@@ -91,17 +94,25 @@ const Tabs = ({
         if (should_update_hash) {
             // if hash is in url, find which tab index correlates to it
             const hash = location.hash.slice(1);
-            const childrenArray = React.Children.toArray(children);
-            const hash_index = childrenArray.findIndex(
-                child =>
-                    child && typeof child === 'object' && 'props' in child && child.props && child.props.hash === hash
-            );
-            const has_hash = hash_index > -1;
+            let hash_index = -1;
 
-            if (has_hash) {
+            React.Children.forEach(children, (child, index) => {
+                if (
+                    child &&
+                    typeof child === 'object' &&
+                    'props' in child &&
+                    child.props &&
+                    child.props.hash === hash
+                ) {
+                    hash_index = index;
+                }
+            });
+
+            if (hash_index > -1) {
                 initial_index_to_show = hash_index;
             } else {
                 // if no hash is in url but component has passed hash prop, set hash of the tab shown
+                const childrenArray = React.Children.toArray(children);
                 const childAtIndex = childrenArray[initial_index_to_show];
                 const child_props =
                     childAtIndex && typeof childAtIndex === 'object' && 'props' in childAtIndex

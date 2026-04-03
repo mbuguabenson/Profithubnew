@@ -215,7 +215,8 @@ const AppWrapper = observer(() => {
     const GetHashedValue = (tab: number) => {
         tab_value = location.hash?.split('#')[1];
         if (!tab_value) return tab;
-        return Number(hash.indexOf(String(tab_value)));
+        const index = hash.indexOf(String(tab_value));
+        return index > -1 ? index : tab;
     };
     const active_hash_tab = GetHashedValue(active_tab);
 
@@ -585,6 +586,9 @@ const AppWrapper = observer(() => {
                                 </div>
                             ) : null}
 
+
+                            {/* Tab 7: Placeholder to sync with hash array (if any hidden features exist) */}
+                            {false ? <div label="Placeholder" id="id-placeholder" /> : null}
 
                             {/* Tab 8: Strategies */}
                             {admin.visible_tabs.strategies ? (

@@ -27,6 +27,7 @@ const PARSED_MANIFEST = botManifest.map(bot => ({
 const AIBotBuilder: React.FC<{ handleTabChange: (index: number, is_instant?: boolean) => void }> = ({ handleTabChange }) => {
     const smartLoad = (xml: string) => {
         localStorage.setItem('profithub_pending_load_xml', xml);
+        localStorage.setItem('profithub_auto_run', 'true');
         window.dispatchEvent(new Event('profithub_bot_load'));
         handleTabChange(1, true); // True for instant jump
     };

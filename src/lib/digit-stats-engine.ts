@@ -82,26 +82,30 @@ export class DigitStatsEngine {
 
     private updateStats() {
         const counts = Array(10).fill(0);
-        this.ticks.forEach(d => counts[d]++);
-
+        const last_50_counts = Array(10).fill(0);
+        const last_10_counts = Array(10).fill(0);
+        
         const total = this.ticks.length || 1;
+        const last_50_start = Math.max(0, this.ticks.length - 50);
+        const last_10_start = Math.max(0, this.ticks.length - 10);
 
-        // Calculate powers/trend for each digit
-        const last_50_ticks = this.ticks.slice(-50);
-        const last_10_ticks = this.ticks.slice(-10);
+        this.ticks.forEach((d, i) => {
+            counts[d]++;
+            if (i >= last_50_start) last_50_counts[d]++;
+            if (i >= last_10_start) last_10_counts[d]++;
+        });
 
         // Rank digits by frequency
         const sorted_indices = counts.map((c, i) => ({ count: c, index: i })).sort((a, b) => b.count - a.count);
 
         this.digit_stats = counts.map((count, digit) => {
             const percentage = (count / total) * 100;
-
-            // Calculate rank (1=most, 10=least)
             const rank = sorted_indices.findIndex(s => s.index === digit) + 1;
 
             // Calculate power movement (trend)
-            const recent_count = last_10_ticks.filter(d => d === digit).length;
-            const mid_count = last_50_ticks.filter(d => d === digit).length / 5;
+            const recent_count = last_10_counts[digit];
+            // mid_count is average of previous 50 (actually 10 inside 50)
+            const mid_count = last_50_counts[digit] / 5;
             const is_increasing = recent_count > mid_count;
             const power = 50 + (recent_count - mid_count) * 10;
 
@@ -180,9 +184,15 @@ export class DigitStatsEngine {
 
     getPercentages() {
         const total = this.ticks.length || 1;
-        const evens = this.ticks.filter(d => d % 2 === 0).length;
-        const overs = this.ticks.filter(d => d > this.over_under_threshold).length;
-        const matches = this.ticks.filter(d => d === this.match_diff_digit).length;
+        let evens = 0;
+        let overs = 0;
+        let matches = 0;
+
+        this.ticks.forEach(d => {
+            if (d % 2 === 0) evens++;
+            if (d > this.over_under_threshold) overs++;
+            if (d === this.match_diff_digit) matches++;
+        });
 
         let rises = 0;
         let valid_price_deltas = 0;
