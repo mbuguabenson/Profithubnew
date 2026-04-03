@@ -1,0 +1,136 @@
+﻿ M brand.config.json
+ M package.json
+ M src/components/layout/header/header-config.tsx
+ M src/components/shared/utils/routes/routes.ts
+ M src/constants/bot-contents.ts
+ M src/external/bot-skeleton/scratch/blockly.js
+ M "src/external/bot-skeleton/scratch/blocks/Binary/Trade Definition/trade_definition.js"
+ M src/external/bot-skeleton/scratch/utils/index.js
+ M src/external/bot-skeleton/services/tradeEngine/Interface/index.js
+ M src/lib/digit-stats-engine.ts
+ M src/lib/digit-trade-engine.ts
+ M src/pages/ai-bot-builder/AIBotBuilder.tsx
+ M src/pages/ai-bot-builder/ai-bot-builder.scss
+ M src/pages/ai-bot-builder/components/BotCard.tsx
+ M src/pages/ai-bot-builder/components/bot-card.scss
+ M src/pages/analysis-tool/RiseFallTab.tsx
+ M src/pages/analysis-tool/analysis-tool.scss
+ M src/pages/analysis-tool/index.tsx
+ D src/pages/auto-trader/auto-bots.tsx
+ D src/pages/auto-trader/auto-trader.scss
+ D src/pages/auto-trader/bot-config.tsx
+ D src/pages/auto-trader/comprehensive-stats.tsx
+ D src/pages/auto-trader/differs-bot.tsx
+ D src/pages/auto-trader/digit-stats.tsx
+ D src/pages/auto-trader/even-odd-bot.tsx
+ D src/pages/auto-trader/index.tsx
+ D src/pages/auto-trader/last-digits.tsx
+ D src/pages/auto-trader/market-selector.tsx
+ D src/pages/auto-trader/over-under-analysis.tsx
+ M src/pages/bot-builder/workspace-wrapper.tsx
+ D src/pages/bots/bots.scss
+ D src/pages/bots/index.tsx
+ M src/pages/chart/chart.tsx
+ M src/pages/circles-analysis/components/trading-engine.scss
+ M src/pages/circles-analysis/components/trading-engine.tsx
+ M src/pages/dashboard/cards.tsx
+ D src/pages/deriv-course/DerivCourse.tsx
+ D src/pages/deriv-course/course-data.ts
+ D src/pages/deriv-course/deriv-course.scss
+ M src/pages/digit-cracker/index.tsx
+ D src/pages/easy-tool/advanced-ou-analyzer.scss
+ D src/pages/easy-tool/advanced-ou-analyzer.tsx
+ D src/pages/easy-tool/analysis-utils.ts
+ D src/pages/easy-tool/digit-distribution-circles.scss
+ D src/pages/easy-tool/digit-distribution-circles.tsx
+ D src/pages/easy-tool/easy-tool.scss
+ D src/pages/easy-tool/even-odd-pattern.scss
+ D src/pages/easy-tool/even-odd-pattern.tsx
+ D src/pages/easy-tool/index.tsx
+ D src/pages/easy-tool/matches-differs-analyzer.scss
+ D src/pages/easy-tool/matches-differs-analyzer.tsx
+ D src/pages/easy-tool/over-under-pattern.scss
+ D src/pages/easy-tool/over-under-pattern.tsx
+ M src/pages/main/main.tsx
+ D src/pages/settings/components/contacts.tsx
+ D src/pages/settings/components/error-handling.tsx
+ D src/pages/settings/components/system-logs.tsx
+ D src/pages/settings/index.tsx
+ D src/pages/settings/settings.scss
+ D src/pages/signals/signals-tab.scss
+ D src/pages/signals/signals-tab.tsx
+ D src/pages/smart-trading/components/advanced-over-under-tab.scss
+ D src/pages/smart-trading/components/advanced-over-under-tab.tsx
+ D src/pages/smart-trading/components/ai-analysis-tab.tsx
+ D src/pages/smart-trading/components/automated-trading-view.tsx
+ D src/pages/smart-trading/components/automated-trading.scss
+ D src/pages/smart-trading/components/bot-settings-dialog.scss
+ D src/pages/smart-trading/components/bot-settings-dialog.tsx
+ D src/pages/smart-trading/components/bulk-trading-view.scss
+ D src/pages/smart-trading/components/bulk-trading-view.tsx
+ D src/pages/smart-trading/components/differs-tab.scss
+ D src/pages/smart-trading/components/differs-tab.tsx
+ D src/pages/smart-trading/components/even-odd-tab.scss
+ D src/pages/smart-trading/components/even-odd-tab.tsx
+ D src/pages/smart-trading/components/market-overview.scss
+ D src/pages/smart-trading/components/market-selector.scss
+ D src/pages/smart-trading/components/matches-tab.scss
+ D src/pages/smart-trading/components/matches-tab.tsx
+ D src/pages/smart-trading/components/over-under-tab.scss
+ D src/pages/smart-trading/components/over-under-tab.tsx
+ D src/pages/smart-trading/components/quick-settings.scss
+ D src/pages/smart-trading/components/quick-settings.tsx
+ D src/pages/smart-trading/components/scp-tab.scss
+ D src/pages/smart-trading/components/scp-tab.tsx
+ D src/pages/smart-trading/components/smart-analysis-card.tsx
+ D src/pages/smart-trading/components/smart-analysis-tab.scss
+ D src/pages/smart-trading/components/smart-analysis-tab.tsx
+ D src/pages/smart-trading/components/smart-charts-tab.scss
+ D src/pages/smart-trading/components/smart-charts-tab.tsx
+ D src/pages/smart-trading/components/strategy-tile.tsx
+ D src/pages/smart-trading/components/trading-signals-notification.scss
+ D src/pages/smart-trading/components/trading-signals-notification.tsx
+ D src/pages/smart-trading/components/turbo-exec-bot-tab.scss
+ D src/pages/smart-trading/components/turbo-exec-bot-tab.tsx
+ D src/pages/smart-trading/components/ultra-alpha-score.scss
+ D src/pages/smart-trading/components/ultra-alpha-score.tsx
+ D src/pages/smart-trading/components/ultra-console.scss
+ D src/pages/smart-trading/components/ultra-console.tsx
+ D src/pages/smart-trading/components/ultra-momentum-gauge.scss
+ D src/pages/smart-trading/components/ultra-momentum-gauge.tsx
+ D src/pages/smart-trading/components/vsense-turbo-tab.scss
+ D src/pages/smart-trading/components/vsense-turbo-tab.tsx
+ D src/pages/smart-trading/index.tsx
+ D src/pages/smart-trading/money-maker-ultra-tab.scss
+ D src/pages/smart-trading/money-maker-ultra-tab.tsx
+ D src/pages/smart-trading/smart-trading.scss
+ D src/pages/toolhub/toolhub.scss
+ D src/pages/toolhub/toolhub.tsx
+ M src/stores/admin-store.ts
+ M src/stores/analysis-market-store.ts
+ M src/stores/analysis-store.ts
+ D src/stores/auto-trader-store.ts
+ M src/stores/digit-cracker-store.ts
+ M src/stores/root-store.ts
+ M src/stores/smart-auto-store.ts
+ D src/stores/smart-trading-store.ts
+ M src/utils/digit-utils.ts
+?? .git_status.txt
+?? check.mjs
+?? gen_analysis.py
+?? gen_xml.txt
+?? "public/AI Bots/"
+?? public/Automatic/
+?? "public/Hybrid Bots/"
+?? "public/Official Bots/"
+?? scripts/
+?? src/components/premium-slider/
+?? src/constants/bot-manifest.json
+?? src/lib/profitmax-trade-engine.ts
+?? src/pages/analysis-tool/components/
+?? src/pages/analysis-tool/easy-tool/
+?? src/stores/profitmax-store.ts
+?? src/utils/analysis-indicators.ts
+?? take_screen.py
+?? tmp_check.js
+?? tmp_check2.js

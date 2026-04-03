@@ -1,5 +1,4 @@
 import { action, makeObservable, observable, reaction, runInAction } from 'mobx';
-import { getSafeLastDigit } from '@/utils/digit-utils';
 import { TDigitStat } from './analysis-store';
 import RootStore from './root-store';
 
@@ -23,6 +22,7 @@ export type TBotConfig = {
     prediction: number;
     is_running: boolean;
     is_auto: boolean;
+    symbol?: string;
     use_compounding?: boolean;
     compound_resets_on_loss?: boolean;
     use_martingale?: boolean;
@@ -744,7 +744,10 @@ export default class SmartAutoStore {
             const stake = this.calculateStake(config);
             this.addLog(`Buying ${contract_type} for $${stake.toFixed(2)}`, 'trade');
 
-            const symbol = config.symbol || this.root_store.common.symbol || 'R_100';
+            const symbol = config.symbol 
+                || this.root_store.analysis_market?.symbol 
+                || this.root_store.smart_trading?.symbol 
+                || 'R_100';
             const proposal = (await apiBaseInstance.api.send({
                 proposal: 1,
                 amount: stake,
@@ -753,15 +756,20 @@ export default class SmartAutoStore {
                 currency: this.root_store.client.currency || 'USD',
                 duration: config.ticks,
                 duration_unit: 't',
-                symbol: symbol,
+                underlying_symbol: symbol,
                 ...(contract_type.includes('DIGIT')
                     ? contract_type.includes('EVEN') || contract_type.includes('ODD')
                         ? {}
                         : { barrier: prediction.toString() }
                     : {}),
-            })) as { error?: { message: string }; proposal?: { id: string } };
+            })) as { error?: { message: string; code: string }; proposal?: { id: string } };
 
-            if (proposal.error) throw new Error(proposal.error.message);
+            if (proposal.error) {
+                if (proposal.error.code === 'InsufficientBalance') {
+                    apiBaseInstance.api.send({ topup_virtual: 1 });
+                }
+                throw new Error(proposal.error.message);
+            }
             if (!proposal.proposal) throw new Error('Proposal failed');
 
             this.addLog(`Buying ${contract_type} contract...`, 'trade');
@@ -775,29 +783,37 @@ export default class SmartAutoStore {
 
             this.bot_status = `TRADING: ${contract_type}`;
 
-            // Wait for result
-            setTimeout(
-                async () => {
-                    const poc = (await apiBaseInstance.api?.send({
-                        proposal_open_contract: 1,
-                        contract_id: (res.buy as { contract_id: string }).contract_id,
-                    })) as { proposal_open_contract?: Record<string, unknown> };
-                    if (poc.proposal_open_contract) {
-                        this.handleResult(poc.proposal_open_contract, config);
-                    }
+            // Use subscription instead of setTimeout for better reliability
+            const contract_id = res.buy.contract_id;
+            const sub = apiBaseInstance.api.onMessage().subscribe((response: any) => {
+                if (response.proposal_open_contract?.contract_id === contract_id && response.proposal_open_contract?.is_sold) {
+                    this.handleResult(response.proposal_open_contract, config);
                     runInAction(() => {
                         this.is_executing = false;
                     });
-                },
-                config.ticks * 1000 + 2000
-            );
+                    if (sub && typeof sub.unsubscribe === 'function') {
+                        sub.unsubscribe();
+                    } else if (response.subscription?.id) {
+                        apiBaseInstance.api.send({ forget: response.subscription.id });
+                    }
+                }
+            });
+
+            apiBaseInstance.api.send({ proposal_open_contract: 1, contract_id, subscribe: 1 });
         } catch (error: unknown) {
-            console.error('SmartAuto Error:', JSON.stringify(error, null, 2));
+            console.error('[SmartAutoStore] Execution Error:', error);
             runInAction(() => {
-                const err = error as { error?: { message?: string }; message?: string };
-                const errorMessage = err?.error?.message || err?.message || 'Unknown error';
-                this.bot_status = `ERROR: ${errorMessage}`;
-                this.addLog(`Error: ${errorMessage}`, 'error');
+                const err = error as { 
+                    error?: { message?: string, code?: string }; 
+                    message?: string; 
+                    code?: string 
+                };
+                const message = err?.error?.message || err?.message || 'Unknown error';
+                const code = err?.error?.code || (err as any).code || '';
+                const displayError = code ? `${message} (${code})` : message;
+                
+                this.bot_status = `ERROR: ${displayError}`;
+                this.addLog(`Error: ${displayError}`, 'error');
                 this.is_executing = false;
             });
         }

@@ -35,6 +35,7 @@ export const loadBlockly = async isDarkMode => {
     const BlocklyJavaScriptGenerator = {
         ...BlocklyJavaScript,
         ...BlocklyGenerator,
+        javascriptGenerator: BlocklyJavaScript.javascriptGenerator || BlocklyJavaScript,
     };
     window.Blockly.JavaScript = BlocklyJavaScriptGenerator;
     window.Blockly.Themes.zelos_renderer = window.Blockly.Theme.defineTheme('zelos_renderer', {

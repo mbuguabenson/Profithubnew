@@ -9,7 +9,9 @@ import {
     LabelPairedSquareMdFillIcon,
 } from '@deriv/quill-icons';
 import { useStore } from '../../../hooks/useStore';
+import PremiumInput from '@/components/premium-slider/premium-slider';
 import './trading-engine.scss';
+import '@/components/premium-slider/premium-slider.scss';
 
 interface DigitStat {
     digit: number;
@@ -195,76 +197,73 @@ const TradingEngine = observer(() => {
                 </div>
 
                 <div className='bot-settings-panel'>
-                    <div className='controls-grid'>
-                        <div className='input-group'>
-                            <label>Stake ($)</label>
-                            <input
-                                type='number'
-                                value={config.stake}
-                                onChange={e => smart_auto.updateConfig(botType, 'stake', parseFloat(e.target.value))}
-                            />
-                        </div>
-                        <div className='input-group'>
-                            <label>Take Profit ($)</label>
-                            <input
-                                type='number'
-                                value={config.take_profit || 10}
-                                onChange={e =>
-                                    smart_auto.updateConfig(botType, 'take_profit', parseFloat(e.target.value))
-                                }
-                            />
-                        </div>
-                        <div className='input-group'>
-                            <label>Stop Loss ($)</label>
-                            <input
-                                type='number'
-                                value={config.max_loss}
-                                onChange={e => smart_auto.updateConfig(botType, 'max_loss', parseFloat(e.target.value))}
-                            />
-                        </div>
-                        <div className='input-group'>
-                            <label>Multiplier</label>
-                            <input
-                                type='number'
-                                value={config.multiplier}
-                                onChange={e =>
-                                    smart_auto.updateConfig(botType, 'multiplier', parseFloat(e.target.value))
-                                }
-                            />
-                        </div>
-
+                    <div className='settings-grid-premium'>
+                        <PremiumInput
+                            label='Stake'
+                            value={config.stake}
+                            min={0.35}
+                            max={100}
+                            step={0.1}
+                            suffix='$'
+                            color='emerald'
+                            onChange={val => smart_auto.updateConfig(botType, 'stake', val)}
+                        />
+                        <PremiumInput
+                            label='Take Profit'
+                            value={config.take_profit || 10}
+                            min={1}
+                            max={500}
+                            suffix='$'
+                            color='blue'
+                            onChange={val => smart_auto.updateConfig(botType, 'take_profit', val)}
+                        />
+                        <PremiumInput
+                            label='Stop Loss'
+                            value={config.max_loss}
+                            min={1}
+                            max={500}
+                            suffix='$'
+                            color='rose'
+                            onChange={val => smart_auto.updateConfig(botType, 'max_loss', val)}
+                        />
+                        <PremiumInput
+                            label='Martingale'
+                            value={config.multiplier}
+                            min={1.1}
+                            max={10}
+                            step={0.1}
+                            color='gold'
+                            onChange={val => smart_auto.updateConfig(botType, 'multiplier', val)}
+                        />
+                        
                         {(botType === 'differs' || botType === 'matches' || botType === 'over_under') && (
-                            <div className='input-group'>
-                                <label>Prediction</label>
-                                <input
-                                    type='number'
-                                    value={config.prediction}
-                                    onChange={e =>
-                                        smart_auto.updateConfig(botType, 'prediction', parseInt(e.target.value))
-                                    }
-                                />
-                            </div>
+                            <PremiumInput
+                                label='Prediction'
+                                value={config.prediction}
+                                min={0}
+                                max={9}
+                                color='cyan'
+                                onChange={val => smart_auto.updateConfig(botType, 'prediction', Math.round(val))}
+                            />
                         )}
-                        <div className='input-group'>
-                            <label>Ticks</label>
-                            <input
-                                type='number'
-                                value={config.ticks}
-                                onChange={e => smart_auto.updateConfig(botType, 'ticks', parseInt(e.target.value))}
-                            />
-                        </div>
-                        <div className='input-group'>
-                            <label>Bulk Trades</label>
-                            <input
-                                type='number'
-                                min='1'
-                                max='10'
-                                value={config.bulk_trades_count || 1}
-                                onChange={e =>
-                                    smart_auto.updateConfig(botType, 'bulk_trades_count', parseInt(e.target.value))
-                                }
-                            />
-                        </div>
+
+                        <PremiumInput
+                            label='Tick Duration'
+                            value={config.ticks}
+                            min={1}
+                            max={10}
+                            color='indigo'
+                            onChange={val => smart_auto.updateConfig(botType, 'ticks', Math.round(val))}
+                        />
+
+                        <PremiumInput
+                            label='Bulk Trades'
+                            value={config.bulk_trades_count || 1}
+                            min={1}
+                            max={10}
+                            color='violet'
+                            onChange={val => smart_auto.updateConfig(botType, 'bulk_trades_count', Math.round(val))}
+                        />
                     </div>
 
                     <div className='toggles-grid'>

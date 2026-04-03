@@ -2,15 +2,15 @@
     background: rgba(255, 255, 255, 0.03);
     backdrop-filter: blur(12px);
     border-radius: 16px;
-    padding: 18px;
+    padding: 6px; // Reduced from 12px
     display: flex;
     flex-direction: column;
-    gap: 14px;
+    gap: 4px; // Reduced from 8px
     transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     position: relative;
     border: 1px solid rgba(255, 255, 255, 0.06);
     overflow: hidden;
-    min-height: 185px;
+    min-height: 120px; // Reduced from 140px
     width: 100%;
     animation: fadeInUp 0.5s ease-out backwards;
 
@@ -46,9 +46,39 @@
         color: var(--brand-red-coral);
     }
 
+    &__category {
+        font-size: 9px;
+        font-weight: bold;
+        padding: 3px 6px;
+        border-radius: 3px;
+        text-transform: uppercase;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+
+        &--even-odd {
+            background: rgba(33, 150, 243, 0.15);
+            color: #64B5F6;
+            border-color: rgba(33, 150, 243, 0.3);
+        }
+        &--over-under {
+            background: rgba(156, 39, 176, 0.15);
+            color: #BA68C8;
+            border-color: rgba(156, 39, 176, 0.3);
+        }
+        &--rise-fall {
+            background: rgba(76, 175, 80, 0.15);
+            color: #81C784;
+            border-color: rgba(76, 175, 80, 0.3);
+        }
+        &--differs {
+            background: rgba(244, 67, 54, 0.15);
+            color: #E57373;
+            border-color: rgba(244, 67, 54, 0.3);
+        }
+    }
+
     &__icon-wrapper {
-        width: 40px;
-        height: 40px;
+        width: 22px; // Reduced from 28px
+        height: 22px;
         border-radius: 50%;
         display: flex;
         align-items: center;
@@ -56,8 +86,8 @@
         background: var(--general-section-1);
         
         svg {
-            width: 22px;
-            height: 22px;
+            width: 12px; // Reduced from 16px
+            height: 12px;
         }
     }
 
@@ -69,18 +99,22 @@
     }
 
     &__title {
-        line-height: 1.3;
-        font-size: 14px !important;
+        line-height: 1.2;
+        font-size: 11px !important;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
 
     &__description {
-        font-size: 11px !important;
-        line-height: 1.5;
+        font-size: 9px !important;
+        line-height: 1.3;
         display: -webkit-box;
-        -webkit-line-clamp: 2;
-        line-clamp: 2;
+        -webkit-line-clamp: 1;
+        line-clamp: 1;
         -webkit-box-orient: vertical;
         overflow: hidden;
+        opacity: 0.7;
     }
 
     &__actions {
@@ -143,6 +177,43 @@
             box-shadow: 0 4px 12px rgba(123, 97, 255, 0.3);
             overflow: visible;
         }
+    }
+
+    // Trade Type Color Overrides
+    &--even-odd {
+        .bot-card__icon-wrapper { color: #2196F3; background: rgba(33, 150, 243, 0.1); }
+        .bot-card__btn:not(.bot-card__btn--outlined) {
+            background: linear-gradient(135deg, #42A5F5 0%, #1976D2 100%) !important;
+            box-shadow: 0 4px 12px rgba(33, 150, 243, 0.3) !important;
+        }
+        &:hover { border-color: rgba(33, 150, 243, 0.4); box-shadow: 0 12px 32px rgba(33, 150, 243, 0.15); }
+    }
+
+    &--over-under {
+        .bot-card__icon-wrapper { color: #9C27B0; background: rgba(156, 39, 176, 0.1); }
+        .bot-card__btn:not(.bot-card__btn--outlined) {
+            background: linear-gradient(135deg, #AB47BC 0%, #7B1FA2 100%) !important;
+            box-shadow: 0 4px 12px rgba(156, 39, 176, 0.3) !important;
+        }
+        &:hover { border-color: rgba(156, 39, 176, 0.4); box-shadow: 0 12px 32px rgba(156, 39, 176, 0.15); }
+    }
+
+    &--rise-fall {
+        .bot-card__icon-wrapper { color: #4CAF50; background: rgba(76, 175, 80, 0.1); }
+        .bot-card__btn:not(.bot-card__btn--outlined) {
+            background: linear-gradient(135deg, #66BB6A 0%, #388E3C 100%) !important;
+            box-shadow: 0 4px 12px rgba(76, 175, 80, 0.3) !important;
+        }
+        &:hover { border-color: rgba(76, 175, 80, 0.4); box-shadow: 0 12px 32px rgba(76, 175, 80, 0.15); }
+    }
+
+    &--differs {
+        .bot-card__icon-wrapper { color: #F44336; background: rgba(244, 67, 54, 0.1); }
+        .bot-card__btn:not(.bot-card__btn--outlined) {
+            background: linear-gradient(135deg, #EF5350 0%, #D32F2F 100%) !important;
+            box-shadow: 0 4px 12px rgba(244, 67, 54, 0.3) !important;
+        }
+        &:hover { border-color: rgba(244, 67, 54, 0.4); box-shadow: 0 12px 32px rgba(244, 67, 54, 0.15); }
     }
 
     &__ai-logo {

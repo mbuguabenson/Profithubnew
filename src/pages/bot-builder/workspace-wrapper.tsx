@@ -2,6 +2,7 @@ import React from 'react';
 import { observer } from 'mobx-react-lite';
 import Flyout from '@/components/flyout';
 import { useStore } from '@/hooks/useStore';
+import { repopulateMarketDropdowns } from '@/external/bot-skeleton/scratch/utils';
 import StopBotModal from '../dashboard/stop-bot-modal';
 import Toolbar from './toolbar';
 import Toolbox from './toolbox';
@@ -18,25 +19,42 @@ const WorkspaceWrapper = observer(() => {
         };
     }, []);
 
-    // Profithub AI Strategy Loader
-    React.useEffect(() => {
-        if (!is_loading && window.Blockly?.derivWorkspace) {
-            const pending_xml = localStorage.getItem('profithub_pending_load_xml');
-            if (pending_xml) {
+    const handlePendingLoad = React.useCallback(async () => {
+        const pending_xml = localStorage.getItem('profithub_pending_load_xml');
+        if (pending_xml && window.Blockly?.derivWorkspace) {
+            requestAnimationFrame(async () => {
                 try {
                     const xml_dom = window.Blockly.utils.xml.textToDom(pending_xml);
+                    window.Blockly.Events.disable();
                     window.Blockly.derivWorkspace.clear();
                     window.Blockly.Xml.domToWorkspace(xml_dom, window.Blockly.derivWorkspace);
-                    localStorage.removeItem('profithub_pending_load_xml');
+                    window.Blockly.Events.enable();
                     
-                    // Trigger a resize to ensure blockly layout is correct
+                    // Populate market dropdowns after load
+                    await repopulateMarketDropdowns(window.Blockly.derivWorkspace);
+                    
+                    localStorage.removeItem('profithub_pending_load_xml');
                     window.dispatchEvent(new Event('resize'));
                 } catch (e) {
-                    console.error('Profithub AI: Error loading pending XML', e);
+                    console.error('Profithub AI: Error loading pending XML', (e as any).message);
+                    window.Blockly.Events.enable();
                 }
-            }
+            });
         }
-    }, [is_loading]);
+    }, []);
+
+    // Load on mount/is_loading change
+    React.useEffect(() => {
+        if (!is_loading) {
+            handlePendingLoad();
+        }
+    }, [is_loading, handlePendingLoad]);
+
+    // Fast Load: Listen for immediate load signals from the AI Bot List
+    React.useEffect(() => {
+        window.addEventListener('profithub_bot_load', handlePendingLoad);
+        return () => window.removeEventListener('profithub_bot_load', handlePendingLoad);
+    }, [handlePendingLoad]);
 
     if (is_loading) return null;
 

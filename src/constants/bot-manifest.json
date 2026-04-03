@@ -1,0 +1,306 @@
+[
+    {
+        "id": "automatic_autotrader",
+        "name": "AUTOTRADER",
+        "category": "Automatic",
+        "prompt": "Load premium strategy: AUTOTRADER",
+        "description": "Automatic premium strategy specifically engineered for deriv DBot features.",
+        "path": "/Automatic/AUTOTRADER.xml"
+    },
+    {
+        "id": "automatic_over_under_auto_switcher",
+        "name": "OVER UNDER AUTO SWITCHER",
+        "category": "Automatic",
+        "prompt": "Load premium strategy: OVER UNDER AUTO SWITCHER",
+        "description": "Automatic premium strategy specifically engineered for deriv DBot features.",
+        "path": "/Automatic/OVER UNDER AUTO SWITCHER.xml"
+    },
+    {
+        "id": "automatic_over_under_automatic_x_",
+        "name": "OVER UNDER AUTOMATIC X ",
+        "category": "Automatic",
+        "prompt": "Load premium strategy: OVER UNDER AUTOMATIC X ",
+        "description": "Automatic premium strategy specifically engineered for deriv DBot features.",
+        "path": "/Automatic/OVER UNDER AUTOMATIC X .xml"
+    },
+    {
+        "id": "automatic_profithub_premium_a_i",
+        "name": "PROFITHUB PREMIUM A.I",
+        "category": "Automatic",
+        "prompt": "Load premium strategy: PROFITHUB PREMIUM A.I",
+        "description": "Automatic premium strategy specifically engineered for deriv DBot features.",
+        "path": "/Automatic/PROFITHUB PREMIUM A.I.xml"
+    },
+    {
+        "id": "automatic_profithub_rise_fall_auto",
+        "name": "PROFITHUB RISE FALL AUTO",
+        "category": "Automatic",
+        "prompt": "Load premium strategy: PROFITHUB RISE FALL AUTO",
+        "description": "Automatic premium strategy specifically engineered for deriv DBot features.",
+        "path": "/Automatic/PROFITHUB RISE FALL AUTO.xml"
+    },
+    {
+        "id": "automatic_profithub_under_8_over_3_auto",
+        "name": "PROFITHUB UNDER 8 OVER 3 AUTO",
+        "category": "Automatic",
+        "prompt": "Load premium strategy: PROFITHUB UNDER 8 OVER 3 AUTO",
+        "description": "Automatic premium strategy specifically engineered for deriv DBot features.",
+        "path": "/Automatic/PROFITHUB UNDER 8 OVER 3 AUTO.xml"
+    },
+    {
+        "id": "automatic_rise_and_fall_automatic_x_",
+        "name": "RISE AND FALL AUTOMATIC X ",
+        "category": "Automatic",
+        "prompt": "Load premium strategy: RISE AND FALL AUTOMATIC X ",
+        "description": "Automatic premium strategy specifically engineered for deriv DBot features.",
+        "path": "/Automatic/RISE AND FALL AUTOMATIC X .xml"
+    },
+    {
+        "id": "hybrids_las_vegas______pro_english_",
+        "name": "LAS VEGAS 💵💵 PRO ENGLISH.",
+        "category": "Hybrids",
+        "prompt": "Load premium strategy: LAS VEGAS 💵💵 PRO ENGLISH.",
+        "description": "Hybrids premium strategy specifically engineered for deriv DBot features.",
+        "path": "/Hybrid Bots/LAS VEGAS 💵💵 PRO ENGLISH..xml"
+    },
+    {
+        "id": "hybrids_profit_hub_pro",
+        "name": "PROFIT HUB PRO",
+        "category": "Hybrids",
+        "prompt": "Load premium strategy: PROFIT HUB PRO",
+        "description": "Hybrids premium strategy specifically engineered for deriv DBot features.",
+        "path": "/Hybrid Bots/PROFIT HUB PRO.xml"
+    },
+    {
+        "id": "hybrids_profithub_speedbot",
+        "name": "Profithub Speedbot",
+        "category": "Hybrids",
+        "prompt": "Load premium strategy: Profithub Speedbot",
+        "description": "Hybrids premium strategy specifically engineered for deriv DBot features.",
+        "path": "/Hybrid Bots/Profithub Speedbot.xml"
+    },
+    {
+        "id": "hybrids_speed_bot_updated",
+        "name": "SPEED BOT updated",
+        "category": "Hybrids",
+        "prompt": "Load premium strategy: SPEED BOT updated",
+        "description": "Hybrids premium strategy specifically engineered for deriv DBot features.",
+        "path": "/Hybrid Bots/SPEED BOT updated.xml"
+    },
+    {
+        "id": "hybrids_speedbot_with_entry_point",
+        "name": "Speedbot with entry point",
+        "category": "Hybrids",
+        "prompt": "Load premium strategy: Speedbot with entry point",
+        "description": "Hybrids premium strategy specifically engineered for deriv DBot features.",
+        "path": "/Hybrid Bots/Speedbot with entry point.xml"
+    },
+    {
+        "id": "hybrids___unstoppable_differ_bot__",
+        "name": "🤑UNSTOPPABLE DIFFER BOT🤑",
+        "category": "Hybrids",
+        "prompt": "Load premium strategy: 🤑UNSTOPPABLE DIFFER BOT🤑",
+        "description": "Hybrids premium strategy specifically engineered for deriv DBot features.",
+        "path": "/Hybrid Bots/🤑UNSTOPPABLE DIFFER BOT🤑.xml"
+    },
+    {
+        "id": "official_bot_even_odd",
+        "name": "Bot Even Odd",
+        "category": "Official",
+        "prompt": "Load premium strategy: Bot Even Odd",
+        "description": "Official premium strategy specifically engineered for deriv DBot features.",
+        "path": "/Official Bots/Bot_Even_Odd.xml"
+    },
+    {
+        "id": "official_compounding_bot",
+        "name": "Compounding Bot",
+        "category": "Official",
+        "prompt": "Load premium strategy: Compounding Bot",
+        "description": "Official premium strategy specifically engineered for deriv DBot features.",
+        "path": "/Official Bots/Compounding_Bot.xml"
+    },
+    {
+        "id": "official_differs_bot",
+        "name": "Differs Bot",
+        "category": "Official",
+        "prompt": "Load premium strategy: Differs Bot",
+        "description": "Official premium strategy specifically engineered for deriv DBot features.",
+        "path": "/Official Bots/Differs_Bot.xml"
+    },
+    {
+        "id": "official_differs_rank3_bot",
+        "name": "Differs Rank3 Bot",
+        "category": "Official",
+        "prompt": "Load premium strategy: Differs Rank3 Bot",
+        "description": "Official premium strategy specifically engineered for deriv DBot features.",
+        "path": "/Official Bots/Differs_Rank3_Bot.xml"
+    },
+    {
+        "id": "official_even_odd_auto_switcher",
+        "name": "Even Odd Auto Switcher",
+        "category": "Official",
+        "prompt": "Load premium strategy: Even Odd Auto Switcher",
+        "description": "Official premium strategy specifically engineered for deriv DBot features.",
+        "path": "/Official Bots/Even_Odd_Auto_Switcher.xml"
+    },
+    {
+        "id": "official_even_odd_bot",
+        "name": "Even Odd Bot",
+        "category": "Official",
+        "prompt": "Load premium strategy: Even Odd Bot",
+        "description": "Official premium strategy specifically engineered for deriv DBot features.",
+        "path": "/Official Bots/Even_Odd_Bot.xml"
+    },
+    {
+        "id": "official_guardian_under",
+        "name": "Guardian Under",
+        "category": "Official",
+        "prompt": "Load premium strategy: Guardian Under",
+        "description": "Official premium strategy specifically engineered for deriv DBot features.",
+        "path": "/Official Bots/Guardian_Under.xml"
+    },
+    {
+        "id": "official_matches_bot",
+        "name": "Matches Bot",
+        "category": "Official",
+        "prompt": "Load premium strategy: Matches Bot",
+        "description": "Official premium strategy specifically engineered for deriv DBot features.",
+        "path": "/Official Bots/Matches_Bot.xml"
+    },
+    {
+        "id": "official_over_0123_bot",
+        "name": "Over 0123 Bot",
+        "category": "Official",
+        "prompt": "Load premium strategy: Over 0123 Bot",
+        "description": "Official premium strategy specifically engineered for deriv DBot features.",
+        "path": "/Official Bots/Over_0123_Bot.xml"
+    },
+    {
+        "id": "official_over_0_bot",
+        "name": "Over 0 Bot",
+        "category": "Official",
+        "prompt": "Load premium strategy: Over 0 Bot",
+        "description": "Official premium strategy specifically engineered for deriv DBot features.",
+        "path": "/Official Bots/Over_0_Bot.xml"
+    },
+    {
+        "id": "official_over_1_bot",
+        "name": "Over 1 Bot",
+        "category": "Official",
+        "prompt": "Load premium strategy: Over 1 Bot",
+        "description": "Official premium strategy specifically engineered for deriv DBot features.",
+        "path": "/Official Bots/Over_1_Bot.xml"
+    },
+    {
+        "id": "official_over_2_bot",
+        "name": "Over 2 Bot",
+        "category": "Official",
+        "prompt": "Load premium strategy: Over 2 Bot",
+        "description": "Official premium strategy specifically engineered for deriv DBot features.",
+        "path": "/Official Bots/Over_2_Bot.xml"
+    },
+    {
+        "id": "official_over_3_bot",
+        "name": "Over 3 Bot",
+        "category": "Official",
+        "prompt": "Load premium strategy: Over 3 Bot",
+        "description": "Official premium strategy specifically engineered for deriv DBot features.",
+        "path": "/Official Bots/Over_3_Bot.xml"
+    },
+    {
+        "id": "official_over_under_bot",
+        "name": "Over Under Bot",
+        "category": "Official",
+        "prompt": "Load premium strategy: Over Under Bot",
+        "description": "Official premium strategy specifically engineered for deriv DBot features.",
+        "path": "/Official Bots/Over_Under_Bot.xml"
+    },
+    {
+        "id": "official_over_under_compounding",
+        "name": "Over Under Compounding",
+        "category": "Official",
+        "prompt": "Load premium strategy: Over Under Compounding",
+        "description": "Official premium strategy specifically engineered for deriv DBot features.",
+        "path": "/Official Bots/Over_Under_Compounding.xml"
+    },
+    {
+        "id": "official_rise_fall_super_bot",
+        "name": "Rise Fall Super Bot",
+        "category": "Official",
+        "prompt": "Load premium strategy: Rise Fall Super Bot",
+        "description": "Official premium strategy specifically engineered for deriv DBot features.",
+        "path": "/Official Bots/Rise_Fall_Super_Bot.xml"
+    },
+    {
+        "id": "official_sequential_over_recovery",
+        "name": "Sequential Over Recovery",
+        "category": "Official",
+        "prompt": "Load premium strategy: Sequential Over Recovery",
+        "description": "Official premium strategy specifically engineered for deriv DBot features.",
+        "path": "/Official Bots/Sequential_Over_Recovery.xml"
+    },
+    {
+        "id": "official_sequential_under_recovery",
+        "name": "Sequential Under Recovery",
+        "category": "Official",
+        "prompt": "Load premium strategy: Sequential Under Recovery",
+        "description": "Official premium strategy specifically engineered for deriv DBot features.",
+        "path": "/Official Bots/Sequential_Under_Recovery.xml"
+    },
+    {
+        "id": "official_smartauto24_bot",
+        "name": "SmartAuto24 Bot",
+        "category": "Official",
+        "prompt": "Load premium strategy: SmartAuto24 Bot",
+        "description": "Official premium strategy specifically engineered for deriv DBot features.",
+        "path": "/Official Bots/SmartAuto24_Bot.xml"
+    },
+    {
+        "id": "official_titan_over",
+        "name": "Titan Over",
+        "category": "Official",
+        "prompt": "Load premium strategy: Titan Over",
+        "description": "Official premium strategy specifically engineered for deriv DBot features.",
+        "path": "/Official Bots/Titan_Over.xml"
+    },
+    {
+        "id": "official_under_6_bot",
+        "name": "Under 6 Bot",
+        "category": "Official",
+        "prompt": "Load premium strategy: Under 6 Bot",
+        "description": "Official premium strategy specifically engineered for deriv DBot features.",
+        "path": "/Official Bots/Under_6_Bot.xml"
+    },
+    {
+        "id": "official_under_7_bot",
+        "name": "Under 7 Bot",
+        "category": "Official",
+        "prompt": "Load premium strategy: Under 7 Bot",
+        "description": "Official premium strategy specifically engineered for deriv DBot features.",
+        "path": "/Official Bots/Under_7_Bot.xml"
+    },
+    {
+        "id": "official_under_8_bot",
+        "name": "Under 8 Bot",
+        "category": "Official",
+        "prompt": "Load premium strategy: Under 8 Bot",
+        "description": "Official premium strategy specifically engineered for deriv DBot features.",
+        "path": "/Official Bots/Under_8_Bot.xml"
+    },
+    {
+        "id": "official_under_9876_bot",
+        "name": "Under 9876 Bot",
+        "category": "Official",
+        "prompt": "Load premium strategy: Under 9876 Bot",
+        "description": "Official premium strategy specifically engineered for deriv DBot features.",
+        "path": "/Official Bots/Under_9876_Bot.xml"
+    },
+    {
+        "id": "official_under_9_bot",
+        "name": "Under 9 Bot",
+        "category": "Official",
+        "prompt": "Load premium strategy: Under 9 Bot",
+        "description": "Official premium strategy specifically engineered for deriv DBot features.",
+        "path": "/Official Bots/Under_9_Bot.xml"
+    }
+]

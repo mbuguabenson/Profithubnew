@@ -1,4 +1,5 @@
 import { action, makeObservable, observable, reaction, runInAction } from 'mobx';
+import { getSymbolPips } from '@/utils/digit-utils';
 import { DigitStatsEngine } from '@/lib/digit-stats-engine';
 import { DigitTradeEngine } from '@/lib/digit-trade-engine';
 import RootStore from './root-store';
@@ -37,8 +38,6 @@ export default class AnalysisStore {
     @observable accessor last_digit: number | null = null;
     @observable accessor total_ticks = 1000;
     @observable accessor pip = 2;
-    private symbol_pips: Map<string, number> = new Map();
-
     @observable accessor is_connected = false;
     @observable accessor is_loading = false;
     @observable accessor error_message: string | null = null;
@@ -181,7 +180,7 @@ export default class AnalysisStore {
         }
 
         const price = Number(tick.quote);
-        const new_digit = this.stats_engine.extractLastDigit(price);
+        const new_digit = this.stats_engine.extractLastDigit(price, this.symbol);
         console.log(`[AnalysisStore] Extracted digit: ${new_digit} (pip: ${this.stats_engine.pip})`);
 
         runInAction(() => {
@@ -282,7 +281,10 @@ export default class AnalysisStore {
 
         this.unsubscribeFromTicks();
         this.symbol = symbol;
-        this.pip = this.symbol_pips.get(symbol) || 2;
+        
+        // Use central utility to determine correct pips (1HZ symbols = 3 pips)
+        this.pip = getSymbolPips(symbol);
+        
         this.updateEngineConfig();
         this.subscribeToTicks();
     };

@@ -19,6 +19,7 @@ interface BotCardProps {
     onRun?: () => void;
     onDownload?: () => void;
     is_builder_entry?: boolean;
+    tradeType?: 'even-odd' | 'over-under' | 'rise-fall' | 'differs' | string;
 }
 
 const BotCard: React.FC<BotCardProps> = ({ 
@@ -28,7 +29,8 @@ const BotCard: React.FC<BotCardProps> = ({
     badge, 
     onRun, 
     onDownload,
-    is_builder_entry 
+    is_builder_entry,
+    tradeType 
 }) => {
     const getIcon = () => {
         if (is_builder_entry) {
@@ -49,11 +51,23 @@ const BotCard: React.FC<BotCardProps> = ({
 
     return (
         <div 
-            className={classNames('bot-card', `bot-card--${type}`, { 'bot-card--builder': is_builder_entry })}
+            className={classNames(
+                'bot-card', 
+                `bot-card--${type}`, 
+                { 'bot-card--builder': is_builder_entry },
+                tradeType ? `bot-card--${tradeType}` : ''
+            )}
             onClick={is_builder_entry ? onRun : undefined}
         >
             <div className='bot-card__header'>
-                {badge && <div className='bot-card__badge'>{badge}</div>}
+                <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
+                    {badge && <div className='bot-card__badge'>{badge}</div>}
+                    {tradeType && (
+                        <div className={`bot-card__category bot-card__category--${tradeType}`}>
+                            {tradeType.replace('-', ' ').toUpperCase()}
+                        </div>
+                    )}
+                </div>
                 <div className='bot-card__icon-wrapper'>
                     {getIcon()}
                 </div>

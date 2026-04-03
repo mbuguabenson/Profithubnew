@@ -265,6 +265,70 @@ export const loadWorkspace = async (xml, event_group, workspace) => {
     await workspace.asyncClear();
     window.Blockly.Xml.clearWorkspaceAndLoadFromXml(xml, workspace);
     workspace.cleanUp();
+
+    // After loading from XML, the market block dropdowns don't auto-populate because
+    // BLOCK_CREATE doesn't fire for deserialized blocks. Manually repopulate them here.
+    await repopulateMarketDropdowns(workspace);
+};
+
+export const repopulateMarketDropdowns = async (workspace) => {
+    // Small delay to ensure ApiHelpers is ready
+    await new Promise(resolve => setTimeout(resolve, 300));
+
+    try {
+        const ApiHelpers = (await import('../../services/api/api-helpers')).default;
+        const { active_symbols } = ApiHelpers?.instance ?? {};
+        if (!active_symbols) return;
+
+        const all_blocks = workspace.getAllBlocks();
+        const market_block = all_blocks.find(block => block.type === 'trade_definition_market');
+        if (!market_block) return;
+
+        const market_dropdown = market_block.getField('MARKET_LIST');
+        const submarket_dropdown = market_block.getField('SUBMARKET_LIST');
+        const symbol_dropdown = market_block.getField('SYMBOL_LIST');
+
+        if (!market_dropdown || !submarket_dropdown || !symbol_dropdown) return;
+
+        const current_market = market_dropdown.getValue();
+        const current_submarket = submarket_dropdown.getValue();
+        const current_symbol = symbol_dropdown.getValue();
+
+        // Populate markets
+        const market_options = active_symbols.getMarketDropdownOptions();
+        if (market_options?.length) {
+            market_dropdown.updateOptions(market_options, {
+                default_value: current_market,
+                should_pretend_empty: false,
+            });
+        }
+
+        // Populate submarkets based on selected market
+        const market_val = market_dropdown.getValue() || current_market;
+        if (market_val) {
+            const submarket_options = active_symbols.getSubmarketDropdownOptions(market_val);
+            if (submarket_options?.length) {
+                submarket_dropdown.updateOptions(submarket_options, {
+                    default_value: current_submarket,
+                    should_pretend_empty: false,
+                });
+            }
+        }
+
+        // Populate symbols based on selected submarket
+        const submarket_val = submarket_dropdown.getValue() || current_submarket;
+        if (submarket_val) {
+            const symbol_options = active_symbols.getSymbolDropdownOptions(submarket_val);
+            if (symbol_options?.length) {
+                symbol_dropdown.updateOptions(symbol_options, {
+                    default_value: current_symbol,
+                    should_pretend_empty: false,
+                });
+            }
+        }
+    } catch (e) {
+        console.warn('[DBot] Could not repopulate market dropdowns:', e);
+    }
 };
 
 const loadBlocksFromHeader = (xml_string, block) => {

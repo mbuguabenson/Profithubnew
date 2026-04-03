@@ -5,6 +5,7 @@ import { useStore } from '@/hooks/useStore';
 import { Localize } from '@deriv-com/translations';
 import { TTradeConfig, TTradeLog } from '@/lib/digit-trade-engine';
 import { TAnalysisHistory, TDigitStat } from '@/stores/analysis-store';
+import PremiumInput from '@/components/premium-slider/premium-slider';
 import {
     LabelPairedArrowsRotateMdRegularIcon,
     LabelPairedPlayMdFillIcon,
@@ -12,9 +13,10 @@ import {
 } from '@deriv/quill-icons/LabelPaired';
 import '../easy-tool/easy-tool.scss';
 import './digit-cracker.scss';
+import '@/components/premium-slider/premium-slider.scss';
 
 const DigitCracker = observer(() => {
-    const { digit_cracker, client, common, ui, smart_trading } = useStore();
+    const { digit_cracker, client, common, ui, analysis_market } = useStore();
     const [activeStrategy, setActiveStrategy] = useState<'even_odd' | 'differs' | 'matches' | 'over_under'>('even_odd');
     const [activeLogTab, setActiveLogTab] = useState<'summary' | 'transactions' | 'journal'>('summary');
     const logRef = useRef<HTMLDivElement>(null);
@@ -33,7 +35,7 @@ const DigitCracker = observer(() => {
     const { balance, currency } = client;
     const { latency, is_socket_opened } = common;
     const { is_dark_mode_on } = ui;
-    const { current_price } = smart_trading;
+    const { current_price } = analysis_market;
 
     // Initialize/Cleanup
     useEffect(() => {
@@ -152,237 +154,115 @@ const DigitCracker = observer(() => {
                 </div>
 
                 <div className='settings-grid'>
-                    <div className='input-field'>
-                        <label>Stake Amount ($)</label>
-                        <input
-                            type='number'
-                            step='0.01'
-                            value={config.stake || ''}
-                            onChange={e => {
-                                const val = parseFloat(e.target.value);
-                                trade_engine.updateConfig(activeStrategy, 'stake', isNaN(val) ? 0 : val);
-                            }}
-                        />
-                    </div>
-                    <div className='input-field'>
-                        <label>Take Profit ($)</label>
-                        <input
-                            type='number'
-                            step='0.01'
-                            value={config.take_profit || ''}
-                            onChange={e => {
-                                const val = parseFloat(e.target.value);
-                                trade_engine.updateConfig(activeStrategy, 'take_profit', isNaN(val) ? 0 : val);
-                            }}
-                        />
-                    </div>
-                    <div className='input-field'>
-                        <label>Stop Loss ($)</label>
-                        <input
-                            type='number'
-                            step='0.01'
-                            value={config.max_loss || ''}
-                            onChange={e => {
-                                const val = parseFloat(e.target.value);
-                                trade_engine.updateConfig(activeStrategy, 'max_loss', isNaN(val) ? 0 : val);
-                            }}
-                        />
-                    </div>
-                    <div className='input-field'>
-                        <label>Martingale Multiplier</label>
-                        <input
-                            type='number'
-                            step='0.1'
-                            value={config.multiplier || ''}
-                            onChange={e => {
-                                const val = parseFloat(e.target.value);
-                                trade_engine.updateConfig(activeStrategy, 'multiplier', isNaN(val) ? 0 : val);
-                            }}
-                        />
-                    </div>
-                    <div className='input-field'>
-                        <label>Maximum Runs</label>
-                        <input
-                            type='number'
-                            value={config.max_runs || ''}
-                            onChange={e => {
-                                const val = parseInt(e.target.value);
-                                trade_engine.updateConfig(activeStrategy, 'max_runs', isNaN(val) ? 0 : val);
-                            }}
-                        />
-                    </div>
-                    <div className='input-field'>
-                        <label>Tick Duration</label>
-                        <input
-                            type='number'
-                            value={config.ticks || ''}
-                            onChange={e => {
-                                const val = parseInt(e.target.value);
-                                trade_engine.updateConfig(activeStrategy, 'ticks', isNaN(val) ? 1 : val);
-                            }}
-                        />
-                    </div>
+                    <PremiumInput
+                        label='Stake ($)'
+                        value={config.stake || 0.35}
+                        min={0.35}
+                        max={100}
+                        step={0.1}
+                        color='emerald'
+                        onChange={val => trade_engine.updateConfig(activeStrategy, 'stake', val)}
+                    />
+                    <PremiumInput
+                        label='Take Profit ($)'
+                        value={config.take_profit || 10}
+                        min={1}
+                        max={500}
+                        color='blue'
+                        onChange={val => trade_engine.updateConfig(activeStrategy, 'take_profit', val)}
+                    />
+                    <PremiumInput
+                        label='Stop Loss ($)'
+                        value={config.max_loss || 10}
+                        min={1}
+                        max={500}
+                        color='rose'
+                        onChange={val => trade_engine.updateConfig(activeStrategy, 'max_loss', val)}
+                    />
+                    <PremiumInput
+                        label='Martingale'
+                        value={config.multiplier || 2.1}
+                        min={1.1}
+                        max={10}
+                        step={0.1}
+                        color='gold'
+                        onChange={val => trade_engine.updateConfig(activeStrategy, 'multiplier', val)}
+                    />
+                    <PremiumInput
+                        label='Max Runs'
+                        value={config.max_runs || 5}
+                        min={1}
+                        max={100}
+                        color='violet'
+                        onChange={val => trade_engine.updateConfig(activeStrategy, 'max_runs', Math.round(val))}
+                    />
+                    <PremiumInput
+                        label='Tick Duration'
+                        value={config.ticks || 1}
+                        min={1}
+                        max={10}
+                        color='indigo'
+                        onChange={val => trade_engine.updateConfig(activeStrategy, 'ticks', Math.round(val))}
+                    />
+
                     {['over_under', 'matches', 'differs'].includes(activeStrategy) && (
-                        <div className='input-field'>
-                            <label>Prediction</label>
-                            <input
-                                type='number'
-                                min='0'
-                                max='9'
-                                value={config.prediction ?? 0}
-                                onChange={e => {
-                                    const val = parseInt(e.target.value);
-                                    trade_engine.updateConfig(activeStrategy, 'prediction', isNaN(val) ? 0 : val);
-                                }}
-                            />
-                        </div>
+                        <PremiumInput
+                            label='Prediction'
+                            value={config.prediction ?? 0}
+                            min={0}
+                            max={9}
+                            color='blue'
+                            onChange={val => trade_engine.updateConfig(activeStrategy, 'prediction', Math.round(val))}
+                        />
                     )}
-                    {activeStrategy === 'even_odd' && (
+
+                    {activeStrategy === 'even_odd' && config.entry_pattern !== 'PATTERN_2' && (
                         <>
-                            <div className='input-field'>
-                                <label>Trigger Condition</label>
-                                <div className='select-wrapper'>
-                                    <select
-                                        value={config.trigger_condition || 'EITHER'}
-                                        onChange={e =>
-                                            trade_engine.updateConfig(
-                                                activeStrategy,
-                                                'trigger_condition' as keyof TTradeConfig,
-                                                e.target.value as any
-                                            )
-                                        }
-                                    >
-                                        <option value='EITHER'>Either (Even/Odd)</option>
-                                        <option value='EVEN'>Even Only</option>
-                                        <option value='ODD'>Odd Only</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div className='input-field'>
-                                <label>Target Prediction</label>
-                                <div className='select-wrapper'>
-                                    <select
-                                        value={config.target_prediction || 'EVEN'}
-                                        onChange={e =>
-                                            trade_engine.updateConfig(
-                                                activeStrategy,
-                                                'target_prediction' as keyof TTradeConfig,
-                                                e.target.value as any
-                                            )
-                                        }
-                                    >
-                                        <option value='EVEN'>Trade Even</option>
-                                        <option value='ODD'>Trade Odd</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div className='input-field'>
-                                <label>Entry Pattern</label>
-                                <div className='select-wrapper'>
-                                    <select
-                                        value={config.entry_pattern || 'PATTERN_1'}
-                                        onChange={e =>
-                                            trade_engine.updateConfig(
-                                                activeStrategy,
-                                                'entry_pattern' as keyof TTradeConfig,
-                                                e.target.value as any
-                                            )
-                                        }
-                                    >
-                                        <option value='PATTERN_1'>Threshold + Consec.</option>
-                                        <option value='PATTERN_2'>High/2nd/Least Rankings</option>
-                                    </select>
-                                </div>
-                            </div>
-                            {config.entry_pattern !== 'PATTERN_2' && (
-                                <>
-                                    <div className='input-field'>
-                                        <label>Trigger %</label>
-                                        <input
-                                            type='number'
-                                            value={config.trigger_percentage || ''}
-                                            onChange={e => {
-                                                const val = parseFloat(e.target.value);
-                                                trade_engine.updateConfig(
-                                                    activeStrategy,
-                                                    'trigger_percentage' as keyof TTradeConfig,
-                                                    isNaN(val) ? 0 : val as any
-                                                );
-                                            }}
-                                        />
-                                    </div>
-                                    <div className='input-field'>
-                                        <label>Consecutive Ticks</label>
-                                        <input
-                                            type='number'
-                                            value={config.consecutive_ticks || ''}
-                                            onChange={e => {
-                                                const val = parseInt(e.target.value);
-                                                trade_engine.updateConfig(
-                                                    activeStrategy,
-                                                    'consecutive_ticks' as keyof TTradeConfig,
-                                                    isNaN(val) ? 0 : val as any
-                                                );
-                                            }}
-                                        />
-                                    </div>
-                                </>
-                            )}
+                            <PremiumInput
+                                label='Trigger %'
+                                value={config.trigger_percentage || 50}
+                                min={40}
+                                max={80}
+                                color='amber'
+                                onChange={val => trade_engine.updateConfig(activeStrategy, 'trigger_percentage' as any, val)}
+                            />
+                            <PremiumInput
+                                label='Consec. Ticks'
+                                value={config.consecutive_ticks || 2}
+                                min={1}
+                                max={5}
+                                color='orange'
+                                onChange={val => trade_engine.updateConfig(activeStrategy, 'consecutive_ticks' as any, Math.round(val))}
+                            />
                         </>
                     )}
+
                     {activeStrategy === 'differs' && (
                         <>
-                            <div className='input-field'>
-                                <label>Max Allowed %</label>
-                                <input
-                                    type='number'
-                                    step='1'
-                                    value={config.differs_max_percentage ?? ''}
-                                    onChange={e => {
-                                        const val = parseFloat(e.target.value);
-                                        trade_engine.updateConfig(
-                                            activeStrategy,
-                                            'differs_max_percentage' as keyof TTradeConfig,
-                                            isNaN(val) ? 0 : val as any
-                                        );
-                                    }}
-                                />
-                            </div>
-                            <div className='input-field'>
-                                <label>Target Appearances</label>
-                                <input
-                                    type='number'
-                                    step='1'
-                                    min='1'
-                                    value={config.differs_target_ticks ?? ''}
-                                    onChange={e => {
-                                        const val = parseInt(e.target.value);
-                                        trade_engine.updateConfig(
-                                            activeStrategy,
-                                            'differs_target_ticks' as keyof TTradeConfig,
-                                            isNaN(val) ? 1 : val as any
-                                        );
-                                    }}
-                                />
-                            </div>
-                            <div className='input-field'>
-                                <label>Bulk Trades</label>
-                                <input
-                                    type='number'
-                                    step='1'
-                                    min='1'
-                                    max='10'
-                                    value={config.bulk_trades_count ?? ''}
-                                    onChange={e => {
-                                        const val = parseInt(e.target.value);
-                                        trade_engine.updateConfig(
-                                            activeStrategy,
-                                            'bulk_trades_count' as keyof TTradeConfig,
-                                            isNaN(val) ? 1 : val as any
-                                        );
-                                    }}
-                                />
-                            </div>
+                            <PremiumInput
+                                label='Max Allowed %'
+                                value={config.differs_max_percentage || 9}
+                                min={5}
+                                max={15}
+                                color='cyan'
+                                onChange={val => trade_engine.updateConfig(activeStrategy, 'differs_max_percentage' as any, val)}
+                            />
+                            <PremiumInput
+                                label='Target App.'
+                                value={config.differs_target_ticks || 2}
+                                min={1}
+                                max={5}
+                                color='teal'
+                                onChange={val => trade_engine.updateConfig(activeStrategy, 'differs_target_ticks' as any, Math.round(val))}
+                            />
+                            <PremiumInput
+                                label='Bulk Trades'
+                                value={config.bulk_trades_count || 1}
+                                min={1}
+                                max={10}
+                                color='sky'
+                                onChange={val => trade_engine.updateConfig(activeStrategy, 'bulk_trades_count' as any, Math.round(val))}
+                            />
                         </>
                     )}
                 </div>

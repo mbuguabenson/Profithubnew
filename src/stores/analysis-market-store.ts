@@ -1,6 +1,15 @@
 import { action, makeObservable, observable, runInAction, reaction } from 'mobx';
+import { getSafeLastDigit, getSymbolPips } from '@/utils/digit-utils';
 import chart_api from '@/external/bot-skeleton/services/api/chart-api';
 import { DigitStatsEngine } from '@/lib/digit-stats-engine';
+import { 
+    calculateCCI, 
+    calculateMACD, 
+    calculateDonchian, 
+    convertToCandles, 
+    detectPattern,
+    TOHLC
+} from '@/utils/analysis-indicators';
 import RootStore from './root-store';
 
 export default class AnalysisMarketStore {
@@ -13,11 +22,44 @@ export default class AnalysisMarketStore {
     @observable accessor is_falling = false;
     @observable accessor symbol = 'R_100';
     @observable accessor is_loading = false;
+    @observable accessor stats_sample_size = 100;
+
+    @action setStatsSampleSize = (size: number) => {
+        this.stats_sample_size = size;
+    };
+    
+    get effective_pip() {
+        return this.symbol.startsWith('1HZ') ? 3 : (this.pip || 2);
+    }
     @observable accessor tick_history: { price: number; time: number; direction: 'up' | 'down' }[] = [];
     @observable accessor rise_percentage: number = 50;
     @observable accessor fall_percentage: number = 50;
     @observable accessor ticks: number[] = [];
     @observable accessor markets: { group: string; items: { value: string; label: string }[] }[] = [];
+    @observable accessor pip = 2;
+    
+    // Technical Indicators
+    @observable accessor raw_prices: number[] = [];
+    @observable accessor cci = 0;
+    @observable accessor macd = { macd: 0, signal: 0, histogram: 0 };
+    @observable accessor donchian = { upper: 0, lower: 0, middle: 0 };
+    @observable accessor candles: TOHLC[] = [];
+    @observable accessor detected_pattern: string | null = null;
+
+    get candleColor() {
+        if (this.candles.length === 0) return 'neutral';
+        const last = this.candles[this.candles.length - 1];
+        return last.close >= last.open ? 'rise' : 'fall';
+    }
+
+    get candleMomentum() {
+        if (this.candles.length === 0) return 0;
+        const last = this.candles[this.candles.length - 1];
+        const range = Math.abs(last.high - last.low);
+        if (range === 0) return 0;
+        const body = Math.abs(last.close - last.open);
+        return (body / range) * 100;
+    }
 
     private subscription_id: string | null = null;
     private prev_price: number | null = null;
@@ -90,6 +132,13 @@ export default class AnalysisMarketStore {
         this.symbol = symbol;
         this.prev_price = null;
         this.tick_history = [];
+        
+        // Fix pip for 1-second markets (1HZ symbols have 3 decimal places)
+        this.pip = symbol.startsWith('1HZ') ? 3 : 2;
+        this.stats_engine.setConfig({ pip: this.pip });
+        
+        // No longer sync with smart_trading, as it has been decommissioned
+        
         this.subscribe();
     };
 
@@ -136,9 +185,16 @@ export default class AnalysisMarketStore {
                     
                     if (prices.length > 0) {
                         const last_price = Number(prices[prices.length - 1]);
-                        this.current_price = last_price.toFixed(2);
+                        // HARD FORCE: 1HZ markets MUST have 3 pips for correct analysis
+                        const pip = this.symbol.startsWith('1HZ') ? 3 : (response.history.pip_size || 2);
+                        this.pip = pip;
+                        this.current_price = last_price.toFixed(pip);
                         this.prev_price = last_price;
-                        this.last_digit = this.stats_engine.extractLastDigit(last_price);
+                        this.last_digit = this.stats_engine.extractLastDigit(last_price, this.symbol);
+                        
+                        // Initial Indicator Calculation
+                        this.raw_prices = prices.map((p: any) => Number(p));
+                        this.updateIndicators();
                     }
                 });
             }
@@ -147,12 +203,20 @@ export default class AnalysisMarketStore {
                 this.subscription_id = response.subscription.id;
             }
 
-            // Global onMessage listener for ticks
-            chart_api.api.onMessage().subscribe(({ data }: any) => {
-                if (data.msg_type === 'tick' && data.tick?.symbol === this.symbol) {
-                    this.onTick(data.tick);
-                }
-            });
+            // Global message listener handled by a single long-lived subscription if possible, 
+            // but here we just ensure we don't stack them.
+            if (!(chart_api.api as any)._has_analysis_listener) {
+                (chart_api.api as any)._has_analysis_listener = true;
+                chart_api.api.onMessage().subscribe(({ data }: any) => {
+                    if (data.msg_type === 'tick') {
+                        // Dynamically find the right store to update or use a global dispatcher
+                        // For now, satisfy the current architecture by checking the active symbol
+                        if (data.tick?.symbol === this.symbol) {
+                            this.onTick(data.tick);
+                        }
+                    }
+                });
+            }
 
             runInAction(() => {
                 this.is_loading = false;
@@ -171,13 +235,20 @@ export default class AnalysisMarketStore {
         const time = tick.epoch * 1000;
         
         runInAction(() => {
+            // HARD FORCE: 1HZ markets MUST have 3 pips for correct analysis
+            const symbol = tick.symbol || this.symbol;
+            const pip_size = symbol.startsWith('1HZ') ? 3 : (tick.pip_size || 2);
+            this.pip = pip_size;
+            this.current_price = price.toFixed(pip_size);
+
             if (this.prev_price !== null) {
                 this.is_rising = price > this.prev_price;
                 this.is_falling = price < this.prev_price;
             }
             
-            this.current_price = price.toFixed(tick.pip_size || 2);
-            const digit = this.stats_engine.extractLastDigit(price);
+            // Ensure stats engine uses correct pip before extracting digit
+            this.stats_engine.setConfig({ pip: pip_size });
+            const digit = this.stats_engine.extractLastDigit(price, this.symbol);
             this.last_digit = digit;
             
             const direction = price >= (this.prev_price || 0) ? 'up' : 'down';
@@ -197,7 +268,26 @@ export default class AnalysisMarketStore {
             }
             
             this.prev_price = price;
+            
+            // Technical Indicators Update
+            this.raw_prices.push(price);
+            if (this.raw_prices.length > 200) this.raw_prices.shift();
+            
+            this.updateIndicators();
         });
+    };
+
+    @action
+    updateIndicators = () => {
+        if (this.raw_prices.length < 2) return;
+        
+        this.cci = calculateCCI(this.raw_prices, 20);
+        this.macd = calculateMACD(this.raw_prices);
+        this.donchian = calculateDonchian(this.raw_prices, 20);
+        
+        // Candles (5 ticks per unit)
+        this.candles = convertToCandles(this.raw_prices, 5);
+        this.detected_pattern = detectPattern(this.candles);
     };
 
     @action

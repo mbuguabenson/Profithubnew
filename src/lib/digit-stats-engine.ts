@@ -1,5 +1,5 @@
 import { TDigitStat, TAnalysisHistory } from '../stores/analysis-store';
-import { getSafeLastDigit } from '../utils/digit-utils';
+import { getSafeLastDigit, getSymbolPips } from '../utils/digit-utils';
 
 export class DigitStatsEngine {
     ticks: number[] = [];
@@ -48,8 +48,10 @@ export class DigitStatsEngine {
     }
 
     // Robust digit extraction helper
-    extractLastDigit(price: number | string): number {
-        return getSafeLastDigit(price, this.pip);
+    extractLastDigit(price: number | string, symbol?: string): number {
+        // Use the explicitly provided symbol's pip, or the engine's current pip config
+        const active_pip = symbol ? getSymbolPips(symbol) : this.pip;
+        return getSafeLastDigit(price, active_pip);
     }
 
     update(new_ticks: number[], new_prices: number[]) {

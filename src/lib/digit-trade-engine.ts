@@ -444,7 +444,7 @@ export class DigitTradeEngine {
                     ...(contract_type.includes('DIGIT') && !['DIGITEVEN', 'DIGITODD'].includes(contract_type)
                         ? { barrier: String(prediction) }
                         : {}),
-                })) as { error?: { message: string }; proposal?: { id: string } };
+                })) as { error?: { message: string; code: string }; proposal?: { id: string } };
 
                 if (proposal.error) throw new Error(proposal.error.message);
 
@@ -465,33 +465,51 @@ export class DigitTradeEngine {
                 }
             }
         } catch (e: unknown) {
-            console.error(e);
+            const error_obj = e as any;
+            const message = error_obj.error?.message || error_obj.message || 'Unknown Error';
+            const code = error_obj.error?.code || 'NO_CODE';
+            
+            console.error('[DigitTradeEngine] Trade Error Detail:', {
+                message,
+                code,
+                contract_type,
+                prediction,
+                symbol,
+                full_error: error_obj
+            });
+            
             runInAction(() => {
-                const message = (e as Error).message || 'Unknown Error';
-                this.addLog(`Error: ${message}`, 'error');
+                const logMsg = `Error: ${message}${code !== 'NO_CODE' ? ` (${code})` : ''} - [${contract_type} ${prediction}]`;
+                this.addLog(logMsg, 'error');
                 this.is_executing = false;
                 this.trade_status = 'ERROR';
+                
+                // If it's a critical error (like symbol mismatch/duration), stop the bot
+                if (['InvalidSymbol', 'InvalidDuration', 'ContractRange'].includes(code)) {
+                    config.is_running = false;
+                }
             });
         }
     };
 
     private monitorTrade = (contract_id: string, config: TTradeConfig, isLastBulkTrade: boolean) => {
-        const check = setInterval(async () => {
-            try {
-                const data = (await api_base.api?.send({ proposal_open_contract: 1, contract_id })) as {
-                    proposal_open_contract?: { is_sold: number; profit: number };
-                };
-                if (data.proposal_open_contract && data.proposal_open_contract.is_sold) {
-                    clearInterval(check);
-                    this.handleResult(data.proposal_open_contract, config, isLastBulkTrade);
+        const subscription = api_base.api?.onMessage().subscribe((response: any) => {
+            if (response.proposal_open_contract?.contract_id === contract_id && response.proposal_open_contract?.is_sold) {
+                this.handleResult(response.proposal_open_contract, config, isLastBulkTrade);
+                if (subscription && typeof subscription.unsubscribe === 'function') {
+                    subscription.unsubscribe();
+                } else if (response.subscription?.id) {
+                    api_base.api?.send({ forget: response.subscription.id });
                 }
-            } catch (e) {
-                clearInterval(check);
-                runInAction(() => {
-                    if (isLastBulkTrade) this.is_executing = false;
-                });
             }
-        }, 1000);
+        });
+
+        api_base.api?.send({ proposal_open_contract: 1, contract_id, subscribe: 1 }).catch((err: any) => {
+            console.error('[DigitTradeEngine] Monitoring Error:', err);
+            runInAction(() => {
+                if (isLastBulkTrade) this.is_executing = false;
+            });
+        });
     };
 
     @action

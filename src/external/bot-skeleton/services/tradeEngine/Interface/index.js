@@ -22,6 +22,7 @@ const Interface = $scope => {
         return {
             ...getBotInterface(tradeEngine),
             ...getToolsInterface(tradeEngine),
+            ...getTicksInterface(tradeEngine),
             getTicksInterface: getTicksInterface(tradeEngine),
             watch: (...args) => tradeEngine.watch(...args),
             sleep: (...args) => sleep(observer, ...args),

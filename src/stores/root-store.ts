@@ -2,7 +2,6 @@ import { api_base } from '@/external/bot-skeleton/services/api/api-base';
 import AnalysisStore from './analysis-store';
 import AnalysisMarketStore from './analysis-market-store';
 import AppStore from './app-store';
-import AutoTraderStore from './auto-trader-store';
 import BlocklyStore from './blockly-store';
 import ChartStore from './chart-store';
 import ClientStore from './client-store';
@@ -18,9 +17,8 @@ import LoadModalStore from './load-modal-store';
 import QuickStrategyStore from './quick-strategy-store';
 import RunPanelStore from './run-panel-store';
 import SaveModalStore from './save-modal-store';
-import SelfExclusionStore from './self-exclusion-store';
-import SmartTradingStore from './smart-trading-store';
 import SummaryCardStore from './summary-card-store';
+import SelfExclusionStore from './self-exclusion-store';
 import ToolbarStore from './toolbar-store';
 import ToolboxStore from './toolbox-store';
 import TransactionsStore from './transactions-store';
@@ -28,6 +26,7 @@ import UiStore from './ui-store';
 import SmartAutoStore from './smart-auto-store';
 import DigitCrackerStore from './digit-cracker-store';
 import AdminStore from './admin-store';
+import ProfitmaxStore from './profitmax-store';
 
 // TODO: need to write types for the individual classes and convert them to ts
 export default class RootStore {
@@ -36,7 +35,6 @@ export default class RootStore {
     public analysis_market: AnalysisMarketStore;
     public app: AppStore;
     public summary_card: SummaryCardStore;
-    public auto_trader: AutoTraderStore;
     public copy_trader: CopyTraderStore;
     public flyout: FlyoutStore;
     public flyout_help: FlyoutHelpStore;
@@ -51,10 +49,10 @@ export default class RootStore {
     public quick_strategy: QuickStrategyStore;
     public self_exclusion: SelfExclusionStore;
     public dashboard: DashboardStore;
-    public smart_trading: SmartTradingStore;
     public smart_auto: SmartAutoStore;
     public digit_cracker: DigitCrackerStore;
     public admin: AdminStore;
+    public profitmax: ProfitmaxStore;
 
     public chart_store: ChartStore;
     public blockly_store: BlocklyStore;
@@ -88,7 +86,6 @@ export default class RootStore {
 
         this.app = new AppStore(this, this.core);
         this.summary_card = new SummaryCardStore(this, this.core);
-        this.auto_trader = new AutoTraderStore(this);
         this.copy_trader = new CopyTraderStore(this);
         this.flyout = new FlyoutStore(this);
         this.flyout_help = new FlyoutHelpStore(this);
@@ -103,10 +100,10 @@ export default class RootStore {
         this.quick_strategy = new QuickStrategyStore(this);
         this.self_exclusion = new SelfExclusionStore(this, this.core);
         this.dashboard = new DashboardStore(this, this.core);
-        this.smart_trading = new SmartTradingStore(this);
         this.smart_auto = new SmartAutoStore(this);
         this.digit_cracker = new DigitCrackerStore(this);
         this.admin = new AdminStore();
+        this.profitmax = new ProfitmaxStore(this);
 
         // need to be at last for dependency
         this.chart_store = new ChartStore(this);

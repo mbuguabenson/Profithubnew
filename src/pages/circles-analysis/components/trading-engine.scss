@@ -279,34 +279,15 @@
                 flex-direction: column;
                 gap: 2rem;
 
-                .controls-grid {
+                .settings-grid-premium {
                     display: grid;
-                    grid-template-columns: repeat(2, 1fr);
-                    gap: 1.2rem;
-
-                    .input-group {
-                        display: flex;
-                        flex-direction: column;
-                        gap: 0.6rem;
-                        label {
-                            font-size: 0.9rem;
-                            color: #64748b;
-                            font-weight: 700;
-                            text-transform: uppercase;
-                        }
-                        input {
-                            background: rgba(0, 0, 0, 0.3);
-                            border: 1px solid rgba(255, 255, 255, 0.1);
-                            padding: 0.8rem 1rem;
-                            border-radius: 6px;
-                            color: #fff;
-                            font-weight: 700;
-                            &:focus {
-                                border-color: #38bdf8;
-                                outline: none;
-                            }
-                        }
-                    }
+                    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+                    gap: 1.5rem;
+                    padding: 1rem;
+                    background: rgba(255, 255, 255, 0.03);
+                    border-radius: 12px;
+                    border: 1px solid rgba(255, 255, 255, 0.05);
+                    margin-bottom: 1.5rem;
                 }
 
                 .toggles-grid {

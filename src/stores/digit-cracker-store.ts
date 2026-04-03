@@ -1,4 +1,5 @@
 import { action, makeObservable, observable, reaction, runInAction } from 'mobx';
+import { getSymbolPips } from '@/utils/digit-utils';
 import { DigitStatsEngine } from '@/lib/digit-stats-engine';
 import { DigitTradeEngine } from '@/lib/digit-trade-engine';
 import RootStore from './root-store';
@@ -51,7 +52,6 @@ export default class DigitCrackerStore {
     @observable accessor pip = 2;
     @observable accessor over_under_threshold = 5;
     @observable accessor match_diff_digit = 6;
-    private symbol_pips: Map<string, number> = new Map();
 
     constructor(root_store: RootStore) {
         makeObservable(this);
@@ -168,7 +168,10 @@ export default class DigitCrackerStore {
     @action
     setSymbol = (symbol: string) => {
         this.symbol = symbol;
-        this.pip = this.symbol_pips.get(symbol) || 2;
+        
+        // Use central utility to determine correct pips (1HZ symbols = 3 pips)
+        this.pip = getSymbolPips(symbol);
+        
         this.updateEngineConfig();
         this.subscribeToTicks();
     };
@@ -178,7 +181,7 @@ export default class DigitCrackerStore {
         if (tick.symbol !== this.symbol) return;
 
         const price = Number(tick.quote);
-        const new_digit = this.stats_engine.extractLastDigit(price);
+        const new_digit = this.stats_engine.extractLastDigit(price, this.symbol);
 
         runInAction(() => {
             if (this.is_subscribing) this.is_subscribing = false;

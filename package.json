@@ -10,7 +10,9 @@
         "node": ">=20.0.0"
     },
     "scripts": {
+        "prestart": "node scripts/index-bots.js",
         "start": "rsbuild dev -o",
+        "prebuild": "node scripts/index-bots.js",
         "build": "rsbuild build",
         "watch": "rsbuild build --watch",
         "serve": "http-server dist -p 8443 -a localhost -o",

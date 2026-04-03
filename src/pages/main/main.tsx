@@ -44,10 +44,9 @@ const AnalysisTool = lazy(() => import('@/pages/analysis-tool/index'));
 const Tutorials = lazy(() => import('@/pages/tutorials/tutorials'));
 const SmartAuto24 = lazy(() => import('@/pages/circles-analysis/index'));
 const DigitCracker = lazy(() => import('@/pages/digit-cracker/index'));
-const Settings = lazy(() => import('@/pages/settings/index'));
 const Strategies = lazy(() => import('@/pages/strategies/index'));
 const AIBotBuilder = lazy(() => import('@/pages/ai-bot-builder/AIBotBuilder'));
-const DerivCourse = lazy(() => import('@/pages/deriv-course/DerivCourse'));
+const Profitmax = lazy(() => import('@/pages/profitmax/index'));
 
 const Portal = observer(({ type }: { type: 'dtrader' | 'dtooltrades' }) => {
     const { client } = useStore();
@@ -202,10 +201,9 @@ const AppWrapper = observer(() => {
         'trading_tools',
         'copy_trading',
         'strategies',
-        'settings',
         'tutorials',
         'dtooltrades',
-        'deriv_course',
+        'profitmax',
     ];
     const { isDesktop } = useDevice();
     const location = useLocation();
@@ -390,17 +388,17 @@ const AppWrapper = observer(() => {
     }, [dashboard_strategies, active_tab]);
 
     const handleTabChange = React.useCallback(
-        (tab_index: number) => {
+        (tab_index: number, is_instant = false) => {
             setActiveTab(tab_index);
             const el_id = TAB_IDS[tab_index];
             if (el_id) {
                 const el_tab = document.getElementById(el_id);
+                const behavior = is_instant ? 'auto' : 'smooth';
                 setTimeout(() => {
-                    el_tab?.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'center' });
+                    el_tab?.scrollIntoView({ behavior, block: 'center', inline: 'center' });
                 }, 10);
             }
         },
-        // eslint-disable-next-line react-hooks/exhaustive-deps
         [active_tab]
     );
 
@@ -587,7 +585,8 @@ const AppWrapper = observer(() => {
                                 </div>
                             ) : null}
 
-                            {/* Tab 7: Strategies */}
+
+                            {/* Tab 8: Strategies */}
                             {admin.visible_tabs.strategies ? (
                                 <div
                                     label={
@@ -612,28 +611,7 @@ const AppWrapper = observer(() => {
                                 </div>
                             ) : null}
 
-                            {/* Tab 8: Settings */}
-                            {admin.visible_tabs.settings ? (
-                                <div
-                                    label={
-                                        <div className='main__tabs-label'>
-                                            <LabelPairedGearCaptionRegularIcon
-                                                height='20px'
-                                                width='20px'
-                                                fill='var(--text-general)'
-                                            />
-                                            <Localize i18n_default_text='Settings' />
-                                        </div>
-                                    }
-                                    id='id-settings'
-                                >
-                                    <PageContentWrapper>
-                                        <Suspense fallback={<ChunkLoader message={localize('Loading Settings...')} />}>
-                                            <Settings />
-                                        </Suspense>
-                                    </PageContentWrapper>
-                                </div>
-                            ) : null}
+
 
                             {/* Tab 9: Tutorials */}
                             {admin.visible_tabs.tutorials ? (
@@ -674,26 +652,26 @@ const AppWrapper = observer(() => {
                                 </div>
                             ) : null}
 
-                            {/* Tab 11: Deriv Course */}
-                            {admin.visible_tabs.deriv_course ? (
+                            {/* Tab 11: Profitmax */}
+                            {admin.visible_tabs.profitmax ? (
                                 <div
                                     label={
                                         <div className='main__tabs-label'>
-                                            <span style={{ fontSize: '20px', marginRight: '8px' }}>🎓</span>
-                                            <Localize i18n_default_text='Deriv Course' />
+                                            <span style={{ fontSize: '20px', marginRight: '8px' }}>🚀</span>
+                                            <Localize i18n_default_text='Profitmax' />
                                         </div>
                                     }
-                                    id='id-deriv-course'
+                                    id='id-profitmax'
                                 >
                                     <PageContentWrapper>
-                                        <Suspense
-                                            fallback={<ChunkLoader message={localize('Loading Deriv Course...')} />}
-                                        >
-                                            <DerivCourse />
+                                        <Suspense fallback={<ChunkLoader message={localize('Loading Profitmax...')} />}>
+                                            <Profitmax />
                                         </Suspense>
                                     </PageContentWrapper>
                                 </div>
                             ) : null}
+
+
                         </Tabs>
                         {!isDesktop && right_tab_shadow && <span className='tabs-shadow tabs-shadow--right' />}
                     </div>

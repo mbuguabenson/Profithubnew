@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, useMemo } from 'react';
 import classNames from 'classnames';
 import { observer } from 'mobx-react-lite';
 import chart_api from '@/external/bot-skeleton/services/api/chart-api';
@@ -219,6 +219,10 @@ const Chart = observer(({ show_digits_stats }: { show_digits_stats: boolean }) =
             </div>
         );
     }
+    const memoizedActiveSymbols = useMemo(() => {
+        return activeSymbols && activeSymbols.length > 0 ? JSON.parse(JSON.stringify(activeSymbols)) : [];
+    }, [activeSymbols]);
+
     const is_connection_opened = !!chart_api?.api;
     return (
         <div
@@ -259,7 +263,7 @@ const Chart = observer(({ show_digits_stats }: { show_digits_stats: boolean }) =
                 isConnectionOpened={is_connection_opened}
                 getMarketsOrder={getMarketsOrder}
                 chartData={{
-                    activeSymbols: JSON.parse(JSON.stringify(activeSymbols)),
+                    activeSymbols: memoizedActiveSymbols,
                 }}
                 isLive
                 leftMargin={80}

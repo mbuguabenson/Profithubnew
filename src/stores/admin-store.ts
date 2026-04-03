@@ -28,13 +28,12 @@ export default class AdminStore {
         trading_tools: true,
         copy_trading: true,
         strategies: false,
-        settings: true,
         tutorials: false,
         free_bots: false, // Legacy
         ai_bot_builder: true,
         dtrader: true,
         dtooltrades: true,
-        deriv_course: true,
+        profitmax: true,
     };
 
     // Mock Data for Table & Radial Chart

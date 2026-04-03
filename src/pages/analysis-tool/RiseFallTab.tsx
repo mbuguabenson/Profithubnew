@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+﻿import { useEffect } from 'react';
 import { observer } from 'mobx-react-lite';
 import { useStore } from '@/hooks/useStore';
 import './rise-fall-tab.scss';
@@ -37,9 +37,9 @@ const RiseFallTab = observer(() => {
                     <div className='price-orb__inner'>
                         <span className='price-orb__value'>{current_price}</span>
                         <div className='price-orb__arrow'>
-                            {is_rising && '▲'}
-                            {is_falling && '▼'}
-                            {!is_rising && !is_falling && '•'}
+                            {is_rising && 'Γû▓'}
+                            {is_falling && 'Γû╝'}
+                            {!is_rising && !is_falling && 'ΓÇó'}
                         </div>
                     </div>
                 </div>
@@ -52,7 +52,7 @@ const RiseFallTab = observer(() => {
                         <div key={i} className={`history-item ${tick.direction}`}>
                             <span>{new Date(tick.time).toLocaleTimeString()}</span>
                             <span>{tick.price.toFixed(5)}</span>
-                            <span className='direction-icon'>{tick.direction === 'up' ? '▲' : '▼'}</span>
+                            <span className='direction-icon'>{tick.direction === 'up' ? 'Γû▓' : 'Γû╝'}</span>
                         </div>
                     ))}
                     {tick_history.length === 0 && (
