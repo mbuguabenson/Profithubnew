@@ -11,7 +11,7 @@ import {
     LabelPairedPlayMdFillIcon,
     LabelPairedSquareMdFillIcon,
 } from '@deriv/quill-icons/LabelPaired';
-import '../easy-tool/easy-tool.scss';
+import '../analysis-tool/easy-tool/easy-tool.scss';
 import './digit-cracker.scss';
 import '@/components/premium-slider/premium-slider.scss';
 

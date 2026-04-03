@@ -1,0 +1,119 @@
+﻿
+> bot-trader-app-v2@0.0.1 prebuild
+> node scripts/index-bots.js
+
+Successfully indexed 38 localized premium bots into F:\2027\Profithubnew\src\constants\bot-manifest.json.
+
+> bot-trader-app-v2@0.0.1 build
+> rsbuild build
+
+Rsbuild v1.7.3
+
+info    build started...
+npm : error   [1m[31mBuild 
+errors: [39m[22m
+At line:1 char:1
++ npm run build 2>&1 | 
+Out-File -FilePath 
+f:\2027\Profithubnew\.build_o 
+...
++ ~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : 
+No    tSpecified: (error   
+[1m[3    ...ors: 
+[39m[22m:String) [    ], 
+RemoteException
+    + FullyQualifiedErrorId : 
+Na    tiveCommandError
+ 
+File: [36m./src/pages/digit-c
+racker/index.tsx:9:1-37[39m
+  ├ù Module not found: Can't 
+resolve 
+'../easy-tool/easy-tool.scss' 
+in 'F:\2027\Profithubnew\src\p
+ages\digit-cracker'
+    Γò¡ΓöÇ[9:0]
+  7 Γöé import PremiumInput 
+from '@/components/premium-sli
+der/premium-slider';
+  8 Γöé import { LabelPairedAr
+rowsRotateMdRegularIcon, 
+LabelPairedPlayMdFillIcon, 
+LabelPairedSquareMdFillIcon } 
+from '@deriv/quill-icons/Label
+Paired';
+  9 Γöé import 
+'../easy-tool/easy-tool.scss';
+    ┬╖ ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓö
+ÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓö
+ÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓö
+ÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+ 10 Γöé import 
+'./digit-cracker.scss';
+ 11 Γöé import '@/components/p
+remium-slider/premium-slider.s
+css';
+    Γò░ΓöÇΓöÇΓöÇΓöÇ
+[2mImport traces (entry ΓåÆ 
+error):
+  ./src/main.tsx
+  ./src/app/AuthWrapper.tsx
+  ΓÇª (4 hidden)
+  ./src/pages/main/main.tsx
+  ./src/pages/digit-cracker/in
+dex.tsx 
+[1m[31m├ù[39m[22m[2m[22m
+
+File: [36m./src/pages/main/ma
+in.tsx:1:1[39m
+  ├ù Cannot find module 
+'@/pages/profitmax/index' for 
+matched aliased key '@'
+[2mImport traces (entry ΓåÆ 
+error):
+  ./src/main.tsx
+  ./src/app/AuthWrapper.tsx
+  ΓÇª (3 hidden)
+  ./src/pages/main/index.ts
+  ./src/pages/main/main.tsx 
+[1m[31m├ù[39m[22m[2m[22m
+
+error   build failed in 
+[1m18.3[22m s
+error   Rspack build failed.
+    at file:///F:/2027/Profith
+ubnew/node_modules/@rsbuild/co
+re/dist/131.js:4214:145
+    at F:\2027\Profithubnew\no
+de_modules\@rspack\core\dist\i
+ndex.js:10949:46
+    at F:\2027\Profithubnew\no
+de_modules\@rspack\core\dist\i
+ndex.js:7117:113
+    at done (F:\2027\Profithub
+new\node_modules\@rspack\lite-
+tapable\dist\index.cjs:373:13)
+    at AsyncParallelHook.callA
+syncStageRange (F:\2027\Profit
+hubnew\node_modules\@rspack\li
+te-tapable\dist\index.cjs:379:
+46)
+    at 
+AsyncParallelHook.callAsync (F
+:\2027\Profithubnew\node_modul
+es\@rspack\lite-tapable\dist\i
+ndex.cjs:101:21)
+    at Cache.shutdown (F:\2027
+\Profithubnew\node_modules\@rs
+pack\core\dist\index.js:7170:3
+3)
+    at F:\2027\Profithubnew\no
+de_modules\@rspack\core\dist\i
+ndex.js:10948:28
+    at done (F:\2027\Profithub
+new\node_modules\@rspack\lite-
+tapable\dist\index.cjs:426:13)
+    at next (F:\2027\Profithub
+new\node_modules\@rspack\lite-
+tapable\dist\index.cjs:469:55)

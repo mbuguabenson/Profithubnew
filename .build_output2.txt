@@ -1,0 +1,585 @@
+﻿
+> bot-trader-app-v2@0.0.1 prebuild
+> node scripts/index-bots.js
+
+Successfully indexed 38 localized premium bots into F:\2027\Profithubnew\src\constants\bot-manifest.json.
+
+> bot-trader-app-v2@0.0.1 build
+> rsbuild build
+
+Rsbuild v1.7.3
+
+info    build started...
+npm : warn    [1m[33mBuild 
+warning: 
+At line:1 char:1
++ npm run build 2>&1 | 
+Out-File -FilePath 
+f:\2027\Profithubnew\.build_o 
+...
++ ~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : 
+No    tSpecified: (warn    
+[1m[3    3mBuild warning: 
+:String) []    , 
+RemoteException
+    + FullyQualifiedErrorId : 
+Na    tiveCommandError
+ 
+[39m[22mFile: [36m.\src\com
+ponents\layout\header\wallets\
+wallet.scss:1:1[39m
+  ΓÜá Module Warning (from F:\
+2027\Profithubnew\node_modules
+\@rsbuild\plugin-sass\compiled
+\sass-loader\index.js??ruleSet
+[1].rules[13].use[4]):
+  Γöé Deprecation Warning on 
+line 738, column 20 of file://
+/F:/2027/Profithubnew/src/comp
+onents/layout/header/wallets/w
+allet.scss:738:20:
+  Γöé The Sass if() syntax is 
+deprecated in favor of the 
+modern CSS syntax.
+  Γöé 
+  Γöé Suggestion: 
+if(sass($theme == "dark"): 
+"--dark"; else: "")
+  Γöé 
+  Γöé More info: https://sass-
+lang.com/d/if-function
+  Γöé 
+  Γöé 738 |                 
+$t: if($theme == 'dark', 
+'--dark', '');
+  Γöé 
+  Γöé 
+  Γöé F:\2027\Profithubnew\src
+\components\layout\header\wall
+ets\wallet.scss 739:21  root 
+stylesheet
+  Γöé
+
+ready   built in [1m17.8[22m s
+
+[34mFile (web)                                                                           Size         Gzip   [39m
+[2mdist\[22m[35m_redirects[39m                                                                      0.02 kB   
+[2mdist\assets\media\[22m[35m1x1.gif[39m                                                            0.04 kB   
+[2mdist\assets\screenshots\[22m[35mdesktop-screenshot.png[39m                                       0.10 kB   
+[2mdist\assets\screenshots\[22m[35mmobile-screenshot.png[39m                                        0.10 kB   
+[2mdist\assets\icons\[22m[35mIcMinus.svg[39m                                                        0.14 kB      0.14 kB
+[2mdist\assets\icons\[22m[35mIcAdd.svg[39m                                                          0.17 kB      0.16 kB
+[2mdist\[22m[35m_headers[39m                                                                        0.18 kB   
+[2mdist\assets\media\[22m[35mhandopen.cur[39m                                                       0.20 kB   
+[2mdist\assets\icons\[22m[35mIcMenuDots.svg[39m                                                     0.21 kB      0.14 kB
+[2mdist\assets\[22m[35mFontManifest.json[39m                                                        0.21 kB      0.14 kB
+[2mdist\assets\icons\[22m[35mIcChevronRightBold.svg[39m                                             0.22 kB      0.17 kB
+[2mdist\assets\media\[22m[35mic-chevron-down-bold.svg[39m                                           0.23 kB      0.18 kB
+[2mdist\assets\icons\[22m[35mIcFilter.svg[39m                                                       0.23 kB      0.17 kB
+[2mdist\assets\icons\[22m[35mIcUndo.svg[39m                                                         0.24 kB      0.19 kB
+[2mdist\assets\icons\[22m[35mIcRedo.svg[39m                                                         0.24 kB      0.19 kB
+[2mdist\assets\icons\[22m[35mIcArrowLeft.svg[39m                                                    0.25 kB      0.20 kB
+[2mdist\assets\icons\[22m[35mIcUserGuide.svg[39m                                                    0.26 kB      0.19 kB
+[2mdist\assets\icons\[22m[35mIcChartsTabDbot.svg[39m                                                0.26 kB      0.18 kB
+[2mdist\assets\icons\[22m[35mIcSearch.svg[39m                                                       0.26 kB      0.20 kB
+[2mdist\assets\icons\[22m[35mIcCross.svg[39m                                                        0.29 kB      0.19 kB
+[2mdist\assets\icons\pwa\[22m[35micon-96x96.svg[39m                                                 0.29 kB      0.22 kB
+[2mdist\assets\icons\pwa\[22m[35micon-72x72.svg[39m                                                 0.29 kB      0.22 kB
+[2mdist\assets\icons\pwa\[22m[35micon-144x144.svg[39m                                               0.30 kB      0.22 kB
+[2mdist\assets\icons\pwa\[22m[35micon-128x128.svg[39m                                               0.30 kB      0.22 kB
+[2mdist\assets\icons\pwa\[22m[35micon-192x192.svg[39m                                               0.30 kB      0.22 kB
+[2mdist\assets\icons\pwa\[22m[35micon-152x152.svg[39m                                               0.30 kB      0.22 kB
+[2mdist\assets\media\icons\[22m[35mcontrol_stop.svg[39m                                             0.30 kB      0.22 kB
+[2mdist\assets\icons\pwa\[22m[35micon-384x384.svg[39m                                               0.30 kB      0.22 kB
+[2mdist\assets\icons\pwa\[22m[35micon-512x512.svg[39m                                               0.30 kB      0.22 kB
+[2mdist\assets\icons\[22m[35mIcStop.svg[39m                                                         0.31 kB      0.22 kB
+[2mdist\assets\media\[22m[35mhandclosed.cur[39m                                                     0.33 kB   
+[2mdist\assets\icons\[22m[35mIcChart.svg[39m                                                        0.33 kB      0.22 kB
+[2mdist\assets\icons\[22m[35mIcSort.svg[39m                                                         0.34 kB      0.20 kB
+[2mdist\assets\icons\[22m[35mIcZoomOut.svg[39m                                                      0.36 kB      0.24 kB
+[2mdist\assets\icons\[22m[35mIcDbotClose.svg[39m                                                    0.37 kB      0.23 kB
+[2mdist\assets\icons\[22m[35mIcTradetypeAccu.svg[39m                                                0.40 kB      0.28 kB
+[2mdist\assets\icons\[22m[35mic-deriv.svg[39m                                                       0.40 kB      0.28 kB
+[2mdist\static\js\async\[22m[36m5087.48ca9df6.js[39m                                                0.41 kB      0.30 kB
+[2mdist\assets\icons\[22m[35mIcFolderOpen.svg[39m                                                   0.43 kB      0.28 kB
+[2mdist\assets\icons\[22m[35mIcZoomIn.svg[39m                                                       0.43 kB      0.25 kB
+[2mdist\assets\icons\[22m[35mIcDashboard.svg[39m                                                    0.50 kB      0.21 kB
+[2mdist\assets\media\[22m[35mzoom-reset.svg[39m                                                     0.50 kB      0.28 kB
+[2mdist\assets\icons\[22m[35mIcChevronDown.svg[39m                                                  0.51 kB      0.32 kB
+[2mdist\assets\icons\[22m[35mIcChevronDownBold.svg[39m                                              0.51 kB      0.32 kB
+[2mdist\assets\icons\[22m[35mIcPlay.svg[39m                                                         0.53 kB      0.32 kB
+[2mdist\assets\icons\[22m[35mIcDbotNoSearchResult.svg[39m                                           0.54 kB      0.32 kB
+[2mdist\assets\icons\[22m[35mIcChevronUp.svg[39m                                                    0.54 kB      0.31 kB
+[2mdist\assets\icons\[22m[35mIcPlayOutline.svg[39m                                                  0.54 kB      0.35 kB
+[2mdist\assets\icons\[22m[35mIcTradingViewChart.svg[39m                                             0.55 kB      0.33 kB
+[2mdist\assets\icons\[22m[35mIcMapTripFold.svg[39m                                                  0.56 kB      0.25 kB
+[2mdist\assets\media\[22m[35mdropdown-arrow.svg[39m                                                 0.57 kB      0.35 kB
+[2mdist\assets\media\[22m[35mdropdown-arrow-dark.svg[39m                                            0.57 kB      0.35 kB
+[2mdist\assets\media\[22m[35mzoom-out.svg[39m                                                       0.58 kB      0.31 kB
+[2mdist\[22m[35mderiv-logo.svg[39m                                                                  0.58 kB      0.34 kB
+[2mdist\assets\media\icons\[22m[35mevent_whenflagclicked.svg[39m                                    0.63 kB      0.34 kB
+[2mdist\assets\media\[22m[35mzoom-in.svg[39m                                                        0.63 kB      0.32 kB
+[2mdist\assets\icons\[22m[35mIcDbotDownload.svg[39m                                                 0.65 kB      0.34 kB
+[2mdist\assets\icons\[22m[35mIcClose.svg[39m                                                        0.68 kB      0.31 kB
+[2mdist\assets\icons\[22m[35mIcDbotViewDetail.svg[39m                                               0.70 kB      0.36 kB
+[2mdist\assets\icons\[22m[35mIcTutorials.svg[39m                                                    0.70 kB      0.39 kB
+[2mdist\assets\icons\[22m[35mIcMyComputer.svg[39m                                                   0.73 kB      0.40 kB
+[2mdist\assets\media\[22m[35mhanddelete.cur[39m                                                     0.77 kB   
+[2mdist\static\js\async\[22m[36m3028.3563e090.js[39m                                                0.80 kB      0.47 kB
+[2mdist\static\js\async\[22m[36m8295.fceec6e3.js[39m                                                0.80 kB      0.48 kB
+[2mdist\static\js\async\[22m[36m7211.1ba414c3.js[39m                                                0.82 kB      0.52 kB
+[2mdist\static\js\async\[22m[36m8252.2dc74079.js[39m                                                0.86 kB      0.50 kB
+[2mdist\static\js\async\[22m[36m7669.e46aaf64.js[39m                                                0.87 kB      0.51 kB
+[2mdist\static\js\async\[22m[36m896.72ac5bda.js[39m                                                 0.88 kB      0.51 kB
+[2mdist\assets\icons\[22m[35mIcSave.svg[39m                                                         0.90 kB      0.48 kB
+[2mdist\assets\media\[22m[35mcomment-arrow-down.svg[39m                                             0.90 kB      0.52 kB
+[2mdist\[22m[32mfront-channel.html[39m                                                              0.91 kB      0.37 kB
+[2mdist\assets\icons\[22m[35mIcReset.svg[39m                                                        0.92 kB      0.49 kB
+[2mdist\static\js\async\[22m[36m5905.6ad98622.js[39m                                                0.96 kB      0.55 kB
+[2mdist\static\js\async\[22m[36m2446.d59a9b43.js[39m                                                0.97 kB      0.57 kB
+[2mdist\static\js\async\[22m[36m8087.33d6489c.js[39m                                                0.97 kB      0.57 kB
+[2mdist\static\js\async\[22m[36m4594.9139a835.js[39m                                                0.97 kB      0.56 kB
+[2mdist\static\js\async\[22m[36m4456.6b93ce48.js[39m                                                0.97 kB      0.57 kB
+[2mdist\static\js\async\[22m[36m58.409290a4.js[39m                                                  0.98 kB      0.58 kB
+[2mdist\static\js\async\[22m[36m1434.068d5f0e.js[39m                                                0.98 kB      0.58 kB
+[2mdist\static\js\async\[22m[36m8473.ad990a5a.js[39m                                                0.98 kB      0.58 kB
+[2mdist\static\js\async\[22m[36m8635.254635a5.js[39m                                                0.98 kB      0.56 kB
+[2mdist\static\js\async\[22m[36m557.af43c17d.js[39m                                                 0.99 kB      0.58 kB
+[2mdist\assets\media\[22m[35mcomment-arrow-up.svg[39m                                               0.99 kB      0.56 kB
+[2mdist\static\js\async\[22m[36m3523.5d9483cf.js[39m                                                0.99 kB      0.58 kB
+[2mdist\static\js\async\[22m[36m1481.3d02eb8a.js[39m                                                0.99 kB      0.57 kB
+[2mdist\static\js\async\[22m[36m6241.6bc80ab3.js[39m                                                1.00 kB      0.63 kB
+[2mdist\static\js\async\[22m[36m5139.0b252f52.js[39m                                                1.0 kB       0.60 kB
+[2mdist\static\js\async\[22m[36m5108.4e0e04ab.js[39m                                                1.0 kB       0.60 kB
+[2mdist\static\js\async\[22m[36m8138.b13fc215.js[39m                                                1.0 kB       0.60 kB
+[2mdist\static\js\async\[22m[36m1179.1a935bf1.js[39m                                                1.0 kB       0.59 kB
+[2mdist\static\js\async\[22m[36m9584.716a484b.js[39m                                                1.0 kB       0.59 kB
+[2mdist\assets\icons\[22m[35mIcTrash.svg[39m                                                        1.0 kB       0.47 kB
+[2mdist\static\js\async\[22m[36m7386.70bd199a.js[39m                                                1.0 kB       0.60 kB
+[2mdist\static\js\async\[22m[36m1469.61730b82.js[39m                                                1.0 kB       0.59 kB
+[2mdist\static\js\async\[22m[36m4223.aabcb52b.js[39m                                                1.0 kB       0.58 kB
+[2mdist\static\js\async\[22m[36m2301.3c2a6f5b.js[39m                                                1.0 kB       0.60 kB
+[2mdist\static\js\async\[22m[36m4686.da0e6fa6.js[39m                                                1.0 kB       0.60 kB
+[2mdist\static\js\async\[22m[36m5674.7730a1dd.js[39m                                                1.0 kB       0.58 kB
+[2mdist\static\js\async\[22m[36m1667.de9b8b8d.js[39m                                                1.0 kB       0.59 kB
+[2mdist\static\js\async\[22m[36m5122.13fba615.js[39m                                                1.0 kB       0.59 kB
+[2mdist\static\js\async\[22m[36m5642.5fbd3c30.js[39m                                                1.0 kB       0.59 kB
+[2mdist\static\js\async\[22m[36m9204.42f639cb.js[39m                                                1.0 kB       0.59 kB
+[2mdist\static\js\async\[22m[36m6346.dd3ef307.js[39m                                                1.0 kB       0.60 kB
+[2mdist\static\js\async\[22m[36m4930.1033eeca.js[39m                                                1.0 kB       0.60 kB
+[2mdist\static\js\async\[22m[36m70.c756fe99.js[39m                                                  1.0 kB       0.60 kB
+[2mdist\static\js\async\[22m[36m335.9bd5da68.js[39m                                                 1.0 kB       0.59 kB
+[2mdist\static\js\async\[22m[36m492.8f4d1606.js[39m                                                 1.0 kB       0.61 kB
+[2mdist\static\js\async\[22m[36m630.ef1e20ac.js[39m                                                 1.0 kB       0.58 kB
+[2mdist\static\js\async\[22m[36m2606.6971c363.js[39m                                                1.0 kB       0.60 kB
+[2mdist\static\js\async\[22m[36m8676.56e0f828.js[39m                                                1.0 kB       0.61 kB
+[2mdist\static\js\async\[22m[36m8624.296f4ffc.js[39m                                                1.0 kB       0.61 kB
+[2mdist\static\js\async\[22m[36m6062.b118f07d.js[39m                                                1.0 kB       0.59 kB
+[2mdist\static\js\async\[22m[36m7095.8b4c080c.js[39m                                                1.1 kB       0.60 kB
+[2mdist\assets\icons\[22m[35mIcBox.svg[39m                                                          1.1 kB       0.60 kB
+[2mdist\static\js\async\[22m[36m9021.d9678e9a.js[39m                                                1.1 kB       0.60 kB
+[2mdist\static\js\async\[22m[36m448.0afa076a.js[39m                                                 1.1 kB       0.59 kB
+[2mdist\static\js\async\[22m[36m8242.f8c10f3f.js[39m                                                1.1 kB       0.63 kB
+[2mdist\static\js\async\[22m[36m4096.10b93709.js[39m                                                1.1 kB       0.63 kB
+[2mdist\assets\media\[22m[35mrotate-right.svg[39m                                                   1.1 kB       0.54 kB
+[2mdist\static\js\async\[22m[36m2913.0182af55.js[39m                                                1.1 kB       0.55 kB
+[2mdist\static\js\async\[22m[36m4767.51a7d888.js[39m                                                1.1 kB       0.59 kB
+[2mdist\static\js\async\[22m[36m9847.4df50dd3.js[39m                                                1.1 kB       0.61 kB
+[2mdist\static\js\async\[22m[36m9065.ec8e164e.js[39m                                                1.1 kB       0.58 kB
+[2mdist\static\js\async\[22m[36m7608.cd87e210.js[39m                                                1.1 kB       0.63 kB
+[2mdist\static\js\async\[22m[36m3977.55fbf092.js[39m                                                1.1 kB       0.63 kB
+[2mdist\static\js\async\[22m[36m8759.2a4c667f.js[39m                                                1.1 kB       0.63 kB
+[2mdist\assets\media\[22m[35mrotate-left.svg[39m                                                    1.1 kB       0.55 kB
+[2mdist\static\js\async\[22m[36m5933.6f15b97c.js[39m                                                1.1 kB       0.58 kB
+[2mdist\static\js\async\[22m[36m4672.7a63b918.js[39m                                                1.1 kB       0.63 kB
+[2mdist\static\js\async\[22m[36m791.99661cfe.js[39m                                                 1.1 kB       0.60 kB
+[2mdist\static\js\async\[22m[36m2613.09850db1.js[39m                                                1.1 kB       0.56 kB
+[2mdist\static\js\async\[22m[36m3978.8484d8bb.js[39m                                                1.1 kB       0.47 kB
+[2mdist\static\js\async\[22m[36m1863.7e711190.js[39m                                                1.1 kB       0.60 kB
+[2mdist\assets\media\icons\[22m[35marrow_button.svg[39m                                             1.1 kB       0.62 kB
+[2mdist\static\js\async\[22m[36m9578.a4f016c4.js[39m                                                1.1 kB       0.61 kB
+[2mdist\static\js\async\[22m[36m5701.7b8b79bb.js[39m                                                1.1 kB       0.62 kB
+[2mdist\static\js\async\[22m[36m4801.de1ead76.js[39m                                                1.1 kB       0.59 kB
+[2mdist\static\js\async\[22m[36m3039.fa27b21c.js[39m                                                1.1 kB       0.65 kB
+[2mdist\assets\media\[22m[35mstatus-ready.svg[39m                                                   1.1 kB       0.57 kB
+[2mdist\static\js\async\[22m[36m9170.aada102f.js[39m                                                1.1 kB       0.64 kB
+[2mdist\assets\media\icons\[22m[35mcontrol_wait.svg[39m                                             1.1 kB       0.51 kB
+[2mdist\static\js\async\[22m[36m3309.0710c0ee.js[39m                                                1.1 kB       0.63 kB
+[2mdist\static\js\async\[22m[36m3646.535c72ff.js[39m                                                1.1 kB       0.63 kB
+[2mdist\static\js\async\[22m[36m4784.2e2df0d2.js[39m                                                1.1 kB       0.59 kB
+[2mdist\static\js\async\[22m[36m1052.fc170731.js[39m                                                1.2 kB       0.63 kB
+[2mdist\static\js\async\[22m[36m5870.74299a32.js[39m                                                1.2 kB       0.65 kB
+[2mdist\static\js\async\[22m[36m9953.f699c96a.js[39m                                                1.2 kB       0.64 kB
+[2mdist\static\js\async\[22m[36m8269.15c1998f.js[39m                                                1.2 kB       0.63 kB
+[2mdist\static\js\async\[22m[36m2565.2116acb6.js[39m                                                1.2 kB       0.67 kB
+[2mdist\assets\media\[22m[35mstatus-not-ready.svg[39m                                               1.2 kB       0.61 kB
+[2mdist\static\js\async\[22m[36m7555.d80b9d3a.js[39m                                                1.2 kB       0.67 kB
+[2mdist\static\js\async\[22m[36m8294.ebef56ef.js[39m                                                1.2 kB       0.66 kB
+[2mdist\assets\media\[22m[35mgreen-flag.svg[39m                                                     1.2 kB       0.66 kB
+[2mdist\assets\media\icons\[22m[35marrow.svg[39m                                                    1.2 kB       0.67 kB
+[2mdist\static\js\async\[22m[36m4358.c4f322a8.js[39m                                                1.2 kB       0.68 kB
+[2mdist\static\js\async\[22m[36m5819.8a0f8180.js[39m                                                1.2 kB       0.61 kB
+[2mdist\static\js\async\[22m[36m9248.25def7bf.js[39m                                                1.2 kB       0.71 kB
+[2mdist\static\js\async\[22m[36m242.35b3b2d0.js[39m                                                 1.2 kB       0.66 kB
+[2mdist\static\js\async\[22m[36m1675.aa6ed013.js[39m                                                1.2 kB       0.62 kB
+[2mdist\static\js\async\[22m[36m3458.3ffb1af2.js[39m                                                1.2 kB       0.68 kB
+[2mdist\static\js\async\[22m[36m300.042374c5.js[39m                                                 1.2 kB       0.68 kB
+[2mdist\static\js\async\[22m[36m1986.2378aca8.js[39m                                                1.2 kB       0.67 kB
+[2mdist\static\js\async\[22m[36m6870.156bc9f7.js[39m                                                1.3 kB       0.67 kB
+[2mdist\static\js\async\[22m[36m2322.06d30f9c.js[39m                                                1.3 kB       0.66 kB
+[2mdist\static\js\async\[22m[36m1848.f73b61c9.js[39m                                                1.3 kB       0.66 kB
+[2mdist\static\js\async\[22m[36m7413.263ad56d.js[39m                                                1.3 kB       0.62 kB
+[2mdist\assets\media\[22m[35mrepeat.svg[39m                                                         1.3 kB       0.70 kB
+[2mdist\static\js\async\[22m[36m1329.9996f3ee.js[39m                                                1.3 kB       0.69 kB
+[2mdist\static\js\async\[22m[36m3526.04f9453f.js[39m                                                1.3 kB       0.72 kB
+[2mdist\static\js\async\[22m[36m2622.99d27cab.js[39m                                                1.3 kB       0.72 kB
+[2mdist\static\js\async\[22m[36m3283.8b6005e4.js[39m                                                1.3 kB       0.71 kB
+[2mdist\static\js\async\[22m[36m1846.a93e2336.js[39m                                                1.3 kB       0.70 kB
+[2mdist\static\js\async\[22m[36m5459.6a364a87.js[39m                                                1.3 kB       0.60 kB
+[2mdist\static\js\async\[22m[36m7507.71d10c7c.js[39m                                                1.3 kB       0.71 kB
+[2mdist\assets\media\[22m[35mdelete-x.svg[39m                                                       1.3 kB       0.60 kB
+[2mdist\static\js\async\[22m[36m828.85b55d2b.js[39m                                                 1.3 kB       0.74 kB
+[2mdist\static\js\async\[22m[36m1586.dd78303b.js[39m                                                1.3 kB       0.75 kB
+[2mdist\static\js\async\[22m[36m5850.cd96d0f4.js[39m                                                1.3 kB       0.74 kB
+[2mdist\static\js\async\[22m[36m192.b1de6f78.js[39m                                                 1.3 kB       0.70 kB
+[2mdist\static\js\async\[22m[36m3102.71bb3264.js[39m                                                1.3 kB       0.68 kB
+[2mdist\static\js\async\[22m[36m9217.5e7db3f7.js[39m                                                1.3 kB       0.73 kB
+[2mdist\static\js\async\[22m[36m8631.ec78fd68.js[39m                                                1.3 kB       0.68 kB
+[2mdist\static\js\async\[22m[36m1979.94d3b677.js[39m                                                1.3 kB       0.74 kB
+[2mdist\assets\icons\[22m[35mIcReports.svg[39m                                                      1.3 kB       0.55 kB
+[2mdist\static\js\async\[22m[36m3260.f109dc61.js[39m                                                1.4 kB       0.67 kB
+[2mdist\static\js\async\[22m[36m5881.61cf1ef6.js[39m                                                1.4 kB       0.71 kB
+[2mdist\static\js\async\[22m[36m3898.4d94a975.js[39m                                                1.4 kB       0.70 kB
+[2mdist\static\js\async\[22m[36m7318.a8a946f7.js[39m                                                1.5 kB       0.68 kB
+[2mdist\static\js\async\[22m[36m8217.705ee7f6.js[39m                                                1.5 kB       0.73 kB
+[2mdist\static\js\async\[22m[36m7141.609ef090.js[39m                                                1.5 kB       0.67 kB
+[2mdist\assets\media\[22m[35mdisconnect.wav[39m                                                     1.5 kB    
+[2mdist\static\js\async\[22m[36m6914.6e3c060b.js[39m                                                1.5 kB       0.84 kB
+[2mdist\static\js\async\[22m[36m3859.f82a76ee.js[39m                                                1.5 kB       0.70 kB
+[2mdist\static\js\async\[22m[36m5640.a0e2682a.js[39m                                                1.5 kB       0.67 kB
+[2mdist\static\js\async\[22m[36m8480.4bc74f3e.js[39m                                                1.5 kB       0.72 kB
+[2mdist\assets\images\[22m[35mmartingale_formula_2.svg[39m                                          1.5 kB       0.55 kB
+[2mdist\static\js\async\[22m[36m9274.c6cd9b6f.js[39m                                                1.6 kB       0.69 kB
+[2mdist\static\js\async\[22m[36m8734.0aaf3ce6.js[39m                                                1.6 kB       0.74 kB
+[2mdist\static\js\async\[22m[36m9877.757269bb.js[39m                                                1.6 kB       0.74 kB
+[2mdist\assets\icons\[22m[35mIcGoogleDriveDbot.svg[39m                                              1.6 kB       0.76 kB
+[2mdist\static\js\async\[22m[36m5791.566b4f9c.js[39m                                                1.6 kB       0.88 kB
+[2mdist\static\js\async\[22m[36m183.07be479c.js[39m                                                 1.6 kB       0.65 kB
+[2mdist\static\js\async\[22m[36m8053.e2f60e73.js[39m                                                1.6 kB       0.67 kB
+[2mdist\assets\media\[22m[35mdisconnect.mp3[39m                                                     1.6 kB    
+[2mdist\static\js\async\[22m[36m6660.ae30a53a.js[39m                                                1.6 kB       0.77 kB
+[2mdist\static\js\async\[22m[36m4076.8be32168.js[39m                                                1.6 kB       0.78 kB
+[2mdist\assets\media\icons\[22m[35mremove.svg[39m                                                   1.6 kB       0.66 kB
+[2mdist\static\js\async\[22m[36m4419.989d612f.js[39m                                                1.6 kB       0.73 kB
+[2mdist\assets\images\[22m[35mmartingale_formula_1.svg[39m                                          1.6 kB       0.56 kB
+[2mdist\static\js\async\[22m[36m474.5e948b83.js[39m                                                 1.6 kB       0.71 kB
+[2mdist\static\js\async\[22m[36m5506.dd99fa9a.js[39m                                                1.6 kB       0.78 kB
+[2mdist\static\js\async\[22m[36m1463.0737063f.js[39m                                                1.6 kB       0.75 kB
+[2mdist\assets\media\icons\[22m[35mevent_when-broadcast-received_purple.svg[39m                     1.6 kB       0.58 kB
+[2mdist\assets\media\icons\[22m[35mevent_broadcast_purple.svg[39m                                   1.6 kB       0.48 kB
+[2mdist\static\js\async\[22m[36m93.478e7d3c.js[39m                                                  1.7 kB       0.71 kB
+[2mdist\assets\media\icons\[22m[35mevent_when-broadcast-received_blue.svg[39m                       1.7 kB       0.58 kB
+[2mdist\assets\media\icons\[22m[35mevent_broadcast_blue.svg[39m                                     1.7 kB       0.49 kB
+[2mdist\assets\media\icons\[22m[35mevent_when-broadcast-received_coral.svg[39m                      1.7 kB       0.58 kB
+[2mdist\assets\media\icons\[22m[35mevent_when-broadcast-received_green.svg[39m                      1.7 kB       0.58 kB
+[2mdist\assets\media\icons\[22m[35mevent_broadcast_green.svg[39m                                    1.7 kB       0.48 kB
+[2mdist\assets\media\icons\[22m[35mevent_when-broadcast-received_orange.svg[39m                     1.7 kB       0.58 kB
+[2mdist\assets\media\icons\[22m[35mevent_broadcast_coral.svg[39m                                    1.7 kB       0.49 kB
+[2mdist\assets\media\icons\[22m[35mevent_broadcast_orange.svg[39m                                   1.7 kB       0.49 kB
+[2mdist\assets\media\icons\[22m[35mevent_when-broadcast-received_magenta.svg[39m                    1.7 kB       0.58 kB
+[2mdist\assets\media\icons\[22m[35mevent_broadcast_magenta.svg[39m                                  1.7 kB       0.49 kB
+[2mdist\assets\icons\[22m[35mIcOpen.svg[39m                                                         1.7 kB       0.80 kB
+[2mdist\static\js\async\[22m[36m553.0593ebc8.js[39m                                                 1.7 kB       0.76 kB
+[2mdist\static\js\async\[22m[36m1101.0489d54b.js[39m                                                1.7 kB       0.64 kB
+[2mdist\static\js\async\[22m[36m5047.83aeb77b.js[39m                                                1.7 kB       0.92 kB
+[2mdist\static\js\async\[22m[36m2716.0a81da88.js[39m                                                1.7 kB       0.93 kB
+[2mdist\static\js\async\[22m[36m8729.4cd5d7af.js[39m                                                1.7 kB       0.77 kB
+[2mdist\static\js\async\[22m[36m9565.473b5be0.js[39m                                                1.7 kB       0.79 kB
+[2mdist\static\js\async\[22m[36m9518.9d7a09b4.js[39m                                                1.7 kB       0.94 kB
+[2mdist\static\js\async\[22m[36m4195.8e57839e.js[39m                                                1.8 kB       0.81 kB
+[2mdist\static\js\async\[22m[36m406.51675a60.js[39m                                                 1.8 kB       0.79 kB
+[2mdist\assets\icons\[22m[35mIcBotBuilder.svg[39m                                                   1.8 kB       0.86 kB
+[2mdist\static\js\async\[22m[36m3641.75e3aab3.js[39m                                                1.8 kB       0.85 kB
+[2mdist\assets\media\[22m[35msprites.svg[39m                                                        1.8 kB       0.67 kB
+[2mdist\assets\icons\[22m[35mIcBotBuilderSkeleton.svg[39m                                           1.9 kB       0.87 kB
+[2mdist\static\js\async\[22m[36m1887.ea6b75ee.js[39m                                                1.9 kB       0.73 kB
+[2mdist\assets\icons\[22m[35mic-currency-eur-check.svg[39m                                          2.0 kB       0.66 kB
+[2mdist\assets\media\icons\[22m[35mcontrol_repeat.svg[39m                                           2.0 kB       0.92 kB
+[2mdist\static\js\async\[22m[36m2110.f1031407.js[39m                                                2.0 kB       0.87 kB
+[2mdist\static\js\async\[22m[36m484.576d60a6.js[39m                                                 2.0 kB       1.1 kB
+[2mdist\assets\media\icons\[22m[35mset-led_white.svg[39m                                            2.0 kB       0.57 kB
+[2mdist\assets\media\icons\[22m[35mset-led_coral.svg[39m                                            2.0 kB       0.57 kB
+[2mdist\assets\media\icons\[22m[35mset-led_blue.svg[39m                                             2.0 kB       0.57 kB
+[2mdist\assets\media\icons\[22m[35mset-led_magenta.svg[39m                                          2.0 kB       0.57 kB
+[2mdist\assets\media\icons\[22m[35mset-led_green.svg[39m                                            2.0 kB       0.57 kB
+[2mdist\assets\media\icons\[22m[35mset-led_yellow.svg[39m                                           2.0 kB       0.57 kB
+[2mdist\assets\media\icons\[22m[35mset-led_orange.svg[39m                                           2.0 kB       0.57 kB
+[2mdist\assets\media\icons\[22m[35mset-led_purple.svg[39m                                           2.0 kB       0.57 kB
+[2mdist\static\js\async\[22m[36m2270.f28a6e54.js[39m                                                2.1 kB       1.0 kB
+[2mdist\static\js\async\[22m[36m6093.ba73ffe9.js[39m                                                2.2 kB       1.1 kB
+[2mdist\static\js\async\[22m[36m5123.c23ea9f5.js[39m                                                2.2 kB       0.70 kB
+[2mdist\static\js\async\[22m[36m5148.70c5085e.js[39m                                                2.2 kB       1.0 kB
+[2mdist\static\js\async\[22m[36m3396.6d21d4ca.js[39m                                                2.2 kB       0.99 kB
+[2mdist\static\js\async\[22m[36m6289.88d119f1.js[39m                                                2.2 kB       0.78 kB
+[2mdist\assets\media\[22m[35mclick.mp3[39m                                                          2.3 kB    
+[2mdist\assets\icons\[22m[35mIcQuickStrategy.svg[39m                                                2.4 kB       0.93 kB
+[2mdist\static\js\async\[22m[36m6345.0a623fdf.js[39m                                                2.4 kB       1.0 kB
+[2mdist\static\js\async\[22m[36m8349.9ebbb604.js[39m                                                2.4 kB       1.1 kB
+[2mdist\assets\media\extensions\[22m[35mpen-block-icon.svg[39m                                      2.5 kB       1.2 kB
+[2mdist\static\js\async\[22m[36m1930.b5658e99.js[39m                                                2.8 kB       1.2 kB
+[2mdist\assets\images\[22m[35mdalembert_formula_2.svg[39m                                           2.9 kB       1.2 kB
+[2mdist\assets\images\[22m[35mdalembert_formula_1.svg[39m                                           2.9 kB       1.2 kB
+[2mdist\static\js\async\[22m[36m4252.a7ecf150.js[39m                                                2.9 kB       1.2 kB
+[2mdist\assets\media\[22m[35mlogic.png[39m                                                          2.9 kB    
+[2mdist\assets\media\icons\[22m[35mset-led_mystery.svg[39m                                          3.0 kB       0.93 kB
+[2mdist\static\css\async\[22m[33m5148.af8e1661.css[39m                                              3.1 kB       0.95 kB
+[2mdist\static\js\async\[22m[36m5936.b530f5b0.js[39m                                                3.5 kB       1.4 kB
+[2mdist\[22m[35mmanifest.json[39m                                                                   3.5 kB       0.78 kB
+[2mdist\assets\media\[22m[35meyedropper.svg[39m                                                     3.6 kB       1.5 kB
+[2mdist\assets\media\icons\[22m[35mwedo_when-tilt-left.svg[39m                                      3.7 kB       1.2 kB
+[2mdist\assets\media\icons\[22m[35mwedo_when-tilt-right.svg[39m                                     3.7 kB       1.2 kB
+[2mdist\assets\media\icons\[22m[35mwedo_motor-counterclockwise.svg[39m                              3.7 kB       1.2 kB
+[2mdist\assets\media\icons\[22m[35mwedo_motor-clockwise.svg[39m                                     3.7 kB       1.2 kB
+[2mdist\assets\media\[22m[35mclick.wav[39m                                                          3.8 kB    
+[2mdist\assets\media\icons\[22m[35mwedo_when-tilt.svg[39m                                           4.1 kB       1.2 kB
+[2mdist\assets\media\[22m[35msprites.png[39m                                                        4.1 kB    
+[2mdist\static\image\[22m[35msprites.c68f0575.png[39m                                               4.1 kB    
+[2mdist\assets\media\icons\[22m[35mwedo_motor-speed_fast.svg[39m                                    4.3 kB       1.3 kB
+[2mdist\assets\media\icons\[22m[35mwedo_motor-speed_med.svg[39m                                     4.3 kB       1.3 kB
+[2mdist\assets\media\icons\[22m[35mwedo_motor-speed_slow.svg[39m                                    4.4 kB       1.3 kB
+[2mdist\assets\media\[22m[35mdisconnect.ogg[39m                                                     4.4 kB    
+[2mdist\assets\media\extensions\[22m[35mmusic-block-icon.svg[39m                                    4.5 kB       2.2 kB
+[2mdist\assets\media\icons\[22m[35mcontrol_forever.svg[39m                                          4.7 kB       1.9 kB
+[2mdist\assets\media\icons\[22m[35mwedo_when-distance_close.svg[39m                                 4.7 kB       1.1 kB
+[2mdist\assets\media\[22m[35mclick.ogg[39m                                                          4.9 kB    
+[2mdist\assets\media\icons\[22m[35mwedo_when-tilt-backward.svg[39m                                  4.9 kB       1.3 kB
+[2mdist\assets\media\icons\[22m[35mwedo_when-tilt-forward.svg[39m                                   4.9 kB       1.3 kB
+[2mdist\static\css\async\[22m[33m1680.3646e411.css[39m                                              5.1 kB       1.2 kB
+[2mdist\assets\media\extensions\[22m[35mmicrobit-block-icon.svg[39m                                 5.1 kB       1.4 kB
+[2mdist\AI Bots\[22m[35mEven_Odd_Reversal_Bot.xml[39m                                               5.8 kB       1.3 kB
+[2mdist\static\js\async\[22m[36m1680.0c765b05.js[39m                                                5.8 kB       1.3 kB
+[2mdist\assets\media\[22m[35mjob-done.mp3[39m                                                       5.8 kB    
+[2mdist\assets\media\[22m[35mcoins.mp3[39m                                                          5.9 kB    
+[2mdist\AI Bots\[22m[35mDiffers_Rank_Based.xml[39m                                                  5.9 kB       1.2 kB
+[2mdist\AI Bots\[22m[35mOver_Under_3_6.xml[39m                                                      5.9 kB       1.2 kB
+[2mdist\AI Bots\[22m[35mOver_Under_4_5.xml[39m                                                      5.9 kB       1.2 kB
+[2mdist\AI Bots\[22m[35mOver_Under_1_8.xml[39m                                                      5.9 kB       1.2 kB
+[2mdist\Official Bots\[22m[35mSmartAuto24_Bot.xml[39m                                               5.9 kB       1.3 kB
+[2mdist\AI Bots\[22m[35mMatches_Bot.xml[39m                                                         6.2 kB       1.3 kB
+[2mdist\static\css\async\[22m[33m4849.8029e68a.css[39m                                              6.3 kB       1.7 kB
+[2mdist\AI Bots\[22m[35mCompounding_Bot.xml[39m                                                     6.5 kB       1.3 kB
+[2mdist\static\js\async\[22m[36m7188.00c25f81.js[39m                                                6.5 kB       2.0 kB
+[2mdist\static\js\async\[22m[36m4387.3d49f910.js[39m                                                6.6 kB       2.5 kB
+[2mdist\[22m[32mindex.html[39m                                                                      7.1 kB       2.1 kB
+[2mdist\AI Bots\[22m[35mOver_Under_Bot.xml[39m                                                      7.1 kB       1.3 kB
+[2mdist\AI Bots\[22m[35mEven_Odd_Pro_Bot.xml[39m                                                    7.3 kB       1.4 kB
+[2mdist\js\smartcharts\[22m[36mresize-observer-polyfill-0f56ce.smartcharts.js[39m                   7.5 kB       2.5 kB
+[2mdist\static\js\async\[22m[36m4849.7c26e5ee.js[39m                                                7.7 kB       1.8 kB
+[2mdist\AI Bots\[22m[35mRise_Fall_Pro_Bot.xml[39m                                                   7.7 kB       1.4 kB
+[2mdist\static\js\async\[22m[36m3664.16c58415.js[39m                                                7.8 kB       3.1 kB
+[2mdist\Official Bots\[22m[35mDiffers_Rank3_Bot.xml[39m                                             8.4 kB       1.5 kB
+[2mdist\AI Bots\[22m[35mAuto_Differs_Bot.xml[39m                                                    8.5 kB       1.5 kB
+[2mdist\assets\media\[22m[35mdelete.ogg[39m                                                         8.6 kB    
+[2mdist\assets\fonts\[22m[35mMaterialIcons-Regular.otf[39m                                          8.8 kB    
+[2mdist\assets\shaders\[22m[35mink_sparkle.frag[39m                                                 8.9 kB    
+[2mdist\AI Bots\[22m[35mEven_Odd_Auto_Bot.xml[39m                                                   9.4 kB       1.6 kB
+[2mdist\assets\media\[22m[35mdelete.mp3[39m                                                         9.8 kB    
+[2mdist\assets\media\extensions\[22m[35mwedo2-block-icon.svg[39m                                    9.8 kB       2.2 kB
+[2mdist\static\css\async\[22m[33m5675.69850dd6.css[39m                                              9.9 kB       2.2 kB
+[2mdist\assets\media\[22m[35mi-am-being-serious.mp3[39m                                             9.9 kB    
+[2mdist\Official Bots\[22m[35mCompounding_Bot.xml[39m                                               10.4 kB      1.6 kB
+[2mdist\[22m[36msw.js[39m                                                                           10.5 kB      3.0 kB
+[2mdist\Hybrid Bots\[22m[35mSPEED BOT updated.xml[39m                                               10.8 kB      2.5 kB
+[2mdist\assets\images\[22m[35mmartingale_formula_dark_2.svg[39m                                     10.9 kB      3.4 kB
+[2mdist\static\css\async\[22m[33m7188.dfcfd077.css[39m                                              11.0 kB      2.2 kB
+[2mdist\[22m[32moffline.html[39m                                                                    11.2 kB      2.6 kB
+[2mdist\assets\[22m[35mAssetManifest.json[39m                                                       11.7 kB      0.78 kB
+[2mdist\assets\media\[22m[35mout-of-bounds.mp3[39m                                                  11.8 kB   
+[2mdist\js\smartcharts\[22m[36mzh-json-89fe6d.smartcharts.js[39m                                    11.9 kB      4.3 kB
+[2mdist\js\smartcharts\[22m[36mnl-json-20751e.smartcharts.js[39m                                    11.9 kB      4.3 kB
+[2mdist\assets\media\[22m[35mdelete.wav[39m                                                         11.9 kB   
+[2mdist\assets\media\[22m[35mannouncement.mp3[39m                                                   12.2 kB   
+[2mdist\static\css\async\[22m[33m3110.67b9252d.css[39m                                              12.4 kB      2.7 kB
+[2mdist\assets\[22m[35mAssetManifest.bin[39m                                                        12.5 kB   
+[2mdist\Official Bots\[22m[35mUnder_9876_Bot.xml[39m                                                12.6 kB      1.9 kB
+[2mdist\Official Bots\[22m[35mOver_0123_Bot.xml[39m                                                 12.6 kB      1.9 kB
+[2mdist\assets\media\[22m[35msma_formula.png[39m                                                    13.4 kB   
+[2mdist\Official Bots\[22m[35mOver_0_Bot.xml[39m                                                    14.0 kB      2.0 kB
+[2mdist\Official Bots\[22m[35mOver_3_Bot.xml[39m                                                    14.0 kB      2.0 kB
+[2mdist\Official Bots\[22m[35mOver_1_Bot.xml[39m                                                    14.0 kB      2.0 kB
+[2mdist\Official Bots\[22m[35mUnder_6_Bot.xml[39m                                                   14.0 kB      2.0 kB
+[2mdist\Official Bots\[22m[35mUnder_7_Bot.xml[39m                                                   14.0 kB      2.0 kB
+[2mdist\Official Bots\[22m[35mUnder_8_Bot.xml[39m                                                   14.0 kB      2.0 kB
+[2mdist\Official Bots\[22m[35mUnder_9_Bot.xml[39m                                                   14.0 kB      2.0 kB
+[2mdist\[22m[32mtest-offline.html[39m                                                               14.0 kB      2.8 kB
+[2mdist\Official Bots\[22m[35mBot_Even_Odd.xml[39m                                                  14.1 kB      2.0 kB
+[2mdist\assets\fonts\[22m[35mIBMPlexSans-Regular.woff2[39m                                          14.1 kB   
+[2mdist\assets\fonts\[22m[35mIBMPlexSans-Bold.woff2[39m                                             14.3 kB   
+[2mdist\Official Bots\[22m[35mOver_2_Bot.xml[39m                                                    14.4 kB      2.0 kB
+[2mdist\static\js\async\[22m[36m25.c85f93d7.js[39m                                                  15.1 kB      6.2 kB
+[2mdist\Official Bots\[22m[35mTitan_Over.xml[39m                                                    15.5 kB      2.1 kB
+[2mdist\Official Bots\[22m[35mGuardian_Under.xml[39m                                                15.5 kB      2.1 kB
+[2mdist\assets\icons\[22m[35mIcMigrateStrategy.svg[39m                                              15.7 kB      4.8 kB
+[2mdist\assets\images\[22m[35mloss_control_set_current_stake.png[39m                                15.8 kB   
+[2mdist\Official Bots\[22m[35mOver_Under_Bot.xml[39m                                                16.0 kB      2.1 kB
+[2mdist\Official Bots\[22m[35mMatches_Bot.xml[39m                                                   16.1 kB      2.1 kB
+[2mdist\Official Bots\[22m[35mDiffers_Bot.xml[39m                                                   16.1 kB      2.1 kB
+[2mdist\assets\[22m[35mAssetManifest.bin.json[39m                                                   16.6 kB      1.6 kB
+[2mdist\assets\images\[22m[35mloss_control_set_stop_loss.png[39m                                    17.2 kB   
+[2mdist\static\js\async\[22m[36m3110.2dd4356b.js[39m                                                17.6 kB      4.2 kB
+[2mdist\static\css\async\[22m[33m4443.943f1ac1.css[39m                                              17.7 kB      4.1 kB
+[2mdist\Official Bots\[22m[35mOver_Under_Compounding.xml[39m                                        18.0 kB      2.2 kB
+[2mdist\Official Bots\[22m[35mRise_Fall_Super_Bot.xml[39m                                           18.2 kB      2.3 kB
+[2mdist\static\js\async\[22m[36m5280.dc26caff.js[39m                                                18.4 kB      3.1 kB
+[2mdist\assets\images\[22m[35mdbot-mobile-onboarding-step-7.png[39m                                 18.7 kB   
+[2mdist\static\js\async\[22m[36m5675.2ed5b232.js[39m                                                18.8 kB      6.0 kB
+[2mdist\static\js\async\[22m[36m1303.da68df38.js[39m                                                19.2 kB      5.2 kB
+[2mdist\assets\images\[22m[35mdbot-mobile-onboarding-step-4.png[39m                                 19.2 kB   
+[2mdist\static\js\async\[22m[36m9230.ac1b618d.js[39m                                                19.3 kB      4.8 kB
+[2mdist\assets\media\[22m[35mcreate_variable.jpg[39m                                                19.4 kB   
+[2mdist\Official Bots\[22m[35mEven_Odd_Auto_Switcher.xml[39m                                        20.8 kB      2.4 kB
+[2mdist\static\js\async\[22m[36m6985.52507e3f.js[39m                                                20.8 kB      6.1 kB
+[2mdist\js\smartcharts\[22m[36mzh_tw-json-e57713.smartcharts.js[39m                                 20.9 kB      9.2 kB
+[2mdist\js\smartcharts\[22m[36mzh_cn-json-e1d6ca.smartcharts.js[39m                                 20.9 kB      9.0 kB
+[2mdist\js\smartcharts\[22m[36mid-json-5db5c1.smartcharts.js[39m                                    20.9 kB      7.5 kB
+[2mdist\Automatic\[22m[35mOVER UNDER AUTO SWITCHER.xml[39m                                          21.4 kB      4.2 kB
+[2mdist\AI Bots\[22m[35mSmart_Analysis_Signal_Bot.xml[39m                                           21.8 kB      2.6 kB
+[2mdist\static\js\async\[22m[36m847.4a2794b9.js[39m                                                 22.0 kB      4.9 kB
+[2mdist\js\smartcharts\[22m[36mmessages-json-1399f7.smartcharts.js[39m                              22.1 kB      5.3 kB
+[2mdist\static\css\async\[22m[33m6985.15f76663.css[39m                                              22.2 kB      3.4 kB
+[2mdist\js\smartcharts\[22m[36msw-json-b77241.smartcharts.js[39m                                    22.7 kB      8.3 kB
+[2mdist\js\smartcharts\[22m[36mpl-json-4f74dc.smartcharts.js[39m                                    23.2 kB      8.9 kB
+[2mdist\js\smartcharts\[22m[36mko-json-0ea389.smartcharts.js[39m                                    23.2 kB      9.0 kB
+[2mdist\assets\images\[22m[35mdbot-mobile-onboarding-step-2.png[39m                                 23.5 kB   
+[2mdist\js\smartcharts\[22m[36muz-json-fb7cdd.smartcharts.js[39m                                    23.5 kB      8.6 kB
+[2mdist\js\smartcharts\[22m[36mit-json-28c133.smartcharts.js[39m                                    23.5 kB      8.5 kB
+[2mdist\Official Bots\[22m[35mSequential_Over_Recovery.xml[39m                                      24.1 kB      2.4 kB
+[2mdist\Official Bots\[22m[35mSequential_Under_Recovery.xml[39m                                     24.2 kB      2.4 kB
+[2mdist\js\smartcharts\[22m[36mde-json-7fad20.smartcharts.js[39m                                    24.2 kB      9.0 kB
+[2mdist\static\js\async\[22m[36m2258.094267ef.js[39m                                                24.2 kB      7.5 kB
+[2mdist\js\smartcharts\[22m[36mtr-json-9b9a07.smartcharts.js[39m                                    24.2 kB      8.8 kB
+[2mdist\assets\images\[22m[35mreset_transaction_log_message.png[39m                                 24.2 kB   
+[2mdist\js\smartcharts\[22m[36mpt-json-aecea1.smartcharts.js[39m                                    24.4 kB      8.5 kB
+[2mdist\js\smartcharts\[22m[36mes-json-b87ec0.smartcharts.js[39m                                    24.4 kB      8.5 kB
+[2mdist\js\smartcharts\[22m[36mfr-json-1412b5.smartcharts.js[39m                                    25.3 kB      8.8 kB
+[2mdist\Official Bots\[22m[35mEven_Odd_Bot.xml[39m                                                  25.9 kB      2.7 kB
+[2mdist\static\css\[22m[33m9666.d360f288.css[39m                                                    26.8 kB      5.1 kB
+[2mdist\js\smartcharts\[22m[36mvi-json-df84af.smartcharts.js[39m                                    26.9 kB      9.3 kB
+[2mdist\js\smartcharts\[22m[36mar-json-c897e2.smartcharts.js[39m                                    27.8 kB      9.6 kB
+[2mdist\static\css\async\[22m[33m2258.286fa4aa.css[39m                                              28.8 kB      2.9 kB
+[2mdist\Automatic\[22m[35mPROFITHUB RISE FALL AUTO.xml[39m                                          29.1 kB      5.3 kB
+[2mdist\Hybrid Bots\[22m[35mPROFIT HUB PRO.xml[39m                                                  29.1 kB      5.1 kB
+[2mdist\Hybrid Bots\[22m[35mLAS VEGAS ≡ƒÆ╡≡ƒÆ╡ PRO ENGLISH..xml[39m                                     29.9 kB      5.1 kB
+[2mdist\assets\images\[22m[35moscars_grind.png[39m                                                  30.0 kB   
+[2mdist\static\js\async\[22m[36m9328.a39a19d6.js[39m                                                30.6 kB      12.0 kB
+[2mdist\static\css\async\[22m[33m1303.8ee69d03.css[39m                                              31.2 kB      4.4 kB
+[2mdist\js\smartcharts\[22m[36mmn-json-eae485.smartcharts.js[39m                                    31.4 kB      10.1 kB
+[2mdist\static\js\async\[22m[36m8385.305d94a7.js[39m                                                31.8 kB      12.4 kB
+[2mdist\js\smartcharts\[22m[36mru-json-c7030e.smartcharts.js[39m                                    32.2 kB      10.5 kB
+[2mdist\static\css\async\[22m[33m2963.ab7ca5ee.css[39m                                              32.9 kB      5.8 kB
+[2mdist\Hybrid Bots\[22m[35mProfithub Speedbot.xml[39m                                              34.2 kB      6.1 kB
+[2mdist\assets\icons\[22m[35mIcUpgradeBlockly.svg[39m                                               36.3 kB      13.3 kB
+[2mdist\js\smartcharts\[22m[36mkm-json-a757b8.smartcharts.js[39m                                    37.1 kB      9.9 kB
+[2mdist\js\smartcharts\[22m[36msi-json-87e394.smartcharts.js[39m                                    37.5 kB      10.3 kB
+[2mdist\Automatic\[22m[35mPROFITHUB UNDER 8 OVER 3 AUTO.xml[39m                                     37.6 kB      6.5 kB
+[2mdist\js\smartcharts\[22m[36mbn-json-b82d20.smartcharts.js[39m                                    38.3 kB      10.2 kB
+[2mdist\Automatic\[22m[35mOVER UNDER AUTOMATIC X .xml[39m                                           39.5 kB      6.6 kB
+[2mdist\Automatic\[22m[35mPROFITHUB PREMIUM A.I.xml[39m                                             39.6 kB      6.6 kB
+[2mdist\static\css\async\[22m[33m8.9acf9c6a.css[39m                                                 40.1 kB      7.3 kB
+[2mdist\static\js\async\[22m[36m966.7e185906.js[39m                                                 41.5 kB      8.7 kB
+[2mdist\static\css\async\[22m[33m847.eb609bb5.css[39m                                               42.0 kB      5.6 kB
+[2mdist\js\smartcharts\[22m[36mth-json-8b40bc.smartcharts.js[39m                                    42.1 kB      10.5 kB
+[2mdist\static\js\async\[22m[36m5016.17ccce39.js[39m                                                42.6 kB      12.7 kB
+[2mdist\static\js\async\[22m[36mmartingale-xml.4684a2b7.js[39m                                      42.6 kB      6.4 kB
+[2mdist\assets\images\[22m[35mloss_control_purchase_conditions.png[39m                              43.1 kB   
+[2mdist\Automatic\[22m[35mAUTOTRADER.xml[39m                                                        43.6 kB      6.9 kB
+[2mdist\static\js\async\[22m[36m1_3_2_6-xml.a1c33a04.js[39m                                         43.8 kB      6.9 kB
+[2mdist\static\js\async\[22m[36mmartingale_max-stake-xml.80f62211.js[39m                            44.7 kB      6.9 kB
+[2mdist\static\js\async\[22m[36mdalembert-xml.00fbdeab.js[39m                                       44.8 kB      6.6 kB
+[2mdist\static\js\async\[22m[36mreverse_martingale-xml.efda9db7.js[39m                              44.9 kB      6.9 kB
+[2mdist\static\js\async\[22m[36mreverse_dalembert-xml.77edadc0.js[39m                               45.0 kB      7.1 kB
+[2mdist\static\js\async\[22m[36mdbot-collection.db9128c3.js[39m                                     45.4 kB      14.2 kB
+[2mdist\static\js\async\[22m[36mdalembert_max-stake-xml.13ae19b4.js[39m                             47.2 kB      7.1 kB
+[2mdist\static\js\async\[22m[36m2963.f220f7f7.js[39m                                                49.3 kB      13.6 kB
+[2mdist\static\js\async\[22m[36moscars_grind-xml.1fa639a7.js[39m                                    49.3 kB      7.1 kB
+[2mdist\static\js\async\[22m[36m4443.33b4c327.js[39m                                                50.1 kB      15.2 kB
+[2mdist\Hybrid Bots\[22m[35mSpeedbot with entry point.xml[39m                                       50.4 kB      8.0 kB
+[2mdist\static\js\async\[22m[36maccumulators_reverse_dalembert-xml.4f70ff74.js[39m                  51.6 kB      8.3 kB
+[2mdist\static\js\async\[22m[36maccumulators_martingale-xml.4680a499.js[39m                         51.9 kB      8.4 kB
+[2mdist\static\js\async\[22m[36maccumulators_reverse_martingale-xml.ad7e7c94.js[39m                 52.0 kB      8.4 kB
+[2mdist\static\js\async\[22m[36maccumulators_reverse_dalembert_on_stat_reset-xml.9f1b588f.js[39m    52.5 kB      8.4 kB
+[2mdist\static\css\async\[22m[33m9230.04e018dc.css[39m                                              52.7 kB      6.8 kB
+[2mdist\static\js\async\[22m[36maccumulators_martingale_on_stat_reset-xml.409b6cd5.js[39m           52.8 kB      8.5 kB
+[2mdist\static\js\async\[22m[36maccumulators_reverse_martingale_on_stat_reset-xml.1e1a7d45.js[39m   52.8 kB      8.5 kB
+[2mdist\static\js\async\[22m[36maccumulators_dalembert-xml.9171ac60.js[39m                          54.4 kB      8.7 kB
+[2mdist\static\js\async\[22m[36maccumulators_dalembert_on_stat_reset-xml.34b76cbe.js[39m            55.2 kB      8.8 kB
+[2mdist\assets\images\[22m[35mdalembert_formula_dark_1.svg[39m                                      55.5 kB      19.8 kB
+[2mdist\assets\images\[22m[35mdalembert_formula_dark_2.svg[39m                                      56.4 kB      18.7 kB
+[2mdist\Hybrid Bots\[22m[35m≡ƒñæUNSTOPPABLE DIFFER BOT≡ƒñæ.xml[39m                                      57.1 kB      8.2 kB
+[2mdist\assets\images\[22m[35mblocks_menu.png[39m                                                   57.3 kB   
+[2mdist\assets\images\[22m[35mblocks_menu_search.png[39m                                            57.5 kB   
+[2mdist\assets\media\[22m[35msma_array_explanation.jpeg[39m                                         63.3 kB   
+[2mdist\assets\media\[22m[35mis_candle_black_1.jpeg[39m                                             65.0 kB   
+[2mdist\assets\media\[22m[35mis_candle_black.jpeg[39m                                               65.7 kB   
+[2mdist\static\css\async\[22m[33m966.63dc4e45.css[39m                                               66.3 kB      7.9 kB
+[2mdist\assets\images\[22m[35mmartingale_formula_dark_1.svg[39m                                     68.7 kB      19.6 kB
+[2mdist\assets\media\[22m[35msma_chart_2.png[39m                                                    69.5 kB   
+[2mdist\assets\media\[22m[35msma_chart_1.png[39m                                                    75.9 kB   
+[2mdist\Automatic\[22m[35mRISE AND FALL AUTOMATIC X .xml[39m                                        76.2 kB      10.8 kB
+[2mdist\assets\images\[22m[35mreset_transaction_log.png[39m                                         76.6 kB   
+[2mdist\static\js\async\[22m[36moscars_grind_max-stake-xml.bca35c7d.js[39m                          81.7 kB      10.8 kB
+[2mdist\assets\media\[22m[35mset_variable.png[39m                                                   84.6 kB   
+[2mdist\static\js\[22m[36mlib-router.d23e939a.js[39m                                                87.6 kB      29.1 kB
+[2mdist\static\css\[22m[33mindex.a7fa05c1.css[39m                                                   89.1 kB      12.3 kB
+[2mdist\assets\images\[22m[35mloss_control_restart_trade_conditions.png[39m                         91.6 kB   
+[2mdist\assets\images\[22m[35mmartingale.svg[39m                                                    108.6 kB     19.0 kB
+[2mdist\static\js\async\[22m[36m8850.2988980a.js[39m                                                108.7 kB     21.5 kB
+[2mdist\assets\images\[22m[35mreverse_martingale.svg[39m                                            111.3 kB     19.1 kB
+[2mdist\static\js\async\[22m[36m8.48534dfb.js[39m                                                   114.8 kB     34.7 kB
+[2mdist\js\smartcharts\[22m[33msmartcharts.css[39m                                                  115.7 kB     16.7 kB
+[2mdist\assets\images\[22m[35mdbot-onboard-tour.png[39m                                             123.5 kB  
+[2mdist\static\js\async\[22m[36m8776.cc0d72b6.js[39m                                                126.5 kB     37.8 kB
+[2mdist\assets\images\[22m[35mdalembert.svg[39m                                                     129.3 kB     24.1 kB
+[2mdist\assets\images\[22m[35mreverse_dalembert.svg[39m                                             136.2 kB     24.2 kB
+[2mdist\assets\images\[22m[35m1-3-2-6.svg[39m                                                       164.2 kB     26.8 kB
+[2mdist\static\js\async\[22m[36m4549.334681fb.js[39m                                                178.3 kB     57.4 kB
+[2mdist\assets\images\[22m[35mloss_control_trade_parameters.png[39m                                 185.8 kB  
+[2mdist\js\smartcharts\[22m[36mhtml2canvas-5ea4c4.smartcharts.js[39m                                197.4 kB     45.5 kB
+[2mdist\assets\videos\[22m[35mdbot-mobile-onboarding-step-5.mp4[39m                                 198.7 kB  
+[2mdist\static\js\[22m[36mlib-react.8fe5e5f8.js[39m                                                 209.0 kB     66.4 kB
+[2mdist\assets\videos\[22m[35mdbot-mobile-onboarding-step-6.mp4[39m                                 225.7 kB  
+[2mdist\static\css\async\[22m[33m9976.1ddaea43.css[39m                                              236.7 kB     32.7 kB
+[2mdist\static\js\async\[22m[36m8948.76b5ffdd.js[39m                                                251.3 kB     44.8 kB
+[2mdist\assets\images\[22m[35mloss_control_all_block.png[39m                                        278.2 kB  
+[2mdist\assets\images\[22m[35mbuild_a_bot.png[39m                                                   350.7 kB  
+[2mdist\assets\images\[22m[35msso_loader.gif[39m                                                    357.2 kB  
+[2mdist\static\js\async\[22m[36m9976.f0e0e77e.js[39m                                                367.1 kB     88.1 kB
+[2mdist\assets\images\[22m[35mhow_to_use_martingale.jpg[39m                                         420.8 kB  
+[2mdist\assets\videos\[22m[35mdbot-mobile-onboarding-step-3.mp4[39m                                 421.2 kB  
+[2mdist\assets\videos\[22m[35mdbot-mobile-onboarding-step-2.mp4[39m                                 421.2 kB  
+[2mdist\js\smartcharts\[22m[36msmartcharts.js[39m                                                   444.8 kB     [33m103.6 kB[39m
+[2mdist\assets\images\[22m[35mbot-builder-tour.png[39m                                              459.7 kB  
+[2mdist\assets\images\[22m[35mintro_to_deriv_bot.png[39m                                            535.2 kB  
+[2mdist\static\js\[22m[36mindex.c4621999.js[39m                                                     577.5 kB     [33m161.2 kB[39m
+[2mdist\assets\videos\[22m[35mdbot-onboarding-tour-step-2.mp4[39m                                   638.1 kB  
+[2mdist\js\smartcharts\[22m[35msprite-dd6387.smartcharts.svg[39m                                    639.6 kB     [33m146.9 kB[39m
+[2mdist\assets\videos\[22m[35mdbot-onboarding-tour-step-5.mp4[39m                                   656.1 kB  
+[2mdist\assets\videos\[22m[35mdbot-onboarding-tour-step-3.mp4[39m                                   660.5 kB  
+[2mdist\assets\videos\[22m[35mbot-builder-tour-step-5.mp4[39m                                       663.0 kB  
+[2mdist\static\js\async\[22m[36m6000.10876d51.js[39m                                                761.0 kB     51.6 kB
+[2mdist\assets\videos\[22m[35mbot-builder-tour-step-4.mp4[39m                                       952.6 kB  
+[2mdist\assets\videos\[22m[35mdbot-mobile-onboarding-step-1.mp4[39m                                 1057.5 kB 
+[2mdist\assets\videos\[22m[35mdbot-onboarding-tour-step-6.mp4[39m                                   1162.2 kB 
+[2mdist\static\js\async\[22m[36m7779.73dc9ce9.js[39m                                                1220.3 kB    [31m332.7 kB[39m
+[2mdist\assets\images\[22m[35mintroducing_accumulators_on_deriv_bot.png[39m                         1410.9 kB 
+[2mdist\[22m[35mlogo-ph.png[39m                                                                     1497.7 kB 
+[2mdist\assets\[22m[35mNOTICES[39m                                                                  1745.2 kB 
+[2mdist\static\js\[22m[36m9666.6deef9e6.js[39m                                                      1920.2 kB    [31m540.5 kB[39m
+[2mdist\assets\videos\[22m[35mdbot-onboarding-tour-step-1.mp4[39m                                   2130.7 kB 
+[2mdist\js\smartcharts\[22m[36mflutter-chart-adapter-4b4e50.smartcharts.js[39m                      2456.2 kB    [31m715.1 kB[39m
+[2mdist\static\css\async\[22m[33m7779.1976660f.css[39m                                              3459.7 kB    [33m175.6 kB[39m
+[2mdist\assets\images\[22m[35mdbot-new-look-QS-and-accumulators-addition.gif[39m                    3725.3 kB 
+
+                                                                            [35mTotal:[39m   39682.2 kB   25176.5 kB
+
